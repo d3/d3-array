@@ -17,7 +17,6 @@ export default function() {
         keyValue,
         keyValues = [],
         object,
-        setter,
         valuesByKey = new Map,
         values;
 
