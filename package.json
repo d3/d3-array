@@ -1,0 +1,32 @@
+{
+  "name": "d3-arrays",
+  "version": "0.0.1",
+  "description": "Utilities for array manipulation: ordering, summarizing, searching, etc.",
+  "keywords": [
+    "d3",
+    "array"
+  ],
+  "homepage": "https://github.com/d3/d3-arrays",
+  "license" : "BSD-3-Clause",
+  "author": {
+    "name": "Mike Bostock",
+    "url": "http://bost.ocks.org/mike"
+  },
+  "main": "build/arrays",
+  "jsnext:main": "index",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/d3/d3-arrays.git"
+  },
+  "scripts": {
+    "pretest": "mkdir -p build && d3-bundler --format=umd --name=arrays -- index.js > build/arrays.js",
+    "test": "faucet `find test -name '*-test.js'`",
+    "prepublish": "npm run test && uglifyjs build/arrays.js -c -m -o build/arrays.min.js"
+  },
+  "devDependencies": {
+    "d3-bundler": "~0.2.5",
+    "faucet": "0.0",
+    "tape": "4",
+    "uglifyjs": "2"
+  }
+}
