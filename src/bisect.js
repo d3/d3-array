@@ -1,3 +1,4 @@
+import ascending from "./ascending";
 import bisector from "./bisector";
 
 var ascendingBisect = bisector(ascending);
