@@ -5,7 +5,7 @@ import descending from "./src/descending";
 import deviation from "./src/deviation";
 import entries from "./src/entries";
 import extent from "./src/extent";
-import key from "./src/key";
+import keys from "./src/keys";
 import max from "./src/max";
 import mean from "./src/mean";
 import median from "./src/median";
@@ -33,7 +33,7 @@ export {
   deviation,
   entries,
   extent,
-  key,
+  keys,
   max,
   mean,
   median,
