@@ -1,6 +1,8 @@
 var tape = require("tape"),
     arrays = require("../");
 
+require("./isNaN");
+
 tape("values(object) enumerates every value", function(test) {
   test.deepEqual(arrays.values({a: 1, b: 2}).sort(arrays.ascending), [1, 2]);
   test.end();
@@ -20,7 +22,7 @@ tape("values(object) includes null, undefined and NaN values", function(test) {
   var v = arrays.values({a: null, b: undefined, c: NaN}).map(box).sort(order).map(unbox);
   test.equal(v[0], null);
   test.equal(v[1], undefined);
-  test.ok(isNaN(v[2]) && v[2] !== v[2]);
+  test.isNaN(v[2]);
   test.equal(v.length, 3);
   test.end();
 });
