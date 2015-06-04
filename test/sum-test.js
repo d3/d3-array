@@ -81,10 +81,10 @@ tape("sum(array, f) returns zero if there are no numbers", function(test) {
   test.end();
 });
 
-function box(number) {
-  return {number: number};
+function box(value) {
+  return {value: value};
 }
 
 function unbox(box) {
-  return box.number;
+  return box.value;
 }

@@ -311,14 +311,14 @@ tape("bisector(accessor).right(array, value) handles large sparse arrays", funct
   test.end();
 });
 
-function box(number) {
-  return {number: number};
+function box(value) {
+  return {value: value};
 }
 
 function unbox(box) {
-  return box.number;
+  return box.value;
 }
 
 function ascendingBox(a, b) {
-  return arrays.ascending(a.number, b.number);
+  return arrays.ascending(a.value, b.value);
 }

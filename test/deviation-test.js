@@ -61,10 +61,10 @@ tape("deviation(array, f) returns undefined if the array has fewer than two numb
   test.end();
 });
 
-function box(number) {
-  return {number: number};
+function box(value) {
+  return {value: value};
 }
 
 function unbox(box) {
-  return box.number;
+  return box.value;
 }

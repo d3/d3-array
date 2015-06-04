@@ -27,17 +27,17 @@ tape("values(object) includes null, undefined and NaN values", function(test) {
   test.end();
 });
 
-function box(number) {
-  return {number: number};
+function box(value) {
+  return {value: value};
 }
 
 function unbox(box) {
-  return box.number;
+  return box.value;
 }
 
 function order(a, b) {
-  a = a.number;
-  b = b.number;
+  a = a.value;
+  b = b.value;
   return arrays.ascending(a, b)
       || isNaN(a) - isNaN(b)
       || (b === b) - (a === a);
