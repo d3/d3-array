@@ -78,7 +78,7 @@ tape("max(array, f) compares heterogenous types as numbers", function(test) {
   test.end();
 });
 
-tape("max(array, f) returns undefined if the array contains no numbers", function(test) {
+tape("max(array, f) returns undefined if the array contains no observed values", function(test) {
   test.equal(arrays.max([].map(box), unbox), undefined);
   test.equal(arrays.max([null].map(box), unbox), undefined);
   test.equal(arrays.max([undefined].map(box), unbox), undefined);
