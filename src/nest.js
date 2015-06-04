@@ -15,36 +15,34 @@ export default function() {
         n = array.length,
         key = keys[depth++],
         keyValue,
-        keyValues = [],
-        object,
+        value,
         valuesByKey = new Map,
         values;
 
     while (++i < n) {
-      if (values = valuesByKey.get(keyValue = key(object = array[i]))) {
-        values.push(object);
+      if (values = valuesByKey.get(keyValue = key(value = array[i]))) {
+        values.push(value);
       } else {
-        keyValues.push(keyValue);
-        valuesByKey.set(keyValue, [object]);
+        valuesByKey.set(keyValue, [value]);
       }
     }
 
-    object = new Map;
-    keyValues.forEach(function(keyValue) {
-      object.set(keyValue, map(valuesByKey.get(keyValue), depth));
+    valuesByKey.forEach(function(values, key) {
+      valuesByKey.set(key, map(values, depth));
     });
 
-    return object;
+    return valuesByKey;
   }
 
   function entries(map, depth) {
     if (depth >= keys.length) return map;
 
-    var array = [],
+    var array = new Array(map.size),
+        i = -1,
         sortKey = sortKeys[depth++];
 
-    map.forEach(function(key, keyMap) {
-      array.push({key: key, values: entries(keyMap, depth)});
+    map.forEach(function(value, key) {
+      array[++i] = {key: key, values: entries(value, depth)};
     });
 
     return sortKey
@@ -53,27 +51,11 @@ export default function() {
   }
 
   return nest = {
-    map: function(array) {
-      return map(array, 0);
-    },
-    entries: function(array) {
-      return entries(map(array, 0), 0);
-    },
-    key: function(d) {
-      keys.push(d);
-      return nest;
-    },
-    sortKeys: function(order) {
-      sortKeys[keys.length - 1] = order;
-      return nest;
-    },
-    sortValues: function(order) {
-      sortValues = order;
-      return nest;
-    },
-    rollup: function(f) {
-      rollup = f;
-      return nest;
-    }
+    map: function(array) { return map(array, 0); },
+    entries: function(array) { return entries(map(array, 0), 0); },
+    key: function(d) { keys.push(d); return nest; },
+    sortKeys: function(order) { sortKeys[keys.length - 1] = order; return nest; },
+    sortValues: function(order) { sortValues = order; return nest; },
+    rollup: function(f) { rollup = f; return nest; }
   };
 };

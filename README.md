@@ -7,3 +7,5 @@ Utilities for array manipulation: ordering, summarizing, searching, etc. This co
 * The map and set classes have been removed. Please use ES6 Map and Set instead.
 
 * The nest.map method now always returns an ES6 Map.
+
+* The return value of a nest.key function is no longer coerced to a string: any value type can be used as a nest key. (Though, note that ES6 maps use `===` for equality, so beware of using Date objects as keys as two Date objects representing the same time are not equal!)

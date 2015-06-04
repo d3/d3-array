@@ -11,7 +11,7 @@ import mean from "./src/mean";
 import median from "./src/median";
 import merge from "./src/merge";
 import min from "./src/min";
-import nest from "./src/nest"; // TODO test
+import nest from "./src/nest";
 import pairs from "./src/pairs";
 import permute from "./src/permute";
 import quantile from "./src/quantile";
