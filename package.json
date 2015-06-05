@@ -22,7 +22,7 @@
     "url": "https://github.com/d3/d3-arrays.git"
   },
   "scripts": {
-    "pretest": "mkdir -p build && d3-bundler --format=umd --name=arrays -- index.js > build/arrays.js",
+    "pretest": "mkdir -p build && d3-bundler --polyfill-map --format=umd --name=arrays -- index.js > build/arrays.js",
     "test": "faucet `find test -name '*-test.js'`",
     "prepublish": "npm run test && uglifyjs build/arrays.js -c -m -o build/arrays.min.js"
   },
