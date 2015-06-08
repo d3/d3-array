@@ -175,10 +175,10 @@ returns ["b", "c", "a"]. It is acceptable for the array of indexes to be a diffe
 This method can also be used to extract the values from an object into an array with a stable order. Extracting keyed values in order can be useful for generating data arrays in nested selections. For example:
 
 ```js
-var yield = {yield: 27, variety: "Manchuria", year: 1931, site: "University Farm"},
+var object = {yield: 27, variety: "Manchuria", year: 1931, site: "University Farm"},
     fields = ["site", "variety", "yield"];
 
-console.log(permute(yield, fields)); // ["University Farm", "Manchuria", 27]
+console.log(permute(object, fields)); // ["University Farm", "Manchuria", 27]
 ```
 
 <a name="zip" href="#zip">#</a> <b>zip</b>(<i>arrays…</i>)
