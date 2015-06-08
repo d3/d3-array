@@ -20,7 +20,7 @@ export default function() {
         values;
 
     while (++i < n) {
-      if (values = valuesByKey.get(keyValue = key(value = array[i]))) {
+      if (values = valuesByKey.get(keyValue = key(value = array[i]) + "")) {
         values.push(value);
       } else {
         valuesByKey.set(keyValue, [value]);
