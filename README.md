@@ -223,7 +223,7 @@ Returns an array containing the property keys and values of the specified object
 entries({foo: 42, bar: true}); // [{key: "foo", value: 42}, {key: "bar", value: true}]
 ```
 
-### <a name="_nest"></a> Nest
+### Nest
 
 Nesting allows elements in an array to be grouped into a hierarchical tree structure; think of it like the GROUP BY operator in SQL, except you can have multiple levels of grouping, and the resulting output is a tree rather than a flat table. The levels in the tree are specified by key functions. The leaf nodes of the tree can be sorted by value, while the internal nodes can be sorted by key. An optional rollup function will collapse the elements in each leaf node using a summary function. The nest operator (the object returned by [nest](#nest)) is reusable, and does not retain any references to the data that is nested.
 
