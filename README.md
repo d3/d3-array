@@ -138,13 +138,13 @@ var data = [
 A suitable bisect function could be constructed as:
 
 ```js
-var bisect = bisector(function(d) { return d.date; }).right;
+var bisectDate = bisector(function(d) { return d.date; }).right;
 ```
 
 This is equivalent to specifying a comparator:
 
 ```js
-var bisect = bisector(function(a, b) { return a.date - b.date; }).right;
+var bisectDate = bisector(function(a, b) { return a.date - b.date; }).right;
 ```
 
 And then applied as `bisect(data, new Date(2011, 1, 2))`, returning an index. Use a comparator rather than an accessor if you want values to be sorted in an order different than natural order, such as in descending rather than ascending order.
