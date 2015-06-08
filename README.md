@@ -144,10 +144,10 @@ var bisectDate = bisector(function(d) { return d.date; }).right;
 This is equivalent to specifying a comparator:
 
 ```js
-var bisectDate = bisector(function(a, b) { return a.date - b.date; }).right;
+var bisectDate = bisector(function(d, x) { return d.date - x; }).right;
 ```
 
-And then applied as `bisect(data, new Date(2011, 1, 2))`, returning an index. Use a comparator rather than an accessor if you want values to be sorted in an order different than natural order, such as in descending rather than ascending order.
+And then applied as `bisect(data, new Date(2011, 1, 2))`, returning an index. Note that the comparator is always passed the search value *x* as the second argument. Use a comparator rather than an accessor if you want values to be sorted in an order different than natural order, such as in descending rather than ascending order.
 
 <a name="shuffle" href="#shuffle">#</a> <b>shuffle</b>(<i>array</i>[, <i>lo</i>[, <i>hi</i>]])
 
