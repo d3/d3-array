@@ -203,7 +203,7 @@ pairs([1, 2, 3, 4]); // returns [[1, 2], [2, 3], [3, 4]]
 
 If the specified array has fewer than two elements, returns the empty array.
 
-## Associative Arrays
+### Associative Arrays
 
 Another common data type in JavaScript is the associative array, or more simply the object, which has a set of named properties. In Java this is referred to as a map, and in Python, a dictionary. JavaScript provides a standard mechanism for iterating over the keys (or property names) in an associative array: the [for…in loop](https://developer.mozilla.org/en/JavaScript/Reference/Statements/for...in). However, note that the iteration order is undefined. D3 provides several operators for converting associative arrays to standard indexed arrays.
 
