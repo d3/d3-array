@@ -1,6 +1,6 @@
 {
   "name": "d3-arrays",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Array manipulation, ordering, searching, summarizing, etc.",
   "keywords": [
     "d3",
@@ -24,7 +24,7 @@
   "scripts": {
     "pretest": "mkdir -p build && d3-bundler --polyfill-map --format=umd --name=arrays -- index.js > build/arrays.js",
     "test": "faucet `find test -name '*-test.js'`",
-    "prepublish": "npm run test && uglifyjs build/arrays.js -c -m -o build/arrays.min.js"
+    "prepublish": "npm run test && uglifyjs build/arrays.js -c -m -o build/arrays.min.js && rm -f build/arrays.zip && zip -j build/arrays.zip -- LICENSE README.md build/arrays.js build/arrays.min.js"
   },
   "devDependencies": {
     "d3-bundler": "~0.2.5",
