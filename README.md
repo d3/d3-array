@@ -32,11 +32,11 @@ And finally, **iteration methods** that apply functions to elements in the array
 * [array.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) - Apply a function to reduce the array to a single value (from left-to-right).
 * [array.reduceRight](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight) - Apply a function to reduce the array to a single value (from right-to-left).
 
-Changes from D3 3.x:
+## Installing
 
-* The [range](#range) method now returns the empty array for infinite ranges, rather than throwing an error.
-* The map and set classes have been removed. Please use ES6 Map and Set instead.
-* The [nest.map](#nest_map) method now always returns an ES6 Map.
+If you use NPM, `npm install d3-arrays`. Otherwise, download the [latest release](https://github.com/d3/d3-arrays/releases/latest).
+
+## API Reference
 
 <a name="ascending" href="#ascending">#</a> <b>ascending</b>(<i>a</i>, <i>b</i>)
 
@@ -302,3 +302,9 @@ Applies the nest operator to the specified *array*, returning a map. Each entry 
 <a name="nest_entries" href="#nest_entries">#</a> nest.<b>entries</b>(<i>array</i>)
 
 Applies the nest operator to the specified *array*, returning an array of key-values entries. Conceptually, this is similar to applying [entries](#entries) to the associative array returned by [map](#nest_map), but it applies to every level of the hierarchy rather than just the first (outermost) level. Each entry in the returned array corresponds to a distinct key value returned by the first key function. The entry value depends on the number of registered key functions: if there is an additional key, the value is another nested array of entries; otherwise, the value is the array of elements filtered from the input *array* that have the given key value.
+
+## Changes from D3 3.x:
+
+* The [range](#range) method now returns the empty array for infinite ranges, rather than throwing an error.
+* The map and set classes have been removed. Please use ES6 Map and Set instead.
+* The [nest.map](#nest_map) method now always returns an ES6 Map.
