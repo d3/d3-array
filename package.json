@@ -31,6 +31,6 @@
     "faucet": "0.0",
     "seedrandom": "2",
     "tape": "4",
-    "uglifyjs": "2"
+    "uglify-js": "2"
   }
 }
