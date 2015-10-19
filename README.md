@@ -316,7 +316,7 @@ m.get("bar"); // {"name": "bar"}
 m.get("baz"); // undefined
 ```
 
-See also [nest](#-nest).
+See also [nest](#nest).
 
 <a name="map_has" href="#map_has">#</a> map.<b>has</b>(<i>key</i>)
 
