@@ -275,7 +275,7 @@ For a longer introduction to nesting, see:
 
 <a name="nest" href="#nest">#</a> <b>nest</b>()
 
-Creates a new nest operator. The set of keys is initially empty. If the [map](#nest_map) or [entries](#nest_entries) operator is invoked before any key functions are registered, the nest operator simply returns the input array. Examples of nest: [http://bl.ocks.org/phoebebright/raw/3176159/](http://bl.ocks.org/phoebebright/raw/3176159/)
+Creates a new nest operator. The set of keys is initially empty. If the [map](#nest_map) or [entries](#nest_entries) operator is invoked before any key functions are registered, the nest operator simply returns the input array.
 
 <a name="nest_key" href="#nest_key">#</a> nest.<b>key</b>(<i>function</i>)
 
