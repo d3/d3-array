@@ -183,7 +183,7 @@ This method can also be used to extract the values from an object into an array 
 var object = {yield: 27, variety: "Manchuria", year: 1931, site: "University Farm"},
     fields = ["site", "variety", "yield"];
 
-console.log(permute(object, fields)); // ["University Farm", "Manchuria", 27]
+permute(object, fields); // returns ["University Farm", "Manchuria", 27]
 ```
 
 <a name="zip" href="#zip">#</a> <b>zip</b>(<i>arrays…</i>)
