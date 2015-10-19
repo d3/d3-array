@@ -163,7 +163,7 @@ merge([[1], [2, 3]]); // returns [1, 2, 3]
 
 <a name="range" href="#range">#</a> <b>range</b>([<i>start</i>, ]<i>stop</i>[, <i>step</i>])
 
-Generates an array containing an arithmetic progression, similar to the Python built-in [range](http://docs.python.org/library/functions.html#range). This method is often used to iterate over a sequence of numeric or integer values, such as the indexes into an array. Unlike the Python version, the arguments are not required to be integers, though the results are more predictable if they are due to floating point precision. If the generated array is required to have a predictable length, consider using [array.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) on an integer range. For example:
+Generates an array containing an arithmetic progression, similar to the Python built-in [range](http://docs.python.org/library/functions.html#range). This method is often used to iterate over a sequence of numeric or integer values, such as the indexes into an array. Unlike the Python version, the arguments are not required to be integers, though the results are more predictable if they are due to floating point precision. If the generated array is required to have a specific length, consider using [array.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) on an integer range. For example:
 
 ```js
 range(0, 1, 1/49).length; // BAD: returns 50!
