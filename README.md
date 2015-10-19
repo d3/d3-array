@@ -166,8 +166,8 @@ merge([[1], [2, 3]]); // returns [1, 2, 3]
 Generates an array containing an arithmetic progression, similar to the Python built-in [range](http://docs.python.org/library/functions.html#range). This method is often used to iterate over a sequence of numeric or integer values, such as the indexes into an array. Unlike the Python version, the arguments are not required to be integers, though the results are more predictable if they are due to floating point precision. If the generated array is required to have a specific length, consider using [array.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) on an integer range. For example:
 
 ```js
-range(0, 1, 1/49).length; // BAD: returns 50!
-range(49).map(function(d) { return d / 49; }).length; // GOOD: returns 49.
+range(0, 1, 1/49); // BAD: returns 50 elements!
+range(49).map(function(d) { return d / 49; }); // GOOD: returns 49 elements.
 ```
 
 If *step* is omitted, it defaults to 1. If *start* is omitted, it defaults to 0. The *stop* value is not included in the result. The full form returns an array of numbers [*start*, *start* + *step*, *start* + 2 \* *step*, …]. If *step* is positive, the last element is the largest *start* + *i* \* *step* less than *stop*; if *step* is negative, the last element is the smallest *start* + *i* \* *step* greater than *stop*. If the returned array would contain an infinite number of values, an empty range is returned.
