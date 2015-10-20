@@ -163,7 +163,12 @@ merge([[1], [2, 3]]); // returns [1, 2, 3]
 
 <a name="range" href="#range">#</a> <b>range</b>([<i>start</i>, ]<i>stop</i>[, <i>step</i>])
 
-Generates an array containing an arithmetic progression, similar to the Python built-in [range](http://docs.python.org/library/functions.html#range). This method is often used to iterate over a sequence of numeric or integer values, such as the indexes into an array. Unlike the Python version, the arguments are not required to be integers, though the results are more predictable if they are due to floating point precision.
+Generates an array containing an arithmetic progression, similar to the Python built-in [range](http://docs.python.org/library/functions.html#range). This method is often used to iterate over a sequence of numeric or integer values, such as the indexes into an array. Unlike the Python version, the arguments are not required to be integers, though the results are more predictable if they are due to floating point precision. If the generated array is required to have a specific length, consider using [array.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) on an integer range. For example:
+
+```js
+range(0, 1, 1/49); // BAD: returns 50 elements!
+range(49).map(function(d) { return d / 49; }); // GOOD: returns 49 elements.
+```
 
 If *step* is omitted, it defaults to 1. If *start* is omitted, it defaults to 0. The *stop* value is not included in the result. The full form returns an array of numbers [*start*, *start* + *step*, *start* + 2 \* *step*, …]. If *step* is positive, the last element is the largest *start* + *i* \* *step* less than *stop*; if *step* is negative, the last element is the smallest *start* + *i* \* *step* greater than *stop*. If the returned array would contain an infinite number of values, an empty range is returned.
 
@@ -178,7 +183,7 @@ This method can also be used to extract the values from an object into an array 
 var object = {yield: 27, variety: "Manchuria", year: 1931, site: "University Farm"},
     fields = ["site", "variety", "yield"];
 
-console.log(permute(object, fields)); // ["University Farm", "Manchuria", 27]
+permute(object, fields); // returns ["University Farm", "Manchuria", 27]
 ```
 
 <a name="zip" href="#zip">#</a> <b>zip</b>(<i>arrays…</i>)
@@ -365,7 +370,7 @@ For a longer introduction to nesting, see:
 
 <a name="nest" href="#nest">#</a> <b>nest</b>()
 
-Creates a new nest operator. The set of keys is initially empty. If the [map](#nest_map) or [entries](#nest_entries) operator is invoked before any key functions are registered, the nest operator simply returns the input array. Examples of nest: [http://bl.ocks.org/phoebebright/raw/3176159/](http://bl.ocks.org/phoebebright/raw/3176159/)
+Creates a new nest operator. The set of keys is initially empty. If the [map](#nest_map) or [entries](#nest_entries) operator is invoked before any key functions are registered, the nest operator simply returns the input array.
 
 <a name="nest_key" href="#nest_key">#</a> nest.<b>key</b>(<i>function</i>)
 
