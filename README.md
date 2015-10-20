@@ -392,11 +392,11 @@ Specifies a rollup *function* to be applied on each group of leaf elements. The 
 
 <a name="nest_map" href="#nest_map">#</a> nest.<b>map</b>(<i>array</i>)
 
-Applies the nest operator to the specified *array*, returning a [map](#map). Each entry in the returned associative array corresponds to a distinct key value returned by the first key function. The entry value depends on the number of registered key functions: if there is an additional key, the value is another nested associative array; otherwise, the value is the array of elements filtered from the input *array* that have the given key value.
+Applies the nest operator to the specified *array*, returning a nested [map](#map). Each entry in the returned associative array corresponds to a distinct key value returned by the first key function. The entry value depends on the number of registered key functions: if there is an additional key, the value is another nested associative array; otherwise, the value is the array of elements filtered from the input *array* that have the given key value.
 
 <a name="nest_object" href="#nest_object">#</a> nest.<b>object</b>(<i>array</i>)
 
-Applies the nest operator to the specified *array*, returning an object. Each entry in the returned associative array corresponds to a distinct key value returned by the first key function. The entry value depends on the number of registered key functions: if there is an additional key, the value is another nested associative array; otherwise, the value is the array of elements filtered from the input *array* that have the given key value.
+Applies the nest operator to the specified *array*, returning a nested object. Each entry in the returned associative array corresponds to a distinct key value returned by the first key function. The entry value depends on the number of registered key functions: if there is an additional key, the value is another nested associative array; otherwise, the value is the array of elements filtered from the input *array* that have the given key value.
 
 Note: this method is unsafe if any of the keys conflict with built-in JavaScript properties, such as `__proto__`. If you cannot guarantee that the keys will be safe, you should use [nest.map](#nest_map) instead.
 
