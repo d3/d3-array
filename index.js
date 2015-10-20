@@ -6,6 +6,7 @@ import deviation from "./src/deviation";
 import entries from "./src/entries";
 import extent from "./src/extent";
 import keys from "./src/keys";
+import map from "./src/map";
 import max from "./src/max";
 import mean from "./src/mean";
 import median from "./src/median";
@@ -16,6 +17,7 @@ import pairs from "./src/pairs";
 import permute from "./src/permute";
 import quantile from "./src/quantile";
 import range from "./src/range";
+import set from "./src/set";
 import shuffle from "./src/shuffle";
 import sum from "./src/sum";
 import transpose from "./src/transpose";
@@ -34,6 +36,7 @@ export {
   entries,
   extent,
   keys,
+  map,
   max,
   mean,
   median,
@@ -44,6 +47,7 @@ export {
   permute,
   quantile,
   range,
+  set,
   shuffle,
   sum,
   transpose,

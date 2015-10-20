@@ -122,8 +122,8 @@ tape("nest.key(key).map(array) returns entries for each distinct key, with value
       a = {foo: 1},
       b = {foo: 1},
       c = {foo: 2};
-  test.deepEqual(nest.map([c, a, b, c]), (new Map).set(1, [a, b]).set(2, [c, c]));
-  test.deepEqual(nest.map([c, b, a, c]), (new Map).set(1, [b, a]).set(2, [c, c]));
+  test.deepEqual(nest.map([c, a, b, c]), arrays.map({1: [a, b], 2: [c, c]}));
+  test.deepEqual(nest.map([c, b, a, c]), arrays.map({1: [b, a], 2: [c, c]}));
   test.end();
 });
 
@@ -135,8 +135,8 @@ tape("nest.key(key1).key(key2).map(array) returns entries for each distinct key 
       d = {foo: 1, bar: "b"},
       e = {foo: 1, bar: "b"},
       f = {foo: 2, bar: "b"};
-  test.deepEqual(nest.map([a, b, c, d, e, f]), (new Map).set(1, (new Map).set("a", [a, b]).set("b", [d, e])).set(2, (new Map).set("a", [c]).set("b", [f])));
-  test.deepEqual(nest.map([f, e, d, c, b, a]), (new Map).set(1, (new Map).set("a", [b, a]).set("b", [e, d])).set(2, (new Map).set("a", [c]).set("b", [f])));
+  test.deepEqual(nest.map([a, b, c, d, e, f]), arrays.map({1: arrays.map({a: [a, b], b: [d, e]}), 2: arrays.map({a: [c], b: [f]})}));
+  test.deepEqual(nest.map([f, e, d, c, b, a]), arrays.map({1: arrays.map({a: [b, a], b: [e, d]}), 2: arrays.map({a: [c], b: [f]})}));
   test.end();
 });
 
@@ -152,6 +152,6 @@ tape("nest.key(key).rollup(rollup).map(array) aggregates values per key using th
   var a = {foo: 1},
       b = {foo: 1},
       c = {foo: 2};
-  test.deepEqual(arrays.nest().key(function(d) { return d.foo; }).rollup(function(values) { return values.length; }).map([a, b, c]), (new Map).set(1, 2).set(2, 1));
+  test.deepEqual(arrays.nest().key(function(d) { return d.foo; }).rollup(function(values) { return values.length; }).map([a, b, c]), arrays.map({1: 2, 2: 1}));
   test.end();
 });

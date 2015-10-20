@@ -2,7 +2,7 @@
 
 Utilities for array manipulation: ordering, summarizing, searching, etc.
 
-When using D3—and with data visualization in general—you tend to do a lot of array manipulation. That’s because D3’s canonical representation of data is an array. Some common forms of array manipulation include taking a contiguous slice (subset) of an array, filtering an array using a predicate function, and mapping an array to a parallel set of values using a transform function. Before looking at the set of utilities that D3 provides for arrays, you should familiarize yourself with the powerful [array methods built-in to JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype).
+When using D3—and with data in general—you tend to do a lot of array manipulation. Some common forms of array manipulation include taking a contiguous slice (subset) of an array, filtering an array using a predicate function, and mapping an array to a parallel set of values using a transform function. Before looking at the set of utilities that D3 provides for arrays, you should familiarize yourself with the powerful [array methods built-in to JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype).
 
 JavaScript includes **mutator methods** that modify the array:
 
@@ -208,9 +208,11 @@ pairs([1, 2, 3, 4]); // returns [[1, 2], [2, 3], [3, 4]]
 
 If the specified array has fewer than two elements, returns the empty array.
 
-### Associative Arrays
+### Collections
 
-Another common data type in JavaScript is the associative array, or more simply the object, which has a set of named properties. In Java this is referred to as a map, and in Python, a dictionary. JavaScript provides a standard mechanism for iterating over the keys (or property names) in an associative array: the [for…in loop](https://developer.mozilla.org/en/JavaScript/Reference/Statements/for...in). However, note that the iteration order is undefined. D3 provides several operators for converting associative arrays to standard indexed arrays.
+Another common data type in JavaScript is the associative array, or more simply the object, which has a set of named properties. Java refers to this as a *map*, and Python a *dictionary*. JavaScript provides a standard mechanism for iterating over the keys (or property names) in an associative array: the [for…in loop](https://developer.mozilla.org/en/JavaScript/Reference/Statements/for...in). However, note that the iteration order is undefined. D3 provides several operators for converting associative arrays to standard arrays with numeric indexes.
+
+A word of caution: it is tempting to use plain objects as maps, but this causes [unexpected behavior](http://www.devthought.com/2012/01/18/an-object-is-not-a-hash/) when built-in property names are used as keys, such as `object["__proto__"] = 42` and `"hasOwnProperty" in object`. (ES6 introduces Map and Set collections which avoid this problem, but browser support is limited.) If you cannot guarantee that map keys and set values will be safe, you should use [map](#map) and [set](#set) instead of plain objects.
 
 <a name="keys" href="#keys">#</a> <b>keys</b>(<i>object</i>)
 
@@ -227,6 +229,99 @@ Returns an array containing the property keys and values of the specified object
 ```js
 entries({foo: 42, bar: true}); // [{key: "foo", value: 42}, {key: "bar", value: true}]
 ```
+
+<a name="map" href="#map">#</a> <b>map</b>([<i>object</i>[, <i>key</i>]])
+
+Constructs a new map. If *object* is specified, copies all enumerable properties from the specified object into this map. The specified object may also be an array or another map. An optional *key* function may be specified to compute the key for each value in the array. For example:
+
+```js
+var m = map([{name: "foo"}, {name: "bar"}], function(d) { return d.name; });
+m.get("foo"); // {"name": "foo"}
+m.get("bar"); // {"name": "bar"}
+m.get("baz"); // undefined
+```
+
+Note: unlike ES6 Map, D3’s map coerces keys to strings.
+
+See also [nest](#nest).
+
+<a name="map_has" href="#map_has">#</a> map.<b>has</b>(<i>key</i>)
+
+Returns true if and only if this map has an entry for the specified *key* string. Note: the value may be `null` or `undefined`.
+
+<a name="map_get" href="#map_get">#</a> map.<b>get</b>(<i>key</i>)
+
+Returns the value for the specified *key* string. If the map does not have an entry for the specified *key*, returns `undefined`.
+
+<a name="map_set" href="#map_set">#</a> map.<b>set</b>(<i>key</i>, <i>value</i>)
+
+Sets the *value* for the specified *key* string; returns the new *value*. If the map previously had an entry for the same *key* string, the old entry is replaced with the new value.
+
+<a name="map_remove" href="#map_remove">#</a> map.<b>remove</b>(<i>key</i>)
+
+If the map has an entry for the specified *key* string, removes the entry and returns true. Otherwise, this method does nothing and returns false.
+
+<a name="map_keys" href="#map_keys">#</a> map.<b>keys</b>()
+
+Returns an array of string keys for every entry in this map. The order of the returned keys is arbitrary.
+
+<a name="map_values" href="#map_values">#</a> map.<b>values</b>()
+
+Returns an array of values for every entry in this map. The order of the returned values is arbitrary.
+
+<a name="map_entries" href="#map_entries">#</a> map.<b>entries</b>()
+
+Returns an array of key-value objects for each entry in this map. The order of the returned entries is arbitrary. Each entry’s key is a string, but the value has arbitrary type.
+
+<a name="map_forEach" href="#map_forEach">#</a> map.<b>forEach</b>(<i>function</i>)
+
+Calls the specified *function* for each entry in this map, passing the entry's key and value as two arguments. The `this` context of the *function* is this map. Returns undefined. The iteration order is arbitrary.
+
+<a name="map_empty" href="#map_empty">#</a> map.<b>empty</b>()
+
+Returns true if and only if this map has zero entries.
+
+<a name="map_size" href="#map_size">#</a> map.<b>size</b>()
+
+Returns the number of entries in this map.
+
+<a name="set" href="#set">#</a> <b>set</b>([<i>array</i>])
+
+Constructs a new set. If *array* is specified, adds the given *array* of string values to the returned set.
+
+Note: unlike ES6 Set, D3’s set coerces values to strings.
+
+<a name="set_has" href="#set_has">#</a> set.<b>has</b>(<i>value</i>)
+
+Returns true if and only if this set has an entry for the specified *value* string.
+
+<a name="set_add" href="#set_add">#</a> set.<b>add</b>(<i>value</i>)
+
+Adds the specified *value* string to this set. Returns *value*.
+
+<a name="set_remove" href="#set_remove">#</a> set.<b>remove</b>(<i>value</i>)
+
+If the set contains the specified *value* string, removes it and returns true. Otherwise, this method does nothing and returns false.
+
+<a name="set_values" href="#set_values">#</a> set.<b>values</b>()
+
+Returns an array of the string values in this set. The order of the returned values is arbitrary. Can be used as a convenient way of computing the unique values for a set of strings. For example:
+
+```js
+set(["foo", "bar", "foo", "baz"]).values(); // "foo", "bar", "baz"
+```
+
+<a name="set_forEach" href="#set_forEach">#</a> set.<b>forEach</b>(<i>function</i>)
+
+Calls the specified *function* for each value in this set, passing the value as an argument. The `this` context of the *function* is this set. Returns undefined. The iteration order is arbitrary.
+
+<a name="set_empty" href="#set_empty">#</a> set.<b>empty</b>()
+
+Returns true if and only if this set has zero values.
+
+<a name="set_size" href="#set_size">#</a> set.<b>size</b>()
+
+Returns the number of values in this set.
 
 ### Nest
 
@@ -302,7 +397,13 @@ Specifies a rollup *function* to be applied on each group of leaf elements. The 
 
 <a name="nest_map" href="#nest_map">#</a> nest.<b>map</b>(<i>array</i>)
 
-Applies the nest operator to the specified *array*, returning a map. Each entry in the returned associative array corresponds to a distinct key value returned by the first key function. The entry value depends on the number of registered key functions: if there is an additional key, the value is another nested associative array; otherwise, the value is the array of elements filtered from the input *array* that have the given key value.
+Applies the nest operator to the specified *array*, returning a nested [map](#map). Each entry in the returned map corresponds to a distinct key value returned by the first key function. The entry value depends on the number of registered key functions: if there is an additional key, the value is another map; otherwise, the value is the array of elements filtered from the input *array* that have the given key value.
+
+<a name="nest_object" href="#nest_object">#</a> nest.<b>object</b>(<i>array</i>)
+
+Applies the nest operator to the specified *array*, returning a nested object. Each entry in the returned associative array corresponds to a distinct key value returned by the first key function. The entry value depends on the number of registered key functions: if there is an additional key, the value is another associative array; otherwise, the value is the array of elements filtered from the input *array* that have the given key value.
+
+Note: this method is unsafe if any of the keys conflict with built-in JavaScript properties, such as `__proto__`. If you cannot guarantee that the keys will be safe, you should use [nest.map](#nest_map) instead.
 
 <a name="nest_entries" href="#nest_entries">#</a> nest.<b>entries</b>(<i>array</i>)
 
@@ -311,5 +412,4 @@ Applies the nest operator to the specified *array*, returning an array of key-va
 ## Changes from D3 3.x:
 
 * The [range](#range) method now returns the empty array for infinite ranges, rather than throwing an error.
-* The map and set classes have been removed. Please use ES6 Map and Set instead.
-* The [nest.map](#nest_map) method now always returns an ES6 Map.
+* The [nest.map](#nest_map) method now always returns a [map](#map); use [nest.object](#nest_object) to return a plain object instead.
