@@ -203,9 +203,11 @@ pairs([1, 2, 3, 4]); // returns [[1, 2], [2, 3], [3, 4]]
 
 If the specified array has fewer than two elements, returns the empty array.
 
-### Associative Arrays
+### Collections
 
-Another common data type in JavaScript is the associative array, or more simply the object, which has a set of named properties. In Java this is referred to as a map, and in Python, a dictionary. JavaScript provides a standard mechanism for iterating over the keys (or property names) in an associative array: the [for…in loop](https://developer.mozilla.org/en/JavaScript/Reference/Statements/for...in). However, note that the iteration order is undefined. D3 provides several operators for converting associative arrays to standard indexed arrays.
+Another common data type in JavaScript is the associative array, or more simply the object, which has a set of named properties. In Java this is referred to as a map, and in Python, a dictionary. JavaScript provides a standard mechanism for iterating over the keys (or property names) in an associative array: the [for…in loop](https://developer.mozilla.org/en/JavaScript/Reference/Statements/for...in). However, note that the iteration order is undefined. D3 provides several operators for converting associative arrays to standard arrays with numeric indexes.
+
+A word of caution: it is tempting to use plain objects as maps, but this causes [unexpected behavior](http://www.devthought.com/2012/01/18/an-object-is-not-a-hash/) when built-in property names are used as keys, such as `object["__proto__"] = 42` and `"hasOwnProperty" in object`. (ES6 introduces Map and Set collections which avoid this problem, but browser support is still limited.)If you cannot guarantee that map keys and set values will be safe, you should use [map](#map) and [set](#set) instead of plain objects.
 
 <a name="keys" href="#keys">#</a> <b>keys</b>(<i>object</i>)
 
@@ -223,12 +225,6 @@ Returns an array containing the property keys and values of the specified object
 entries({foo: 42, bar: true}); // [{key: "foo", value: 42}, {key: "bar", value: true}]
 ```
 
-### Collections
-
-It is tempting to use plain objects as maps (also known as hashes), but this practice can lead to [unexpected behavior](http://www.devthought.com/2012/01/18/an-object-is-not-a-hash/) when built-in property names are used as keys, such as `object["__proto__"] = 42` and `"hasOwnProperty" in object`. Although ES6 introduces Map and Set collections, browser support is still limited.
-
-Note: unlike ES6, D3’s map coerces keys to strings and D3’s set coerces values to strings.
-
 <a name="map" href="#map">#</a> <b>map</b>([<i>object</i>[, <i>key</i>]])
 
 Constructs a new map. If *object* is specified, copies all enumerable properties from the specified object into this map. The specified object may also be an array or another map. An optional *key* function may be specified to compute the key for each value in the array. For example:
@@ -239,6 +235,8 @@ m.get("foo"); // {"name": "foo"}
 m.get("bar"); // {"name": "bar"}
 m.get("baz"); // undefined
 ```
+
+Note: unlike ES6 Map, D3’s map coerces keys to strings.
 
 See also [nest](#nest).
 
@@ -285,6 +283,8 @@ Returns the number of entries in this map.
 <a name="set" href="#set">#</a> <b>set</b>([<i>array</i>])
 
 Constructs a new set. If *array* is specified, adds the given *array* of string values to the returned set.
+
+Note: unlike ES6 Set, D3’s set coerces values to strings.
 
 <a name="set_has" href="#set_has">#</a> set.<b>has</b>(<i>value</i>)
 
