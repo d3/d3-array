@@ -1,3 +1,5 @@
+import map from "./map";
+
 export default function() {
   var keys = [],
       sortKeys = [],
@@ -5,7 +7,7 @@ export default function() {
       rollup,
       nest;
 
-  function map(array, depth) {
+  function apply(array, depth, createResult, setResult) {
     if (depth >= keys.length) return rollup
         ? rollup.call(nest, array) : (sortValues
         ? array.sort(sortValues)
@@ -16,8 +18,9 @@ export default function() {
         key = keys[depth++],
         keyValue,
         value,
-        valuesByKey = new Map,
-        values;
+        valuesByKey = map(),
+        values,
+        result = createResult();
 
     while (++i < n) {
       if (values = valuesByKey.get(keyValue = key(value = array[i]) + "")) {
@@ -27,22 +30,21 @@ export default function() {
       }
     }
 
-    valuesByKey.forEach(function(values, key) {
-      valuesByKey.set(key, map(values, depth));
+    valuesByKey.forEach(function(key, values) {
+      setResult(result, key, apply(values, depth, createResult, setResult));
     });
 
-    return valuesByKey;
+    return result;
   }
 
   function entries(map, depth) {
     if (depth >= keys.length) return map;
 
-    var array = new Array(map.size),
-        i = -1,
+    var array = [],
         sortKey = sortKeys[depth++];
 
-    map.forEach(function(value, key) {
-      array[++i] = {key: key, values: entries(value, depth)};
+    map.forEach(function(key, value) {
+      array.push({key: key, values: entries(value, depth)});
     });
 
     return sortKey
@@ -51,11 +53,28 @@ export default function() {
   }
 
   return nest = {
-    map: function(array) { return map(array, 0); },
-    entries: function(array) { return entries(map(array, 0), 0); },
+    object: function(array) { return apply(array, 0, createObject, setObject); },
+    map: function(array) { return apply(array, 0, createMap, setMap); },
+    entries: function(array) { return entries(apply(array, 0, createMap, setMap), 0); },
     key: function(d) { keys.push(d); return nest; },
     sortKeys: function(order) { sortKeys[keys.length - 1] = order; return nest; },
     sortValues: function(order) { sortValues = order; return nest; },
     rollup: function(f) { rollup = f; return nest; }
   };
 };
+
+function createObject() {
+  return {};
+}
+
+function setObject(object, key, value) {
+  object[key] = value;
+}
+
+function createMap() {
+  return map();
+}
+
+function setMap(map, key, value) {
+  map.set(key, value);
+}

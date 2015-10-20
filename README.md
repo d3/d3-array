@@ -225,6 +225,10 @@ entries({foo: 42, bar: true}); // [{key: "foo", value: 42}, {key: "bar", value: 
 
 ### Collections
 
+It is tempting to use plain objects as maps (also known as hashes), but this practice can lead to [unexpected behavior](http://www.devthought.com/2012/01/18/an-object-is-not-a-hash/) when built-in property names are used as keys, such as `object["__proto__"] = 42` and `"hasOwnProperty" in object`. Although ES6 introduces Map and Set collections, browser support is still limited.
+
+Note: unlike ES6, D3’s map coerces keys to strings and D3’s set coerces values to strings.
+
 <a name="map" href="#map">#</a> <b>map</b>([<i>object</i>[, <i>key</i>]])
 
 Constructs a new map. If *object* is specified, copies all enumerable properties from the specified object into this map. The specified object may also be an array or another map. An optional *key* function may be specified to compute the key for each value in the array. For example:
@@ -388,7 +392,13 @@ Specifies a rollup *function* to be applied on each group of leaf elements. The 
 
 <a name="nest_map" href="#nest_map">#</a> nest.<b>map</b>(<i>array</i>)
 
-Applies the nest operator to the specified *array*, returning a map. Each entry in the returned associative array corresponds to a distinct key value returned by the first key function. The entry value depends on the number of registered key functions: if there is an additional key, the value is another nested associative array; otherwise, the value is the array of elements filtered from the input *array* that have the given key value.
+Applies the nest operator to the specified *array*, returning a [map](#map). Each entry in the returned associative array corresponds to a distinct key value returned by the first key function. The entry value depends on the number of registered key functions: if there is an additional key, the value is another nested associative array; otherwise, the value is the array of elements filtered from the input *array* that have the given key value.
+
+<a name="nest_object" href="#nest_object">#</a> nest.<b>object</b>(<i>array</i>)
+
+Applies the nest operator to the specified *array*, returning an object. Each entry in the returned associative array corresponds to a distinct key value returned by the first key function. The entry value depends on the number of registered key functions: if there is an additional key, the value is another nested associative array; otherwise, the value is the array of elements filtered from the input *array* that have the given key value.
+
+Note: this method is unsafe if any of the keys conflict with built-in JavaScript properties, such as `__proto__`. If you cannot guarantee that the keys will be safe, you should use [nest.map](#nest_map) instead.
 
 <a name="nest_entries" href="#nest_entries">#</a> nest.<b>entries</b>(<i>array</i>)
 
@@ -397,4 +407,4 @@ Applies the nest operator to the specified *array*, returning an array of key-va
 ## Changes from D3 3.x:
 
 * The [range](#range) method now returns the empty array for infinite ranges, rather than throwing an error.
-* The [nest.map](#nest_map) method now always returns an ES6 Map.
+* The [nest.map](#nest_map) method now always returns a [map](#map); use [nest.object](#nest_object) to return a plain object instead.
