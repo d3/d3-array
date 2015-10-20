@@ -207,7 +207,7 @@ If the specified array has fewer than two elements, returns the empty array.
 
 Another common data type in JavaScript is the associative array, or more simply the object, which has a set of named properties. Java refers to this as a *map*, and Python a *dictionary*. JavaScript provides a standard mechanism for iterating over the keys (or property names) in an associative array: the [for…in loop](https://developer.mozilla.org/en/JavaScript/Reference/Statements/for...in). However, note that the iteration order is undefined. D3 provides several operators for converting associative arrays to standard arrays with numeric indexes.
 
-A word of caution: it is tempting to use plain objects as maps, but this causes [unexpected behavior](http://www.devthought.com/2012/01/18/an-object-is-not-a-hash/) when built-in property names are used as keys, such as `object["__proto__"] = 42` and `"hasOwnProperty" in object`. (ES6 introduces Map and Set collections which avoid this problem, but browser support is still limited.)If you cannot guarantee that map keys and set values will be safe, you should use [map](#map) and [set](#set) instead of plain objects.
+A word of caution: it is tempting to use plain objects as maps, but this causes [unexpected behavior](http://www.devthought.com/2012/01/18/an-object-is-not-a-hash/) when built-in property names are used as keys, such as `object["__proto__"] = 42` and `"hasOwnProperty" in object`. (ES6 introduces Map and Set collections which avoid this problem, but browser support is limited.) If you cannot guarantee that map keys and set values will be safe, you should use [map](#map) and [set](#set) instead of plain objects.
 
 <a name="keys" href="#keys">#</a> <b>keys</b>(<i>object</i>)
 
