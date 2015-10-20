@@ -245,43 +245,43 @@ Note: unlike ES6 Map, D3’s map coerces keys to strings.
 
 See also [nest](#nest).
 
-<a name="map_has" href="#map_has">#</a> map.<b>has</b>(<i>key</i>)
+<a name="map_has" href="#map_has">#</a> <i>map</i>.<b>has</b>(<i>key</i>)
 
 Returns true if and only if this map has an entry for the specified *key* string. Note: the value may be `null` or `undefined`.
 
-<a name="map_get" href="#map_get">#</a> map.<b>get</b>(<i>key</i>)
+<a name="map_get" href="#map_get">#</a> <i>map</i>.<b>get</b>(<i>key</i>)
 
 Returns the value for the specified *key* string. If the map does not have an entry for the specified *key*, returns `undefined`.
 
-<a name="map_set" href="#map_set">#</a> map.<b>set</b>(<i>key</i>, <i>value</i>)
+<a name="map_set" href="#map_set">#</a> <i>map</i>.<b>set</b>(<i>key</i>, <i>value</i>)
 
 Sets the *value* for the specified *key* string; returns the new *value*. If the map previously had an entry for the same *key* string, the old entry is replaced with the new value.
 
-<a name="map_remove" href="#map_remove">#</a> map.<b>remove</b>(<i>key</i>)
+<a name="map_remove" href="#map_remove">#</a> <i>map</i>.<b>remove</b>(<i>key</i>)
 
 If the map has an entry for the specified *key* string, removes the entry and returns true. Otherwise, this method does nothing and returns false.
 
-<a name="map_keys" href="#map_keys">#</a> map.<b>keys</b>()
+<a name="map_keys" href="#map_keys">#</a> <i>map</i>.<b>keys</b>()
 
 Returns an array of string keys for every entry in this map. The order of the returned keys is arbitrary.
 
-<a name="map_values" href="#map_values">#</a> map.<b>values</b>()
+<a name="map_values" href="#map_values">#</a> <i>map</i>.<b>values</b>()
 
 Returns an array of values for every entry in this map. The order of the returned values is arbitrary.
 
-<a name="map_entries" href="#map_entries">#</a> map.<b>entries</b>()
+<a name="map_entries" href="#map_entries">#</a> <i>map</i>.<b>entries</b>()
 
 Returns an array of key-value objects for each entry in this map. The order of the returned entries is arbitrary. Each entry’s key is a string, but the value has arbitrary type.
 
-<a name="map_forEach" href="#map_forEach">#</a> map.<b>forEach</b>(<i>function</i>)
+<a name="map_forEach" href="#map_forEach">#</a> <i>map</i>.<b>forEach</b>(<i>function</i>)
 
 Calls the specified *function* for each entry in this map, passing the entry's key and value as two arguments. The `this` context of the *function* is this map. Returns undefined. The iteration order is arbitrary.
 
-<a name="map_empty" href="#map_empty">#</a> map.<b>empty</b>()
+<a name="map_empty" href="#map_empty">#</a> <i>map</i>.<b>empty</b>()
 
 Returns true if and only if this map has zero entries.
 
-<a name="map_size" href="#map_size">#</a> map.<b>size</b>()
+<a name="map_size" href="#map_size">#</a> <i>map</i>.<b>size</b>()
 
 Returns the number of entries in this map.
 
@@ -291,19 +291,19 @@ Constructs a new set. If *array* is specified, adds the given *array* of string 
 
 Note: unlike ES6 Set, D3’s set coerces values to strings.
 
-<a name="set_has" href="#set_has">#</a> set.<b>has</b>(<i>value</i>)
+<a name="set_has" href="#set_has">#</a> <i>set</i>.<b>has</b>(<i>value</i>)
 
 Returns true if and only if this set has an entry for the specified *value* string.
 
-<a name="set_add" href="#set_add">#</a> set.<b>add</b>(<i>value</i>)
+<a name="set_add" href="#set_add">#</a> <i>set</i>.<b>add</b>(<i>value</i>)
 
 Adds the specified *value* string to this set. Returns *value*.
 
-<a name="set_remove" href="#set_remove">#</a> set.<b>remove</b>(<i>value</i>)
+<a name="set_remove" href="#set_remove">#</a> <i>set</i>.<b>remove</b>(<i>value</i>)
 
 If the set contains the specified *value* string, removes it and returns true. Otherwise, this method does nothing and returns false.
 
-<a name="set_values" href="#set_values">#</a> set.<b>values</b>()
+<a name="set_values" href="#set_values">#</a> <i>set</i>.<b>values</b>()
 
 Returns an array of the string values in this set. The order of the returned values is arbitrary. Can be used as a convenient way of computing the unique values for a set of strings. For example:
 
@@ -311,15 +311,15 @@ Returns an array of the string values in this set. The order of the returned val
 set(["foo", "bar", "foo", "baz"]).values(); // "foo", "bar", "baz"
 ```
 
-<a name="set_forEach" href="#set_forEach">#</a> set.<b>forEach</b>(<i>function</i>)
+<a name="set_forEach" href="#set_forEach">#</a> <i>set</i>.<b>forEach</b>(<i>function</i>)
 
 Calls the specified *function* for each value in this set, passing the value as an argument. The `this` context of the *function* is this set. Returns undefined. The iteration order is arbitrary.
 
-<a name="set_empty" href="#set_empty">#</a> set.<b>empty</b>()
+<a name="set_empty" href="#set_empty">#</a> <i>set</i>.<b>empty</b>()
 
 Returns true if and only if this set has zero values.
 
-<a name="set_size" href="#set_size">#</a> set.<b>size</b>()
+<a name="set_size" href="#set_size">#</a> <i>set</i>.<b>size</b>()
 
 Returns the number of values in this set.
 
@@ -372,11 +372,11 @@ For a longer introduction to nesting, see:
 
 Creates a new nest operator. The set of keys is initially empty. If the [map](#nest_map) or [entries](#nest_entries) operator is invoked before any key functions are registered, the nest operator simply returns the input array.
 
-<a name="nest_key" href="#nest_key">#</a> nest.<b>key</b>(<i>function</i>)
+<a name="nest_key" href="#nest_key">#</a> <i>nest</i>.<b>key</b>(<i>function</i>)
 
 Registers a new key *function*. The key function will be invoked for each element in the input array, and must return a string identifier that is used to assign the element to its group. Most often, the function is implemented as a simple accessor, such as the year and variety accessors in the example above. The function is _not_ passed the input array index. Each time a key is registered, it is pushed onto the end of an internal keys array, and the resulting map or entries will have an additional hierarchy level. There is not currently a facility to remove or query the registered keys. The most-recently registered key is referred to as the current key in subsequent methods.
 
-<a name="nest_sortKeys" href="#nest_sortKeys">#</a> nest.<b>sortKeys</b>(<i>comparator</i>)
+<a name="nest_sortKeys" href="#nest_sortKeys">#</a> <i>nest</i>.<b>sortKeys</b>(<i>comparator</i>)
 
 Sorts key values for the current key using the specified *comparator*, such as [descending](#descending). If no comparator is specified for the current key, the order in which keys will be returned is undefined. Note that this only affects the result of the entries operator; the order of keys returned by the map operator is always undefined, regardless of comparator.
 
@@ -387,25 +387,25 @@ var entries = nest()
     .entries(yields);
 ```
 
-<a name="nest_sortValues" href="#nest_sortValues">#</a> nest.<b>sortValues</b>(<i>comparator</i>)
+<a name="nest_sortValues" href="#nest_sortValues">#</a> <i>nest</i>.<b>sortValues</b>(<i>comparator</i>)
 
 Sorts leaf elements using the specified *comparator*, such as [descending](#descending). This is roughly equivalent to sorting the input array before applying the nest operator; however it is typically more efficient as the size of each group is smaller. If no value comparator is specified, elements will be returned in the order they appeared in the input array. This applies to both the map and entries operators.
 
-<a name="nest_rollup" href="#nest_rollup">#</a> nest.<b>rollup</b>(<i>function</i>)
+<a name="nest_rollup" href="#nest_rollup">#</a> <i>nest</i>.<b>rollup</b>(<i>function</i>)
 
 Specifies a rollup *function* to be applied on each group of leaf elements. The return value of the rollup function will replace the array of leaf values in either the associative array returned by the map operator, or the values attribute of each entry returned by the entries operator.
 
-<a name="nest_map" href="#nest_map">#</a> nest.<b>map</b>(<i>array</i>)
+<a name="nest_map" href="#nest_map">#</a> <i>nest</i>.<b>map</b>(<i>array</i>)
 
 Applies the nest operator to the specified *array*, returning a nested [map](#map). Each entry in the returned map corresponds to a distinct key value returned by the first key function. The entry value depends on the number of registered key functions: if there is an additional key, the value is another map; otherwise, the value is the array of elements filtered from the input *array* that have the given key value.
 
-<a name="nest_object" href="#nest_object">#</a> nest.<b>object</b>(<i>array</i>)
+<a name="nest_object" href="#nest_object">#</a> <i>nest</i>.<b>object</b>(<i>array</i>)
 
 Applies the nest operator to the specified *array*, returning a nested object. Each entry in the returned associative array corresponds to a distinct key value returned by the first key function. The entry value depends on the number of registered key functions: if there is an additional key, the value is another associative array; otherwise, the value is the array of elements filtered from the input *array* that have the given key value.
 
 Note: this method is unsafe if any of the keys conflict with built-in JavaScript properties, such as `__proto__`. If you cannot guarantee that the keys will be safe, you should use [nest.map](#nest_map) instead.
 
-<a name="nest_entries" href="#nest_entries">#</a> nest.<b>entries</b>(<i>array</i>)
+<a name="nest_entries" href="#nest_entries">#</a> <i>nest</i>.<b>entries</b>(<i>array</i>)
 
 Applies the nest operator to the specified *array*, returning an array of key-values entries. Conceptually, this is similar to applying [entries](#entries) to the associative array returned by [map](#nest_map), but it applies to every level of the hierarchy rather than just the first (outermost) level. Each entry in the returned array corresponds to a distinct key value returned by the first key function. The entry value depends on the number of registered key functions: if there is an additional key, the value is another nested array of entries; otherwise, the value is the array of elements filtered from the input *array* that have the given key value.
 
