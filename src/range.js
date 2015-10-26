@@ -9,20 +9,11 @@ export default function(start, stop, step) {
 
   var i = -1,
       n = Math.max(0, Math.ceil((stop - start) / step)) | 0,
-      k = scale(Math.abs(step)),
       range = new Array(n);
 
-  start *= k;
-  step *= k;
   while (++i < n) {
-    range[i] = (start + i * step) / k;
+    range[i] = start + i * step;
   }
 
   return range;
 };
-
-function scale(x) {
-  var k = 1;
-  while (x * k % 1) k *= 10;
-  return k;
-}

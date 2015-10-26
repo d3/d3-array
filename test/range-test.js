@@ -118,18 +118,22 @@ tape("range(start, stop, step) returns an empty array if step is zero", function
   test.end();
 });
 
-tape("range(start, stop, step) handles fractional steps without rounding errors", function(test) {
-  test.deepEqual(arrays.range(0, 0.5, 0.1), [0, 0.1, 0.2, 0.3, 0.4]);
-  test.deepEqual(arrays.range(-2, -1.2, 0.1), [-2, -1.9, -1.8, -1.7, -1.6, -1.5, -1.4, -1.3]);
+tape("range(start, stop, step) returns exactly [start + step * i, …] for fractional steps", function(test) {
+  test.deepEqual(arrays.range(0, 0.5, 0.1), [0 + 0.1 * 0, 0 + 0.1 * 1, 0 + 0.1 * 2, 0 + 0.1 * 3, 0 + 0.1 * 4]);
+  test.deepEqual(arrays.range(0.5, 0, -0.1), [0.5 - 0.1 * 0, 0.5 - 0.1 * 1, 0.5 - 0.1 * 2, 0.5 - 0.1 * 3, 0.5 - 0.1 * 4]);
+  test.deepEqual(arrays.range(-2, -1.2, 0.1), [-2 + 0.1 * 0, -2 + 0.1 * 1, -2 + 0.1 * 2, -2 + 0.1 * 3, -2 + 0.1 * 4, -2 + 0.1 * 5, -2 + 0.1 * 6, -2 + 0.1 * 7]);
+  test.deepEqual(arrays.range(-1.2, -2, -0.1), [-1.2 - 0.1 * 0, -1.2 - 0.1 * 1, -1.2 - 0.1 * 2, -1.2 - 0.1 * 3, -1.2 - 0.1 * 4, -1.2 - 0.1 * 5, -1.2 - 0.1 * 6, -1.2 - 0.1 * 7]);
   test.end();
 });
 
-tape("range(start, stop, step) handles extremely small steps without rounding errors", function(test) {
-  test.deepEqual(arrays.range(2.1e-31, 5e-31, 1.1e-31), [2.1e-31, 3.2e-31, 4.3e-31]);
+tape("range(start, stop, step) returns exactly [start + step * i, …] for very small fractional steps", function(test) {
+  test.deepEqual(arrays.range(2.1e-31, 5e-31, 1.1e-31), [2.1e-31 + 1.1e-31 * 0, 2.1e-31 + 1.1e-31 * 1, 2.1e-31 + 1.1e-31 * 2]);
+  test.deepEqual(arrays.range(5e-31, 2.1e-31, -1.1e-31), [5e-31 - 1.1e-31 * 0, 5e-31 - 1.1e-31 * 1, 5e-31 - 1.1e-31 * 2]);
   test.end();
 });
 
-tape("range(start, stop, step) handles extremely large steps without rounding errors", function(test) {
-  test.deepEqual(arrays.range(1e300, 2e300, 0.3e300), [1e300, 1.3e300, 1.6e300, 1.9e300]);
+tape("range(start, stop, step) returns exactly [start + step * i, …] for very large fractional steps", function(test) {
+  test.deepEqual(arrays.range(1e300, 2e300, 0.3e300), [1e300 + 0.3e300 * 0, 1e300 + 0.3e300 * 1, 1e300 + 0.3e300 * 2, 1e300 + 0.3e300 * 3]);
+  test.deepEqual(arrays.range(2e300, 1e300, -0.3e300), [2e300 - 0.3e300 * 0, 2e300 - 0.3e300 * 1, 2e300 - 0.3e300 * 2, 2e300 - 0.3e300 * 3]);
   test.end();
 });
