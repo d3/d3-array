@@ -1,6 +1,6 @@
 {
   "name": "d3-arrays",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Array manipulation, ordering, searching, summarizing, etc.",
   "keywords": [
     "d3",
@@ -15,19 +15,19 @@
     "name": "Mike Bostock",
     "url": "http://bost.ocks.org/mike"
   },
-  "main": "build/arrays",
+  "main": "build/arrays.cjs",
   "jsnext:main": "index",
   "repository": {
     "type": "git",
     "url": "https://github.com/d3/d3-arrays.git"
   },
   "scripts": {
-    "pretest": "mkdir -p build && d3-bundler --format=umd --name=arrays -- index.js > build/arrays.js",
+    "pretest": "mkdir -p build && d3-bundler -x -f cjs -o build/arrays.cjs.js",
     "test": "faucet `find test -name '*-test.js'`",
-    "prepublish": "npm run test && uglifyjs build/arrays.js -c -m -o build/arrays.min.js && rm -f build/arrays.zip && zip -j build/arrays.zip -- LICENSE README.md build/arrays.js build/arrays.min.js"
+    "prepublish": "npm run test && d3-bundler -n arrays -o build/arrays.js && uglifyjs build/arrays.js -c -m -o build/arrays.min.js && rm -f build/arrays.zip && zip -j build/arrays.zip -- LICENSE README.md build/arrays.js build/arrays.min.js"
   },
   "devDependencies": {
-    "d3-bundler": "~0.2.5",
+    "d3-bundler": "~0.4.0",
     "faucet": "0.0",
     "seedrandom": "2",
     "tape": "4",
