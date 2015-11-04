@@ -1,57 +1,26 @@
-import ascending from "./src/ascending";
-import {default as bisect, bisectRight, bisectLeft} from "./src/bisect";
-import bisector from "./src/bisector";
-import descending from "./src/descending";
-import deviation from "./src/deviation";
-import entries from "./src/entries";
-import extent from "./src/extent";
-import keys from "./src/keys";
-import map from "./src/map";
-import max from "./src/max";
-import mean from "./src/mean";
-import median from "./src/median";
-import merge from "./src/merge";
-import min from "./src/min";
-import nest from "./src/nest";
-import pairs from "./src/pairs";
-import permute from "./src/permute";
-import quantile from "./src/quantile";
-import range from "./src/range";
-import set from "./src/set";
-import shuffle from "./src/shuffle";
-import sum from "./src/sum";
-import transpose from "./src/transpose";
-import values from "./src/values";
-import variance from "./src/variance";
-import zip from "./src/zip";
-
-export {
-  ascending,
-  bisect,
-  bisectLeft,
-  bisectRight,
-  bisector,
-  descending,
-  deviation,
-  entries,
-  extent,
-  keys,
-  map,
-  max,
-  mean,
-  median,
-  merge,
-  min,
-  nest,
-  pairs,
-  permute,
-  quantile,
-  range,
-  set,
-  shuffle,
-  sum,
-  transpose,
-  values,
-  variance,
-  zip
-};
+export {default as bisect, bisectRight, bisectLeft} from "./src/bisect";
+export {default as ascending} from "./src/ascending";
+export {default as bisector} from "./src/bisector";
+export {default as descending} from "./src/descending";
+export {default as deviation} from "./src/deviation";
+export {default as entries} from "./src/entries";
+export {default as extent} from "./src/extent";
+export {default as keys} from "./src/keys";
+export {default as map} from "./src/map";
+export {default as max} from "./src/max";
+export {default as mean} from "./src/mean";
+export {default as median} from "./src/median";
+export {default as merge} from "./src/merge";
+export {default as min} from "./src/min";
+export {default as nest} from "./src/nest";
+export {default as pairs} from "./src/pairs";
+export {default as permute} from "./src/permute";
+export {default as quantile} from "./src/quantile";
+export {default as range} from "./src/range";
+export {default as set} from "./src/set";
+export {default as shuffle} from "./src/shuffle";
+export {default as sum} from "./src/sum";
+export {default as transpose} from "./src/transpose";
+export {default as values} from "./src/values";
+export {default as variance} from "./src/variance";
+export {default as zip} from "./src/zip";
