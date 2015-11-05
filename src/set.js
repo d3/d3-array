@@ -16,7 +16,8 @@ Set.prototype = set.prototype = {
   size: proto.size,
   empty: proto.empty,
   forEach: function(f) {
-    for (var property in this) if (property[0] === prefix) f.call(this, property.slice(1));
+    var value;
+    for (var property in this) if (property[0] === prefix) f.call(this, value = property.slice(1), value);
   }
 };
 
