@@ -68,6 +68,15 @@ tape("set.forEach(callback) passes value", function(test) {
   test.end();
 });
 
+tape("set.forEach(callback) passes value twice", function(test) {
+  var s = arrays.set(["foo", "bar"]),
+      c = [];
+  s.forEach(function(v, k) { c.push([v, k]); });
+  c.sort();
+  test.deepEqual(c, [["bar", "bar"], ["foo", "foo"]]);
+  test.end();
+});
+
 tape("set.forEach(callback) uses the set as the context", function(test) {
   var s = arrays.set(["foo", "bar"]),
       c = [];

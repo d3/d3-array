@@ -109,10 +109,10 @@ tape("map.empty() returns true only if the map is empty", function(test) {
   test.end();
 });
 
-tape("map.forEach(callback) passes key and value", function(test) {
+tape("map.forEach(callback) passes value and key", function(test) {
   var m = arrays.map({foo: 1, bar: "42"}),
       c = [];
-  m.forEach(function(k, v) { c.push([k, v]); });
+  m.forEach(function(v, k) { c.push([k, v]); });
   c.sort(function(a, b) { return a[0].localeCompare(b[0]); });
   test.deepEqual(c, [["bar", "42"], ["foo", 1]]);
   test.end();
@@ -133,8 +133,8 @@ tape("map.forEach(callback) iterates in arbitrary order", function(test) {
       m2 = arrays.map({bar: "42", foo: 1}),
       c1 = [],
       c2 = [];
-  m1.forEach(function(k, v) { c1.push([k, v]); });
-  m2.forEach(function(k, v) { c2.push([k, v]); });
+  m1.forEach(function(v, k) { c1.push([k, v]); });
+  m2.forEach(function(v, k) { c2.push([k, v]); });
   c1.sort(function(a, b) { return a[0].localeCompare(b[0]); });
   c2.sort(function(a, b) { return a[0].localeCompare(b[0]); });
   test.deepEqual(c1, c2);
