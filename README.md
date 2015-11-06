@@ -34,7 +34,7 @@ And finally, **iteration methods** that apply functions to elements in the array
 
 ## Installing
 
-If you use NPM, `npm install d3-arrays`. Otherwise, download the [latest release](https://github.com/d3/d3-arrays/releases/latest).
+If you use NPM, `npm install d3-arrays`. Otherwise, download the [latest release](/releases/latest).
 
 ## API Reference
 
@@ -218,7 +218,7 @@ pairs([1, 2, 3, 4]); // returns [[1, 2], [2, 3], [3, 4]]
 
 If the specified array has fewer than two elements, returns the empty array.
 
-### Collections
+### Associative Arrays
 
 Another common data type in JavaScript is the associative array, or more simply the object, which has a set of named properties. Java refers to this as a *map*, and Python a *dictionary*. JavaScript provides a standard mechanism for iterating over the keys (or property names) in an associative array: the [for…in loop](https://developer.mozilla.org/en/JavaScript/Reference/Statements/for...in). However, note that the iteration order is undefined. D3 provides several operators for converting associative arrays to standard arrays with numeric indexes.
 
@@ -240,6 +240,19 @@ Returns an array containing the property keys and values of the specified object
 entries({foo: 42, bar: true}); // [{key: "foo", value: 42}, {key: "bar", value: true}]
 ```
 
+### Maps
+
+Like [ES6 Maps](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), but with a few differences:
+
+* Keys are coerced to strings.
+* [map.set](#map_set) returns the new value, not the map itself.
+* [map.each](#map_each), not [map.forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/forEach). (Also, no *thisArg*.)
+* [map.remove](#map_remove), not [map.delete](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete).
+* No [map.clear](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear).
+* [map.entries](#map_entries) returns an array of {key, value} objects, not an iterator of [key, value].
+* [map.size](#map_size) is a method, not a [property](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size).
+* A [map.empty](#map_empty) method.
+
 <a name="map" href="#map">#</a> <b>map</b>([<i>object</i>[, <i>key</i>]])
 
 Constructs a new map. If *object* is specified, copies all enumerable properties from the specified object into this map. The specified object may also be an array or another map. An optional *key* function may be specified to compute the key for each value in the array. For example:
@@ -250,8 +263,6 @@ m.get("foo"); // {"name": "foo"}
 m.get("bar"); // {"name": "bar"}
 m.get("baz"); // undefined
 ```
-
-Note: unlike ES6 Map, D3’s map coerces keys to strings.
 
 See also [nest](#nest).
 
@@ -285,7 +296,7 @@ Returns an array of key-value objects for each entry in this map. The order of t
 
 <a name="map_each" href="#map_each">#</a> <i>map</i>.<b>each</b>(<i>function</i>)
 
-Calls the specified *function* for each entry in this map, passing the entry's key and value as two arguments. The `this` context of the *function* is this map. Returns undefined. The iteration order is arbitrary.
+Calls the specified *function* for each entry in this map, passing the entry's value and key as two arguments. The `this` context of the *function* is this map. Returns undefined. The iteration order is arbitrary.
 
 <a name="map_empty" href="#map_empty">#</a> <i>map</i>.<b>empty</b>()
 
@@ -295,11 +306,21 @@ Returns true if and only if this map has zero entries.
 
 Returns the number of entries in this map.
 
+### Sets
+
+Like [ES6 Sets](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set), but with a few differences:
+
+* Values are coerced to strings.
+* [set.add](#set_add) returns the new value, not the set itself.
+* [set.each](#set_each), not [set.forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/forEach). (Also, no *thisArg*.)
+* [set.remove](#set_remove), not [set.delete](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete).
+* No [set.clear](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear).
+* [set.size](#set_size) is a method, not a [property](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size).
+* A [set.empty](#set_empty) method.
+
 <a name="set" href="#set">#</a> <b>set</b>([<i>array</i>])
 
-Constructs a new set. If *array* is specified, adds the given *array* of string values to the returned set.
-
-Note: unlike ES6 Set, D3’s set coerces values to strings.
+Constructs a new set. If *array* is specified, adds the given *array* of string values to the returned set. The specified array may also be another set.
 
 <a name="set_has" href="#set_has">#</a> <i>set</i>.<b>has</b>(<i>value</i>)
 
