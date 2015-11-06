@@ -41,7 +41,7 @@ Map.prototype = map.prototype = {
     return true;
   },
   each: function(f) {
-    for (var property in this) if (property[0] === prefix) f.call(this, property.slice(1), this[property]);
+    for (var property in this) if (property[0] === prefix) f.call(this, this[property], property.slice(1));
   }
 };
 
@@ -49,7 +49,7 @@ function map(object, f) {
   var map = new Map;
 
   // Copy constructor.
-  if (object instanceof Map) object.each(function(key, value) { map.set(key, value); });
+  if (object instanceof Map) object.each(function(value, key) { map.set(key, value); });
 
   // Index array by numeric index or specified key function.
   else if (Array.isArray(object)) {
