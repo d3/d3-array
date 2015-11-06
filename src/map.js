@@ -16,6 +16,9 @@ Map.prototype = map.prototype = {
     var property = prefix + key;
     return property in this && delete this[property];
   },
+  clear: function() {
+    for (var property in this) if (property[0] === prefix) delete this[property];
+  },
   keys: function() {
     var keys = [];
     for (var property in this) if (property[0] === prefix) keys.push(property.slice(1));

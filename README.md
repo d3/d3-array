@@ -247,7 +247,7 @@ Like [ES6 Maps](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Referenc
 * Keys are coerced to strings.
 * [map.set](#map_set) returns the new value, not the map itself.
 * [map.each](#map_each), not [map.forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/forEach). (Also, no *thisArg*.)
-* [map.remove](#map_remove), not [map.delete](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete); also, no [map.clear](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear).
+* [map.remove](#map_remove), not [map.delete](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete).
 * [map.entries](#map_entries) returns an array of {key, value} objects, not an iterator of [key, value].
 * [map.size](#map_size) is a method, not a [property](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size); also, there’s [map.empty](#map_empty).
 
@@ -280,6 +280,10 @@ Sets the *value* for the specified *key* string; returns the new *value*. If the
 
 If the map has an entry for the specified *key* string, removes the entry and returns true. Otherwise, this method does nothing and returns false.
 
+<a name="map_clear" href="#map_clear">#</a> <i>map</i>.<b>clear</b>()
+
+Removes all entries from this map.
+
 <a name="map_keys" href="#map_keys">#</a> <i>map</i>.<b>keys</b>()
 
 Returns an array of string keys for every entry in this map. The order of the returned keys is arbitrary.
@@ -311,7 +315,7 @@ Like [ES6 Sets](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Referenc
 * Values are coerced to strings.
 * [set.add](#set_add) returns the new value, not the set itself.
 * [set.each](#set_each), not [set.forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/forEach). (Also, no *thisArg*.)
-* [set.remove](#set_remove), not [set.delete](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete); also, no [set.clear](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear).
+* [set.remove](#set_remove), not [set.delete](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete).
 * [set.size](#set_size) is a method, not a [property](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size); also, there’s [set.empty](#set_empty).
 
 <a name="set" href="#set">#</a> <b>set</b>([<i>array</i>])
@@ -329,6 +333,10 @@ Adds the specified *value* string to this set. Returns *value*.
 <a name="set_remove" href="#set_remove">#</a> <i>set</i>.<b>remove</b>(<i>value</i>)
 
 If the set contains the specified *value* string, removes it and returns true. Otherwise, this method does nothing and returns false.
+
+<a name="set_clear" href="#set_clear">#</a> <i>set</i>.<b>clear</b>()
+
+Removes all values from this set.
 
 <a name="set_values" href="#set_values">#</a> <i>set</i>.<b>values</b>()
 

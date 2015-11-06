@@ -91,6 +91,17 @@ tape("map.size() returns the number of distinct keys", function(test) {
   test.end();
 });
 
+tape("map.clear() removes all entries", function(test) {
+  var m = arrays.map();
+  m.set("foo", 1);
+  m.set("bar", 2);
+  m.set("foo", 3);
+  m.clear();
+  test.equal(m.size(), 0);
+  test.deepEqual(m.entries(), []);
+  test.end();
+});
+
 tape("map.empty() returns true only if the map is empty", function(test) {
   var m = arrays.map();
   test.equal(m.empty(), true);

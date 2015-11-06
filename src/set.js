@@ -12,6 +12,7 @@ Set.prototype = set.prototype = {
     return value;
   },
   remove: proto.remove,
+  clear: proto.clear,
   values: proto.keys,
   size: proto.size,
   empty: proto.empty,

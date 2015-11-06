@@ -51,6 +51,17 @@ tape("set.size() returns the number of distinct values", function(test) {
   test.end();
 });
 
+tape("set.clear() removes all values", function(test) {
+  var s = arrays.set();
+  s.add("foo");
+  s.add("bar");
+  s.add("foo");
+  s.clear();
+  test.equal(s.size(), 0);
+  test.deepEqual(s.values(), []);
+  test.end();
+});
+
 tape("set.empty() returns true only if the set is empty", function(test) {
   var s = arrays.set();
   test.equal(s.empty(), true);
