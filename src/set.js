@@ -9,7 +9,7 @@ Set.prototype = set.prototype = {
   add: function(value) {
     value += "";
     this[prefix + value] = true;
-    return value;
+    return this;
   },
   remove: proto.remove,
   clear: proto.clear,

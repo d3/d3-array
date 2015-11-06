@@ -305,9 +305,9 @@ tape("map.get(key) returns undefined for missing keys", function(test) {
   test.end()
 });
 
-tape("map.set(key, value) returns the set value", function(test) {
+tape("map.set(key, value) returns the map", function(test) {
   var m = arrays.map();
-  test.equal(m.set("foo", 42), 42);
+  test.equal(m.set("foo", 42), m);
   test.end();
 });
 

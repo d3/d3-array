@@ -193,10 +193,10 @@ tape("set.has(value) returns undefined for missing values", function(test) {
   test.end();
 });
 
-tape("set.add(value) returns the set value, coerced to a string", function(test) {
+tape("set.add(value) returns the set", function(test) {
   var s = arrays.set();
-  test.equal(s.add("foo"), "foo");
-  test.strictEqual(s.add(2), "2");
+  test.equal(s.add("foo"), s);
+  test.equal(s.add(2), s);
   test.deepEqual(s.values().sort(), ["2", "foo"]);
   test.end();
 });

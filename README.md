@@ -245,7 +245,6 @@ entries({foo: 42, bar: true}); // [{key: "foo", value: 42}, {key: "bar", value: 
 Like [ES6 Maps](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), but with a few differences:
 
 * Keys are coerced to strings.
-* [map.set](#map_set) returns the new value, not the map itself.
 * [map.each](#map_each), not [map.forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/forEach). (Also, no *thisArg*.)
 * [map.remove](#map_remove), not [map.delete](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete).
 * [map.entries](#map_entries) returns an array of {key, value} objects, not an iterator of [key, value].
@@ -313,7 +312,6 @@ Returns the number of entries in this map.
 Like [ES6 Sets](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set), but with a few differences:
 
 * Values are coerced to strings.
-* [set.add](#set_add) returns the new value, not the set itself.
 * [set.each](#set_each), not [set.forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/forEach). (Also, no *thisArg*.)
 * [set.remove](#set_remove), not [set.delete](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete).
 * [set.size](#set_size) is a method, not a [property](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size); also, there’s [set.empty](#set_empty).

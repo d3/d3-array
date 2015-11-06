@@ -10,7 +10,8 @@ Map.prototype = map.prototype = {
     return this[prefix + key];
   },
   set: function(key, value) {
-    return this[prefix + key] = value;
+    this[prefix + key] = value;
+    return this;
   },
   remove: function(key) {
     var property = prefix + key;
