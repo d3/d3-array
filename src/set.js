@@ -15,7 +15,7 @@ Set.prototype = set.prototype = {
   values: proto.keys,
   size: proto.size,
   empty: proto.empty,
-  forEach: function(f) {
+  each: function(f) {
     for (var property in this) if (property[0] === prefix) f.call(this, property.slice(1));
   }
 };
@@ -24,7 +24,7 @@ function set(object) {
   var set = new Set;
 
   // Copy constructor.
-  if (object instanceof Set) object.forEach(function(value) { set.add(value); });
+  if (object instanceof Set) object.each(function(value) { set.add(value); });
 
   // Otherwise, assume it’s an array.
   else if (object) for (var i = 0, n = object.length; i < n; ++i) set.add(object[i]);

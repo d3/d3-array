@@ -69,32 +69,32 @@ tape("set.empty() returns true only if the set is empty", function(test) {
   test.end();
 });
 
-tape("set.forEach(callback) passes value", function(test) {
+tape("set.each(callback) passes value", function(test) {
   var s = arrays.set(["foo", "bar"]),
       c = [];
-  s.forEach(function(v) { c.push(v); });
+  s.each(function(v) { c.push(v); });
   c.sort();
   test.deepEqual(c, ["bar", "foo"]);
   test.end();
 });
 
-tape("set.forEach(callback) uses the set as the context", function(test) {
+tape("set.each(callback) uses the set as the context", function(test) {
   var s = arrays.set(["foo", "bar"]),
       c = [];
-  s.forEach(function() { c.push(this); });
+  s.each(function() { c.push(this); });
   test.strictEqual(c[0], s);
   test.strictEqual(c[1], s);
   test.equal(c.length, 2);
   test.end();
 });
 
-tape("set.forEach(callback) iterates in arbitrary order", function(test) {
+tape("set.each(callback) iterates in arbitrary order", function(test) {
   var s1 = arrays.set(["foo", "bar"]),
       s2 = arrays.set(["bar", "foo"]),
       c1 = [],
       c2 = [];
-  s1.forEach(function(v) { c1.push(v); });
-  s2.forEach(function(v) { c2.push(v); });
+  s1.each(function(v) { c1.push(v); });
+  s2.each(function(v) { c2.push(v); });
   c1.sort();
   c2.sort();
   test.deepEqual(c1, c2);

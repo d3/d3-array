@@ -283,7 +283,7 @@ Returns an array of values for every entry in this map. The order of the returne
 
 Returns an array of key-value objects for each entry in this map. The order of the returned entries is arbitrary. Each entry’s key is a string, but the value has arbitrary type.
 
-<a name="map_forEach" href="#map_forEach">#</a> <i>map</i>.<b>forEach</b>(<i>function</i>)
+<a name="map_each" href="#map_each">#</a> <i>map</i>.<b>each</b>(<i>function</i>)
 
 Calls the specified *function* for each entry in this map, passing the entry's key and value as two arguments. The `this` context of the *function* is this map. Returns undefined. The iteration order is arbitrary.
 
@@ -321,7 +321,7 @@ Returns an array of the string values in this set. The order of the returned val
 set(["foo", "bar", "foo", "baz"]).values(); // "foo", "bar", "baz"
 ```
 
-<a name="set_forEach" href="#set_forEach">#</a> <i>set</i>.<b>forEach</b>(<i>function</i>)
+<a name="set_each" href="#set_each">#</a> <i>set</i>.<b>each</b>(<i>function</i>)
 
 Calls the specified *function* for each value in this set, passing the value as an argument. The `this` context of the *function* is this set. Returns undefined. The iteration order is arbitrary.
 
