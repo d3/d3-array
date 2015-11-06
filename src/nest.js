@@ -30,7 +30,7 @@ export default function() {
       }
     }
 
-    valuesByKey.forEach(function(key, values) {
+    valuesByKey.each(function(key, values) {
       setResult(result, key, apply(values, depth, createResult, setResult));
     });
 
@@ -43,7 +43,7 @@ export default function() {
     var array = [],
         sortKey = sortKeys[depth++];
 
-    map.forEach(function(key, value) {
+    map.each(function(key, value) {
       array.push({key: key, values: entries(value, depth)});
     });
 
