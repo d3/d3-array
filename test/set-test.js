@@ -23,6 +23,16 @@ tape("set(array) adds array entries", function(test) {
   test.end();
 });
 
+tape("set(set) copies the given set", function(test) {
+  var a = arrays.set(["foo"]),
+      b = arrays.set(a);
+  test.equal(b.has("foo"), true);
+  test.equal(b.has("foo"), true);
+  a.add("bar");
+  test.equal(b.has("bar"), false);
+  test.end();
+});
+
 tape("set.size() returns the number of distinct values", function(test) {
   var s = arrays.set();
   test.equal(s.size(), 0);

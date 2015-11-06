@@ -20,9 +20,15 @@ Set.prototype = set.prototype = {
   }
 };
 
-function set(array) {
+function set(object) {
   var set = new Set;
-  if (array) for (var i = 0, n = array.length; i < n; ++i) set.add(array[i]);
+
+  // Copy constructor.
+  if (object instanceof Set) object.forEach(function(value) { set.add(value); });
+
+  // Otherwise, assume it’s an array.
+  else if (object) for (var i = 0, n = object.length; i < n; ++i) set.add(object[i]);
+
   return set;
 }
 

@@ -62,7 +62,7 @@ function map(object, f) {
   }
 
   // Convert object to map.
-  else for (var key in object) map.set(key, object[key]);
+  else if (object) for (var key in object) map.set(key, object[key]);
 
   return map;
 }
