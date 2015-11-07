@@ -34,7 +34,7 @@ And finally, **iteration methods** that apply functions to elements in the array
 
 ## Installing
 
-If you use NPM, `npm install d3-arrays`. Otherwise, download the [latest release](/releases/latest).
+If you use NPM, `npm install d3-arrays`. Otherwise, download the [latest release](https://github.com/d3/d3-arrays/releases/latest).
 
 ## API Reference
 
