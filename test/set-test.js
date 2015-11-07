@@ -52,10 +52,8 @@ tape("set.size() returns the number of distinct values", function(test) {
 });
 
 tape("set.clear() removes all values", function(test) {
-  var s = arrays.set();
-  s.add("foo");
-  s.add("bar");
-  s.add("foo");
+  var s = arrays.set().add("foo").add("bar").add("foo");
+  test.equal(s.size(), 2);
   s.clear();
   test.equal(s.size(), 0);
   test.deepEqual(s.values(), []);
@@ -202,15 +200,13 @@ tape("set.add(value) returns the set", function(test) {
 });
 
 tape("set.add(value) can add values using built-in names", function(test) {
-  var s = arrays.set();
-  s.add("__proto__");
+  var s = arrays.set().add("__proto__");
   test.equal(s.has("__proto__"), true);
   test.end();
 });
 
 tape("set.add(value) can add values using zero-prefixed names", function(test) {
-  var s = arrays.set();
-  s.add("$weird");
+  var s = arrays.set().add("$weird");
   test.equal(s.has("$weird"), true);
   test.end();
 });
@@ -228,10 +224,7 @@ tape("set.add(value) coerces values to strings", function(test) {
 });
 
 tape("set.add(value) can add null, undefined or empty string values", function(test) {
-  var s = arrays.set();
-  s.add("");
-  s.add("null");
-  s.add("undefined");
+  var s = arrays.set().add("").add("null").add("undefined");
   test.equal(s.has(""), true);
   test.equal(s.has("null"), true);
   test.equal(s.has("undefined"), true);

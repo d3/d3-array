@@ -273,7 +273,16 @@ Returns the value for the specified *key* string. If the map does not have an en
 
 <a name="map_set" href="#map_set">#</a> <i>map</i>.<b>set</b>(<i>key</i>, <i>value</i>)
 
-Sets the *value* for the specified *key* string. If the map previously had an entry for the same *key* string, the old entry is replaced with the new value. Returns the map, allowing chaining.
+Sets the *value* for the specified *key* string. If the map previously had an entry for the same *key* string, the old entry is replaced with the new value. Returns the map, allowing chaining. For example:
+
+```js
+var m = map()
+    .set("foo", 1)
+    .set("bar", 2)
+    .set("baz", 3);
+
+m.get("foo"); // 1
+```
 
 <a name="map_remove" href="#map_remove">#</a> <i>map</i>.<b>remove</b>(<i>key</i>)
 
@@ -326,7 +335,16 @@ Returns true if and only if this set has an entry for the specified *value* stri
 
 <a name="set_add" href="#set_add">#</a> <i>set</i>.<b>add</b>(<i>value</i>)
 
-Adds the specified *value* string to this set. Returns the set, allowing chaining.
+Adds the specified *value* string to this set. Returns the set, allowing chaining. For example:
+
+```js
+var s = set()
+    .add("foo")
+    .add("bar")
+    .add("baz");
+
+s.has("foo"); // true
+```
 
 <a name="set_remove" href="#set_remove">#</a> <i>set</i>.<b>remove</b>(<i>value</i>)
 

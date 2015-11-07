@@ -92,10 +92,8 @@ tape("map.size() returns the number of distinct keys", function(test) {
 });
 
 tape("map.clear() removes all entries", function(test) {
-  var m = arrays.map();
-  m.set("foo", 1);
-  m.set("bar", 2);
-  m.set("foo", 3);
+  var m = arrays.map().set("foo", 1).set("bar", 2).set("foo", 3);
+  test.equal(m.size(), 2);
   m.clear();
   test.equal(m.size(), 0);
   test.deepEqual(m.entries(), []);
@@ -159,9 +157,7 @@ tape("map.keys() returns an array of string keys", function(test) {
 });
 
 tape("map.keys() properly unescapes zero-prefixed keys", function(test) {
-  var m = arrays.map();
-  m.set("__proto__", 42);
-  m.set("$weird", 42);
+  var m = arrays.map().set("__proto__", 42).set("$weird", 42);
   test.deepEqual(m.keys().sort(), ["$weird", "__proto__"]);
   test.end();
 });
@@ -222,17 +218,13 @@ tape("map.has(key) empty maps do not have object built-ins", function(test) {
 });
 
 tape("map.has(key) can has keys using built-in names", function(test) {
-  var m = arrays.map();
-  m.set("__proto__", 42);
+  var m = arrays.map().set("__proto__", 42);
   test.equal(m.has("__proto__"), true);
   test.end();
 });
 
 tape("map.has(key) can has keys with null or undefined properties", function(test) {
-  var m = arrays.map();
-  m.set("", "");
-  m.set("null", null);
-  m.set("undefined", undefined);
+  var m = arrays.map().set("", "").set("null", null).set("undefined", undefined);
   test.equal(m.has(""), true);
   test.equal(m.has("null"), true);
   test.equal(m.has("undefined"), true);
@@ -348,10 +340,7 @@ tape("map.set(key, value) can replace values", function(test) {
 });
 
 tape("map.set(key, value) can set null, undefined or empty string values", function(test) {
-  var m = arrays.map();
-  m.set("", "");
-  m.set("null", null);
-  m.set("undefined", undefined);
+  var m = arrays.map().set("", "").set("null", null).set("undefined", undefined);
   test.equal(m.get(""), "");
   test.equal(m.get("null"), null);
   test.equal(m.get("undefined"), undefined);
