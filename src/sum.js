@@ -9,7 +9,7 @@ export default function(array, f) {
   }
 
   else {
-    while (++i < n) if (!isNaN(a = +f.call(array, array[i], i))) s += a;
+    while (++i < n) if (!isNaN(a = +f(array[i], i, array))) s += a;
   }
 
   return s;

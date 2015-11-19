@@ -13,7 +13,7 @@ export default function(array, f) {
   }
 
   else {
-    while (++i < n) if (!isNaN(a = number(f.call(array, array[i], i)))) numbers.push(a);
+    while (++i < n) if (!isNaN(a = number(f(array[i], i, array)))) numbers.push(a);
   }
 
   if (numbers.length) return quantile(numbers.sort(ascending), .5);
