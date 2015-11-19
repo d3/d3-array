@@ -12,7 +12,7 @@ export default function(array, f) {
   }
 
   else {
-    while (++i < n) if (!isNaN(a = number(f.call(array, array[i], i)))) s += a; else --j;
+    while (++i < n) if (!isNaN(a = number(f(array[i], i, array)))) s += a; else --j;
   }
 
   if (j) return s / j;

@@ -8,7 +8,7 @@ Set.prototype = set.prototype = {
   has: proto.has,
   add: function(value) {
     value += "";
-    this[prefix + value] = true;
+    this[prefix + value] = value;
     return this;
   },
   remove: proto.remove,
@@ -16,9 +16,7 @@ Set.prototype = set.prototype = {
   values: proto.keys,
   size: proto.size,
   empty: proto.empty,
-  each: function(f) {
-    for (var property in this) if (property[0] === prefix) f.call(this, property.slice(1));
-  }
+  each: proto.each
 };
 
 function set(object) {

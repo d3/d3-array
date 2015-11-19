@@ -78,21 +78,21 @@ tape("set.empty() returns true only if the set is empty", function(test) {
   test.end();
 });
 
-tape("set.each(callback) passes value", function(test) {
+tape("set.each(callback) passes value, value and the set", function(test) {
   var s = arrays.set(["foo", "bar"]),
       c = [];
-  s.each(function(v) { c.push(v); });
+  s.each(function(v0, v1, s) { c.push([v0, v1, s]); });
   c.sort();
-  test.deepEqual(c, ["bar", "foo"]);
+  test.deepEqual(c, [["bar", "bar", s], ["foo", "foo", s]]);
   test.end();
 });
 
-tape("set.each(callback) uses the set as the context", function(test) {
+tape("set.each(callback) uses the global context", function(test) {
   var s = arrays.set(["foo", "bar"]),
       c = [];
   s.each(function() { c.push(this); });
-  test.strictEqual(c[0], s);
-  test.strictEqual(c[1], s);
+  test.strictEqual(c[0], global);
+  test.strictEqual(c[1], global);
   test.equal(c.length, 2);
   test.end();
 });

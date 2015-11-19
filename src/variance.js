@@ -21,7 +21,7 @@ export default function(array, f) {
 
   else {
     while (++i < n) {
-      if (!isNaN(a = number(f.call(array, array[i], i)))) {
+      if (!isNaN(a = number(f(array[i], i, array)))) {
         d = a - m;
         m += d / ++j;
         s += d * (a - m);

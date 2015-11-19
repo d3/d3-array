@@ -14,8 +14,8 @@ export default function(array, f) {
   }
 
   else {
-    while (++i < n) if ((b = f.call(array, array[i], i)) != null && b >= b) { a = c = b; break; }
-    while (++i < n) if ((b = f.call(array, array[i], i)) != null) {
+    while (++i < n) if ((b = f(array[i], i, array)) != null && b >= b) { a = c = b; break; }
+    while (++i < n) if ((b = f(array[i], i, array)) != null) {
       if (a > b) a = b;
       if (c < b) c = b;
     }

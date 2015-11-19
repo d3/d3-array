@@ -306,7 +306,7 @@ Returns an array of key-value objects for each entry in this map. The order of t
 
 <a name="map_each" href="#map_each">#</a> <i>map</i>.<b>each</b>(<i>function</i>)
 
-Calls the specified *function* for each entry in this map, passing the entry's value and key as two arguments. The `this` context of the *function* is this map. Returns undefined. The iteration order is arbitrary.
+Calls the specified *function* for each entry in this map, passing the entry’s value and key as arguments, followed by the map itself. Returns undefined. The iteration order is arbitrary.
 
 <a name="map_empty" href="#map_empty">#</a> <i>map</i>.<b>empty</b>()
 
@@ -364,7 +364,7 @@ set(["foo", "bar", "foo", "baz"]).values(); // "foo", "bar", "baz"
 
 <a name="set_each" href="#set_each">#</a> <i>set</i>.<b>each</b>(<i>function</i>)
 
-Calls the specified *function* for each value in this set, passing the value as an argument. The `this` context of the *function* is this set. Returns undefined. The iteration order is arbitrary.
+Calls the specified *function* for each value in this set, passing the value as the first two arguments (for symmetry with [*map*.each](#map_each)), followed by the set itself. Returns undefined. The iteration order is arbitrary.
 
 <a name="set_empty" href="#set_empty">#</a> <i>set</i>.<b>empty</b>()
 
@@ -462,5 +462,6 @@ Applies the nest operator to the specified *array*, returning an array of key-va
 
 ## Changes from D3 3.x:
 
+* Array accessor functions now take the array as the third argument, rather than setting it as the `this` context.
 * The [range](#range) method now returns the empty array for infinite ranges, rather than throwing an error.
 * The [nest.map](#nest_map) method now always returns a [map](#map); use [nest.object](#nest_object) to return a plain object instead.

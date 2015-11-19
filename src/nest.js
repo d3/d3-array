@@ -9,7 +9,7 @@ export default function() {
 
   function apply(array, depth, createResult, setResult) {
     if (depth >= keys.length) return rollup
-        ? rollup.call(nest, array) : (sortValues
+        ? rollup(array) : (sortValues
         ? array.sort(sortValues)
         : array);
 

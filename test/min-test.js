@@ -87,6 +87,20 @@ tape("min(array, f) returns undefined if the array contains no observed values",
   test.end();
 });
 
+tape("min(array, f) passes the accessor d, i, and array", function(test) {
+  var results = [], array = ["a", "b", "c"];
+  arrays.min(array, function(d, i, array) { results.push([d, i, array]); });
+  test.deepEqual(results, [["a", 0, array], ["b", 1, array], ["c", 2, array]]);
+  test.end();
+});
+
+tape("min(array, f) uses the global context", function(test) {
+  var results = [];
+  arrays.min([1, 2], function() { results.push(this); });
+  test.deepEqual(results, [global, global]);
+  test.end();
+});
+
 function box(value) {
   return {value: value};
 }

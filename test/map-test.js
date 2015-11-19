@@ -69,7 +69,7 @@ tape("map(array) indexes missing elements in sparse arrays", function(test) {
 tape("map(array, f) creates a map by accessor", function(test) {
   test.deepEqual(arrays.map([{field: "foo"}, {field: "bar"}], function(d) { return d.field; }).entries(), [{key: "foo", value: {field: "foo"}}, {key: "bar", value: {field: "bar"}}]);
   test.deepEqual(arrays.map([{field: "foo"}, {field: "bar"}], function(d, i) { return i; }).entries(), [{key: "0", value: {field: "foo"}}, {key: "1", value: {field: "bar"}}]);
-  test.deepEqual(arrays.map([{field: "foo"}, {field: "bar"}], function(d, i) { return this[i].field; }).entries(), [{key: "foo", value: {field: "foo"}}, {key: "bar", value: {field: "bar"}}]);
+  test.deepEqual(arrays.map([{field: "foo"}, {field: "bar"}], function(d, i, array) { return array[i].field; }).entries(), [{key: "foo", value: {field: "foo"}}, {key: "bar", value: {field: "bar"}}]);
   test.end();
 });
 
@@ -118,21 +118,21 @@ tape("map.empty() returns true only if the map is empty", function(test) {
   test.end();
 });
 
-tape("map.each(callback) passes value and key", function(test) {
+tape("map.each(callback) passes value, key and the map", function(test) {
   var m = arrays.map({foo: 1, bar: "42"}),
       c = [];
-  m.each(function(v, k) { c.push([k, v]); });
+  m.each(function(v, k, m) { c.push([k, v, m]); });
   c.sort(function(a, b) { return a[0].localeCompare(b[0]); });
-  test.deepEqual(c, [["bar", "42"], ["foo", 1]]);
+  test.deepEqual(c, [["bar", "42", m], ["foo", 1, m]]);
   test.end();
 });
 
-tape("map.each(callback) uses the map as the context", function(test) {
+tape("map.each(callback) uses the global context", function(test) {
   var m = arrays.map({foo: 1, bar: "42"}),
       c = [];
   m.each(function() { c.push(this); });
-  test.strictEqual(c[0], m);
-  test.strictEqual(c[1], m);
+  test.strictEqual(c[0], global);
+  test.strictEqual(c[1], global);
   test.equal(c.length, 2);
   test.end();
 });

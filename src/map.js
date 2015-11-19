@@ -45,7 +45,7 @@ Map.prototype = map.prototype = {
     return true;
   },
   each: function(f) {
-    for (var property in this) if (property[0] === prefix) f.call(this, this[property], property.slice(1));
+    for (var property in this) if (property[0] === prefix) f(this[property], property.slice(1), this);
   }
 };
 
@@ -62,7 +62,7 @@ function map(object, f) {
         o;
 
     if (arguments.length === 1) while (++i < n) map.set(i, object[i]);
-    else while (++i < n) map.set(f.call(object, o = object[i], i), o);
+    else while (++i < n) map.set(f(o = object[i], i, object), o);
   }
 
   // Convert object to map.
