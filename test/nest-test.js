@@ -86,6 +86,13 @@ tape("nest.rollup(rollup).entries(array) aggregates values using the specified r
   test.end();
 });
 
+tape("nest.rollup(rollup) uses the global this context", function(test) {
+  var that;
+  arrays.nest().rollup(function() { that = this; }).entries([1, 2, 3, 4, 5]);
+  test.equal(that, global);
+  test.end();
+});
+
 tape("nest.key(key).rollup(rollup).entries(array) aggregates values per key using the specified rollup function", function(test) {
   var a = {foo: 1},
       b = {foo: 1},
