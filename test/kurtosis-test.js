@@ -17,11 +17,6 @@ tape("kurtosis(array) ignores null, undefined and NaN", function(test) {
   test.end();
 });
 
-tape("kurtosis(array) can handle large numbers without overflowing", function(test) {
-  test.inDelta(arrays.kurtosis([Number.MAX_VALUE, Number.MAX_VALUE, -Number.MAX_VALUE, -Number.MAX_VALUE]), -6, 0.05);
-  test.end();
-});
-
 tape("kurtosis(array) returns undefined if the array has fewer than four numbers", function(test) {
   test.equal(arrays.kurtosis([1, 2, 3]), undefined);
   test.equal(arrays.kurtosis([]), undefined);
@@ -43,11 +38,6 @@ tape("kurtosis(array, f) ignores null, undefined and NaN", function(test) {
   test.inDelta(arrays.kurtosis([NaN, 6, 2, 1, 3].map(box), unbox), 1.5, 0.05);
   test.inDelta(arrays.kurtosis([3, 1, 2, 6, NaN].map(box), unbox), 1.5, 0.05);
   test.inDelta(arrays.kurtosis([4, null, 8, undefined, 7, NaN, 1].map(box), unbox), -1.7, 0.05);
-  test.end();
-});
-
-tape("kurtosis(array, f) can handle large numbers without overflowing", function(test) {
-  test.inDelta(arrays.kurtosis([Number.MAX_VALUE, Number.MAX_VALUE, -Number.MAX_VALUE, -Number.MAX_VALUE].map(box), unbox), -6, 0.05);
   test.end();
 });
 

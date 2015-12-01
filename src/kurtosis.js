@@ -2,7 +2,8 @@ import number from "./number";
 import mean from "./mean";
 
 export default function(array, f) {
-  var m = mean(array),
+  var m,
+      farray,
       sum4 = 0,
       sum2 = 0,
       v,
@@ -12,24 +13,21 @@ export default function(array, f) {
       n = array.length;
 
   if (arguments.length === 1) {
-    while (++i < n) {
-      if (!isNaN(a = number(array[i]))) {
-        v = a - m;
-        sum2 += v * v;
-        sum4 += v * v * v * v;
-        j++;
-      }
-    }
+    farray = array;
   }
-  
   else {
-    while (++i < n) {
-      if (!isNaN(a = number(f(array[i], i, array)))) {
-        v = a - m;
-        sum2 += v * v;
-        sum4 += v * v * v * v;
-        j++;
-      }
+    farray = array.map(f);
+  }
+
+  m = mean(farray);
+  console.log("array: " + farray);
+  console.log("mean: " + m);
+  while (++i < n) {
+    if (!isNaN(a = number(farray[i]))) {
+      v = a - m;
+      sum2 += v * v;
+      sum4 += v * v * v * v;
+      j++;
     }
   }
 
