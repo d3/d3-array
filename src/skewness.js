@@ -1,7 +1,7 @@
 import number from "./number";
 import mean from "./mean";
 
-export default function(array) {
+export default function(array, f) {
   var m = mean(array),
       sum3 = 0,
       sum2 = 0,
