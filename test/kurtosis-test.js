@@ -62,7 +62,7 @@ tape("kurtosis(array, f) returns undefined if the array has fewer than four numb
 tape("kurtosis(array, f) passes the accessor d, i, and array", function(test) {
   var results = [], array = ["a", "b", "c", "d"];
   arrays.kurtosis(array, function(d, i, array) { results.push([d, i, array]); });
-  test.deepEqual(results, [["a", 0, array], ["b", 1, array], ["c", 2, array], ["d", 3, array]]]);
+  test.deepEqual(results, [["a", 0, array], ["b", 1, array], ["c", 2, array], ["d", 3, array]]);
   test.end();
 });
 
