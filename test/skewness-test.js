@@ -1,6 +1,8 @@
 var tape = require("tape"),
     arrays = require("../");
 
+require("./inDelta");
+
 tape("skewness(array) returns the skewness of the specified numbers", function(test) {
   test.inDelta(arrays.skewness([1, 1, 1, 10]), 2, 0.05);
   test.inDelta(arrays.skewness([1, 1, 10, 1]), 2, 0.05);
@@ -63,13 +65,6 @@ tape("skewness(array, f) passes the accessor d, i, and array", function(test) {
   var results = [], array = ["a", "b", "c"];
   arrays.skewness(array, function(d, i, array) { results.push([d, i, array]); });
   test.deepEqual(results, [["a", 0, array], ["b", 1, array], ["c", 2, array]]);
-  test.end();
-});
-
-tape("skewness(array, f) uses the global context", function(test) {
-  var results = [];
-  arrays.skewness([1, 2, 3], function() { results.push(this); });
-  test.deepEqual(results, [global, global]);
   test.end();
 });
 

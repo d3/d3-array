@@ -1,6 +1,8 @@
 var tape = require("tape"),
     arrays = require("../");
 
+require("./inDelta");
+
 tape("kurtosis(array) returns the kurtosis of the specified numbers", function(test) {
   test.inDelta(arrays.kurtosis([6, 2, 1, 3]), 1.5, 0.05);
   test.inDelta(arrays.kurtosis([3, 1, 2, 6]), 1.5, 0.05);
@@ -63,13 +65,6 @@ tape("kurtosis(array, f) passes the accessor d, i, and array", function(test) {
   var results = [], array = ["a", "b", "c", "d"];
   arrays.kurtosis(array, function(d, i, array) { results.push([d, i, array]); });
   test.deepEqual(results, [["a", 0, array], ["b", 1, array], ["c", 2, array], ["d", 3, array]]);
-  test.end();
-});
-
-tape("kurtosis(array, f) uses the global context", function(test) {
-  var results = [];
-  arrays.kurtosis([1, 2, 3, 4], function() { results.push(this); });
-  test.deepEqual(results, [global, global]);
   test.end();
 });
 
