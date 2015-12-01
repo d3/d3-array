@@ -6,6 +6,7 @@ export default function(array, f) {
       sum3 = 0,
       sum2 = 0,
       v,
+      a,
       i = -1,
       j = 0,
       n = array.length;
@@ -16,6 +17,7 @@ export default function(array, f) {
         v = a - m;
         sum2 += v * v;
         sum3 += v * v * v;
+        j++;
       }
     }
   }
@@ -26,9 +28,10 @@ export default function(array, f) {
         v = a - m;
         sum2 += v * v;
         sum3 += v * v * v;
+        j++;
       }
     }
   }
 
-  return (n * Math.sqrt(n - 1) / (n - 2)) * (sum3 / Math.pow(sum2, 3 / 2)));
+  if (j > 2) return ((j * Math.sqrt(j - 1) / (j - 2)) * (sum3 / Math.pow(sum2, 3 / 2)));
 };

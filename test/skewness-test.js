@@ -2,21 +2,21 @@ var tape = require("tape"),
     arrays = require("../");
 
 tape("skewness(array) returns the skewness of the specified numbers", function(test) {
-  test.equal(arrays.skewness([1, 1, 1, 10]), 2);
-  test.equal(arrays.skewness([1, 1, 10, 1]), 2);
-  test.equal(arrays.skewness([1, 10, 10, 1]), 0);
+  test.inDelta(arrays.skewness([1, 1, 1, 10]), 2, 0.05);
+  test.inDelta(arrays.skewness([1, 1, 10, 1]), 2, 0.05);
+  test.inDelta(arrays.skewness([1, 10, 10, 1]), 0, 0.05);
   test.end();
 });
 
 tape("skewness(array) ignores null, undefined and NaN", function(test) {
-  test.equal(arrays.skewness([NaN, 1, 1, 1, 10]), 2);
-  test.equal(arrays.skewness([1, 1, 10, 1, NaN]), 2);
-  test.equal(arrays.skewness([4, null, 4, undefined, 4, NaN, 1]), -2);
+  test.inDelta(arrays.skewness([NaN, 1, 1, 1, 10]), 2, 0.05);
+  test.inDelta(arrays.skewness([1, 1, 10, 1, NaN]), 2, 0.05);
+  test.inDelta(arrays.skewness([4, null, 4, undefined, 4, NaN, 1]), -2, 0.05);
   test.end();
 });
 
 tape("skewness(array) can handle large numbers without overflowing", function(test) {
-  test.equal(arrays.skewness([-Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE, -Number.MAX_VALUE]), 0);
+  test.inDelta(arrays.skewness([-Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE, -Number.MAX_VALUE]), 0, 0.05);
   test.end();
 });
 
@@ -31,21 +31,21 @@ tape("skewness(array) returns undefined if the array has fewer than three number
 });
 
 tape("skewness(array, f) returns the skewness of the specified numbers", function(test) {
-  test.equal(arrays.skewness([1, 1, 1, 10].map(box), unbox), 2);
-  test.equal(arrays.skewness([1, 1, 10, 1].map(box), unbox), 2);
-  test.equal(arrays.skewness([1, 10, 10, 1].map(box), unbox), 0);
+  test.inDelta(arrays.skewness([1, 1, 1, 10].map(box), unbox), 2, 0.05);
+  test.inDelta(arrays.skewness([1, 1, 10, 1].map(box), unbox), 2, 0.05);
+  test.inDelta(arrays.skewness([1, 10, 10, 1].map(box), unbox), 0, 0.05);
   test.end();
 });
 
 tape("skewness(array, f) ignores null, undefined and NaN", function(test) {
-  test.equal(arrays.skewness([NaN, 1, 1, 1, 10].map(box), unbox), 2);
-  test.equal(arrays.skewness([1, 1, 10, 1, NaN].map(box), unbox), 2);
-  test.equal(arrays.skewness([4, null, 4, undefined, 4, NaN, 1].map(box), unbox), -2);
+  test.inDelta(arrays.skewness([NaN, 1, 1, 1, 10].map(box), unbox), 2, 0.05);
+  test.inDelta(arrays.skewness([1, 1, 10, 1, NaN].map(box), unbox), 2, 0.05);
+  test.inDelta(arrays.skewness([4, null, 4, undefined, 4, NaN, 1].map(box), unbox), -2, 0.05);
   test.end();
 });
 
 tape("skewness(array, f) can handle large numbers without overflowing", function(test) {
-  test.equal(arrays.skewness([-Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE, -Number.MAX_VALUE].map(box), unbox), 0);
+  test.inDelta(arrays.skewness([-Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE, -Number.MAX_VALUE].map(box), unbox), 0, 0.05);
   test.end();
 });
 

@@ -6,7 +6,9 @@ export default function(array, f) {
       sum4 = 0,
       sum2 = 0,
       v,
+      a,
       i = -1,
+      j = 0,
       n = array.length;
 
   if (arguments.length === 1) {
@@ -31,6 +33,6 @@ export default function(array, f) {
     }
   }
 
-  if (j > 3) return (n * (n + 1) * (n - 1) * sum4) / ((n - 2) * (n - 3) * sum2 * sum2) -
-                    (3 * Math.pow(n - 1, 2) / ((n - 2) * (n - 3)));
+  if (j > 3) return (j * (j + 1) * (j - 1) * sum4) / ((j - 2) * (j - 3) * sum2 * sum2) -
+                    (3 * Math.pow(j - 1, 2) / ((j - 2) * (j - 3)));
 };
