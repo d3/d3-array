@@ -3,9 +3,9 @@ var tape = require("tape"),
 
 tape("nest.entries(array) returns the array of input values, in input order", function(test) {
   var nest = arrays.nest();
-  test.deepEqual(nest.entries([1, 2, 3]), [1, 2, 3]);
-  test.deepEqual(nest.entries([1, 3, 2]), [1, 3, 2]);
-  test.deepEqual(nest.entries([3, 1, 2]), [3, 1, 2]);
+  test.deepEqual(nest.entries([1, 2, 3]), count([1, 2, 3], 3));
+  test.deepEqual(nest.entries([1, 3, 2]), count([1, 3, 2], 3));
+  test.deepEqual(nest.entries([3, 1, 2]), count([3, 1, 2], 3));
   test.end();
 });
 
@@ -15,12 +15,12 @@ tape("nest.sortValues(order).entries(array) returns input values in sorted order
       a = {foo: 1},
       b = {foo: 2},
       c = {foo: 3};
-  test.deepEqual(nestAscending.entries([a, b, c]), [a, b, c]);
-  test.deepEqual(nestAscending.entries([a, c, b]), [a, b, c]);
-  test.deepEqual(nestAscending.entries([c, a, b]), [a, b, c]);
-  test.deepEqual(nestDescending.entries([a, b, c]), [c, b, a]);
-  test.deepEqual(nestDescending.entries([a, c, b]), [c, b, a]);
-  test.deepEqual(nestDescending.entries([c, a, b]), [c, b, a]);
+  test.deepEqual(nestAscending.entries([a, b, c]), count([a, b, c], 3));
+  test.deepEqual(nestAscending.entries([a, c, b]), count([a, b, c], 3));
+  test.deepEqual(nestAscending.entries([c, a, b]), count([a, b, c], 3));
+  test.deepEqual(nestDescending.entries([a, b, c]), count([c, b, a], 3));
+  test.deepEqual(nestDescending.entries([a, c, b]), count([c, b, a], 3));
+  test.deepEqual(nestDescending.entries([c, a, b]), count([c, b, a], 3));
   test.end();
 });
 
@@ -29,8 +29,8 @@ tape("nest.key(key).entries(array) returns entries for each distinct key, with v
       a = {foo: 1},
       b = {foo: 1},
       c = {foo: 2};
-  test.deepEqual(nest.entries([c, a, b, c]), [{key: "1", values: [a, b]}, {key: "2", values: [c, c]}]);
-  test.deepEqual(nest.entries([c, b, a, c]), [{key: "1", values: [b, a]}, {key: "2", values: [c, c]}]);
+  test.deepEqual(nest.entries([c, a, b, c]), count([{key: "1", values: count([a, b], 2)}, {key: "2", values: count([c, c], 2)}], 4));
+  test.deepEqual(nest.entries([c, b, a, c]), count([{key: "1", values: count([b, a], 2)}, {key: "2", values: count([c, c], 2)}], 4));
   test.end();
 });
 
@@ -38,7 +38,7 @@ tape("nest.key(key) coerces key values to strings", function(test) {
   var nest = arrays.nest().key(function(d) { return d.number ? 1 : "1"; }).sortKeys(arrays.ascending),
       a = {number: true},
       b = {number: false};
-  test.deepEqual(nest.entries([a, b]), [{key: "1", values: [a, b]}]);
+  test.deepEqual(nest.entries([a, b]), count([{key: "1", values: count([a, b], 2)}], 2));
   test.end();
 });
 
@@ -50,8 +50,8 @@ tape("nest.key(key1).key(key2).entries(array) returns entries for each distinct 
       d = {foo: 1, bar: "b"},
       e = {foo: 1, bar: "b"},
       f = {foo: 2, bar: "b"};
-  test.deepEqual(nest.entries([a, b, c, d, e, f]), [{key: "1", values: [{key: "a", values: [a, b]}, {key: "b", values: [d, e]}]}, {key: "2", values: [{key: "a", values: [c]}, {key: "b", values: [f]}]}]);
-  test.deepEqual(nest.entries([f, e, d, c, b, a]), [{key: "1", values: [{key: "a", values: [b, a]}, {key: "b", values: [e, d]}]}, {key: "2", values: [{key: "a", values: [c]}, {key: "b", values: [f]}]}]);
+  test.deepEqual(nest.entries([a, b, c, d, e, f]), count([{key: "1", values: count([{key: "a", values: count([a, b], 2)}, {key: "b", values: count([d, e], 2)}], 4)}, {key: "2", values: count([{key: "a", values: count([c], 1)}, {key: "b", values: count([f], 1)}], 2)}], 6));
+  test.deepEqual(nest.entries([f, e, d, c, b, a]), count([{key: "1", values: count([{key: "a", values: count([b, a], 2)}, {key: "b", values: count([e, d], 2)}], 4)}, {key: "2", values: count([{key: "a", values: count([c], 1)}, {key: "b", values: count([f], 1)}], 2)}], 6));
   test.end();
 });
 
@@ -60,8 +60,8 @@ tape("nest.key(key).sortKeys(order).entries(array) sorts entries by key using th
       a = {foo: 1},
       b = {foo: 1},
       c = {foo: 2};
-  test.deepEqual(nest.entries([c, a, b, c]), [{key: "2", values: [c, c]}, {key: "1", values: [a, b]}]);
-  test.deepEqual(nest.entries([c, b, a, c]), [{key: "2", values: [c, c]}, {key: "1", values: [b, a]}]);
+  test.deepEqual(nest.entries([c, a, b, c]), count([{key: "2", values: count([c, c], 2)}, {key: "1", values: count([a, b], 2)}], 4));
+  test.deepEqual(nest.entries([c, b, a, c]), count([{key: "2", values: count([c, c], 2)}, {key: "1", values: count([b, a], 2)}], 4));
   test.end();
 });
 
@@ -73,8 +73,8 @@ tape("nest.key(key1).sortKeys(order1).key(key2).sortKeys(order2).entries(array) 
       d = {foo: 1, bar: "b"},
       e = {foo: 1, bar: "b"},
       f = {foo: 2, bar: "b"};
-  test.deepEqual(nest.entries([a, b, c, d, e, f]), [{key: "2", values: [{key: "b", values: [f]}, {key: "a", values: [c]}]}, {key: "1", values: [{key: "b", values: [d, e]}, {key: "a", values: [a, b]}]}]);
-  test.deepEqual(nest.entries([f, e, d, c, b, a]), [{key: "2", values: [{key: "b", values: [f]}, {key: "a", values: [c]}]}, {key: "1", values: [{key: "b", values: [e, d]}, {key: "a", values: [b, a]}]}]);
+  test.deepEqual(nest.entries([a, b, c, d, e, f]), count([{key: "2", values: count([{key: "b", values: count([f], 1)}, {key: "a", values: count([c], 1)}], 2)}, {key: "1", values: count([{key: "b", values: count([d, e], 2)}, {key: "a", values: count([a, b], 2)}], 4)}], 6));
+  test.deepEqual(nest.entries([f, e, d, c, b, a]), count([{key: "2", values: count([{key: "b", values: count([f], 1)}, {key: "a", values: count([c], 1)}], 2)}, {key: "1", values: count([{key: "b", values: count([e, d], 2)}, {key: "a", values: count([b, a], 2)}], 4)}], 6));
   test.end();
 });
 
@@ -162,3 +162,8 @@ tape("nest.key(key).rollup(rollup).map(array) aggregates values per key using th
   test.deepEqual(arrays.nest().key(function(d) { return d.foo; }).rollup(function(values) { return values.length; }).map([a, b, c]), arrays.map({1: 2, 2: 1}));
   test.end();
 });
+
+function count(array, count) {
+  array.count = count;
+  return array;
+}

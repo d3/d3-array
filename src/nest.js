@@ -38,18 +38,23 @@ export default function() {
   }
 
   function entries(map, depth) {
-    if (depth >= keys.length) return map;
+    if (depth >= keys.length) return (rollup || (map.count = map.length)), map;
 
     var array = [],
-        sortKey = sortKeys[depth++];
+        sortKey = sortKeys[depth++],
+        values,
+        count = 0;
 
     map.each(function(value, key) {
-      array.push({key: key, values: entries(value, depth)});
+      values = entries(value, depth);
+      array.push({key: key, values: values});
+      if (!rollup) count += values.count;
     });
 
-    return sortKey
-        ? array.sort(function(a, b) { return sortKey(a.key, b.key); })
-        : array;
+    if (sortKey) array = array.sort(function(a, b) { return sortKey(a.key, b.key); });
+    if (!rollup) array.count = count;
+
+    return array;
   }
 
   return nest = {
