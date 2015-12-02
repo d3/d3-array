@@ -68,15 +68,31 @@ Returns the minimum value in the given *array* using natural order. If the array
 
 Unlike the built-in [Math.min](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Math/min), this method ignores undefined, null and NaN values; this is useful for ignoring missing data. In addition, elements are compared using *natural* order rather than *numeric* order. For example, the minimum of ["20", "3"] is "20", while the minimum of [20, 3] is 3.
 
+See also [scan](#scan) and [extent](#extent).
+
 <a name="max" href="#max">#</a> <b>max</b>(<i>array</i>[, <i>accessor</i>])
 
 Returns the maximum value in the given *array* using natural order. If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the maximum value.
 
 Unlike the built-in [Math.max](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Math/max), this method ignores undefined values; this is useful for ignoring missing data. In addition, elements are compared using *natural* order rather than *numeric* order. For example, the maximum of ["20", "3"] is "3", while the maximum of [20, 3] is 20.
 
+See also [scan](#scan) and [extent](#extent).
+
 <a name="extent" href="#extent">#</a> <b>extent</b>(<i>array</i>[, <i>accessor</i>])
 
 Returns the [minimum](#min) and [maximum](#max) value in the given *array* using natural order.
+
+<a name="scan" href="#scan">#</a> <b>scan</b>(<i>array</i>[, <i>comparator</i>])
+
+Performs a linear scan of the specified *array*, returning the index of the least value according to the specified *comparator*. If the given *array* contains no comparable values (*i.e.*, the comparator returns NaN when comparing each value to itself), returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
+
+```js
+var array = [{foo: 42}, {foo: 91}];
+scan(array, function(a, b) { return a.foo - b.foo; }); // 0
+scan(array, function(a, b) { return b.foo - a.foo; }); // 1
+```
+
+This function is similar to [min](#min), except it allows the use of a comparator rather than an accessor and it returns the index instead of the accessed value. See also [bisect](#bisect).
 
 <a name="sum" href="#sum">#</a> <b>sum</b>(<i>array</i>[, <i>accessor</i>])
 
