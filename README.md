@@ -112,6 +112,14 @@ Returns an [unbiased estimator of the population variance](http://mathworld.wolf
 
 Returns the standard deviation, defined as the square root of the [bias-corrected variance](#variance), of the given *array* of numbers. If the array has fewer than two values, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the standard deviation. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
+<a name="skewness" href="#skewness">#</a> <b>skewness</b>(<i>array</i>[, <i>accessor</i>])
+
+Returns the [sample skewness](http://www.macroption.com/skewness-formula/) of the given *array* of numbers. If the array has fewer than three values, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the sample skewness. This method ignores undefined and NaN values; this is useful for ignoring missing data.
+
+<a name="kurtosis" href="#kurtosis">#</a> <b>kurtosis</b>(<i>array</i>[, <i>accessor</i>])
+
+Returns the [sample excess kurtosis](http://www.macroption.com/kurtosis-formula/) of the given *array* of numbers. If the array has fewer than four values, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the sample excess kurtosis. This method ignores undefined and NaN values; this is useful for ignoring missing data.
+
 <a name="bisectLeft" href="#bisectLeft">#</a> <b>bisectLeft</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]])
 
 Returns the insertion point for *x* in *array* to maintain sorted order. The arguments *lo* and *hi* may be used to specify a subset of the array which should be considered; by default the entire array is used. If *x* is already present in *array*, the insertion point will be before (to the left of) any existing entries. The return value is suitable for use as the first argument to [splice](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/splice) assuming that *array* is already sorted. The returned insertion point *i* partitions the *array* into two halves so that all *v* < *x* for *v* in *array*.slice(*lo*, *i*) for the left side and all *v* >= *x* for *v* in *array*.slice(*i*, *hi*) for the right side.
