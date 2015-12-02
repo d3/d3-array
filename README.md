@@ -84,7 +84,7 @@ Returns the [minimum](#min) and [maximum](#max) value in the given *array* using
 
 <a name="scan" href="#scan">#</a> <b>scan</b>(<i>array</i>[, <i>comparator</i>])
 
-Performs a linear scan of the specified *array*, returning the index of the least value according to the specified *comparator*. If the given *array* contains no comparable values (*i.e.*, the comparator returns NaN when comparing each value to itself), returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
+Performs a linear scan of the specified *array*, returning the index of the least element according to the specified *comparator*. If the given *array* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
 
 ```js
 var array = [{foo: 42}, {foo: 91}];
