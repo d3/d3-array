@@ -488,6 +488,29 @@ Note: this method is unsafe if any of the keys conflict with built-in JavaScript
 
 Applies the nest operator to the specified *array*, returning an array of key-values entries. Conceptually, this is similar to applying [entries](#entries) to the associative array returned by [map](#nest_map), but it applies to every level of the hierarchy rather than just the first (outermost) level. Each entry in the returned array corresponds to a distinct key value returned by the first key function. The entry value depends on the number of registered key functions: if there is an additional key, the value is another nested array of entries; otherwise, the value is the array of elements filtered from the input *array* that have the given key value.
 
+### Histogram
+
+<a name="histogram" href="#histogram">#</a> <b>histogram</b>()
+
+…
+
+<a name="_histogram" href="#_histogram">#</a> <i>histogram</i>(<i>data</i>)
+
+…
+
+<a name="histogram_value" href="#histogram_value">#</a> <i>histogram</i>.<b>value</b>([<i>value</i>])
+
+…
+
+<a name="histogram_range" href="#histogram_range">#</a> <i>histogram</i>.<b>range</b>([<i>range</i>])
+
+…
+
+<a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>count</i>])
+<br><a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>thresholds</i>])
+
+…
+
 ## Changes from D3 3.x:
 
 * Array accessor functions now take the array as the third argument, rather than setting it as the `this` context.

@@ -5,6 +5,7 @@ export {default as descending} from "./src/descending";
 export {default as deviation} from "./src/deviation";
 export {default as entries} from "./src/entries";
 export {default as extent} from "./src/extent";
+export {default as histogram} from "./src/histogram";
 export {default as keys} from "./src/keys";
 export {default as map} from "./src/map";
 export {default as max} from "./src/max";
