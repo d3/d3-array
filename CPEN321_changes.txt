@@ -1,0 +1,10 @@
+In this repo, we want to fix issues #2 and #3 from https://github.com/d3/d3-arrays.
+As part of our project, we also contributed to https://github.com/d3/d3-random,
+the implementation for that contribution is in https://github.com/UBC-CPEN/d3-random
+which we also shared with you.
+
+Issue #2: skewness function
+files: README.md index.js src/skewness.js test/inDelta.js test/skewness-test.js
+
+Issue #3: kurtosis function
+files: README.md index.js src/kurtosis.js test/inDelta.js test/kurtosis-test.js
