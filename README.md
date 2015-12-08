@@ -540,6 +540,10 @@ If *thresholds* is specified, sets the threshold accessor to the specified funct
 
 If a *count* is specified instead of an array of *thresholds*, then the [domain](#histogram_domain) will be uniformly divided into *count* + 1 bins.
 
+### Histogram Thresholds
+
+These functions are typically not used directly, but instead are passed to [*histogram*.thresholds](#histogram_thresholds) to set the threshold accessor function.
+
 <a name="thresholdFreedmanDiaconis" href="#thresholdFreedmanDiaconis">#</a> <b>thresholdFreedmanDiaconis</b>(<i>min</i>, <i>max</i>, <i>values</i>)
 
 Returns the array of bin thresholds according to the [Freedman–Diaconis rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
