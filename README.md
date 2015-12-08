@@ -528,21 +528,21 @@ Note that the range accessor is invoked on the materialized array of [values](#h
 <a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>count</i>])
 <br><a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>thresholds</i>])
 
-If *thresholds* is specified, sets the threshold accessor to the specified function or array and returns this histogram generator. If *thresholds* is not specified, returns the current threshold accessor, which by default implements [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition). The histogram thresholds are defined as an array of values [*x0*, *x1*, …]. Any [observed value](#histogram_range) less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated histogram](#_histogram) will have *thresholds*.length + 1 bins.
-
-You can implement your own threshold formula by specifying a function. This function takes three arguments: the *mininum* range value, the *maximum* range value, and the array of input *values* derived from the data. It should return an array of numbers representing the computed thresholds. For example, Sturges’ formula is implemented as:
+If *thresholds* is specified, sets the threshold accessor to the specified function or array and returns this histogram generator. If *thresholds* is not specified, returns the current threshold accessor, which by default implements [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition):
 
 ```js
-function sturges(x0, x1, values) {
+function sturges(min, max, values) {
   var n = Math.ceil(Math.log(values.length) / Math.LN2 + 1),
       thresholds = new Array(n),
       i = -1,
-      dx = (x1 - x0) / (n + 1);
-  x0 += dx;
-  while (++i < n) thresholds[i] = dx * i + x0;
+      dx = (max - min) / (n + 1);
+  min += dx;
+  while (++i < n) thresholds[i] = dx * i + min;
   return thresholds;
 }
 ```
+
+The threshold accessor takes three arguments: the [observed range](#histogram_range), represented as *min* and *max*, and the array of input [*values*](#histogram_value) derived from the data. The accessor must return an array of numbers representing the computed thresholds: [*x0*, *x1*, …]. Any observed value less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated histogram](#_histogram) will have *thresholds*.length + 1 bins.
 
 If a *count* is specified instead of an array of *thresholds*, then the [range](#histogram_range) will be uniformly divided into *count* + 1 bins.
 
