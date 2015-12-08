@@ -523,10 +523,26 @@ This is similar to mapping your data to values before invoking the histogram gen
 
 If *range* is specified, sets the range accessor to the specified function or array and returns this histogram generator. If *range* is not specified, returns the current range accessor, which defaults to [extent](#extent). The histogram range is defined as an array [*min*, *max*], where *min* is the minimum observed value and *max* is the maximum observed value; both values are inclusive. Any value outside of this range will be ignored when the histogram is [generated](#_histogram).
 
+Note that the range accessor is invoked on the materialized array of [values](#histogram_value), not on the input data array.
+
 <a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>count</i>])
 <br><a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>thresholds</i>])
 
 If *thresholds* is specified, sets the threshold accessor to the specified function or array and returns this histogram generator. If *thresholds* is not specified, returns the current threshold accessor, which by default implements [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition). The histogram thresholds are defined as an array of values [*x0*, *x1*, …]. Any [observed value](#histogram_range) less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated histogram](#_histogram) will have *thresholds*.length + 1 bins.
+
+You can implement your own threshold formula by specifying a function. This function takes three arguments: the *mininum* range value, the *maximum* range value, and the array of input *values* derived from the data. It should return an array of numbers representing the computed thresholds. For example, Sturges’ formula is implemented as:
+
+```js
+function sturges(x0, x1, values) {
+  var n = Math.ceil(Math.log(values.length) / Math.LN2 + 1),
+      thresholds = new Array(n),
+      i = -1,
+      dx = (x1 - x0) / (n + 1);
+  x0 += dx;
+  while (++i < n) thresholds[i] = dx * i + x0;
+  return thresholds;
+}
+```
 
 If a *count* is specified instead of an array of *thresholds*, then the [range](#histogram_range) will be uniformly divided into *count* + 1 bins.
 
