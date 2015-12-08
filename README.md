@@ -525,6 +525,12 @@ var h = histogram()
     .thresholds(x.ticks(20));
 ```
 
+You can then compute the bins from an array of numbers like so:
+
+```js
+var bins = h(numbers);
+```
+
 Note that the domain accessor is invoked on the materialized array of [values](#histogram_value), not on the input data array.
 
 <a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>count</i>])
