@@ -488,7 +488,7 @@ Note: this method is unsafe if any of the keys conflict with built-in JavaScript
 
 Applies the nest operator to the specified *array*, returning an array of key-values entries. Conceptually, this is similar to applying [entries](#entries) to the associative array returned by [map](#nest_map), but it applies to every level of the hierarchy rather than just the first (outermost) level. Each entry in the returned array corresponds to a distinct key value returned by the first key function. The entry value depends on the number of registered key functions: if there is an additional key, the value is another nested array of entries; otherwise, the value is the array of elements filtered from the input *array* that have the given key value.
 
-### Histogram
+### Histograms
 
 [<img src="https://raw.githubusercontent.com/d3/d3-arrays/master/img/histogram.png" width="480" height="250" alt="Histogram">](http://bl.ocks.org/mbostock/3048450)
 
