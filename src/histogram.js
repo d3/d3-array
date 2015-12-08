@@ -2,32 +2,17 @@ import bisect from "./bisect";
 import constant from "./constant";
 import extent from "./extent";
 import identity from "./identity";
+import sturges from "./threshold/sturges";
+import uniform from "./threshold/uniform";
 
 function number(x) {
   return +x;
 }
 
-function thresholdSturges(x0, x1, values) {
-  return thresholdUniform(x0, x1, Math.ceil(Math.log(values.length) / Math.LN2 + 1));
-}
-
-function thresholdUniform(x0, x1, n) {
-  var i = -1,
-      dx = (x1 - x0) / (n + 1),
-      thresholds = new Array(n);
-
-  x0 += dx;
-  while (++i < n) {
-    thresholds[i] = dx * i + x0;
-  }
-
-  return thresholds;
-}
-
 export default function() {
   var value = identity,
       domain = extent,
-      threshold = thresholdSturges;
+      threshold = sturges;
 
   function histogram(data) {
     var i,
@@ -84,7 +69,7 @@ export default function() {
     if (!arguments.length) return threshold;
     threshold = typeof _ === "function" ? _
         : Array.isArray(_) ? constant(Array.prototype.map.call(_, number))
-        : (_ = +_, function(x0, x1) { return thresholdUniform(x0, x1, _); });
+        : uniform(+_);
     return histogram;
   };
 

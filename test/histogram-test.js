@@ -5,18 +5,17 @@ tape("histogram() returns a default histogram generator", function(test) {
   var h = arrays.histogram();
   test.equal(h.value()(42), 42);
   test.equal(h.domain(), arrays.extent);
-  test.deepEqual(h.thresholds()(0, 10, arrays.range(200)), arrays.range(1, 10));
+  test.deepEqual(h.thresholds(), arrays.thresholdSturges);
   test.end();
 });
 
 tape("histogram(data) computes a histogram of the specified array of data", function(test) {
   var h = arrays.histogram();
   test.deepEqual(h([0, 0, 0, 10, 20, 20]), [
-    bin([0, 0, 0], 0, 4),
-    bin([], 4, 8),
-    bin([10], 8, 12),
-    bin([], 12, 16),
-    bin([20, 20], 16, 20) // Note: inclusive upper bound for last bin.
+    bin([0, 0, 0], 0, 5),
+    bin([], 5, 10),
+    bin([10], 10, 15),
+    bin([20, 20], 15, 20) // Note: inclusive upper bound for last bin.
   ]);
   test.end();
 });
@@ -35,11 +34,10 @@ tape("histogram.value(function) sets the value accessor", function(test) {
       b = {value: 10},
       c = {value: 20};
   test.deepEqual(h([a, a, a, b, c, c]), [
-    bin([a, a, a], 0, 4),
-    bin([], 4, 8),
-    bin([b], 8, 12),
-    bin([], 12, 16),
-    bin([c, c], 16, 20)
+    bin([a, a, a], 0, 5),
+    bin([], 5, 10),
+    bin([b], 10, 15),
+    bin([c, c], 15, 20)
   ]);
   test.end();
 });
@@ -48,11 +46,10 @@ tape("histogram.domain(array) sets the domain", function(test) {
   var h = arrays.histogram().domain([0, 20]);
   test.deepEqual(h.domain()(), [0, 20]);
   test.deepEqual(h([1, 2, 2, 10, 18, 18]), [
-    bin([1, 2, 2], 0, 4),
-    bin([], 4, 8),
-    bin([10], 8, 12),
-    bin([], 12, 16),
-    bin([18, 18], 16, 20)
+    bin([1, 2, 2], 0, 5),
+    bin([], 5, 10),
+    bin([10], 10, 15),
+    bin([18, 18], 15, 20)
   ]);
   test.end();
 });
@@ -64,11 +61,10 @@ tape("histogram.domain(function) sets the domain accessor", function(test) {
       h = arrays.histogram().domain(domain);
   test.equal(h.domain(), domain);
   test.deepEqual(h(values), [
-    bin([1, 2, 2], 0, 4),
-    bin([], 4, 8),
-    bin([10], 8, 12),
-    bin([], 12, 16),
-    bin([18, 18], 16, 20)
+    bin([1, 2, 2], 0, 5),
+    bin([], 5, 10),
+    bin([10], 10, 15),
+    bin([18, 18], 15, 20)
   ]);
   test.deepEqual(actual, values);
   test.end();

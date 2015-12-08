@@ -536,23 +536,21 @@ Note that the domain accessor is invoked on the materialized array of [values](#
 <a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>count</i>])
 <br><a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>thresholds</i>])
 
-If *thresholds* is specified, sets the threshold accessor to the specified function or array and returns this histogram generator. If *thresholds* is not specified, returns the current threshold accessor, which by default implements [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition):
-
-```js
-function sturges(min, max, values) {
-  var n = Math.ceil(Math.log(values.length) / Math.LN2 + 1),
-      thresholds = new Array(n),
-      i = -1,
-      dx = (max - min) / (n + 1);
-  min += dx;
-  while (++i < n) thresholds[i] = dx * i + min;
-  return thresholds;
-}
-```
-
-The threshold accessor takes three arguments: the [observable domain](#histogram_domain), represented as *min* and *max*, and the array of input [*values*](#histogram_value) derived from the data. The accessor must then return an array of numbers representing the computed thresholds: [*x0*, *x1*, …]. Any observable value less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated histogram](#_histogram) will have *thresholds*.length + 1 bins.
+If *thresholds* is specified, sets the threshold accessor to the specified function or array and returns this histogram generator. If *thresholds* is not specified, returns the current threshold accessor, which by default implements [Sturges’ formula](#thresholdSturges). The threshold accessor takes three arguments: the [observable domain](#histogram_domain), represented as *min* and *max*, and the array of input [*values*](#histogram_value) derived from the data. The accessor must then return an array of numbers representing the computed thresholds: [*x0*, *x1*, …]. Any observable value less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated histogram](#_histogram) will have *thresholds*.length + 1 bins.
 
 If a *count* is specified instead of an array of *thresholds*, then the [domain](#histogram_domain) will be uniformly divided into *count* + 1 bins.
+
+<a name="thresholdFreedmanDiaconis" href="#thresholdFreedmanDiaconis">#</a> <b>thresholdFreedmanDiaconis</b>(<i>min</i>, <i>max</i>, <i>values</i>)
+
+Returns the array of bin thresholds according to the [Freedman–Diaconis rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
+
+<a name="thresholdSturges" href="#thresholdSturges">#</a> <b>thresholdSturges</b>(<i>min</i>, <i>max</i>, <i>values</i>)
+
+Returns the array of bin thresholds according to [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
+
+<a name="thresholdScott" href="#thresholdScott">#</a> <b>thresholdScott</b>(<i>min</i>, <i>max</i>, <i>values</i>)
+
+Returns the array of bin thresholds according to [Scott’s normal reference rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
 
 ## Changes from D3 3.x:
 
