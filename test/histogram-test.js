@@ -4,7 +4,7 @@ var tape = require("tape"),
 tape("histogram() returns a default histogram generator", function(test) {
   var h = arrays.histogram();
   test.equal(h.value()(42), 42);
-  test.equal(h.range(), arrays.extent);
+  test.equal(h.domain(), arrays.extent);
   test.deepEqual(h.thresholds()(0, 10, arrays.range(200)), arrays.range(1, 10));
   test.end();
 });
@@ -44,9 +44,9 @@ tape("histogram.value(function) sets the value accessor", function(test) {
   test.end();
 });
 
-tape("histogram.range(array) sets the range", function(test) {
-  var h = arrays.histogram().range([0, 20]);
-  test.deepEqual(h.range()(), [0, 20]);
+tape("histogram.domain(array) sets the domain", function(test) {
+  var h = arrays.histogram().domain([0, 20]);
+  test.deepEqual(h.domain()(), [0, 20]);
   test.deepEqual(h([1, 2, 2, 10, 18, 18]), [
     bin([1, 2, 2], 0, 4),
     bin([], 4, 8),
@@ -57,12 +57,12 @@ tape("histogram.range(array) sets the range", function(test) {
   test.end();
 });
 
-tape("histogram.range(function) sets the range accessor", function(test) {
+tape("histogram.domain(function) sets the domain accessor", function(test) {
   var values = [1, 2, 2, 10, 18, 18],
       actual,
-      range = function(values) { actual = values; return [0, 20]; },
-      h = arrays.histogram().range(range);
-  test.equal(h.range(), range);
+      domain = function(values) { actual = values; return [0, 20]; },
+      h = arrays.histogram().domain(domain);
+  test.equal(h.domain(), domain);
   test.deepEqual(h(values), [
     bin([1, 2, 2], 0, 4),
     bin([], 4, 8),

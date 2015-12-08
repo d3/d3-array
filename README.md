@@ -519,11 +519,19 @@ When a histogram is [generated](#_histogram), the value accessor will be invoked
 
 This is similar to mapping your data to values before invoking the histogram generator, but has the benefit that the input data remains associated with the returned bins, thereby making it easier to access other fields of the data.
 
-<a name="histogram_range" href="#histogram_range">#</a> <i>histogram</i>.<b>range</b>([<i>range</i>])
+<a name="histogram_domain" href="#histogram_domain">#</a> <i>histogram</i>.<b>domain</b>([<i>domain</i>])
 
-If *range* is specified, sets the range accessor to the specified function or array and returns this histogram generator. If *range* is not specified, returns the current range accessor, which defaults to [extent](#extent). The histogram range is defined as an array [*min*, *max*], where *min* is the minimum observed value and *max* is the maximum observed value; both values are inclusive. Any value outside of this range will be ignored when the histogram is [generated](#_histogram).
+If *domain* is specified, sets the domain accessor to the specified function or array and returns this histogram generator. If *domain* is not specified, returns the current domain accessor, which defaults to [extent](#extent). The histogram domain is defined as an array [*min*, *max*], where *min* is the minimum observed value and *max* is the maximum observed value; both values are inclusive. Any value outside of this domain will be ignored when the histogram is [generated](#_histogram).
 
-Note that the range accessor is invoked on the materialized array of [values](#histogram_value), not on the input data array.
+For example, if you are using the the histogram in conjunction with a [linear scale](https://github.com/d3/d3-scale#linear-scales) `x`, you might say:
+
+```js
+var h = histogram()
+    .domain(x.domain())
+    .thresholds(x.ticks(20));
+```
+
+Note that the domain accessor is invoked on the materialized array of [values](#histogram_value), not on the input data array.
 
 <a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>count</i>])
 <br><a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>thresholds</i>])
@@ -542,9 +550,9 @@ function sturges(min, max, values) {
 }
 ```
 
-The threshold accessor takes three arguments: the [observed range](#histogram_range), represented as *min* and *max*, and the array of input [*values*](#histogram_value) derived from the data. The accessor must then return an array of numbers representing the computed thresholds: [*x0*, *x1*, …]. Any observed value less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated histogram](#_histogram) will have *thresholds*.length + 1 bins.
+The threshold accessor takes three arguments: the [observed domain](#histogram_domain), represented as *min* and *max*, and the array of input [*values*](#histogram_value) derived from the data. The accessor must then return an array of numbers representing the computed thresholds: [*x0*, *x1*, …]. Any observed value less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated histogram](#_histogram) will have *thresholds*.length + 1 bins.
 
-If a *count* is specified instead of an array of *thresholds*, then the [range](#histogram_range) will be uniformly divided into *count* + 1 bins.
+If a *count* is specified instead of an array of *thresholds*, then the [domain](#histogram_domain) will be uniformly divided into *count* + 1 bins.
 
 ## Changes from D3 3.x:
 

@@ -26,7 +26,7 @@ function thresholdUniform(x0, x1, n) {
 
 export default function() {
   var value = identity,
-      range = extent,
+      domain = extent,
       threshold = thresholdSturges;
 
   function histogram(data) {
@@ -40,13 +40,13 @@ export default function() {
       values[i] = +value(data[i], i, data);
     }
 
-    var xz = range(values),
+    var xz = domain(values),
         x0 = +xz[0],
         x1 = +xz[1],
         tz = threshold(x0, x1, values),
         m = tz.length;
 
-    // Coerce thresholds to numbers, ignoring any outside the range.
+    // Coerce thresholds to numbers, ignoring any outside the domain.
     for (i = 0; i < m; ++i) x = tz[i] = +tz[i];
     while (tz[0] <= x0) tz.shift(), --m;
     while (tz[m - 1] >= x1) tz.pop(), --m;
@@ -61,7 +61,7 @@ export default function() {
       bin.x1 = i < m ? tz[i] : x1;
     }
 
-    // Assign data to bins by value, ignoring any outside the range.
+    // Assign data to bins by value, ignoring any outside the domain.
     for (i = 0; i < n; ++i) {
       x = values[i];
       if (x0 <= x && x <= x1) {
@@ -76,8 +76,8 @@ export default function() {
     return arguments.length ? (value = typeof _ === "function" ? _ : constant(+_), histogram) : value;
   };
 
-  histogram.range = function(_) {
-    return arguments.length ? (range = typeof _ === "function" ? _ : constant([+_[0], +_[1]]), histogram) : range;
+  histogram.domain = function(_) {
+    return arguments.length ? (domain = typeof _ === "function" ? _ : constant([+_[0], +_[1]]), histogram) : domain;
   };
 
   histogram.thresholds = function(_) {
