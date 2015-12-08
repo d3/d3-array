@@ -542,7 +542,7 @@ If a *count* is specified instead of an array of *thresholds*, then the [domain]
 
 ### Histogram Thresholds
 
-These functions are typically not used directly, but instead are passed to [*histogram*.thresholds](#histogram_thresholds) to set the threshold accessor function.
+These functions are typically not used directly. Instead, pass them to [*histogram*.thresholds](#histogram_thresholds) to set the threshold accessor function.
 
 <a name="thresholdFreedmanDiaconis" href="#thresholdFreedmanDiaconis">#</a> <b>thresholdFreedmanDiaconis</b>(<i>min</i>, <i>max</i>, <i>values</i>)
 
