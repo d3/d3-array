@@ -492,7 +492,7 @@ Applies the nest operator to the specified *array*, returning an array of key-va
 
 [<img src="https://raw.githubusercontent.com/d3/d3-arrays/master/img/histogram.png" width="480" height="250" alt="Histogram">](http://bl.ocks.org/mbostock/3048450)
 
-Histograms bin discrete samples into consecutive, non-overlapping intervals. They are often used to visualize the distribution of numerical data.
+Histograms bin many discrete samples into a smaller number of consecutive, non-overlapping intervals. They are often used to visualize the distribution of numerical data.
 
 <a name="histogram" href="#histogram">#</a> <b>histogram</b>()
 
@@ -500,7 +500,7 @@ Constructs a new histogram generator with the default settings.
 
 <a name="_histogram" href="#_histogram">#</a> <i>histogram</i>(<i>data</i>)
 
-Computes the histogram for the given array of *data*. Returns an array of bins, where each bin is an array containing the associated elements from the input *data*. In addition, each bin has two additional attributes:
+Computes the histogram for the given array of *data* samples. Returns an array of bins, where each bin is an array containing the associated elements from the input *data*. Thus, the `length` of the bin is the number of elements in that bin. Each bin has two additional attributes:
 
 * `x0` - the lower bound of the bin (inclusive).
 * `x1` - the upper bound of the bin (exclusive, except for the last bin).
