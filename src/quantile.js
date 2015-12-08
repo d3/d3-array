@@ -2,7 +2,7 @@ import number from "./number";
 
 export default function(array, p, f) {
   if (arguments.length < 3) f = number;
-  if (!(n = array.length)) return undefined;
+  if (!(n = array.length)) return;
   if ((p = +p) <= 0 || n < 2) return +f(array[0], 0, array);
   if (p >= 1) return +f(array[n - 1], n - 1, array);
   var n,
