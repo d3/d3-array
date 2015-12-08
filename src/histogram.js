@@ -1,20 +1,10 @@
 import bisect from "./bisect";
+import constant from "./constant";
 import extent from "./extent";
-
-var map = [].map;
-
-function identity(x) {
-  return x;
-}
+import identity from "./identity";
 
 function number(x) {
   return +x;
-}
-
-function constant(x) {
-  return function() {
-    return x;
-  };
 }
 
 function thresholdSturges(x0, x1, values) {
@@ -93,7 +83,7 @@ export default function() {
   histogram.thresholds = function(_) {
     if (!arguments.length) return threshold;
     threshold = typeof _ === "function" ? _
-        : Array.isArray(_) ? constant(map.call(_, number))
+        : Array.isArray(_) ? constant(Array.prototype.map.call(_, number))
         : (_ = +_, function(x0, x1) { return thresholdUniform(x0, x1, _); });
     return histogram;
   };
