@@ -1,7 +1,7 @@
 var tape = require("tape"),
     arrays = require("../");
 
-tape("quantile(array) requires sorted numeric input", function(test) {
+tape("quantile(array, p) requires sorted numeric input", function(test) {
   test.equal(arrays.quantile([1, 2, 3, 4], 0), 1);
   test.equal(arrays.quantile([1, 2, 3, 4], 1), 4);
   test.equal(arrays.quantile([4, 3, 2, 1], 0), 4);
@@ -9,23 +9,23 @@ tape("quantile(array) requires sorted numeric input", function(test) {
   test.end();
 });
 
-tape("quantile(array) uses the R-7 algorithm", function(test) {
+tape("quantile(array, p) uses the R-7 method", function(test) {
   var data = [3, 6, 7, 8, 8, 10, 13, 15, 16, 20];
   test.equal(arrays.quantile(data, 0), 3);
-  test.equal(arrays.quantile(data, .25), 7.25);
-  test.equal(arrays.quantile(data, .5), 9);
-  test.equal(arrays.quantile(data, .75), 14.5);
+  test.equal(arrays.quantile(data, 0.25), 7.25);
+  test.equal(arrays.quantile(data, 0.5), 9);
+  test.equal(arrays.quantile(data, 0.75), 14.5);
   test.equal(arrays.quantile(data, 1), 20);
   var data = [3, 6, 7, 8, 8, 9, 10, 13, 15, 16, 20];
   test.equal(arrays.quantile(data, 0), 3);
-  test.equal(arrays.quantile(data, .25), 7.5);
-  test.equal(arrays.quantile(data, .5), 9);
-  test.equal(arrays.quantile(data, .75), 14);
+  test.equal(arrays.quantile(data, 0.25), 7.5);
+  test.equal(arrays.quantile(data, 0.5), 9);
+  test.equal(arrays.quantile(data, 0.75), 14);
   test.equal(arrays.quantile(data, 1), 20);
   test.end();
 });
 
-tape("quantile(array) coerces values to numbers", function(test) {
+tape("quantile(array, p) coerces values to numbers", function(test) {
   var strings = ["1", "2", "3", "4"];
   test.equal(arrays.quantile(strings, 1 / 3), 2);
   test.equal(arrays.quantile(strings, 1 / 2), 2.5);
@@ -37,21 +37,42 @@ tape("quantile(array) coerces values to numbers", function(test) {
   test.end();
 });
 
-tape("quantile(array) returns an exact value for integer p-values", function(test) {
+tape("quantile(array, p) returns an exact value for integer p-values", function(test) {
   var data = [1, 2, 3, 4];
   test.equal(arrays.quantile(data, 1 / 3), 2);
   test.equal(arrays.quantile(data, 2 / 3), 3);
   test.end();
 });
 
-tape("quantile(array) returns the first value for p = 0", function(test) {
+tape("quantile(array, p) returns the first value for p = 0", function(test) {
   var data = [1, 2, 3, 4];
   test.equal(arrays.quantile(data, 0), 1);
   test.end();
 });
 
-tape("quantile(array) returns the last value for p = 1", function(test) {
+tape("quantile(array, p) returns the last value for p = 1", function(test) {
   var data = [1, 2, 3, 4];
   test.equal(arrays.quantile(data, 1), 4);
   test.end();
 });
+
+tape("quantile(array, p, f) observes the specified accessor", function(test) {
+  test.equal(arrays.quantile([1, 2, 3, 4].map(box), 0.5, unbox), 2.5);
+  test.equal(arrays.quantile([1, 2, 3, 4].map(box), 0, unbox), 1);
+  test.equal(arrays.quantile([1, 2, 3, 4].map(box), 1, unbox), 4);
+  test.equal(arrays.quantile([2].map(box), 0, unbox), 2);
+  test.equal(arrays.quantile([2].map(box), 0.5, unbox), 2);
+  test.equal(arrays.quantile([2].map(box), 1, unbox), 2);
+  test.equal(arrays.quantile([], 0, unbox), undefined);
+  test.equal(arrays.quantile([], 0.5, unbox), undefined);
+  test.equal(arrays.quantile([], 1, unbox), undefined);
+  test.end();
+});
+
+function box(value) {
+  return {value: value};
+}
+
+function unbox(box) {
+  return box.value;
+}

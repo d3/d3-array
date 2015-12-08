@@ -1,8 +1,14 @@
-// R-7 per <http://en.wikipedia.org/wiki/Quantile>
-export default function(values, p) {
-  var H = (values.length - 1) * p + 1,
-      h = Math.floor(H),
-      v = +values[h - 1],
-      e = H - h;
-  return e ? v + e * (values[h] - v) : v;
+import number from "./number";
+
+export default function(array, p, f) {
+  if (arguments.length < 3) f = number;
+  if (!(n = array.length)) return;
+  if ((p = +p) <= 0 || n < 2) return +f(array[0], 0, array);
+  if (p >= 1) return +f(array[n - 1], n - 1, array);
+  var n,
+      h = (n - 1) * p,
+      i = Math.floor(h),
+      a = +f(array[i], i, array),
+      b = +f(array[i + 1], i + 1, array);
+  return a + (b - a) * (h - i);
 };

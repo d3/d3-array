@@ -104,21 +104,23 @@ Returns the mean of the given *array*. If the array is empty, returns undefined.
 
 <a name="median" href="#median">#</a> <b>median</b>(<i>array</i>[, <i>accessor</i>])
 
-Returns the median of the given *array* using the [R-7](http://en.wikipedia.org/wiki/Quantile#Quantiles_of_a_population) algorithm. If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the median. This method ignores undefined and NaN values; this is useful for ignoring missing data.
+Returns the median of the given *array* using the [R-7 method](https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample). If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the median. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
-<a name="quantile" href="#quantile">#</a> <b>quantile</b>(<i>numbers</i>, <i>p</i>)
+<a name="quantile" href="#quantile">#</a> <b>quantile</b>(<i>array</i>, <i>p</i>[, <i>accessor</i>])
 
-Returns the *p*-quantile of the given sorted array of *numbers*, where *p* is a number in the range [0,1]. For example, the median can be computed using *p* = 0.5, the first quartile at *p* = 0.25, and the third quartile at *p* = 0.75. This particular implementation uses the [R-7](http://en.wikipedia.org/wiki/Quantile#Quantiles_of_a_population) algorithm, which is the default for the R programming language and Excel. This method requires that *numbers* contains numeric elements and is already sorted in ascending order, such as by [ascending](#ascending).
+Returns the *p*-quantile of the given sorted *array* of elements, where *p* is a number in the range [0,1]. For example, the median can be computed using *p* = 0.5, the first quartile at *p* = 0.25, and the third quartile at *p* = 0.75. This particular implementation uses the [R-7 method](http://en.wikipedia.org/wiki/Quantile#Quantiles_of_a_population), which is the default for the R programming language and Excel. For example:
 
 ```js
-var a = [0, 1, 3];
+var a = [0, 10, 30];
 quantile(a, 0); // 0
-quantile(a, 0.5); // 1
-quantile(a, 1); // 3
-quantile(a, 0.25); // 0.5
-quantile(a, 0.75); // 2
-quantile(a, 0.1); // 0.19999999999999996
+quantile(a, 0.5); // 10
+quantile(a, 1); // 30
+quantile(a, 0.25); // 5
+quantile(a, 0.75); // 20
+quantile(a, 0.1); // 2
 ```
+
+An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the quantile.
 
 <a name="variance" href="#variance">#</a> <b>variance</b>(<i>array</i>[, <i>accessor</i>])
 
