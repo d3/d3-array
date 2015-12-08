@@ -507,13 +507,7 @@ Computes the histogram for the given array of *data* samples. Returns an array o
 
 <a name="histogram_value" href="#histogram_value">#</a> <i>histogram</i>.<b>value</b>([<i>value</i>])
 
-If *value* is specified, sets the value accessor to the specified function or number and returns this histogram generator. If *value* is not specified, returns the current value accessor, which defaults to:
-
-```js
-function value(d) {
-  return d;
-}
-```
+If *value* is specified, sets the value accessor to the specified function or number and returns this histogram generator. If *value* is not specified, returns the current value accessor, which defaults to the identity function.
 
 When a histogram is [generated](#_histogram), the value accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default value accessor assumes that the input data are numbers, or that they are coercible to numbers using [valueOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf). If your data are not simply numbers, then you should specify an accessor that returns the corresponding numeric value for a given datum.
 
