@@ -106,17 +106,9 @@ Returns the mean of the given *array*. If the array is empty, returns undefined.
 
 Returns the median of the given *array* using the [R-7 method](https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample). If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the median. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
-<a name="quantile" href="#quantile">#</a> <b>quantile</b>(<i>array</i>, <i>p</i>[, <i>interpolator</i>])
+<a name="quantile" href="#quantile">#</a> <b>quantile</b>(<i>array</i>, <i>p</i>[, <i>accessor</i>])
 
-Returns the *p*-quantile of the given sorted *array* of elements, where *p* is a number in the range [0,1]. For example, the median can be computed using *p* = 0.5, the first quartile at *p* = 0.25, and the third quartile at *p* = 0.75. This particular implementation uses the [R-7 method](http://en.wikipedia.org/wiki/Quantile#Quantiles_of_a_population), which is the default for the R programming language and Excel. An optional *interpolator* function may be specified to determine how to interpolate between adjcent elements. If *interpolator* is not specified, it defaults to linear interpolation:
-
-```js
-function interpolate(a, b, t) {
-  return (a = +a) + (b - a) * t;
-}
-```
-
-Thus, the default interpolator requires that *array* contains numeric elements. For example:
+Returns the *p*-quantile of the given sorted *array* of elements, where *p* is a number in the range [0,1]. For example, the median can be computed using *p* = 0.5, the first quartile at *p* = 0.25, and the third quartile at *p* = 0.75. This particular implementation uses the [R-7 method](http://en.wikipedia.org/wiki/Quantile#Quantiles_of_a_population), which is the default for the R programming language and Excel. For example:
 
 ```js
 var a = [0, 10, 30];
@@ -127,6 +119,8 @@ quantile(a, 0.25); // 5
 quantile(a, 0.75); // 20
 quantile(a, 0.1); // 2
 ```
+
+An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the quantile.
 
 <a name="variance" href="#variance">#</a> <b>variance</b>(<i>array</i>[, <i>accessor</i>])
 
