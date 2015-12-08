@@ -542,7 +542,7 @@ function sturges(min, max, values) {
 }
 ```
 
-The threshold accessor takes three arguments: the [observed range](#histogram_range), represented as *min* and *max*, and the array of input [*values*](#histogram_value) derived from the data. The accessor must return an array of numbers representing the computed thresholds: [*x0*, *x1*, …]. Any observed value less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated histogram](#_histogram) will have *thresholds*.length + 1 bins.
+The threshold accessor takes three arguments: the [observed range](#histogram_range), represented as *min* and *max*, and the array of input [*values*](#histogram_value) derived from the data. The accessor must then return an array of numbers representing the computed thresholds: [*x0*, *x1*, …]. Any observed value less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated histogram](#_histogram) will have *thresholds*.length + 1 bins.
 
 If a *count* is specified instead of an array of *thresholds*, then the [range](#histogram_range) will be uniformly divided into *count* + 1 bins.
 
