@@ -490,26 +490,45 @@ Applies the nest operator to the specified *array*, returning an array of key-va
 
 ### Histogram
 
+[<img src="https://raw.githubusercontent.com/d3/d3-arrays/master/img/histogram.png" width="480" height="250" alt="Histogram">](http://bl.ocks.org/mbostock/3048450)
+
+Histograms bin discrete samples into consecutive, non-overlapping intervals. They are often used to visualize the distribution of numerical data.
+
 <a name="histogram" href="#histogram">#</a> <b>histogram</b>()
 
-…
+Constructs a new histogram generator with the default settings.
 
 <a name="_histogram" href="#_histogram">#</a> <i>histogram</i>(<i>data</i>)
 
-…
+Computes the histogram for the given array of *data*. Returns an array of bins, where each bin is an array containing the associated elements from the input *data*. In addition, each bin has two additional attributes:
+
+* `x0` - the lower bound of the bin (inclusive).
+* `x1` - the upper bound of the bin (exclusive, except for the last bin).
 
 <a name="histogram_value" href="#histogram_value">#</a> <i>histogram</i>.<b>value</b>([<i>value</i>])
 
-…
+If *value* is specified, sets the value accessor to the specified function or number and returns this histogram generator. If *value* is not specified, returns the current value accessor, which defaults to:
+
+```js
+function value(d) {
+  return d;
+}
+```
+
+When a histogram is [generated](#_histogram), the value accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default value accessor assumes that the input data are numbers, or that they are coercible to numbers using [valueOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf). If your data are not simply numbers, then you should specify an accessor that returns the corresponding numeric value for a given datum.
+
+This is similar to mapping your data to values before invoking the histogram generator, but has the benefit that the input data remains associated with the returned bins, thereby making it easier to access other fields of the data.
 
 <a name="histogram_range" href="#histogram_range">#</a> <i>histogram</i>.<b>range</b>([<i>range</i>])
 
-…
+If *range* is specified, sets the range accessor to the specified function or array and returns this histogram generator. If *range* is not specified, returns the current range accessor, which defaults to [extent](#extent). The histogram range is defined as an array [*min*, *max*], where *min* is the minimum observed value and *max* is the maximum observed value; both values are inclusive. Any value outside of this range will be ignored when the histogram is [generated](#_histogram).
 
 <a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>count</i>])
 <br><a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>thresholds</i>])
 
-…
+If *thresholds* is specified, sets the threshold accessor to the specified function or array and returns this histogram generator. If *thresholds* is not specified, returns the current threshold accessor, which by default implements [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition). The histogram thresholds are defined as an array of values [*x0*, *x1*, …]. Any [observed value](#histogram_range) less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated histogram](#_histogram) will have *thresholds*.length + 1 bins.
+
+If a *count* is specified instead of an array of *thresholds*, then the [range](#histogram_range) will be uniformly divided into *count* + 1 bins.
 
 ## Changes from D3 3.x:
 
