@@ -11,7 +11,7 @@ tape("range(stop) returns [0, 1, 2, … stop - 1]", function(test) {
 
 tape("range(stop) returns an empty array if stop <= 0", function(test) {
   test.deepEqual(arrays.range(0), []);
-  test.deepEqual(arrays.range(-.5), []);
+  test.deepEqual(arrays.range(-0.5), []);
   test.deepEqual(arrays.range(-1), []);
   test.end();
 });
@@ -77,12 +77,12 @@ tape("range(start, stop, step) returns an empty array if start >= stop and step 
   test.deepEqual(arrays.range(5, 5, 2), []);
   test.deepEqual(arrays.range(6, 5, 2), []);
   test.deepEqual(arrays.range(10, 10, 1), []);
-  test.deepEqual(arrays.range(10, 10, .5), []);
+  test.deepEqual(arrays.range(10, 10, 0.5), []);
   test.deepEqual(arrays.range(0, 0, 1), []);
-  test.deepEqual(arrays.range(0, 0, .5), []);
+  test.deepEqual(arrays.range(0, 0, 0.5), []);
   test.deepEqual(arrays.range(20, 10, 2), []);
   test.deepEqual(arrays.range(20, 10, 1), []);
-  test.deepEqual(arrays.range(20, 10, .5), []);
+  test.deepEqual(arrays.range(20, 10, 0.5), []);
   test.end();
 });
 
@@ -90,12 +90,12 @@ tape("range(start, stop, step) returns an empty array if start >= stop and step 
   test.deepEqual(arrays.range(5, 5, -2), []);
   test.deepEqual(arrays.range(5, 6, -2), []);
   test.deepEqual(arrays.range(10, 10, -1), []);
-  test.deepEqual(arrays.range(10, 10, -.5), []);
+  test.deepEqual(arrays.range(10, 10, -0.5), []);
   test.deepEqual(arrays.range(0, 0, -1), []);
-  test.deepEqual(arrays.range(0, 0, -.5), []);
+  test.deepEqual(arrays.range(0, 0, -0.5), []);
   test.deepEqual(arrays.range(10, 20, -2), []);
   test.deepEqual(arrays.range(10, 20, -1), []);
-  test.deepEqual(arrays.range(10, 20, -.5), []);
+  test.deepEqual(arrays.range(10, 20, -0.5), []);
   test.end();
 });
 
