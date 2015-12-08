@@ -536,13 +536,13 @@ Note that the domain accessor is invoked on the materialized array of [values](#
 <a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>count</i>])
 <br><a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>thresholds</i>])
 
-If *thresholds* is specified, sets the threshold accessor to the specified function or array and returns this histogram generator. If *thresholds* is not specified, returns the current threshold accessor, which by default implements [Sturges’ formula](#thresholdSturges). The threshold accessor takes three arguments: the [observable domain](#histogram_domain), represented as *min* and *max*, and the array of input [*values*](#histogram_value) derived from the data. The accessor must then return an array of numbers representing the computed thresholds: [*x0*, *x1*, …]. Any observable value less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated histogram](#_histogram) will have *thresholds*.length + 1 bins.
+If *thresholds* is specified, sets the threshold accessor to the specified function or array and returns this histogram generator. If *thresholds* is not specified, returns the current threshold accessor, which by default implements [Sturges’ formula](#thresholdSturges). See [histogram thresholds](#histogram-thresholds) for more information.
 
 If a *count* is specified instead of an array of *thresholds*, then the [domain](#histogram_domain) will be uniformly divided into *count* + 1 bins.
 
 ### Histogram Thresholds
 
-These functions are typically not used directly. Instead, pass them to [*histogram*.thresholds](#histogram_thresholds) to set the threshold accessor function.
+These functions are typically not used directly. Instead, pass them to [*histogram*.thresholds](#histogram_thresholds) to set the threshold accessor function. You may also implement your own threshold accessor function taking three arguments: the [observable domain](#histogram_domain), represented as *min* and *max*, and the array of input [*values*](#histogram_value) derived from the data. The accessor must then return an array of numbers representing the computed thresholds: [*x0*, *x1*, …]. Any observable value less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated histogram](#_histogram) will have *thresholds*.length + 1 bins.
 
 <a name="thresholdFreedmanDiaconis" href="#thresholdFreedmanDiaconis">#</a> <b>thresholdFreedmanDiaconis</b>(<i>min</i>, <i>max</i>, <i>values</i>)
 
