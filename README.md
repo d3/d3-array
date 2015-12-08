@@ -82,18 +82,6 @@ See also [scan](#scan) and [extent](#extent).
 
 Returns the [minimum](#min) and [maximum](#max) value in the given *array* using natural order.
 
-<a name="scan" href="#scan">#</a> <b>scan</b>(<i>array</i>[, <i>comparator</i>])
-
-Performs a linear scan of the specified *array*, returning the index of the least element according to the specified *comparator*. If the given *array* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
-
-```js
-var array = [{foo: 42}, {foo: 91}];
-scan(array, function(a, b) { return a.foo - b.foo; }); // 0
-scan(array, function(a, b) { return b.foo - a.foo; }); // 1
-```
-
-This function is similar to [min](#min), except it allows the use of a comparator rather than an accessor and it returns the index instead of the accessed value. See also [bisect](#bisect).
-
 <a name="sum" href="#sum">#</a> <b>sum</b>(<i>array</i>[, <i>accessor</i>])
 
 Returns the sum of the given *array*. If the array is empty, returns 0. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the sum. This method ignores undefined and NaN values; this is useful for ignoring missing data.
@@ -199,7 +187,19 @@ pairs([1, 2, 3, 4]); // returns [[1, 2], [2, 3], [3, 4]]
 
 If the specified array has fewer than two elements, returns the empty array.
 
-### Bisection
+### Search
+
+<a name="scan" href="#scan">#</a> <b>scan</b>(<i>array</i>[, <i>comparator</i>])
+
+Performs a linear scan of the specified *array*, returning the index of the least element according to the specified *comparator*. If the given *array* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
+
+```js
+var array = [{foo: 42}, {foo: 91}];
+scan(array, function(a, b) { return a.foo - b.foo; }); // 0
+scan(array, function(a, b) { return b.foo - a.foo; }); // 1
+```
+
+This function is similar to [min](#min), except it allows the use of a comparator rather than an accessor and it returns the index instead of the accessed value. See also [bisect](#bisect).
 
 <a name="bisectLeft" href="#bisectLeft">#</a> <b>bisectLeft</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]])
 
