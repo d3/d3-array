@@ -104,7 +104,7 @@ Returns the mean of the given *array*. If the array is empty, returns undefined.
 
 <a name="median" href="#median">#</a> <b>median</b>(<i>array</i>[, <i>accessor</i>])
 
-Returns the median of the given *array* using the [R-7](http://en.wikipedia.org/wiki/Quantile#Quantiles_of_a_population) algorithm. If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the median. This method ignores undefined and NaN values; this is useful for ignoring missing data.
+Returns the median of the given *array* using the [R-7 method](https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample). If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the median. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
 <a name="quantile" href="#quantile">#</a> <b>quantile</b>(<i>numbers</i>, <i>p</i>)
 

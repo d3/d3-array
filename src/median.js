@@ -16,5 +16,5 @@ export default function(array, f) {
     while (++i < n) if (!isNaN(a = number(f(array[i], i, array)))) numbers.push(a);
   }
 
-  if (numbers.length) return quantile(numbers.sort(ascending), .5);
+  return quantile(numbers.sort(ascending), 0.5);
 };

@@ -1,8 +1,12 @@
-// R-7 per <http://en.wikipedia.org/wiki/Quantile>
-export default function(values, p) {
-  var H = (values.length - 1) * p + 1,
-      h = Math.floor(H),
-      v = +values[h - 1],
-      e = H - h;
-  return e ? v + e * (values[h] - v) : v;
+function linear(a, b, t) {
+  return (a = +a) + (b - a) * t;
+}
+
+export default function(array, p, f) {
+  if (arguments.length < 3) f = linear;
+  if ((n = array.length) < 2) return n ? f(array[0], array[0], 0) : undefined;
+  var n,
+      h = (n - 1) * Math.max(0, p) + 1,
+      i = h < n ? Math.floor(h) : (h = n, n - 1);
+  return f(array[i - 1], array[i], h - i);
 };
