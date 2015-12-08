@@ -548,13 +548,13 @@ These functions are typically not used directly; instead, pass them to [*histogr
 
 Returns the array of bin thresholds according to the [Freedman–Diaconis rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
 
-<a name="thresholdSturges" href="#thresholdSturges">#</a> <b>thresholdSturges</b>(<i>min</i>, <i>max</i>, <i>values</i>)
-
-Returns the array of bin thresholds according to [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
-
 <a name="thresholdScott" href="#thresholdScott">#</a> <b>thresholdScott</b>(<i>min</i>, <i>max</i>, <i>values</i>)
 
 Returns the array of bin thresholds according to [Scott’s normal reference rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
+
+<a name="thresholdSturges" href="#thresholdSturges">#</a> <b>thresholdSturges</b>(<i>min</i>, <i>max</i>, <i>values</i>)
+
+Returns the array of bin thresholds according to [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
 
 ## Changes from D3 3.x:
 
