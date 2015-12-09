@@ -35,9 +35,9 @@ tape("mean(array) coerces values to numbers", function(test) {
 });
 
 tape("mean(array) coerces values exactly once", function(test) {
-  var array = [1, new OneTimeNumber(3)];
-  test.equal(arrays.mean(array), 2);
-  test.equal(arrays.mean(array), 1);
+  var numbers = [1, new OneTimeNumber(3)];
+  test.equal(arrays.mean(numbers), 2);
+  test.equal(arrays.mean(numbers), 1);
   test.end();
 });
 
@@ -74,16 +74,16 @@ tape("mean(array, f) coerces values to numbers", function(test) {
 });
 
 tape("mean(array, f) coerces values exactly once", function(test) {
-  var array = [1, new OneTimeNumber(3)].map(box);
-  test.equal(arrays.mean(array, unbox), 2);
-  test.equal(arrays.mean(array, unbox), 1);
+  var numbers = [1, new OneTimeNumber(3)].map(box);
+  test.equal(arrays.mean(numbers, unbox), 2);
+  test.equal(arrays.mean(numbers, unbox), 1);
   test.end();
 });
 
 tape("mean(array, f) passes the accessor d, i, and array", function(test) {
-  var results = [], array = ["a", "b", "c"];
-  arrays.mean(array, function(d, i, array) { results.push([d, i, array]); });
-  test.deepEqual(results, [["a", 0, array], ["b", 1, array], ["c", 2, array]]);
+  var results = [], strings = ["a", "b", "c"];
+  arrays.mean(strings, function(d, i, array) { results.push([d, i, array]); });
+  test.deepEqual(results, [["a", 0, strings], ["b", 1, strings], ["c", 2, strings]]);
   test.end();
 });
 

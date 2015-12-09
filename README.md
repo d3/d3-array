@@ -1,4 +1,4 @@
-# d3-arrays
+# d3-array
 
 Utilities for array manipulation: ordering, summarizing, searching, etc.
 
