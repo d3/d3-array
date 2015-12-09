@@ -34,7 +34,7 @@ And finally **iteration methods** that apply functions to elements in the array:
 
 ## Installing
 
-If you use NPM, `npm install d3-arrays`. Otherwise, download the [latest release](https://github.com/d3/d3-arrays/releases/latest).
+If you use NPM, `npm install d3-array`. Otherwise, download the [latest release](https://github.com/d3/d3-array/releases/latest).
 
 ## API Reference
 
@@ -490,7 +490,7 @@ Applies the nest operator to the specified *array*, returning an array of key-va
 
 ### Histograms
 
-[<img src="https://raw.githubusercontent.com/d3/d3-arrays/master/img/histogram.png" width="480" height="250" alt="Histogram">](http://bl.ocks.org/mbostock/3048450)
+[<img src="https://raw.githubusercontent.com/d3/d3-array/master/img/histogram.png" width="480" height="250" alt="Histogram">](http://bl.ocks.org/mbostock/3048450)
 
 Histograms bin many discrete samples into a smaller number of consecutive, non-overlapping intervals. They are often used to visualize the distribution of numerical data.
 
