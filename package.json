@@ -1,6 +1,6 @@
 {
   "name": "d3-array",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Array manipulation, ordering, searching, summarizing, etc.",
   "keywords": [
     "d3",
@@ -22,7 +22,7 @@
     "url": "https://github.com/d3/d3-array.git"
   },
   "scripts": {
-    "pretest": "mkdir -p build && node -e 'process.stdout.write(\"var version = \\\"\" + require(\"./package.json\").version + \"\\\"; export * from \\\"../index\\\"; export {version};\");' > build/bundle.js && rollup -f umd -u d3-array -n d3_arrays -o build/d3-array.js -- build/bundle.js",
+    "pretest": "mkdir -p build && node -e 'process.stdout.write(\"var version = \\\"\" + require(\"./package.json\").version + \"\\\"; export * from \\\"../index\\\"; export {version};\");' > build/bundle.js && rollup -f umd -u d3-array -n d3_array -o build/d3-array.js -- build/bundle.js",
     "test": "faucet `find test -name '*-test.js'`",
     "prepublish": "npm run test && uglifyjs build/d3-array.js -c -m -o build/d3-array.min.js && rm -f build/d3-array.zip && zip -j build/d3-array.zip -- LICENSE README.md build/d3-array.js build/d3-array.min.js"
   },
