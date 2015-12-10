@@ -542,7 +542,7 @@ If a *count* is specified instead of an array of *thresholds*, then the [domain]
 
 ### Histogram Thresholds
 
-These functions are typically not used directly; instead, pass them to [*histogram*.thresholds](#histogram_thresholds). You may also implement your own threshold accessor function taking three arguments: the array of input [*values*](#histogram_value) derived from the data, and the [observable domain](#histogram_domain) represented as *min* and *max*. The accessor may then return either the array of numeric thresholds or the number *n* of thresholds; in the latter case the domain is divided uniformly into *n* + 1 bins.
+These functions are typically not used directly; instead, pass them to [*histogram*.thresholds](#histogram_thresholds). You may also implement your own threshold accessor function taking three arguments: the array of input [*values*](#histogram_value) derived from the data, and the [observable domain](#histogram_domain) represented as *min* and *max*. The accessor may then return either the array of numeric thresholds or the *count* of thresholds; in the latter case the domain is divided uniformly into *count* + 1 bins.
 
 <a name="thresholdFreedmanDiaconis" href="#thresholdFreedmanDiaconis">#</a> <b>thresholdFreedmanDiaconis</b>(<i>values</i>, <i>min</i>, <i>max</i>)
 
