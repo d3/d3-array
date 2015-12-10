@@ -23,6 +23,16 @@ tape("set(array) adds array entries", function(test) {
   test.end();
 });
 
+tape("set(array, f) observes the specified accessor function", function(test) {
+  var name = function(d) { return d.name; };
+  var s = arrays.set([{name: "foo"}], name);
+  test.equal(s.has("foo"), true);
+  var s = arrays.set([{name: "foo"}, {name: "bar"}], name);
+  test.equal(s.has("foo"), true);
+  test.equal(s.has("bar"), true);
+  test.end();
+});
+
 tape("set(set) copies the given set", function(test) {
   var a = arrays.set(["foo"]),
       b = arrays.set(a);

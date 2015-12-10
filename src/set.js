@@ -19,14 +19,18 @@ Set.prototype = set.prototype = {
   each: proto.each
 };
 
-function set(object) {
+function set(object, f) {
   var set = new Set;
 
   // Copy constructor.
   if (object instanceof Set) object.each(function(value) { set.add(value); });
 
   // Otherwise, assume it’s an array.
-  else if (object) for (var i = 0, n = object.length; i < n; ++i) set.add(object[i]);
+  else if (object) {
+    var i = -1, n = object.length, o;
+    if (arguments.length === 1) while (++i < n) set.add(object[i]);
+    else while (++i < n) set.add(f(o = object[i], i, object));
+  }
 
   return set;
 }

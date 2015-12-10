@@ -353,9 +353,9 @@ Like [ES6 Sets](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Referenc
 * [set.remove](#set_remove), not [set.delete](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete).
 * [set.size](#set_size) is a method, not a [property](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size); also, there’s [set.empty](#set_empty).
 
-<a name="set" href="#set">#</a> <b>set</b>([<i>array</i>])
+<a name="set" href="#set">#</a> <b>set</b>([<i>array</i>[, <i>accessor</i>]])
 
-Constructs a new set. If *array* is specified, adds the given *array* of string values to the returned set. The specified array may also be another set.
+Constructs a new set. If *array* is specified, adds the given *array* of string values to the returned set. The specified array may also be another set. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before constructing the set.
 
 <a name="set_has" href="#set_has">#</a> <i>set</i>.<b>has</b>(<i>value</i>)
 
