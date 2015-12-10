@@ -93,13 +93,21 @@ tape("histogram.thresholds(array) sets the bin thresholds", function(test) {
 tape("histogram.thresholds(function) sets the bin thresholds accessor", function(test) {
   var actual,
       values = [0, 0, 0, 10, 30, 30],
-      h = arrays.histogram().thresholds(function(x0, x1, values) { actual = [x0, x1, values]; return [10, 20]; });
+      h = arrays.histogram().thresholds(function(values, x0, x1) { actual = [values, x0, x1]; return [10, 20]; });
   test.deepEqual(h(values), [
     bin([0, 0, 0], 0, 10),
     bin([10], 10, 20),
     bin([30, 30], 20, 30) // Note: inclusive upper bound for last bin.
   ]);
-  test.deepEqual(actual, [0, 30, values]);
+  test.deepEqual(actual, [values, 0, 30]);
+  test.deepEqual(h.thresholds(function() { return 5; })(values), [
+    bin([0, 0, 0], 0, 5),
+    bin([], 5, 10),
+    bin([10], 10, 15),
+    bin([], 15, 20),
+    bin([], 20, 25),
+    bin([30, 30], 25, 30) // Note: inclusive upper bound for last bin.
+  ]);
   test.end();
 });
 

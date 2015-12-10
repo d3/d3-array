@@ -542,19 +542,19 @@ If a *count* is specified instead of an array of *thresholds*, then the [domain]
 
 ### Histogram Thresholds
 
-These functions are typically not used directly; instead, pass them to [*histogram*.thresholds](#histogram_thresholds). You may also implement your own threshold accessor function taking three arguments: the [observable domain](#histogram_domain), represented as *min* and *max*, and the array of input [*values*](#histogram_value) derived from the data. The accessor must then return the array of numeric thresholds.
+These functions are typically not used directly; instead, pass them to [*histogram*.thresholds](#histogram_thresholds). You may also implement your own threshold accessor function taking three arguments: the array of input [*values*](#histogram_value) derived from the data, and the [observable domain](#histogram_domain) represented as *min* and *max*. The accessor may then return either the array of numeric thresholds or the number *n* of thresholds; in the latter case the domain is divided uniformly into *n* + 1 bins.
 
-<a name="thresholdFreedmanDiaconis" href="#thresholdFreedmanDiaconis">#</a> <b>thresholdFreedmanDiaconis</b>(<i>min</i>, <i>max</i>, <i>values</i>)
+<a name="thresholdFreedmanDiaconis" href="#thresholdFreedmanDiaconis">#</a> <b>thresholdFreedmanDiaconis</b>(<i>values</i>, <i>min</i>, <i>max</i>)
 
-Returns the array of bin thresholds according to the [Freedman–Diaconis rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
+Returns the number of bin thresholds according to the [Freedman–Diaconis rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
 
-<a name="thresholdScott" href="#thresholdScott">#</a> <b>thresholdScott</b>(<i>min</i>, <i>max</i>, <i>values</i>)
+<a name="thresholdScott" href="#thresholdScott">#</a> <b>thresholdScott</b>(<i>values</i>, <i>min</i>, <i>max</i>)
 
-Returns the array of bin thresholds according to [Scott’s normal reference rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
+Returns the number of bin thresholds according to [Scott’s normal reference rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
 
-<a name="thresholdSturges" href="#thresholdSturges">#</a> <b>thresholdSturges</b>(<i>min</i>, <i>max</i>, <i>values</i>)
+<a name="thresholdSturges" href="#thresholdSturges">#</a> <b>thresholdSturges</b>(<i>values</i>)
 
-Returns the array of bin thresholds according to [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
+Returns the number of bin thresholds according to [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
 
 ## Changes from D3 3.x:
 
