@@ -70,8 +70,8 @@ tape("histogram.domain(function) sets the domain accessor", function(test) {
   test.end();
 });
 
-tape("histogram.thresholds(number) sets the number of bin thresholds", function(test) {
-  var h = arrays.histogram().thresholds(2);
+tape("histogram.thresholds(number) sets the approximate number of bin thresholds", function(test) {
+  var h = arrays.histogram().thresholds(3);
   test.deepEqual(h([0, 0, 0, 10, 30, 30]), [
     bin([0, 0, 0], 0, 10),
     bin([10], 10, 20),

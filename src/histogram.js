@@ -2,6 +2,7 @@ import bisect from "./bisect";
 import constant from "./constant";
 import extent from "./extent";
 import identity from "./identity";
+import ticks from "./ticks";
 import sturges from "./threshold/sturges";
 
 function number(x) {
@@ -27,18 +28,13 @@ export default function() {
     var xz = domain(values),
         x0 = +xz[0],
         x1 = +xz[1],
-        tz = threshold(values, x0, x1),
-        m;
+        tz = threshold(values, x0, x1);
 
     // Convert number of thresholds into uniform thresholds.
-    if (!Array.isArray(tz)) {
-      tz = new Array(m = +tz), x = (x1 - x0) / (m + 1);
-      for (i = 1; i <= m; ++i) tz[i - 1] = x0 + i * x;
-    } else {
-      m = tz.length;
-    }
+    if (!Array.isArray(tz)) tz = ticks(x0, x1, +tz);
 
     // Coerce thresholds to numbers, ignoring any outside the domain.
+    var m = tz.length;
     for (i = 0; i < m; ++i) tz[i] = +tz[i];
     while (tz[0] <= x0) tz.shift(), --m;
     while (tz[m - 1] >= x1) tz.pop(), --m;
