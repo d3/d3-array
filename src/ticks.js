@@ -5,8 +5,12 @@ var e10 = Math.sqrt(50),
     e2 = Math.sqrt(2);
 
 export default function(start, stop, count) {
-  var k = tickStep(start, stop, count);
-  return range(Math.ceil(start / k) * k, Math.floor(stop / k) * k + k / 2, k);
+  var step = tickStep(start, stop, count);
+  return range(
+    Math.ceil(start / step) * step,
+    Math.floor(stop / step) * step + step / 2, // inclusive
+    step
+  );
 };
 
 export function tickStep(start, stop, count) {
