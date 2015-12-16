@@ -544,25 +544,25 @@ Note that the domain accessor is invoked on the materialized array of [values](#
 <a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>count</i>])
 <br><a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>thresholds</i>])
 
-If *thresholds* is specified, sets the threshold accessor to the specified function or array and returns this histogram generator. If *thresholds* is not specified, returns the current threshold accessor, which by default implements [Sturges’ formula](#thresholdSturges). Thresholds are defined as an array of numbers [*x0*, *x1*, …]. Any value less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated histogram](#_histogram) will have *thresholds*.length + 1 bins. See [histogram thresholds](#histogram-thresholds) for more information.
+If *thresholds* is specified, sets the [threshold generator](#histogram-thresholds) to the specified function or array and returns this histogram generator. If *thresholds* is not specified, returns the current threshold generator, which by default implements [Sturges’ formula](#thresholdSturges). Thresholds are defined as an array of numbers [*x0*, *x1*, …]. Any value less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated histogram](#_histogram) will have *thresholds*.length + 1 bins. See [histogram thresholds](#histogram-thresholds) for more information.
 
-If a *count* is specified instead of an array of *thresholds*, then the [domain](#histogram_domain) will be uniformly divided into *count* + 1 bins.
+If a *count* is specified instead of an array of *thresholds*, then the [domain](#histogram_domain) will be uniformly divided into approximately *count* bins; see [ticks](#ticks).
 
 ### Histogram Thresholds
 
-These functions are typically not used directly; instead, pass them to [*histogram*.thresholds](#histogram_thresholds). You may also implement your own threshold accessor function taking three arguments: the array of input [*values*](#histogram_value) derived from the data, and the [observable domain](#histogram_domain) represented as *min* and *max*. The accessor may then return either the array of numeric thresholds or the *count* of thresholds; in the latter case the domain is divided uniformly into *count* + 1 bins.
+These functions are typically not used directly; instead, pass them to [*histogram*.thresholds](#histogram_thresholds). You may also implement your own threshold generator taking three arguments: the array of input [*values*](#histogram_value) derived from the data, and the [observable domain](#histogram_domain) represented as *min* and *max*. The generator may then return either the array of numeric thresholds or the *count* of bins; in the latter case the domain is divided uniformly into approximately *count* bins; see [ticks](#ticks).
 
 <a name="thresholdFreedmanDiaconis" href="#thresholdFreedmanDiaconis">#</a> <b>thresholdFreedmanDiaconis</b>(<i>values</i>, <i>min</i>, <i>max</i>)
 
-Returns the number of bin thresholds according to the [Freedman–Diaconis rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
+Returns the number of bins according to the [Freedman–Diaconis rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
 
 <a name="thresholdScott" href="#thresholdScott">#</a> <b>thresholdScott</b>(<i>values</i>, <i>min</i>, <i>max</i>)
 
-Returns the number of bin thresholds according to [Scott’s normal reference rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
+Returns the number of bins according to [Scott’s normal reference rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
 
 <a name="thresholdSturges" href="#thresholdSturges">#</a> <b>thresholdSturges</b>(<i>values</i>)
 
-Returns the number of bin thresholds according to [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
+Returns the number of bins according to [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
 
 ## Changes from D3 3.x:
 
