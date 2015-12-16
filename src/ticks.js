@@ -14,7 +14,7 @@ export default function(start, stop, count) {
 };
 
 export function tickStep(start, stop, count) {
-  var step0 = Math.abs(stop - start) / count,
+  var step0 = Math.abs(stop - start) / Math.max(0, count),
       step1 = Math.pow(10, Math.floor(Math.log(step0) / Math.LN10)),
       error = step0 / step1;
   if (error >= e10) step1 *= 10;
