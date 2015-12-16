@@ -25,6 +25,7 @@ export {default as scan} from "./src/scan";
 export {default as set} from "./src/set";
 export {default as shuffle} from "./src/shuffle";
 export {default as sum} from "./src/sum";
+export {default as ticks, tickStep} from "./src/ticks";
 export {default as transpose} from "./src/transpose";
 export {default as values} from "./src/values";
 export {default as variance} from "./src/variance";

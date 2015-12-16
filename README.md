@@ -132,7 +132,7 @@ merge([[1], [2, 3]]); // returns [1, 2, 3]
 
 <a name="range" href="#range">#</a> <b>range</b>([<i>start</i>, ]<i>stop</i>[, <i>step</i>])
 
-Returns an array containing an arithmetic progression, similar to the Python built-in [range](http://docs.python.org/library/functions.html#range). This method is often used to iterate over a sequence of regularly-spaced numeric values, such as the indexes of an array or the ticks of a linear scale.
+Returns an array containing an arithmetic progression, similar to the Python built-in [range](http://docs.python.org/library/functions.html#range). This method is often used to iterate over a sequence of uniformly-spaced numeric values, such as the indexes of an array or the ticks of a linear scale. (See also [ticks](#ticks) for nicely-rounded values.)
 
 If *step* is omitted, it defaults to 1. If *start* is omitted, it defaults to 0. The *stop* value is exclusive; it is not included in the result. If *step* is positive, the last element is the largest *start* + *i* \* *step* less than *stop*; if *step* is negative, the last element is the smallest *start* + *i* \* *step* greater than *stop*. If the returned array would contain an infinite number of values, an empty range is returned.
 
@@ -150,6 +150,14 @@ Likewise, if the returned array should have a specific length, consider using [a
 range(0, 1, 1 / 49); // BAD: returns 50 elements!
 range(49).map(function(d) { return d / 49; }); // GOOD: returns 49 elements.
 ```
+
+<a name="ticks" href="#ticks">#</a> <b>ticks</b>(<i>start</i>, <i>stop</i>, <i>count</i>)
+
+Returns an array of approximately *count* + 1 uniformly-spaced, nicely-rounded values between *start* and *stop* (inclusive). Each value is a power of ten multiplied by 1, 2 or 5. See also [tickStep](#tickStep). Note that due to the limited precision of IEEE 754 floating point, the returned values may not be exact decimals. Use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
+
+<a name="tickStep" href="#tickStep">#</a> <b>tickStep</b>(<i>start</i>, <i>stop</i>, <i>count</i>)
+
+Returns the difference between adjacent tick values if the same arguments were passed to [ticks](#ticks): a nicely-rounded value that is a power of ten multiplied by 1, 2 or 5. Note that due to the limited precision of IEEE 754 floating point, the returned value may not be exact decimals. Use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
 
 <a name="permute" href="#permute">#</a> <b>permute</b>(<i>array</i>, <i>indexes</i>)
 
