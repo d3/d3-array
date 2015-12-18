@@ -48,7 +48,7 @@ In a vanilla environment, a `d3_array` global is exported. [Try d3-array in your
 * [Objects](#objects)
 * [Maps](#maps)
 * [Sets](#sets)
-* [Nest](#nest)
+* [Nests](#nests)
 * [Histograms](#histograms)
 * [Histogram Thresholds](#histogram-thresholds)
 
@@ -280,7 +280,7 @@ Note that if no comparator function is specified to the built-in sort method, th
 
 ### Objects
 
-A common data type in JavaScript is the *associative array*, or more simply the **object**, which has a set of named properties. The standard mechanism for iterating over the keys (or property names) in an associative array is the [for…in loop](https://developer.mozilla.org/en/JavaScript/Reference/Statements/for...in). However, note that the iteration order is undefined. D3 provides several methods for converting associative arrays to standard arrays with numeric indexes.
+A common data type in JavaScript is the *associative array*, or more simply the *object*, which has a set of named properties. The standard mechanism for iterating over the keys (or property names) in an associative array is the [for…in loop](https://developer.mozilla.org/en/JavaScript/Reference/Statements/for...in). However, note that the iteration order is undefined. D3 provides several methods for converting associative arrays to standard arrays with numeric indexes.
 
 A word of caution: it is tempting to use plain objects as maps, but this causes [unexpected behavior](http://www.devthought.com/2012/01/18/an-object-is-not-a-hash/) when built-in property names are used as keys, such as `object["__proto__"] = 42` and `"hasOwnProperty" in object`. If you cannot guarantee that map keys and set values will be safe, use [maps](#maps) and [sets](#sets) (or their ES6 equivalents) instead of plain objects.
 
@@ -321,7 +321,7 @@ map.get("bar"); // {"name": "bar"}
 map.get("baz"); // undefined
 ```
 
-See also [nest](#nest).
+See also [nests](#nests).
 
 <a name="map_has" href="#map_has">#</a> <i>map</i>.<b>has</b>(<i>key</i>)
 
@@ -434,7 +434,7 @@ Returns true if and only if this set has zero values.
 
 Returns the number of values in this set.
 
-### Nest
+### Nests
 
 Nesting allows elements in an array to be grouped into a hierarchical tree structure; think of it like the GROUP BY operator in SQL, except you can have multiple levels of grouping, and the resulting output is a tree rather than a flat table. The levels in the tree are specified by key functions. The leaf nodes of the tree can be sorted by value, while the internal nodes can be sorted by key. An optional rollup function will collapse the elements in each leaf node using a summary function. The nest operator (the object returned by [nest](#nest)) is reusable, and does not retain any references to the data that is nested.
 
