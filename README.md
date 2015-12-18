@@ -42,8 +42,8 @@ In a vanilla environment, a `d3_array` global is exported. [Try d3-array in your
 
 ## API Reference
 
-* [Summarize](#summarize)
-* [Manipulate](#manipulate)
+* [Statistics](#statistics)
+* [Transformations](#transformations)
 * [Search](#search)
 * [Objects](#objects)
 * [Maps](#maps)
@@ -52,7 +52,9 @@ In a vanilla environment, a `d3_array` global is exported. [Try d3-array in your
 * [Histograms](#histograms)
 * [Histogram Thresholds](#histogram-thresholds)
 
-### Summarize
+### Statistics
+
+Methods for computing basic summary statistics.
 
 <a name="min" href="#min">#</a> d3_array.<b>min</b>(<i>array</i>[, <i>accessor</i>])
 
@@ -110,7 +112,9 @@ Returns an [unbiased estimator of the population variance](http://mathworld.wolf
 
 Returns the standard deviation, defined as the square root of the [bias-corrected variance](#variance), of the given *array* of numbers. If the array has fewer than two values, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the standard deviation. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
-### Manipulate
+### Transformations
+
+Methods for transforming arrays and for generating new arrays.
 
 <a name="merge" href="#merge">#</a> d3_array.<b>merge</b>(<i>arrays</i>)
 
@@ -190,6 +194,8 @@ d3_array.zip([1, 2], [3, 4]); // returns [[1, 3], [2, 4]]
 ```
 
 ### Search
+
+Methods for searching arrays for a specific element.
 
 <a name="scan" href="#scan">#</a> d3_array.<b>scan</b>(<i>array</i>[, <i>comparator</i>])
 
@@ -274,9 +280,9 @@ Note that if no comparator function is specified to the built-in sort method, th
 
 ### Objects
 
-Another common data type in JavaScript is the *associative array*, or more simply the **object**, which has a set of named properties. Java refers to this as a *map*, and Python a *dictionary*. JavaScript provides a standard mechanism for iterating over the keys (or property names) in an associative array: the [for…in loop](https://developer.mozilla.org/en/JavaScript/Reference/Statements/for...in). However, note that the iteration order is undefined. D3 provides several operators for converting associative arrays to standard arrays with numeric indexes.
+A common data type in JavaScript is the *associative array*, or more simply the **object**, which has a set of named properties. The standard mechanism for iterating over the keys (or property names) in an associative array is the [for…in loop](https://developer.mozilla.org/en/JavaScript/Reference/Statements/for...in). However, note that the iteration order is undefined. D3 provides several methods for converting associative arrays to standard arrays with numeric indexes.
 
-A word of caution: it is tempting to use plain objects as maps, but this causes [unexpected behavior](http://www.devthought.com/2012/01/18/an-object-is-not-a-hash/) when built-in property names are used as keys, such as `object["__proto__"] = 42` and `"hasOwnProperty" in object`. (ES6 introduces Map and Set collections which avoid this problem, but browser support is limited.) If you cannot guarantee that map keys and set values will be safe, you should use [map](#map) and [set](#set) instead of plain objects.
+A word of caution: it is tempting to use plain objects as maps, but this causes [unexpected behavior](http://www.devthought.com/2012/01/18/an-object-is-not-a-hash/) when built-in property names are used as keys, such as `object["__proto__"] = 42` and `"hasOwnProperty" in object`. If you cannot guarantee that map keys and set values will be safe, use [maps](#maps) and [sets](#sets) (or their ES6 equivalents) instead of plain objects.
 
 <a name="keys" href="#keys">#</a> d3_array.<b>keys</b>(<i>object</i>)
 
