@@ -1,12 +1,16 @@
 {
   "name": "d3-array",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Array manipulation, ordering, searching, summarizing, etc.",
   "keywords": [
     "d3",
     "nest",
+    "histogram",
     "bisect",
     "shuffle",
+    "statistics",
+    "search",
+    "sort",
     "array"
   ],
   "homepage": "https://github.com/d3/d3-array",
