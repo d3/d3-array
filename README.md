@@ -42,29 +42,17 @@ In a vanilla environment, a `d3_array` global is exported. [Try d3-array in your
 
 ## API Reference
 
-<a name="ascending" href="#ascending">#</a> d3_array.<b>ascending</b>(<i>a</i>, <i>b</i>)
+* [Summarize](#summarize)
+* [Manipulate](#manipulate)
+* [Search](#search)
+* [Associative Arrays](#associative-arrays)
+* [Maps](#maps)
+* [Sets](#sets)
+* [Nest](#nest)
+* [Histograms](#histograms)
+* [Histogram Thresholds](#histogram-thresholds)
 
-Returns -1 if *a* is less than *b*, or 1 if *a* is greater than *b*, or 0. This is the comparator function for natural order, and can be used in conjunction with the built-in [*array*.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) method to arrange elements in ascending order. It is implemented as:
-
-```js
-function ascending(a, b) {
-  return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
-}
-```
-
-Note that if no comparator function is specified to the built-in sort method, the default order is lexicographic (alphabetical), not natural! This can lead to surprising behavior when sorting an array of numbers.
-
-<a name="descending" href="#descending">#</a> d3_array.<b>descending</b>(<i>a</i>, <i>b</i>)
-
-Returns -1 if *a* is greater than *b*, or 1 if *a* is less than *b*, or 0. This is the comparator function for reverse natural order, and can be used in conjunction with the built-in array sort method to arrange elements in descending order.  It is implemented as:
-
-```js
-function descending(a, b) {
-  return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
-}
-```
-
-Note that if no comparator function is specified to the built-in sort method, the default order is lexicographic (alphabetical), not natural! This can lead to surprising behavior when sorting an array of numbers.
+### Summarize
 
 <a name="min" href="#min">#</a> d3_array.<b>min</b>(<i>array</i>[, <i>accessor</i>])
 
@@ -122,9 +110,7 @@ Returns an [unbiased estimator of the population variance](http://mathworld.wolf
 
 Returns the standard deviation, defined as the square root of the [bias-corrected variance](#variance), of the given *array* of numbers. If the array has fewer than two values, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the standard deviation. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
-<a name="shuffle" href="#shuffle">#</a> d3_array.<b>shuffle</b>(<i>array</i>[, <i>lo</i>[, <i>hi</i>]])
-
-Randomizes the order of the specified *array* using the [Fisher–Yates shuffle](http://bost.ocks.org/mike/shuffle/).
+### Manipulate
 
 <a name="merge" href="#merge">#</a> d3_array.<b>merge</b>(<i>arrays</i>)
 
@@ -133,6 +119,42 @@ Merges the specified *arrays* into a single array. This method is similar to the
 ```js
 d3_array.merge([[1], [2, 3]]); // returns [1, 2, 3]
 ```
+
+<a name="pairs" href="#pairs">#</a> d3_array.<b>pairs</b>(<i>array</i>)
+
+For each adjacent pair of elements in the specified *array*, returns a new array of tuples of element *i* and element *i* - 1. For example:
+
+```js
+d3_array.pairs([1, 2, 3, 4]); // returns [[1, 2], [2, 3], [3, 4]]
+```
+
+If the specified array has fewer than two elements, returns the empty array.
+
+<a name="permute" href="#permute">#</a> d3_array.<b>permute</b>(<i>array</i>, <i>indexes</i>)
+
+Returns a permutation of the specified *array* using the specified array of *indexes*. The returned array contains the corresponding element in array for each index in indexes, in order. For example, permute(["a", "b", "c"], [1, 2, 0])
+returns ["b", "c", "a"]. It is acceptable for the array of indexes to be a different length from the array of elements, and for indexes to be duplicated or omitted.
+
+This method can also be used to extract the values from an object into an array with a stable order. Extracting keyed values in order can be useful for generating data arrays in nested selections. For example:
+
+```js
+var object = {yield: 27, variety: "Manchuria", year: 1931, site: "University Farm"},
+    fields = ["site", "variety", "yield"];
+
+d3_array.permute(object, fields); // returns ["University Farm", "Manchuria", 27]
+```
+
+<a name="shuffle" href="#shuffle">#</a> d3_array.<b>shuffle</b>(<i>array</i>[, <i>lo</i>[, <i>hi</i>]])
+
+Randomizes the order of the specified *array* using the [Fisher–Yates shuffle](http://bost.ocks.org/mike/shuffle/).
+
+<a name="ticks" href="#ticks">#</a> d3_array.<b>ticks</b>(<i>start</i>, <i>stop</i>, <i>count</i>)
+
+Returns an array of approximately *count* + 1 uniformly-spaced, nicely-rounded values between *start* and *stop* (inclusive). Each value is a power of ten multiplied by 1, 2 or 5. See also [tickStep](#tickStep) and [*linear*.ticks](https://github.com/d3/d3-scale#linear_ticks). Note that due to the limited precision of IEEE 754 floating point, the returned values may not be exact decimals; use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
+
+<a name="tickStep" href="#tickStep">#</a> d3_array.<b>tickStep</b>(<i>start</i>, <i>stop</i>, <i>count</i>)
+
+Returns the difference between adjacent tick values if the same arguments were passed to [ticks](#ticks): a nicely-rounded value that is a power of ten multiplied by 1, 2 or 5. Note that due to the limited precision of IEEE 754 floating point, the returned value may not be exact decimals; use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
 
 <a name="range" href="#range">#</a> d3_array.<b>range</b>([<i>start</i>, ]<i>stop</i>[, <i>step</i>])
 
@@ -155,27 +177,9 @@ d3_array.range(0, 1, 1 / 49); // BAD: returns 50 elements!
 d3_array.range(49).map(function(d) { return d / 49; }); // GOOD: returns 49 elements.
 ```
 
-<a name="ticks" href="#ticks">#</a> d3_array.<b>ticks</b>(<i>start</i>, <i>stop</i>, <i>count</i>)
+<a name="transpose" href="#transpose">#</a> d3_array.<b>transpose</b>(<i>matrix</i>)
 
-Returns an array of approximately *count* + 1 uniformly-spaced, nicely-rounded values between *start* and *stop* (inclusive). Each value is a power of ten multiplied by 1, 2 or 5. See also [tickStep](#tickStep) and [*linear*.ticks](https://github.com/d3/d3-scale#linear_ticks). Note that due to the limited precision of IEEE 754 floating point, the returned values may not be exact decimals; use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
-
-<a name="tickStep" href="#tickStep">#</a> d3_array.<b>tickStep</b>(<i>start</i>, <i>stop</i>, <i>count</i>)
-
-Returns the difference between adjacent tick values if the same arguments were passed to [ticks](#ticks): a nicely-rounded value that is a power of ten multiplied by 1, 2 or 5. Note that due to the limited precision of IEEE 754 floating point, the returned value may not be exact decimals; use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
-
-<a name="permute" href="#permute">#</a> d3_array.<b>permute</b>(<i>array</i>, <i>indexes</i>)
-
-Returns a permutation of the specified *array* using the specified array of *indexes*. The returned array contains the corresponding element in array for each index in indexes, in order. For example, permute(["a", "b", "c"], [1, 2, 0])
-returns ["b", "c", "a"]. It is acceptable for the array of indexes to be a different length from the array of elements, and for indexes to be duplicated or omitted.
-
-This method can also be used to extract the values from an object into an array with a stable order. Extracting keyed values in order can be useful for generating data arrays in nested selections. For example:
-
-```js
-var object = {yield: 27, variety: "Manchuria", year: 1931, site: "University Farm"},
-    fields = ["site", "variety", "yield"];
-
-d3_array.permute(object, fields); // returns ["University Farm", "Manchuria", 27]
-```
+Uses the [zip](#zip) operator as a two-dimensional [matrix transpose](http://en.wikipedia.org/wiki/Transpose).
 
 <a name="zip" href="#zip">#</a> d3_array.<b>zip</b>(<i>arrays…</i>)
 
@@ -184,20 +188,6 @@ Returns an array of arrays, where the *i*th array contains the *i*th element fro
 ```js
 d3_array.zip([1, 2], [3, 4]); // returns [[1, 3], [2, 4]]
 ```
-
-<a name="transpose" href="#transpose">#</a> d3_array.<b>transpose</b>(<i>matrix</i>)
-
-Uses the [zip](#zip) operator as a two-dimensional [matrix transpose](http://en.wikipedia.org/wiki/Transpose).
-
-<a name="pairs" href="#pairs">#</a> d3_array.<b>pairs</b>(<i>array</i>)
-
-For each adjacent pair of elements in the specified *array*, returns a new array of tuples of element *i* and element *i* - 1. For example:
-
-```js
-d3_array.pairs([1, 2, 3, 4]); // returns [[1, 2], [2, 3], [3, 4]]
-```
-
-If the specified array has fewer than two elements, returns the empty array.
 
 ### Search
 
@@ -257,6 +247,30 @@ Equivalent to [bisectLeft](#bisectLeft), but uses this bisector’s associated c
 <a name="bisector_right" href="#bisector_right">#</a> <i>bisector</i>.<b>right</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]])
 
 Equivalent to [bisectRight](#bisectRight), but uses this bisector’s associated comparator.
+
+<a name="ascending" href="#ascending">#</a> d3_array.<b>ascending</b>(<i>a</i>, <i>b</i>)
+
+Returns -1 if *a* is less than *b*, or 1 if *a* is greater than *b*, or 0. This is the comparator function for natural order, and can be used in conjunction with the built-in [*array*.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) method to arrange elements in ascending order. It is implemented as:
+
+```js
+function ascending(a, b) {
+  return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
+}
+```
+
+Note that if no comparator function is specified to the built-in sort method, the default order is lexicographic (alphabetical), not natural! This can lead to surprising behavior when sorting an array of numbers.
+
+<a name="descending" href="#descending">#</a> d3_array.<b>descending</b>(<i>a</i>, <i>b</i>)
+
+Returns -1 if *a* is greater than *b*, or 1 if *a* is less than *b*, or 0. This is the comparator function for reverse natural order, and can be used in conjunction with the built-in array sort method to arrange elements in descending order.  It is implemented as:
+
+```js
+function descending(a, b) {
+  return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
+}
+```
+
+Note that if no comparator function is specified to the built-in sort method, the default order is lexicographic (alphabetical), not natural! This can lead to surprising behavior when sorting an array of numbers.
 
 ### Associative Arrays
 
