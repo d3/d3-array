@@ -592,4 +592,4 @@ Returns the number of bins according to [Sturges’ formula](https://en.wikipedi
 
 * Array accessor functions now take the array as the third argument, rather than setting it as the `this` context.
 * The [range](#range) method now returns the empty array for infinite ranges, rather than throwing an error.
-* The [nest.map](#nest_map) method now always returns a [map](#map); use [nest.object](#nest_object) to return a plain object instead.
+* The [*nest*.map](#nest_map) method now always returns a [map](#map); use [*nest*.object](#nest_object) to return a plain object instead.
