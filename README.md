@@ -45,7 +45,7 @@ In a vanilla environment, a `d3_array` global is exported. [Try d3-array in your
 * [Summarize](#summarize)
 * [Manipulate](#manipulate)
 * [Search](#search)
-* [Associative Arrays](#associative-arrays)
+* [Objects](#objects)
 * [Maps](#maps)
 * [Sets](#sets)
 * [Nest](#nest)
@@ -272,9 +272,9 @@ function descending(a, b) {
 
 Note that if no comparator function is specified to the built-in sort method, the default order is lexicographic (alphabetical), not natural! This can lead to surprising behavior when sorting an array of numbers.
 
-### Associative Arrays
+### Objects
 
-Another common data type in JavaScript is the associative array, or more simply the object, which has a set of named properties. Java refers to this as a *map*, and Python a *dictionary*. JavaScript provides a standard mechanism for iterating over the keys (or property names) in an associative array: the [for…in loop](https://developer.mozilla.org/en/JavaScript/Reference/Statements/for...in). However, note that the iteration order is undefined. D3 provides several operators for converting associative arrays to standard arrays with numeric indexes.
+Another common data type in JavaScript is the *associative array*, or more simply the **object**, which has a set of named properties. Java refers to this as a *map*, and Python a *dictionary*. JavaScript provides a standard mechanism for iterating over the keys (or property names) in an associative array: the [for…in loop](https://developer.mozilla.org/en/JavaScript/Reference/Statements/for...in). However, note that the iteration order is undefined. D3 provides several operators for converting associative arrays to standard arrays with numeric indexes.
 
 A word of caution: it is tempting to use plain objects as maps, but this causes [unexpected behavior](http://www.devthought.com/2012/01/18/an-object-is-not-a-hash/) when built-in property names are used as keys, such as `object["__proto__"] = 42` and `"hasOwnProperty" in object`. (ES6 introduces Map and Set collections which avoid this problem, but browser support is limited.) If you cannot guarantee that map keys and set values will be safe, you should use [map](#map) and [set](#set) instead of plain objects.
 
