@@ -38,7 +38,7 @@ If you use NPM, `npm install d3-array`. Otherwise, download the [latest release]
 <script src="https://d3js.org/d3-array.v0.6.min.js"></script>
 ```
 
-In a vanilla environment, a `d3_array` global is exported.
+In a vanilla environment, a `d3_array` global is exported. [Try d3-array in your browser.](https://tonicdev.com/npm/d3-array)
 
 ## API Reference
 
