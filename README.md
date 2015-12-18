@@ -74,7 +74,7 @@ See also [scan](#scan) and [extent](#extent).
 
 <a name="extent" href="#extent">#</a> d3_array.<b>extent</b>(<i>array</i>[, <i>accessor</i>])
 
-Returns the [minimum](#min) and [maximum](#max) value in the given *array* using natural order.
+Returns the [minimum](#min) and [maximum](#max) value in the given *array* using natural order. If the array is empty, returns [undefined, undefined]. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the extent.
 
 <a name="sum" href="#sum">#</a> d3_array.<b>sum</b>(<i>array</i>[, <i>accessor</i>])
 
