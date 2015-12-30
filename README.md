@@ -587,9 +587,3 @@ Returns the number of bins according to [Scott’s normal reference rule](https:
 <a name="thresholdSturges" href="#thresholdSturges">#</a> d3_array.<b>thresholdSturges</b>(<i>values</i>)
 
 Returns the number of bins according to [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
-
-## Changes from D3 3.x:
-
-* Array accessor functions now take the array as the third argument, rather than setting it as the `this` context.
-* The [range](#range) method now returns the empty array for infinite ranges, rather than throwing an error.
-* The [*nest*.map](#nest_map) method now always returns a [map](#map); use [*nest*.object](#nest_object) to return a plain object instead.
