@@ -124,6 +124,14 @@ Merges the specified *arrays* into a single array. This method is similar to the
 d3_array.merge([[1], [2, 3]]); // returns [1, 2, 3]
 ```
 
+<a name="flatten" href="#flatten">#</a> d3_array.<b>flatten</b>(<i>arrays</i>)
+
+Flattens the specified nested array of *arrays* into a single array. This method is essentially a recursive [merge](#merge) for each input element that is an array.
+
+```js
+d3_array.flatten([1, [[[2, 3], []], 4]]); // returns [1, 2, 3, 4]
+```
+
 <a name="pairs" href="#pairs">#</a> d3_array.<b>pairs</b>(<i>array</i>)
 
 For each adjacent pair of elements in the specified *array*, returns a new array of tuples of element *i* and element *i* - 1. For example:

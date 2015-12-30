@@ -5,6 +5,7 @@ export {default as descending} from "./src/descending";
 export {default as deviation} from "./src/deviation";
 export {default as entries} from "./src/entries";
 export {default as extent} from "./src/extent";
+export {default as flatten} from "./src/flatten";
 export {default as histogram} from "./src/histogram";
 export {default as thresholdFreedmanDiaconis} from "./src/threshold/freedmanDiaconis";
 export {default as thresholdScott} from "./src/threshold/scott";
