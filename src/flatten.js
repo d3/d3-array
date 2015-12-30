@@ -1,16 +1,15 @@
-export default function(arrays) {
-  var queue = [arrays],
-      array,
+export default function(array) {
+  var queue = [],
       result = [];
 
-  while (array = queue.pop()) {
+  do {
     if (Array.isArray(array)) {
       var n = array.length;
       while (--n >= 0) queue.push(array[n]);
     } else {
       result.push(array);
     }
-  }
+  } while (array = queue.pop());
 
   return result;
 };
