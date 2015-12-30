@@ -5,11 +5,11 @@ export default function(array, f) {
       i = -1;
 
   if (arguments.length === 1) {
-    while (++i < n) if (!isNaN(a = +array[i])) s += a; // Note: zero and null are equivalent.
+    while (++i < n) if (a = +array[i]) s += a; // Note: zero and null are equivalent.
   }
 
   else {
-    while (++i < n) if (!isNaN(a = +f(array[i], i, array))) s += a;
+    while (++i < n) if (a = +f(array[i], i, array)) s += a;
   }
 
   return s;
