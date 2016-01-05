@@ -43,8 +43,8 @@ In a vanilla environment, a `d3_array` global is exported. [Try d3-array in your
 ## API Reference
 
 * [Statistics](#statistics)
-* [Transformations](#transformations)
 * [Search](#search)
+* [Transformations](#transformations)
 * [Objects](#objects)
 * [Maps](#maps)
 * [Sets](#sets)
@@ -111,87 +111,6 @@ Returns an [unbiased estimator of the population variance](http://mathworld.wolf
 <a name="deviation" href="#deviation">#</a> d3_array.<b>deviation</b>(<i>array</i>[, <i>accessor</i>])
 
 Returns the standard deviation, defined as the square root of the [bias-corrected variance](#variance), of the given *array* of numbers. If the array has fewer than two values, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the standard deviation. This method ignores undefined and NaN values; this is useful for ignoring missing data.
-
-### Transformations
-
-Methods for transforming arrays and for generating new arrays.
-
-<a name="merge" href="#merge">#</a> d3_array.<b>merge</b>(<i>arrays</i>)
-
-Merges the specified *arrays* into a single array. This method is similar to the built-in array concat method; the only difference is that it is more convenient when you have an array of arrays.
-
-```js
-d3_array.merge([[1], [2, 3]]); // returns [1, 2, 3]
-```
-
-<a name="pairs" href="#pairs">#</a> d3_array.<b>pairs</b>(<i>array</i>)
-
-For each adjacent pair of elements in the specified *array*, returns a new array of tuples of element *i* and element *i* - 1. For example:
-
-```js
-d3_array.pairs([1, 2, 3, 4]); // returns [[1, 2], [2, 3], [3, 4]]
-```
-
-If the specified array has fewer than two elements, returns the empty array.
-
-<a name="permute" href="#permute">#</a> d3_array.<b>permute</b>(<i>array</i>, <i>indexes</i>)
-
-Returns a permutation of the specified *array* using the specified array of *indexes*. The returned array contains the corresponding element in array for each index in indexes, in order. For example, permute(["a", "b", "c"], [1, 2, 0])
-returns ["b", "c", "a"]. It is acceptable for the array of indexes to be a different length from the array of elements, and for indexes to be duplicated or omitted.
-
-This method can also be used to extract the values from an object into an array with a stable order. Extracting keyed values in order can be useful for generating data arrays in nested selections. For example:
-
-```js
-var object = {yield: 27, variety: "Manchuria", year: 1931, site: "University Farm"},
-    fields = ["site", "variety", "yield"];
-
-d3_array.permute(object, fields); // returns ["University Farm", "Manchuria", 27]
-```
-
-<a name="shuffle" href="#shuffle">#</a> d3_array.<b>shuffle</b>(<i>array</i>[, <i>lo</i>[, <i>hi</i>]])
-
-Randomizes the order of the specified *array* using the [Fisher–Yates shuffle](http://bost.ocks.org/mike/shuffle/).
-
-<a name="ticks" href="#ticks">#</a> d3_array.<b>ticks</b>(<i>start</i>, <i>stop</i>, <i>count</i>)
-
-Returns an array of approximately *count* + 1 uniformly-spaced, nicely-rounded values between *start* and *stop* (inclusive). Each value is a power of ten multiplied by 1, 2 or 5. See also [tickStep](#tickStep) and [*linear*.ticks](https://github.com/d3/d3-scale#linear_ticks). Note that due to the limited precision of IEEE 754 floating point, the returned values may not be exact decimals; use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
-
-<a name="tickStep" href="#tickStep">#</a> d3_array.<b>tickStep</b>(<i>start</i>, <i>stop</i>, <i>count</i>)
-
-Returns the difference between adjacent tick values if the same arguments were passed to [ticks](#ticks): a nicely-rounded value that is a power of ten multiplied by 1, 2 or 5. Note that due to the limited precision of IEEE 754 floating point, the returned value may not be exact decimals; use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
-
-<a name="range" href="#range">#</a> d3_array.<b>range</b>([<i>start</i>, ]<i>stop</i>[, <i>step</i>])
-
-Returns an array containing an arithmetic progression, similar to the Python built-in [range](http://docs.python.org/library/functions.html#range). This method is often used to iterate over a sequence of uniformly-spaced numeric values, such as the indexes of an array or the ticks of a linear scale. (See also [ticks](#ticks) for nicely-rounded values.)
-
-If *step* is omitted, it defaults to 1. If *start* is omitted, it defaults to 0. The *stop* value is exclusive; it is not included in the result. If *step* is positive, the last element is the largest *start* + *i* \* *step* less than *stop*; if *step* is negative, the last element is the smallest *start* + *i* \* *step* greater than *stop*. If the returned array would contain an infinite number of values, an empty range is returned.
-
-The arguments are not required to be integers; however, the results are more predictable if they are. The values in the returned array are defined as *start* + *i* \* *step*, where *i* is an integer from zero to one minus the total number of elements in the returned array. For example:
-
-```js
-d3_array.range(0, 1, 0.2) // [0, 0.2, 0.4, 0.6000000000000001, 0.8]
-```
-
-This unexpected behavior is due to IEEE 754 double-precision floating point, which defines 0.2 * 3 = 0.6000000000000001. Use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption with appropriate rounding; see also [linear.tickFormat](https://github.com/d3/d3-scale#linear_tickFormat) in [d3-scale](https://github.com/d3/d3-scale).
-
-Likewise, if the returned array should have a specific length, consider using [array.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) on an integer range. For example:
-
-```js
-d3_array.range(0, 1, 1 / 49); // BAD: returns 50 elements!
-d3_array.range(49).map(function(d) { return d / 49; }); // GOOD: returns 49 elements.
-```
-
-<a name="transpose" href="#transpose">#</a> d3_array.<b>transpose</b>(<i>matrix</i>)
-
-Uses the [zip](#zip) operator as a two-dimensional [matrix transpose](http://en.wikipedia.org/wiki/Transpose).
-
-<a name="zip" href="#zip">#</a> d3_array.<b>zip</b>(<i>arrays…</i>)
-
-Returns an array of arrays, where the *i*th array contains the *i*th element from each of the argument *arrays*. The returned array is truncated in length to the shortest array in *arrays*. If *arrays* contains only a single array, the returned array contains one-element arrays. With no arguments, the returned array is empty.
-
-```js
-d3_array.zip([1, 2], [3, 4]); // returns [[1, 3], [2, 4]]
-```
 
 ### Search
 
@@ -277,6 +196,87 @@ function descending(a, b) {
 ```
 
 Note that if no comparator function is specified to the built-in sort method, the default order is lexicographic (alphabetical), not natural! This can lead to surprising behavior when sorting an array of numbers.
+
+### Transformations
+
+Methods for transforming arrays and for generating new arrays.
+
+<a name="merge" href="#merge">#</a> d3_array.<b>merge</b>(<i>arrays</i>)
+
+Merges the specified *arrays* into a single array. This method is similar to the built-in array concat method; the only difference is that it is more convenient when you have an array of arrays.
+
+```js
+d3_array.merge([[1], [2, 3]]); // returns [1, 2, 3]
+```
+
+<a name="pairs" href="#pairs">#</a> d3_array.<b>pairs</b>(<i>array</i>)
+
+For each adjacent pair of elements in the specified *array*, returns a new array of tuples of element *i* and element *i* - 1. For example:
+
+```js
+d3_array.pairs([1, 2, 3, 4]); // returns [[1, 2], [2, 3], [3, 4]]
+```
+
+If the specified array has fewer than two elements, returns the empty array.
+
+<a name="permute" href="#permute">#</a> d3_array.<b>permute</b>(<i>array</i>, <i>indexes</i>)
+
+Returns a permutation of the specified *array* using the specified array of *indexes*. The returned array contains the corresponding element in array for each index in indexes, in order. For example, permute(["a", "b", "c"], [1, 2, 0])
+returns ["b", "c", "a"]. It is acceptable for the array of indexes to be a different length from the array of elements, and for indexes to be duplicated or omitted.
+
+This method can also be used to extract the values from an object into an array with a stable order. Extracting keyed values in order can be useful for generating data arrays in nested selections. For example:
+
+```js
+var object = {yield: 27, variety: "Manchuria", year: 1931, site: "University Farm"},
+    fields = ["site", "variety", "yield"];
+
+d3_array.permute(object, fields); // returns ["University Farm", "Manchuria", 27]
+```
+
+<a name="shuffle" href="#shuffle">#</a> d3_array.<b>shuffle</b>(<i>array</i>[, <i>lo</i>[, <i>hi</i>]])
+
+Randomizes the order of the specified *array* using the [Fisher–Yates shuffle](http://bost.ocks.org/mike/shuffle/).
+
+<a name="ticks" href="#ticks">#</a> d3_array.<b>ticks</b>(<i>start</i>, <i>stop</i>, <i>count</i>)
+
+Returns an array of approximately *count* + 1 uniformly-spaced, nicely-rounded values between *start* and *stop* (inclusive). Each value is a power of ten multiplied by 1, 2 or 5. See also [tickStep](#tickStep) and [*linear*.ticks](https://github.com/d3/d3-scale#linear_ticks). Note that due to the limited precision of IEEE 754 floating point, the returned values may not be exact decimals; use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
+
+<a name="tickStep" href="#tickStep">#</a> d3_array.<b>tickStep</b>(<i>start</i>, <i>stop</i>, <i>count</i>)
+
+Returns the difference between adjacent tick values if the same arguments were passed to [ticks](#ticks): a nicely-rounded value that is a power of ten multiplied by 1, 2 or 5. Note that due to the limited precision of IEEE 754 floating point, the returned value may not be exact decimals; use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
+
+<a name="range" href="#range">#</a> d3_array.<b>range</b>([<i>start</i>, ]<i>stop</i>[, <i>step</i>])
+
+Returns an array containing an arithmetic progression, similar to the Python built-in [range](http://docs.python.org/library/functions.html#range). This method is often used to iterate over a sequence of uniformly-spaced numeric values, such as the indexes of an array or the ticks of a linear scale. (See also [ticks](#ticks) for nicely-rounded values.)
+
+If *step* is omitted, it defaults to 1. If *start* is omitted, it defaults to 0. The *stop* value is exclusive; it is not included in the result. If *step* is positive, the last element is the largest *start* + *i* \* *step* less than *stop*; if *step* is negative, the last element is the smallest *start* + *i* \* *step* greater than *stop*. If the returned array would contain an infinite number of values, an empty range is returned.
+
+The arguments are not required to be integers; however, the results are more predictable if they are. The values in the returned array are defined as *start* + *i* \* *step*, where *i* is an integer from zero to one minus the total number of elements in the returned array. For example:
+
+```js
+d3_array.range(0, 1, 0.2) // [0, 0.2, 0.4, 0.6000000000000001, 0.8]
+```
+
+This unexpected behavior is due to IEEE 754 double-precision floating point, which defines 0.2 * 3 = 0.6000000000000001. Use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption with appropriate rounding; see also [linear.tickFormat](https://github.com/d3/d3-scale#linear_tickFormat) in [d3-scale](https://github.com/d3/d3-scale).
+
+Likewise, if the returned array should have a specific length, consider using [array.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) on an integer range. For example:
+
+```js
+d3_array.range(0, 1, 1 / 49); // BAD: returns 50 elements!
+d3_array.range(49).map(function(d) { return d / 49; }); // GOOD: returns 49 elements.
+```
+
+<a name="transpose" href="#transpose">#</a> d3_array.<b>transpose</b>(<i>matrix</i>)
+
+Uses the [zip](#zip) operator as a two-dimensional [matrix transpose](http://en.wikipedia.org/wiki/Transpose).
+
+<a name="zip" href="#zip">#</a> d3_array.<b>zip</b>(<i>arrays…</i>)
+
+Returns an array of arrays, where the *i*th array contains the *i*th element from each of the argument *arrays*. The returned array is truncated in length to the shortest array in *arrays*. If *arrays* contains only a single array, the returned array contains one-element arrays. With no arguments, the returned array is empty.
+
+```js
+d3_array.zip([1, 2], [3, 4]); // returns [[1, 3], [2, 4]]
+```
 
 ### Objects
 
