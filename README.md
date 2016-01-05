@@ -78,19 +78,19 @@ Returns the [minimum](#min) and [maximum](#max) value in the given *array* using
 
 <a name="sum" href="#sum">#</a> d3_array.<b>sum</b>(<i>array</i>[, <i>accessor</i>])
 
-Returns the sum of the given *array*. If the array is empty, returns 0. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the sum. This method ignores undefined and NaN values; this is useful for ignoring missing data.
+Returns the sum of the given *array* of numbers. If the array is empty, returns 0. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the sum. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
 <a name="mean" href="#mean">#</a> d3_array.<b>mean</b>(<i>array</i>[, <i>accessor</i>])
 
-Returns the mean of the given *array*. If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the mean. This method ignores undefined and NaN values; this is useful for ignoring missing data.
+Returns the mean of the given *array* of numbers. If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the mean. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
 <a name="median" href="#median">#</a> d3_array.<b>median</b>(<i>array</i>[, <i>accessor</i>])
 
-Returns the median of the given *array* using the [R-7 method](https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample). If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the median. This method ignores undefined and NaN values; this is useful for ignoring missing data.
+Returns the median of the given *array* of numbers using the [R-7 method](https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample). If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the median. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
 <a name="quantile" href="#quantile">#</a> d3_array.<b>quantile</b>(<i>array</i>, <i>p</i>[, <i>accessor</i>])
 
-Returns the *p*-quantile of the given sorted *array* of elements, where *p* is a number in the range [0,1]. For example, the median can be computed using *p* = 0.5, the first quartile at *p* = 0.25, and the third quartile at *p* = 0.75. This particular implementation uses the [R-7 method](http://en.wikipedia.org/wiki/Quantile#Quantiles_of_a_population), which is the default for the R programming language and Excel. For example:
+Returns the *p*-quantile of the given sorted *array* of numbers, where *p* is a number in the range [0, 1]. For example, the median can be computed using *p* = 0.5, the first quartile at *p* = 0.25, and the third quartile at *p* = 0.75. This particular implementation uses the [R-7 method](http://en.wikipedia.org/wiki/Quantile#Quantiles_of_a_population), which is the default for the R programming language and Excel. For example:
 
 ```js
 var a = [0, 10, 30];
