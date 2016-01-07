@@ -1,10 +1,9 @@
 {
   "name": "d3-array",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "Array manipulation, ordering, searching, summarizing, etc.",
   "keywords": [
     "d3",
-    "nest",
     "histogram",
     "bisect",
     "shuffle",
