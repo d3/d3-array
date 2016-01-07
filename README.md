@@ -52,7 +52,7 @@ In a vanilla environment, a `d3_array` global is exported. [Try d3-array in your
 
 Methods for computing basic summary statistics.
 
-<a name="min" href="#min">#</a> d3_array.<b>min</b>(<i>array</i>[, <i>accessor</i>])
+<a name="min" href="#min">#</a> d3.<b>min</b>(<i>array</i>[, <i>accessor</i>])
 
 Returns the minimum value in the given *array* using natural order. If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the minimum value.
 
@@ -60,7 +60,7 @@ Unlike the built-in [Math.min](https://developer.mozilla.org/en/JavaScript/Refer
 
 See also [scan](#scan) and [extent](#extent).
 
-<a name="max" href="#max">#</a> d3_array.<b>max</b>(<i>array</i>[, <i>accessor</i>])
+<a name="max" href="#max">#</a> d3.<b>max</b>(<i>array</i>[, <i>accessor</i>])
 
 Returns the maximum value in the given *array* using natural order. If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the maximum value.
 
@@ -68,43 +68,43 @@ Unlike the built-in [Math.max](https://developer.mozilla.org/en/JavaScript/Refer
 
 See also [scan](#scan) and [extent](#extent).
 
-<a name="extent" href="#extent">#</a> d3_array.<b>extent</b>(<i>array</i>[, <i>accessor</i>])
+<a name="extent" href="#extent">#</a> d3.<b>extent</b>(<i>array</i>[, <i>accessor</i>])
 
 Returns the [minimum](#min) and [maximum](#max) value in the given *array* using natural order. If the array is empty, returns [undefined, undefined]. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the extent.
 
-<a name="sum" href="#sum">#</a> d3_array.<b>sum</b>(<i>array</i>[, <i>accessor</i>])
+<a name="sum" href="#sum">#</a> d3.<b>sum</b>(<i>array</i>[, <i>accessor</i>])
 
 Returns the sum of the given *array* of numbers. If the array is empty, returns 0. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the sum. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
-<a name="mean" href="#mean">#</a> d3_array.<b>mean</b>(<i>array</i>[, <i>accessor</i>])
+<a name="mean" href="#mean">#</a> d3.<b>mean</b>(<i>array</i>[, <i>accessor</i>])
 
 Returns the mean of the given *array* of numbers. If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the mean. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
-<a name="median" href="#median">#</a> d3_array.<b>median</b>(<i>array</i>[, <i>accessor</i>])
+<a name="median" href="#median">#</a> d3.<b>median</b>(<i>array</i>[, <i>accessor</i>])
 
 Returns the median of the given *array* of numbers using the [R-7 method](https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample). If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the median. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
-<a name="quantile" href="#quantile">#</a> d3_array.<b>quantile</b>(<i>array</i>, <i>p</i>[, <i>accessor</i>])
+<a name="quantile" href="#quantile">#</a> d3.<b>quantile</b>(<i>array</i>, <i>p</i>[, <i>accessor</i>])
 
 Returns the *p*-quantile of the given sorted *array* of numbers, where *p* is a number in the range [0, 1]. For example, the median can be computed using *p* = 0.5, the first quartile at *p* = 0.25, and the third quartile at *p* = 0.75. This particular implementation uses the [R-7 method](http://en.wikipedia.org/wiki/Quantile#Quantiles_of_a_population), which is the default for the R programming language and Excel. For example:
 
 ```js
 var a = [0, 10, 30];
-d3_array.quantile(a, 0); // 0
-d3_array.quantile(a, 0.5); // 10
-d3_array.quantile(a, 1); // 30
-d3_array.quantile(a, 0.25); // 5
-d3_array.quantile(a, 0.75); // 20
-d3_array.quantile(a, 0.1); // 2
+d3.quantile(a, 0); // 0
+d3.quantile(a, 0.5); // 10
+d3.quantile(a, 1); // 30
+d3.quantile(a, 0.25); // 5
+d3.quantile(a, 0.75); // 20
+d3.quantile(a, 0.1); // 2
 ```
 
 An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the quantile.
 
-<a name="variance" href="#variance">#</a> d3_array.<b>variance</b>(<i>array</i>[, <i>accessor</i>])
+<a name="variance" href="#variance">#</a> d3.<b>variance</b>(<i>array</i>[, <i>accessor</i>])
 
 Returns an [unbiased estimator of the population variance](http://mathworld.wolfram.com/SampleVariance.html) of the given *array* of numbers. If the array has fewer than two values, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the variance. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
-<a name="deviation" href="#deviation">#</a> d3_array.<b>deviation</b>(<i>array</i>[, <i>accessor</i>])
+<a name="deviation" href="#deviation">#</a> d3.<b>deviation</b>(<i>array</i>[, <i>accessor</i>])
 
 Returns the standard deviation, defined as the square root of the [bias-corrected variance](#variance), of the given *array* of numbers. If the array has fewer than two values, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array.map(accessor)* before computing the standard deviation. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
@@ -112,29 +112,29 @@ Returns the standard deviation, defined as the square root of the [bias-correcte
 
 Methods for searching arrays for a specific element.
 
-<a name="scan" href="#scan">#</a> d3_array.<b>scan</b>(<i>array</i>[, <i>comparator</i>])
+<a name="scan" href="#scan">#</a> d3.<b>scan</b>(<i>array</i>[, <i>comparator</i>])
 
 Performs a linear scan of the specified *array*, returning the index of the least element according to the specified *comparator*. If the given *array* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
 
 ```js
 var array = [{foo: 42}, {foo: 91}];
-d3_array.scan(array, function(a, b) { return a.foo - b.foo; }); // 0
-d3_array.scan(array, function(a, b) { return b.foo - a.foo; }); // 1
+d3.scan(array, function(a, b) { return a.foo - b.foo; }); // 0
+d3.scan(array, function(a, b) { return b.foo - a.foo; }); // 1
 ```
 
 This function is similar to [min](#min), except it allows the use of a comparator rather than an accessor and it returns the index instead of the accessed value. See also [bisect](#bisect).
 
-<a name="bisectLeft" href="#bisectLeft">#</a> d3_array.<b>bisectLeft</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]])
+<a name="bisectLeft" href="#bisectLeft">#</a> d3.<b>bisectLeft</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]])
 
 Returns the insertion point for *x* in *array* to maintain sorted order. The arguments *lo* and *hi* may be used to specify a subset of the array which should be considered; by default the entire array is used. If *x* is already present in *array*, the insertion point will be before (to the left of) any existing entries. The return value is suitable for use as the first argument to [splice](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/splice) assuming that *array* is already sorted. The returned insertion point *i* partitions the *array* into two halves so that all *v* < *x* for *v* in *array*.slice(*lo*, *i*) for the left side and all *v* >= *x* for *v* in *array*.slice(*i*, *hi*) for the right side.
 
-<a name="bisect" href="#bisect">#</a> d3_array.<b>bisect</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]])<br>
-<a name="bisectRight" href="#bisectRight">#</a> d3_array.<b>bisectRight</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]])
+<a name="bisect" href="#bisect">#</a> d3.<b>bisect</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]])<br>
+<a name="bisectRight" href="#bisectRight">#</a> d3.<b>bisectRight</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]])
 
 Similar to [bisectLeft](#bisectLeft), but returns an insertion point which comes after (to the right of) any existing entries of *x* in *array*. The returned insertion point *i* partitions the *array* into two halves so that all *v* <= *x* for *v* in *array*.slice(*lo*, *i*) for the left side and all *v* > *x* for *v* in *array*.slice(*i*, *hi*) for the right side.
 
-<a name="bisector" href="#bisector">#</a> d3_array.<b>bisector</b>(<i>accessor</i>)
-<br><a name="bisector" href="#bisector">#</a> d3_array.<b>bisector</b>(<i>comparator</i>)
+<a name="bisector" href="#bisector">#</a> d3.<b>bisector</b>(<i>accessor</i>)
+<br><a name="bisector" href="#bisector">#</a> d3.<b>bisector</b>(<i>comparator</i>)
 
 Returns a new bisector using the specified *accessor* or *comparator* function. This method can be used to bisect arrays of objects instead of being limited to simple arrays of primitives. For example, given the following array of objects:
 
@@ -150,13 +150,13 @@ var data = [
 A suitable bisect function could be constructed as:
 
 ```js
-var bisectDate = d3_array.bisector(function(d) { return d.date; }).right;
+var bisectDate = d3.bisector(function(d) { return d.date; }).right;
 ```
 
 This is equivalent to specifying a comparator:
 
 ```js
-var bisectDate = d3_array.bisector(function(d, x) { return d.date - x; }).right;
+var bisectDate = d3.bisector(function(d, x) { return d.date - x; }).right;
 ```
 
 And then applied as `bisect(data, new Date(2011, 1, 2))`, returning an index. Note that the comparator is always passed the search value *x* as the second argument. Use a comparator rather than an accessor if you want values to be sorted in an order different than natural order, such as in descending rather than ascending order.
@@ -169,7 +169,7 @@ Equivalent to [bisectLeft](#bisectLeft), but uses this bisector’s associated c
 
 Equivalent to [bisectRight](#bisectRight), but uses this bisector’s associated comparator.
 
-<a name="ascending" href="#ascending">#</a> d3_array.<b>ascending</b>(<i>a</i>, <i>b</i>)
+<a name="ascending" href="#ascending">#</a> d3.<b>ascending</b>(<i>a</i>, <i>b</i>)
 
 Returns -1 if *a* is less than *b*, or 1 if *a* is greater than *b*, or 0. This is the comparator function for natural order, and can be used in conjunction with the built-in [*array*.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) method to arrange elements in ascending order. It is implemented as:
 
@@ -181,7 +181,7 @@ function ascending(a, b) {
 
 Note that if no comparator function is specified to the built-in sort method, the default order is lexicographic (alphabetical), not natural! This can lead to surprising behavior when sorting an array of numbers.
 
-<a name="descending" href="#descending">#</a> d3_array.<b>descending</b>(<i>a</i>, <i>b</i>)
+<a name="descending" href="#descending">#</a> d3.<b>descending</b>(<i>a</i>, <i>b</i>)
 
 Returns -1 if *a* is greater than *b*, or 1 if *a* is less than *b*, or 0. This is the comparator function for reverse natural order, and can be used in conjunction with the built-in array sort method to arrange elements in descending order.  It is implemented as:
 
@@ -197,25 +197,25 @@ Note that if no comparator function is specified to the built-in sort method, th
 
 Methods for transforming arrays and for generating new arrays.
 
-<a name="merge" href="#merge">#</a> d3_array.<b>merge</b>(<i>arrays</i>)
+<a name="merge" href="#merge">#</a> d3.<b>merge</b>(<i>arrays</i>)
 
 Merges the specified *arrays* into a single array. This method is similar to the built-in array concat method; the only difference is that it is more convenient when you have an array of arrays.
 
 ```js
-d3_array.merge([[1], [2, 3]]); // returns [1, 2, 3]
+d3.merge([[1], [2, 3]]); // returns [1, 2, 3]
 ```
 
-<a name="pairs" href="#pairs">#</a> d3_array.<b>pairs</b>(<i>array</i>)
+<a name="pairs" href="#pairs">#</a> d3.<b>pairs</b>(<i>array</i>)
 
 For each adjacent pair of elements in the specified *array*, returns a new array of tuples of element *i* and element *i* - 1. For example:
 
 ```js
-d3_array.pairs([1, 2, 3, 4]); // returns [[1, 2], [2, 3], [3, 4]]
+d3.pairs([1, 2, 3, 4]); // returns [[1, 2], [2, 3], [3, 4]]
 ```
 
 If the specified array has fewer than two elements, returns the empty array.
 
-<a name="permute" href="#permute">#</a> d3_array.<b>permute</b>(<i>array</i>, <i>indexes</i>)
+<a name="permute" href="#permute">#</a> d3.<b>permute</b>(<i>array</i>, <i>indexes</i>)
 
 Returns a permutation of the specified *array* using the specified array of *indexes*. The returned array contains the corresponding element in array for each index in indexes, in order. For example, permute(["a", "b", "c"], [1, 2, 0])
 returns ["b", "c", "a"]. It is acceptable for the array of indexes to be a different length from the array of elements, and for indexes to be duplicated or omitted.
@@ -226,22 +226,22 @@ This method can also be used to extract the values from an object into an array 
 var object = {yield: 27, variety: "Manchuria", year: 1931, site: "University Farm"},
     fields = ["site", "variety", "yield"];
 
-d3_array.permute(object, fields); // returns ["University Farm", "Manchuria", 27]
+d3.permute(object, fields); // returns ["University Farm", "Manchuria", 27]
 ```
 
-<a name="shuffle" href="#shuffle">#</a> d3_array.<b>shuffle</b>(<i>array</i>[, <i>lo</i>[, <i>hi</i>]])
+<a name="shuffle" href="#shuffle">#</a> d3.<b>shuffle</b>(<i>array</i>[, <i>lo</i>[, <i>hi</i>]])
 
 Randomizes the order of the specified *array* using the [Fisher–Yates shuffle](http://bost.ocks.org/mike/shuffle/).
 
-<a name="ticks" href="#ticks">#</a> d3_array.<b>ticks</b>(<i>start</i>, <i>stop</i>, <i>count</i>)
+<a name="ticks" href="#ticks">#</a> d3.<b>ticks</b>(<i>start</i>, <i>stop</i>, <i>count</i>)
 
 Returns an array of approximately *count* + 1 uniformly-spaced, nicely-rounded values between *start* and *stop* (inclusive). Each value is a power of ten multiplied by 1, 2 or 5. See also [tickStep](#tickStep) and [*linear*.ticks](https://github.com/d3/d3-scale#linear_ticks). Note that due to the limited precision of IEEE 754 floating point, the returned values may not be exact decimals; use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
 
-<a name="tickStep" href="#tickStep">#</a> d3_array.<b>tickStep</b>(<i>start</i>, <i>stop</i>, <i>count</i>)
+<a name="tickStep" href="#tickStep">#</a> d3.<b>tickStep</b>(<i>start</i>, <i>stop</i>, <i>count</i>)
 
 Returns the difference between adjacent tick values if the same arguments were passed to [ticks](#ticks): a nicely-rounded value that is a power of ten multiplied by 1, 2 or 5. Note that due to the limited precision of IEEE 754 floating point, the returned value may not be exact decimals; use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
 
-<a name="range" href="#range">#</a> d3_array.<b>range</b>([<i>start</i>, ]<i>stop</i>[, <i>step</i>])
+<a name="range" href="#range">#</a> d3.<b>range</b>([<i>start</i>, ]<i>stop</i>[, <i>step</i>])
 
 Returns an array containing an arithmetic progression, similar to the Python built-in [range](http://docs.python.org/library/functions.html#range). This method is often used to iterate over a sequence of uniformly-spaced numeric values, such as the indexes of an array or the ticks of a linear scale. (See also [ticks](#ticks) for nicely-rounded values.)
 
@@ -250,7 +250,7 @@ If *step* is omitted, it defaults to 1. If *start* is omitted, it defaults to 0.
 The arguments are not required to be integers; however, the results are more predictable if they are. The values in the returned array are defined as *start* + *i* \* *step*, where *i* is an integer from zero to one minus the total number of elements in the returned array. For example:
 
 ```js
-d3_array.range(0, 1, 0.2) // [0, 0.2, 0.4, 0.6000000000000001, 0.8]
+d3.range(0, 1, 0.2) // [0, 0.2, 0.4, 0.6000000000000001, 0.8]
 ```
 
 This unexpected behavior is due to IEEE 754 double-precision floating point, which defines 0.2 * 3 = 0.6000000000000001. Use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption with appropriate rounding; see also [linear.tickFormat](https://github.com/d3/d3-scale#linear_tickFormat) in [d3-scale](https://github.com/d3/d3-scale).
@@ -258,20 +258,20 @@ This unexpected behavior is due to IEEE 754 double-precision floating point, whi
 Likewise, if the returned array should have a specific length, consider using [array.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) on an integer range. For example:
 
 ```js
-d3_array.range(0, 1, 1 / 49); // BAD: returns 50 elements!
-d3_array.range(49).map(function(d) { return d / 49; }); // GOOD: returns 49 elements.
+d3.range(0, 1, 1 / 49); // BAD: returns 50 elements!
+d3.range(49).map(function(d) { return d / 49; }); // GOOD: returns 49 elements.
 ```
 
-<a name="transpose" href="#transpose">#</a> d3_array.<b>transpose</b>(<i>matrix</i>)
+<a name="transpose" href="#transpose">#</a> d3.<b>transpose</b>(<i>matrix</i>)
 
 Uses the [zip](#zip) operator as a two-dimensional [matrix transpose](http://en.wikipedia.org/wiki/Transpose).
 
-<a name="zip" href="#zip">#</a> d3_array.<b>zip</b>(<i>arrays…</i>)
+<a name="zip" href="#zip">#</a> d3.<b>zip</b>(<i>arrays…</i>)
 
 Returns an array of arrays, where the *i*th array contains the *i*th element from each of the argument *arrays*. The returned array is truncated in length to the shortest array in *arrays*. If *arrays* contains only a single array, the returned array contains one-element arrays. With no arguments, the returned array is empty.
 
 ```js
-d3_array.zip([1, 2], [3, 4]); // returns [[1, 3], [2, 4]]
+d3.zip([1, 2], [3, 4]); // returns [[1, 3], [2, 4]]
 ```
 
 ### Histograms
@@ -280,7 +280,7 @@ d3_array.zip([1, 2], [3, 4]); // returns [[1, 3], [2, 4]]
 
 Histograms bin many discrete samples into a smaller number of consecutive, non-overlapping intervals. They are often used to visualize the distribution of numerical data.
 
-<a name="histogram" href="#histogram">#</a> d3_array.<b>histogram</b>()
+<a name="histogram" href="#histogram">#</a> d3.<b>histogram</b>()
 
 Constructs a new histogram generator with the default settings.
 
@@ -306,7 +306,7 @@ If *domain* is specified, sets the domain accessor to the specified function or 
 For example, if you are using the the histogram in conjunction with a [linear scale](https://github.com/d3/d3-scale#linear-scales) `x`, you might say:
 
 ```js
-var histogram = d3_array.histogram()
+var histogram = d3.histogram()
     .domain(x.domain())
     .thresholds(x.ticks(20));
 ```
@@ -330,14 +330,14 @@ If a *count* is specified instead of an array of *thresholds*, then the [domain]
 
 These functions are typically not used directly; instead, pass them to [*histogram*.thresholds](#histogram_thresholds). You may also implement your own threshold generator taking three arguments: the array of input [*values*](#histogram_value) derived from the data, and the [observable domain](#histogram_domain) represented as *min* and *max*. The generator may then return either the array of numeric thresholds or the *count* of bins; in the latter case the domain is divided uniformly into approximately *count* bins; see [ticks](#ticks).
 
-<a name="thresholdFreedmanDiaconis" href="#thresholdFreedmanDiaconis">#</a> d3_array.<b>thresholdFreedmanDiaconis</b>(<i>values</i>, <i>min</i>, <i>max</i>)
+<a name="thresholdFreedmanDiaconis" href="#thresholdFreedmanDiaconis">#</a> d3.<b>thresholdFreedmanDiaconis</b>(<i>values</i>, <i>min</i>, <i>max</i>)
 
 Returns the number of bins according to the [Freedman–Diaconis rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
 
-<a name="thresholdScott" href="#thresholdScott">#</a> d3_array.<b>thresholdScott</b>(<i>values</i>, <i>min</i>, <i>max</i>)
+<a name="thresholdScott" href="#thresholdScott">#</a> d3.<b>thresholdScott</b>(<i>values</i>, <i>min</i>, <i>max</i>)
 
 Returns the number of bins according to [Scott’s normal reference rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
 
-<a name="thresholdSturges" href="#thresholdSturges">#</a> d3_array.<b>thresholdSturges</b>(<i>values</i>)
+<a name="thresholdSturges" href="#thresholdSturges">#</a> d3.<b>thresholdSturges</b>(<i>values</i>)
 
 Returns the number of bins according to [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition).
