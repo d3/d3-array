@@ -1,11 +1,7 @@
 export default function(start, stop, step) {
-  if ((n = arguments.length) < 3) {
-    step = 1;
-    if (n < 2) {
-      stop = start;
-      start = 0;
-    }
-  }
+  step = step == null ? 1 : +step;
+  if (stop == null) stop = +start, start = 0;
+  else start = +start, stop = +stop;
 
   var i = -1,
       n = Math.max(0, Math.ceil((stop - start) / step)) | 0,

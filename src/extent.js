@@ -5,7 +5,7 @@ export default function(array, f) {
       b,
       c;
 
-  if (arguments.length === 1) {
+  if (f == null) {
     while (++i < n) if ((b = array[i]) != null && b >= b) { a = c = b; break; }
     while (++i < n) if ((b = array[i]) != null) {
       if (a > b) a = b;

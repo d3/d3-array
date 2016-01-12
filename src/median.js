@@ -8,7 +8,7 @@ export default function(array, f) {
       a,
       i = -1;
 
-  if (arguments.length === 1) {
+  if (f == null) {
     while (++i < n) if (!isNaN(a = number(array[i]))) numbers.push(a);
   }
 

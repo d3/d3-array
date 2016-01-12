@@ -4,7 +4,7 @@ export default function(array, f) {
       a,
       i = -1;
 
-  if (arguments.length === 1) {
+  if (f == null) {
     while (++i < n) if (a = +array[i]) s += a; // Note: zero and null are equivalent.
   }
 

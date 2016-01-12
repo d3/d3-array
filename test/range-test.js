@@ -6,6 +6,9 @@ tape("range(stop) returns [0, 1, 2, … stop - 1]", function(test) {
   test.deepEqual(arrays.range(2.01), [0, 1, 2]);
   test.deepEqual(arrays.range(1), [0]);
   test.deepEqual(arrays.range(.5), [0]);
+  test.deepEqual(arrays.range(0, undefined), []);
+  test.deepEqual(arrays.range(1, undefined), [0]);
+  test.deepEqual(arrays.range(-1, undefined), []);
   test.end();
 });
 
@@ -27,6 +30,8 @@ tape("range(start, stop) returns [start, start + 1, … stop - 1]", function(tes
   test.deepEqual(arrays.range(2, 5), [2, 3, 4]);
   test.deepEqual(arrays.range(2.5, 5), [2.5, 3.5, 4.5]);
   test.deepEqual(arrays.range(-1, 3), [-1, 0, 1, 2]);
+  test.deepEqual(arrays.range(0, 10, undefined), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  test.deepEqual(arrays.range(10, 0, undefined), []);
   test.end();
 });
 
@@ -34,9 +39,6 @@ tape("range(start, stop) returns an empty array if start or stop is NaN", functi
   test.deepEqual(arrays.range(0, NaN), []);
   test.deepEqual(arrays.range(1, NaN), []);
   test.deepEqual(arrays.range(-1, NaN), []);
-  test.deepEqual(arrays.range(0, undefined), []);
-  test.deepEqual(arrays.range(1, undefined), []);
-  test.deepEqual(arrays.range(-1, undefined), []);
   test.deepEqual(arrays.range(NaN, 0), []);
   test.deepEqual(arrays.range(NaN, 1), []);
   test.deepEqual(arrays.range(NaN, -1), []);
@@ -108,8 +110,6 @@ tape("range(start, stop, step) returns an empty array if start, stop or step is 
   test.deepEqual(arrays.range(undefined, undefined, undefined), []);
   test.deepEqual(arrays.range(0, 10, NaN), []);
   test.deepEqual(arrays.range(10, 0, NaN), []);
-  test.deepEqual(arrays.range(0, 10, undefined), []);
-  test.deepEqual(arrays.range(10, 0, undefined), []);
   test.end();
 });
 

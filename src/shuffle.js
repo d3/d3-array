@@ -1,10 +1,5 @@
 export default function(array, i0, i1) {
-  if ((m = arguments.length) < 3) {
-    i1 = array.length;
-    if (m < 2) i0 = 0;
-  }
-
-  var m = i1 - i0,
+  var m = (i1 == null ? array.length : i1) - (i0 = i0 == null ? 0 : +i0),
       t,
       i;
 

@@ -1,6 +1,6 @@
 import variance from "./variance";
 
-export default function() {
-  var v = variance.apply(this, arguments);
+export default function(array, f) {
+  var v = variance(array, f);
   return v ? Math.sqrt(v) : v;
 };

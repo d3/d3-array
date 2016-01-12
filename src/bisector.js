@@ -4,8 +4,8 @@ export default function(compare) {
   if (compare.length === 1) compare = ascendingComparator(compare);
   return {
     left: function(a, x, lo, hi) {
-      if (arguments.length < 3) lo = 0;
-      if (arguments.length < 4) hi = a.length;
+      if (lo == null) lo = 0;
+      if (hi == null) hi = a.length;
       while (lo < hi) {
         var mid = lo + hi >>> 1;
         if (compare(a[mid], x) < 0) lo = mid + 1;
@@ -14,8 +14,8 @@ export default function(compare) {
       return lo;
     },
     right: function(a, x, lo, hi) {
-      if (arguments.length < 3) lo = 0;
-      if (arguments.length < 4) hi = a.length;
+      if (lo == null) lo = 0;
+      if (hi == null) hi = a.length;
       while (lo < hi) {
         var mid = lo + hi >>> 1;
         if (compare(a[mid], x) > 0) hi = mid;

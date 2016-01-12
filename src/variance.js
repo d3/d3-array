@@ -9,7 +9,7 @@ export default function(array, f) {
       i = -1,
       j = 0;
 
-  if (arguments.length === 1) {
+  if (f == null) {
     while (++i < n) {
       if (!isNaN(a = number(array[i]))) {
         d = a - m;
