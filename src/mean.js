@@ -7,7 +7,7 @@ export default function(array, f) {
       i = -1,
       j = n;
 
-  if (arguments.length === 1) {
+  if (f == null) {
     while (++i < n) if (!isNaN(a = number(array[i]))) s += a; else --j;
   }
 
