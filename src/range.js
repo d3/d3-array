@@ -10,4 +10,4 @@ export default function(start, stop, step) {
   }
 
   return range;
-};
+}

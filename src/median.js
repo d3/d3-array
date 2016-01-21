@@ -17,4 +17,4 @@ export default function(array, f) {
   }
 
   return quantile(numbers.sort(ascending), 0.5);
-};
+}

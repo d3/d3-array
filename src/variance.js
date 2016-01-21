@@ -30,4 +30,4 @@ export default function(array, f) {
   }
 
   if (j > 1) return s / (j - 1);
-};
+}

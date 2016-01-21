@@ -77,4 +77,4 @@ export default function() {
   };
 
   return histogram;
-};
+}

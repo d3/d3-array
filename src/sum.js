@@ -13,4 +13,4 @@ export default function(array, f) {
   }
 
   return s;
-};
+}

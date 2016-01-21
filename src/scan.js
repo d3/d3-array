@@ -13,4 +13,4 @@ export default function(array, compare) {
   while (++i < n) if (compare(xi = array[i], xj) < 0 || compare(xj, xj) !== 0) xj = xi, j = i;
 
   if (compare(xj, xj) === 0) return j;
-};
+}

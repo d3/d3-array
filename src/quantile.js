@@ -11,4 +11,4 @@ export default function(array, p, f) {
       a = +f(array[i], i, array),
       b = +f(array[i + 1], i + 1, array);
   return a + (b - a) * (h - i);
-};
+}

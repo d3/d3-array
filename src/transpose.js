@@ -8,7 +8,7 @@ export default function(matrix) {
     }
   }
   return transpose;
-};
+}
 
 function length(d) {
   return d.length;

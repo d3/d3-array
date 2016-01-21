@@ -16,4 +16,4 @@ export default function(array, f) {
   }
 
   if (j) return s / j;
-};
+}

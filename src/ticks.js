@@ -11,7 +11,7 @@ export default function(start, stop, count) {
     Math.floor(stop / step) * step + step / 2, // inclusive
     step
   );
-};
+}
 
 export function tickStep(start, stop, count) {
   var step0 = Math.abs(stop - start) / Math.max(0, count),
@@ -21,4 +21,4 @@ export function tickStep(start, stop, count) {
   else if (error >= e5) step1 *= 5;
   else if (error >= e2) step1 *= 2;
   return stop < start ? -step1 : step1;
-};
+}

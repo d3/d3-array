@@ -22,4 +22,4 @@ export default function(array, f) {
   }
 
   return [a, c];
-};
+}

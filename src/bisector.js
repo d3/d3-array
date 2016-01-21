@@ -24,7 +24,7 @@ export default function(compare) {
       return lo;
     }
   };
-};
+}
 
 function ascendingComparator(f) {
   return function(d, x) {
