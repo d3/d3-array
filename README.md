@@ -32,13 +32,18 @@ And finally **iteration methods** that apply functions to elements in the array:
 
 ## Installing
 
-If you use NPM, `npm install d3-array`. Otherwise, download the [latest release](https://github.com/d3/d3-array/releases/latest). The released bundle supports AMD, CommonJS, and vanilla environments. Create a custom build using [Rollup](https://github.com/rollup/rollup) or your preferred bundler. You can also load directly from [d3js.org](https://d3js.org):
+If you use NPM, `npm install d3-array`. Otherwise, download the [latest release](https://github.com/d3/d3-array/releases/latest). You can also load directly from [d3js.org](https://d3js.org), either as a [standalone library](https://d3js.org/d3-array.v0.6.min.js) or as part of [D3 4.0 alpha](https://github.com/mbostock/d3/tree/4). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3_array` global is exported:
 
 ```html
 <script src="https://d3js.org/d3-array.v0.6.min.js"></script>
+<script>
+
+var min = d3_array.min(array);
+
+</script>
 ```
 
-In a vanilla environment, a `d3_array` global is exported. [Try d3-array in your browser.](https://tonicdev.com/npm/d3-array)
+[Try d3-array in your browser.](https://tonicdev.com/npm/d3-array)
 
 ## API Reference
 
