@@ -1,4 +1,3 @@
-export {version} from "./build/package";
 export {default as bisect, bisectRight, bisectLeft} from "./src/bisect";
 export {default as ascending} from "./src/ascending";
 export {default as bisector} from "./src/bisector";
