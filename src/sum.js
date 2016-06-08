@@ -1,16 +1,26 @@
 export default function(array, f) {
-  var s = 0,
+  var s0 = 0,
+      s1,
+      e = 0,
+      v,
       n = array.length,
-      a,
       i = -1;
 
   if (f == null) {
-    while (++i < n) if (a = +array[i]) s += a; // Note: zero and null are equivalent.
+    while (++i < n) if (v = +array[i]) { // Ignore zero, NaN.
+      s1 = s0 + (v -= e);
+      e = s1 - s0 - v;
+      s0 = s1;
+    }
   }
 
   else {
-    while (++i < n) if (a = +f(array[i], i, array)) s += a;
+    while (++i < n) if (v = +f(array[i], i, array)) { // Ignore zero, NaN.
+      s1 = s0 + (v -= e);
+      e = s1 - s0 - v;
+      s0 = s1;
+    }
   }
 
-  return s;
+  return s0;
 }
