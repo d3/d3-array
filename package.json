@@ -4,6 +4,7 @@
   "description": "Array manipulation, ordering, searching, summarizing, etc.",
   "keywords": [
     "d3",
+    "d3-module",
     "histogram",
     "bisect",
     "shuffle",
