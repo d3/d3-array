@@ -1,6 +1,6 @@
 {
   "name": "d3-array",
-  "version": "0.8.1",
+  "version": "1.0.0",
   "description": "Array manipulation, ordering, searching, summarizing, etc.",
   "keywords": [
     "d3",
