@@ -30,10 +30,10 @@ tape("quantile(array, p) coerces values to numbers", function(test) {
   test.equal(arrays.quantile(strings, 1 / 3), 2);
   test.equal(arrays.quantile(strings, 1 / 2), 2.5);
   test.equal(arrays.quantile(strings, 2 / 3), 3);
-  var dates = [new Date(2011, 0, 1), new Date(2012, 0, 1)];
-  test.equal(arrays.quantile(dates, 0), +new Date(2011, 0, 1));
-  test.equal(arrays.quantile(dates, 1 / 2), +new Date(2011, 6, 2, 13));
-  test.equal(arrays.quantile(dates, 1), +new Date(2012, 0, 1));
+  var dates = [new Date(Date.UTC(2011, 0, 1)), new Date(Date.UTC(2012, 0, 1))];
+  test.equal(arrays.quantile(dates, 0), +new Date(Date.UTC(2011, 0, 1)));
+  test.equal(arrays.quantile(dates, 1 / 2), +new Date(Date.UTC(2011, 6, 2, 12)));
+  test.equal(arrays.quantile(dates, 1), +new Date(Date.UTC(2012, 0, 1)));
   test.end();
 });
 
