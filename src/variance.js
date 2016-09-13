@@ -1,4 +1,5 @@
 import number from "./number";
+import accessor from './accessor';
 
 export default function(array, f) {
   var n = array.length,
@@ -9,23 +10,11 @@ export default function(array, f) {
       i = -1,
       j = 0;
 
-  if (f == null) {
-    while (++i < n) {
-      if (!isNaN(a = number(array[i]))) {
-        d = a - m;
-        m += d / ++j;
-        s += d * (a - m);
-      }
-    }
-  }
-
-  else {
-    while (++i < n) {
-      if (!isNaN(a = number(f(array[i], i, array)))) {
-        d = a - m;
-        m += d / ++j;
-        s += d * (a - m);
-      }
+  while (++i < n) {
+    if (!isNaN(a = number(accessor(f, i, array)))) {
+      d = a - m;
+      m += d / ++j;
+      s += d * (a - m);
     }
   }
 
