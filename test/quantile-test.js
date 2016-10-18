@@ -16,7 +16,7 @@ tape("quantile(array, p) uses the R-7 method", function(test) {
   test.equal(arrays.quantile(data, 0.5), 9);
   test.equal(arrays.quantile(data, 0.75), 14.5);
   test.equal(arrays.quantile(data, 1), 20);
-  var data = [3, 6, 7, 8, 8, 9, 10, 13, 15, 16, 20];
+  data = [3, 6, 7, 8, 8, 9, 10, 13, 15, 16, 20];
   test.equal(arrays.quantile(data, 0), 3);
   test.equal(arrays.quantile(data, 0.25), 7.5);
   test.equal(arrays.quantile(data, 0.5), 9);
