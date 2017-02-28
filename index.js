@@ -1,6 +1,7 @@
 export {default as bisect, bisectRight, bisectLeft} from "./src/bisect";
 export {default as ascending} from "./src/ascending";
 export {default as bisector} from "./src/bisector";
+export {default as cross} from "./src/cross";
 export {default as descending} from "./src/descending";
 export {default as deviation} from "./src/deviation";
 export {default as extent} from "./src/extent";

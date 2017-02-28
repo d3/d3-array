@@ -15,6 +15,11 @@ tape("pairs(array) returns pairs of adjacent elements in the given array", funct
   test.end();
 });
 
+tape("pairs(array, f) invokes the function f for each pair of adjacent elements", function(test) {
+  test.deepEqual(arrays.pairs([1, 3, 7], (a, b) => b - a), [2, 4]);
+  test.end();
+});
+
 tape("pairs(array) includes null or undefined elements in pairs", function(test) {
   test.deepEqual(arrays.pairs([1, null, 2]), [[1, null], [null, 2]]);
   test.deepEqual(arrays.pairs([1, 2, undefined]), [[1, 2], [2, undefined]]);

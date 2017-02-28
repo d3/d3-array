@@ -202,6 +202,23 @@ Note that if no comparator function is specified to the built-in sort method, th
 
 Methods for transforming arrays and for generating new arrays.
 
+<a name="cross" href="#cross">#</a> d3.<b>cross</b>(<i>a</i>, <i>b</i>[, <i>reducer</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/cross.js "Source")
+
+Returns the [Cartesian product](https://en.wikipedia.org/wiki/Cartesian_product) of the two arrays *a* and *b*. For each element *i* in the specified array *a* and each element *j* in the specified array *b*, in order, invokes the specified *reducer* function passing the element *i* and element *j*. If a *reducer* is not specified, it defaults to a function which creates a two-element array for each pair:
+
+```js
+function pair(a, b) {
+  return [a, b];
+}
+```
+
+For example:
+
+```js
+d3.cross([1, 2], ["x", "y"]); // returns [[1, "x"], [1, "y"], [2, "x"], [2, "y"]]
+d3.cross([1, 2], ["x", "y"], (a, b) => a + b); // returns ["1x", "1y", "2x", "2y"]
+```
+
 <a name="merge" href="#merge">#</a> d3.<b>merge</b>(<i>arrays</i>) [<>](https://github.com/d3/d3-array/blob/master/src/merge.js "Source")
 
 Merges the specified *arrays* into a single array. This method is similar to the built-in array concat method; the only difference is that it is more convenient when you have an array of arrays.
@@ -210,12 +227,21 @@ Merges the specified *arrays* into a single array. This method is similar to the
 d3.merge([[1], [2, 3]]); // returns [1, 2, 3]
 ```
 
-<a name="pairs" href="#pairs">#</a> d3.<b>pairs</b>(<i>array</i>) [<>](https://github.com/d3/d3-array/blob/master/src/pairs.js "Source")
+<a name="pairs" href="#pairs">#</a> d3.<b>pairs</b>(<i>array</i>[, <i>reducer</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/pairs.js "Source")
 
-For each adjacent pair of elements in the specified *array*, returns a new array of tuples of element *i* and element *i* - 1. For example:
+For each adjacent pair of elements in the specified *array*, in order, invokes the specified *reducer* function passing the element *i* and element *i* - 1. If a *reducer* is not specified, it defaults to a function which creates a two-element array for each pair:
+
+```js
+function pair(a, b) {
+  return [a, b];
+}
+```
+
+For example:
 
 ```js
 d3.pairs([1, 2, 3, 4]); // returns [[1, 2], [2, 3], [3, 4]]
+d3.pairs([1, 2, 3, 4], (a, b) => b - a); // returns [1, 1, 1];
 ```
 
 If the specified array has fewer than two elements, returns the empty array.
