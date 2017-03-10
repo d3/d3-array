@@ -38,6 +38,6 @@
     "rollup": "0.41",
     "seedrandom": "2",
     "tape": "4",
-    "uglify-js": "2"
+    "uglify-js": "^2.8.11"
   }
 }
