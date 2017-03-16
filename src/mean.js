@@ -1,3 +1,4 @@
+import accessor from './accessor';
 import number from "./number";
 
 export default function(array, f) {
@@ -7,13 +8,7 @@ export default function(array, f) {
       i = -1,
       j = n;
 
-  if (f == null) {
-    while (++i < n) if (!isNaN(a = number(array[i]))) s += a; else --j;
-  }
-
-  else {
-    while (++i < n) if (!isNaN(a = number(f(array[i], i, array)))) s += a; else --j;
-  }
+  while (++i < n) if (!isNaN(a = number(accessor(f, i, array)))) s += a; else --j;
 
   if (j) return s / j;
 }
