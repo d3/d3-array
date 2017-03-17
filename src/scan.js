@@ -1,9 +1,9 @@
 import ascending from "./ascending";
 
 export default function(array, compare) {
+  var n;
   if (!(n = array.length)) return;
   var i = 0,
-      n,
       j = 0,
       xi,
       xj = array[j];
