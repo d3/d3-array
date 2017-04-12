@@ -14,6 +14,7 @@ export default function() {
   function histogram(data) {
     var i,
         n = data.length,
+        m,
         x,
         values = new Array(n);
 
@@ -27,12 +28,15 @@ export default function() {
         tz = threshold(values, x0, x1);
 
     // Convert number of thresholds into uniform thresholds.
-    if (!Array.isArray(tz)) tz = ticks(x0, x1, tz);
+    if (!Array.isArray(tz)) {
+      m = (tz = ticks(x0, x1, tz)).length;
 
-    // Remove any thresholds outside the domain.
-    var m = tz.length;
-    while (tz[0] <= x0) tz.shift(), --m;
-    while (tz[m - 1] >= x1) tz.pop(), --m;
+      // Remove any thresholds outside the domain.
+      while (tz[0] <= x0) tz.shift(), --m;
+      while (tz[m - 1] >= x1) tz.pop(), --m;
+    } else {
+      m = tz.length;
+    }
 
     var bins = new Array(m + 1),
         bin;

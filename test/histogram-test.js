@@ -90,6 +90,19 @@ tape("histogram.thresholds(array) sets the bin thresholds", function(test) {
   test.end();
 });
 
+tape("histogram.thresholds(array) does not drop thresholds outside the domain", function(test) {
+  var h = arrays.histogram().thresholds(arrays.range(5));
+  test.deepEqual(h(arrays.range(5)), [
+    bin([], 0, 0),
+    bin([0], 0, 1),
+    bin([1], 1, 2),
+    bin([2], 2, 3),
+    bin([3], 3, 4),
+    bin([4], 4, 4) // Note: inclusive upper bound for last bin.
+  ]);
+  test.end();
+});
+
 tape("histogram.thresholds(function) sets the bin thresholds accessor", function(test) {
   var actual,
       values = [0, 0, 0, 10, 30, 30],
