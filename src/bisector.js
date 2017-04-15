@@ -28,6 +28,6 @@ export default function(compare) {
 
 function ascendingComparator(f) {
   return function(d, x) {
-    return ascending(f(d), x);
+    return ascending(f[d], x);
   };
 }
