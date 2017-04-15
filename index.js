@@ -21,7 +21,7 @@ export {default as range} from "./src/range";
 export {default as scan} from "./src/scan";
 export {default as shuffle} from "./src/shuffle";
 export {default as sum} from "./src/sum";
-export {default as ticks, tickStep} from "./src/ticks";
+export {default as ticks, tickIncrement, tickStep} from "./src/ticks";
 export {default as transpose} from "./src/transpose";
 export {default as variance} from "./src/variance";
 export {default as zip} from "./src/zip";
