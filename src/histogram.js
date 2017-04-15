@@ -3,7 +3,8 @@ import bisect from "./bisect";
 import constant from "./constant";
 import extent from "./extent";
 import identity from "./identity";
-import ticks from "./ticks";
+import range from "./range";
+import {tickStep} from "./ticks";
 import sturges from "./threshold/sturges";
 
 export default function() {
@@ -27,12 +28,15 @@ export default function() {
         tz = threshold(values, x0, x1);
 
     // Convert number of thresholds into uniform thresholds.
-    if (!Array.isArray(tz)) tz = ticks(x0, x1, tz);
+    if (!Array.isArray(tz)) {
+      tz = tickStep(x0, x1, tz);
+      tz = range(Math.ceil(x0 / tz) * tz, Math.floor(x1 / tz) * tz, tz); // exclusive
+    }
 
     // Remove any thresholds outside the domain.
     var m = tz.length;
     while (tz[0] <= x0) tz.shift(), --m;
-    while (tz[m - 1] >= x1) tz.pop(), --m;
+    while (tz[m - 1] > x1) tz.pop(), --m;
 
     var bins = new Array(m + 1),
         bin;
