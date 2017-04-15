@@ -1,19 +1,25 @@
 import number from "./number";
 
-export default function(array, f) {
-  var s = 0,
-      n = array.length,
-      a,
+export default function(values, valueof) {
+  var n = values.length,
+      m = n,
       i = -1,
-      j = n;
+      value,
+      sum = 0;
 
-  if (f == null) {
-    while (++i < n) if (!isNaN(a = number(array[i]))) s += a; else --j;
+  if (valueof == null) {
+    while (++i < n) {
+      if (!isNaN(value = number(values[i]))) sum += value;
+      else --m;
+    }
   }
 
   else {
-    while (++i < n) if (!isNaN(a = number(f(array[i], i, array)))) s += a; else --j;
+    while (++i < n) {
+      if (!isNaN(value = number(valueof(values[i], i, values)))) sum += value;
+      else --m;
+    }
   }
 
-  if (j) return s / j;
+  if (m) return sum / m;
 }
