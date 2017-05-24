@@ -1,9 +1,9 @@
-import returnvalue from "returnvalue";
+import identity from "./identity";
 export default function(values, valueof) {
   var n = values.length,
       i = -1,
       value,
-      accessorFn = valueof || returnvalue,
+      accessorFn = valueof || identity,
       min;
 
   while (++i < n) { // Find the first comparable value.
