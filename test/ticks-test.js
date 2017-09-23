@@ -12,12 +12,16 @@ tape("ticks(start, stop, count) returns the empty array if any argument is NaN",
   test.end();
 });
 
-tape("ticks(start, stop, count) returns the empty array if start === stop", function(test) {
+tape("ticks(start, stop, count) returns the empty array if start === stop and count is non-positive", function(test) {
   test.deepEqual(array.ticks(1, 1, -1), []);
   test.deepEqual(array.ticks(1, 1, 0), []);
   test.deepEqual(array.ticks(1, 1, NaN), []);
-  test.deepEqual(array.ticks(1, 1, 1), []);
-  test.deepEqual(array.ticks(1, 1, 10), []);
+  test.end();
+});
+
+tape("ticks(start, stop, count) returns the empty array if start === stop and count is positive", function(test) {
+  test.deepEqual(array.ticks(1, 1, 1), [1]);
+  test.deepEqual(array.ticks(1, 1, 10), [1]);
   test.end();
 });
 
