@@ -1,4 +1,4 @@
-export default function(arrays) {
+export function merge(arrays) {
   var n = arrays.length,
       m,
       i = -1,

@@ -1,6 +1,6 @@
-import number from "./number";
+import {number} from "./number";
 
-export default function(values, valueof) {
+export function variance(values, valueof) {
   var n = values.length,
       m = 0,
       i = -1,

@@ -1,4 +1,4 @@
-export default function(array, i0, i1) {
+export function shuffle(array, i0, i1) {
   var m = (i1 == null ? array.length : i1) - (i0 = i0 == null ? 0 : +i0),
       t,
       i;

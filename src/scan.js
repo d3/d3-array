@@ -1,18 +1,19 @@
-import ascending from "./ascending";
+import {ascending} from './ascending';
 
-export default function(values, compare) {
+export function scan(values, compare) {
+  let n;
   if (!(n = values.length)) return;
-  var n,
-      i = 0,
-      j = 0,
-      xi,
-      xj = values[j];
+  let i = 0,
+    j = 0,
+    xi,
+    xj = values[j];
 
-  if (compare == null) compare = ascending;
+  if (!compare) compare = ascending;
 
   while (++i < n) {
     if (compare(xi = values[i], xj) < 0 || compare(xj, xj) !== 0) {
-      xj = xi, j = i;
+      xj = xi;
+      j = i;
     }
   }
 

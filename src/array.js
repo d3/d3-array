@@ -1,4 +1,4 @@
-var array = Array.prototype;
+const array = Array.prototype;
 
-export var slice = array.slice;
-export var map = array.map;
+export const slice = array.slice;
+export const map = array.map;

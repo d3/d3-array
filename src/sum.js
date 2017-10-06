@@ -1,4 +1,4 @@
-export default function(values, valueof) {
+export function sum(values, valueof) {
   var n = values.length,
       i = -1,
       value,
