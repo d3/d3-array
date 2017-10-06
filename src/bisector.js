@@ -1,6 +1,6 @@
-import ascending from "./ascending";
+import {ascending} from "./ascending";
 
-export default function(compare) {
+export function bisector(compare) {
   if (compare.length === 1) compare = ascendingComparator(compare);
   return {
     left: function(a, x, lo, hi) {

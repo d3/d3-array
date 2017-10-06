@@ -1,13 +1,13 @@
 import {slice} from "./array";
 import bisect from "./bisect";
-import constant from "./constant";
-import extent from "./extent";
-import identity from "./identity";
-import range from "./range";
+import {constant} from "./constant";
+import {extent} from "./extent";
+import {identity} from "./identity";
+import {range} from "./range";
 import {tickStep} from "./ticks";
-import sturges from "./threshold/sturges";
+import {thresholdSturges as sturges} from "./threshold/sturges";
 
-export default function() {
+export function histogram() {
   var value = identity,
       domain = extent,
       threshold = sturges;

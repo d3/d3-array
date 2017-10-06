@@ -1,8 +1,8 @@
-import ascending from "./ascending";
-import number from "./number";
-import quantile from "./quantile";
+import {ascending} from "./ascending";
+import {number} from "./number";
+import {quantile} from "./quantile";
 
-export default function(values, valueof) {
+export function median(values, valueof) {
   var n = values.length,
       i = -1,
       value,

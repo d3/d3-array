@@ -1,5 +1,5 @@
-import transpose from "./transpose";
+import {transpose} from "./transpose";
 
-export default function() {
+export function zip() {
   return transpose(arguments);
 }

@@ -1,7 +1,7 @@
-import ascending from "./ascending";
-import bisector from "./bisector";
+import {ascending} from "./ascending";
+import {bisector}  from "./bisector";
 
-var ascendingBisect = bisector(ascending);
-export var bisectRight = ascendingBisect.right;
-export var bisectLeft = ascendingBisect.left;
+const ascendingBisect = bisector(ascending);
+export const bisectRight = ascendingBisect.right;
+export const bisectLeft = ascendingBisect.left;
 export default bisectRight;

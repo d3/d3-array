@@ -1,6 +1,6 @@
 import {pair} from "./pairs";
 
-export default function(values0, values1, reduce) {
+export function cross(values0, values1, reduce) {
   var n0 = values0.length,
       n1 = values1.length,
       values = new Array(n0 * n1),
