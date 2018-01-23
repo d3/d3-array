@@ -30,7 +30,7 @@ export default function() {
     // Convert number of thresholds into uniform thresholds.
     if (!Array.isArray(tz)) {
       tz = tickStep(x0, x1, tz);
-      tz = range(Math.ceil(x0 / tz) * tz, Math.floor(x1 / tz) * tz, tz); // exclusive
+      tz = range(Math.ceil(x0 / tz) * tz, x1, tz); // exclusive
     }
 
     // Remove any thresholds outside the domain.
