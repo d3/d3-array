@@ -13,6 +13,7 @@
     "sort",
     "array"
   ],
+  "sideEffects": false,
   "homepage": "https://d3js.org/d3-array/",
   "license": "BSD-3-Clause",
   "author": {
