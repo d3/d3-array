@@ -10,18 +10,18 @@ tape("quantile(array, p) requires sorted numeric input", function(test) {
 });
 
 tape("quantile(array, p) uses the R-7 method", function(test) {
-  var data = [3, 6, 7, 8, 8, 10, 13, 15, 16, 20];
-  test.equal(arrays.quantile(data, 0), 3);
-  test.equal(arrays.quantile(data, 0.25), 7.25);
-  test.equal(arrays.quantile(data, 0.5), 9);
-  test.equal(arrays.quantile(data, 0.75), 14.5);
-  test.equal(arrays.quantile(data, 1), 20);
-  var data = [3, 6, 7, 8, 8, 9, 10, 13, 15, 16, 20];
-  test.equal(arrays.quantile(data, 0), 3);
-  test.equal(arrays.quantile(data, 0.25), 7.5);
-  test.equal(arrays.quantile(data, 0.5), 9);
-  test.equal(arrays.quantile(data, 0.75), 14);
-  test.equal(arrays.quantile(data, 1), 20);
+  var even = [3, 6, 7, 8, 8, 10, 13, 15, 16, 20];
+  test.equal(arrays.quantile(even, 0), 3);
+  test.equal(arrays.quantile(even, 0.25), 7.25);
+  test.equal(arrays.quantile(even, 0.5), 9);
+  test.equal(arrays.quantile(even, 0.75), 14.5);
+  test.equal(arrays.quantile(even, 1), 20);
+  var odd = [3, 6, 7, 8, 8, 9, 10, 13, 15, 16, 20];
+  test.equal(arrays.quantile(odd, 0), 3);
+  test.equal(arrays.quantile(odd, 0.25), 7.5);
+  test.equal(arrays.quantile(odd, 0.5), 9);
+  test.equal(arrays.quantile(odd, 0.75), 14);
+  test.equal(arrays.quantile(odd, 1), 20);
   test.end();
 });
 

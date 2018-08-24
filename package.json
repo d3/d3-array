@@ -27,17 +27,16 @@
     "url": "https://github.com/d3/d3-array.git"
   },
   "scripts": {
-    "pretest": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -f umd -n d3 -o build/d3-array.js -- index.js",
-    "test": "tape 'test/**/*-test.js' && eslint index.js src",
-    "prepublish": "npm run test && uglifyjs --preamble \"$(preamble)\" build/d3-array.js -c -m -o build/d3-array.min.js",
+    "pretest": "rm -rf build && mkdir build && rollup -c",
+    "test": "tape 'test/**/*-test.js' && eslint index.js src test",
+    "prepublish": "yarn test",
     "postpublish": "git push && git push --tags && cd ../d3.github.com && git pull && cp ../d3-array/build/d3-array.js d3-array.v1.js && cp ../d3-array/build/d3-array.min.js d3-array.v1.min.js && git add d3-array.v1.js d3-array.v1.min.js && git commit -m \"d3-array ${npm_package_version}\" && git push && cd - && zip -j build/d3-array.zip -- LICENSE README.md build/d3-array.js build/d3-array.min.js"
   },
   "devDependencies": {
-    "eslint": "3",
-    "package-preamble": "0.0",
-    "rollup": "0.41",
+    "eslint": "5",
+    "rollup": "0.64",
+    "rollup-plugin-terser": "1",
     "seedrandom": "2",
-    "tape": "4",
-    "uglify-js": "^2.8.11"
+    "tape": "4"
   }
 }

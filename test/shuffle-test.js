@@ -1,8 +1,6 @@
 var tape = require("tape"),
-    seedrandom = require("seedrandom"),
-    arrays = require("../");
-
-var random = Math.random;
+    arrays = require("../"),
+    random = (require("seedrandom"), Math.random);
 
 tape.test("shuffle(array) shuffles the array in-place", function(test) {
   Math.seedrandom("a random seed.");
