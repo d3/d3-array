@@ -1,6 +1,6 @@
-import variance from "./variance";
+import variance from "./variance.js";
 
-export default function(array, f) {
-  var v = variance(array, f);
+export default function deviation(values, valueof) {
+  const v = variance(values, valueof);
   return v ? Math.sqrt(v) : v;
 }
