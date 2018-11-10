@@ -57,37 +57,37 @@ var min = d3.min(array);
 
 Methods for computing basic summary statistics.
 
-<a name="min" href="#min">#</a> d3.<b>min</b>(<i>array</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/min.js "Source")
+<a name="min" href="#min">#</a> d3.<b>min</b>(<i>iterable</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/min.js "Source")
 
-Returns the minimum value in the given *array* using natural order. If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the minimum value.
+Returns the minimum value in the given *iterable* using natural order. If the iterable contains no comparable values, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the minimum value.
 
 Unlike the built-in [Math.min](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Math/min), this method ignores undefined, null and NaN values; this is useful for ignoring missing data. In addition, elements are compared using natural order rather than numeric order. For example, the minimum of the strings [“20”, “3”] is “20”, while the minimum of the numbers [20, 3] is 3.
 
 See also [scan](#scan) and [extent](#extent).
 
-<a name="max" href="#max">#</a> d3.<b>max</b>(<i>array</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/max.js "Source")
+<a name="max" href="#max">#</a> d3.<b>max</b>(<i>iterable</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/max.js "Source")
 
-Returns the maximum value in the given *array* using natural order. If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the maximum value.
+Returns the maximum value in the given *iterable* using natural order. If the iterable contains no comparable values, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the maximum value.
 
 Unlike the built-in [Math.max](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Math/max), this method ignores undefined values; this is useful for ignoring missing data. In addition, elements are compared using natural order rather than numeric order. For example, the maximum of the strings [“20”, “3”] is “3”, while the maximum of the numbers [20, 3] is 20.
 
 See also [scan](#scan) and [extent](#extent).
 
-<a name="extent" href="#extent">#</a> d3.<b>extent</b>(<i>array</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/extent.js "Source")
+<a name="extent" href="#extent">#</a> d3.<b>extent</b>(<i>iterable</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/extent.js "Source")
 
-Returns the [minimum](#min) and [maximum](#max) value in the given *array* using natural order. If the array is empty, returns [undefined, undefined]. An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the extent.
+Returns the [minimum](#min) and [maximum](#max) value in the given *iterable* using natural order. If the iterable contains no comparable values, returns [undefined, undefined]. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the extent.
 
-<a name="sum" href="#sum">#</a> d3.<b>sum</b>(<i>array</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/sum.js "Source")
+<a name="sum" href="#sum">#</a> d3.<b>sum</b>(<i>iterable</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/sum.js "Source")
 
-Returns the sum of the given *array* of numbers. If the array is empty, returns 0. An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the sum. This method ignores undefined and NaN values; this is useful for ignoring missing data.
+Returns the sum of the given *iterable* of numbers. If the iterable contains no numbers, returns 0. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the sum. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
-<a name="mean" href="#mean">#</a> d3.<b>mean</b>(<i>array</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/mean.js "Source")
+<a name="mean" href="#mean">#</a> d3.<b>mean</b>(<i>iterable</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/mean.js "Source")
 
-Returns the mean of the given *array* of numbers. If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the mean. This method ignores undefined and NaN values; this is useful for ignoring missing data.
+Returns the mean of the given *iterable* of numbers. If the iterable contains no numbers, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the mean. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
-<a name="median" href="#median">#</a> d3.<b>median</b>(<i>array</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/median.js "Source")
+<a name="median" href="#median">#</a> d3.<b>median</b>(<i>iterable</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/median.js "Source")
 
-Returns the median of the given *array* of numbers using the [R-7 method](https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample). If the array is empty, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the median. This method ignores undefined and NaN values; this is useful for ignoring missing data.
+Returns the median of the given *iterable* of numbers using the [R-7 method](https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample). If the iterable contains no numbers, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the median. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
 <a name="quantile" href="#quantile">#</a> d3.<b>quantile</b>(<i>array</i>, <i>p</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/quantile.js "Source")
 
@@ -103,28 +103,28 @@ d3.quantile(a, 0.75); // 20
 d3.quantile(a, 0.1); // 2
 ```
 
-An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the quantile.
+An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the quantile, except that it is only called on the elements needed to compute the quantile.
 
-<a name="variance" href="#variance">#</a> d3.<b>variance</b>(<i>array</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/variance.js "Source")
+<a name="variance" href="#variance">#</a> d3.<b>variance</b>(<i>iterable</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/variance.js "Source")
 
-Returns an [unbiased estimator of the population variance](http://mathworld.wolfram.com/SampleVariance.html) of the given *array* of numbers. If the array has fewer than two values, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the variance. This method ignores undefined and NaN values; this is useful for ignoring missing data.
+Returns an [unbiased estimator of the population variance](http://mathworld.wolfram.com/SampleVariance.html) of the given *iterable* of numbers. If the iterable has fewer than two numbers, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the variance. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
-<a name="deviation" href="#deviation">#</a> d3.<b>deviation</b>(<i>array</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/deviation.js "Source")
+<a name="deviation" href="#deviation">#</a> d3.<b>deviation</b>(<i>iterable</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/deviation.js "Source")
 
-Returns the standard deviation, defined as the square root of the [bias-corrected variance](#variance), of the given *array* of numbers. If the array has fewer than two values, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the standard deviation. This method ignores undefined and NaN values; this is useful for ignoring missing data.
+Returns the standard deviation, defined as the square root of the [bias-corrected variance](#variance), of the given *iterable* of numbers. If the iterable has fewer than two numbers, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the standard deviation. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
 ### Search
 
 Methods for searching arrays for a specific element.
 
-<a name="scan" href="#scan">#</a> d3.<b>scan</b>(<i>array</i>[, <i>comparator</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/scan.js "Source")
+<a name="scan" href="#scan">#</a> d3.<b>scan</b>(<i>iterable</i>[, <i>comparator</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/scan.js "Source")
 
-Performs a linear scan of the specified *array*, returning the index of the least element according to the specified *comparator*. If the given *array* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
+Performs a linear scan of the specified *iterable*, returning the index of the least element according to the specified *comparator*. If the given *iterable* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
 
 ```js
-var array = [{foo: 42}, {foo: 91}];
-d3.scan(array, function(a, b) { return a.foo - b.foo; }); // 0
-d3.scan(array, function(a, b) { return b.foo - a.foo; }); // 1
+const array = [{foo: 42}, {foo: 91}];
+d3.scan(array, (a, b) => a.foo - b.foo); // 0
+d3.scan(array, (a, b) => b.foo - a.foo); // 1
 ```
 
 This function is similar to [min](#min), except it allows the use of a comparator rather than an accessor and it returns the index instead of the accessed value. See also [bisect](#bisect).
@@ -174,6 +174,10 @@ Equivalent to [bisectLeft](#bisectLeft), but uses this bisector’s associated c
 
 Equivalent to [bisectRight](#bisectRight), but uses this bisector’s associated comparator.
 
+<a name="quickselect" href="#quickselect">#</a> d3.<b>quickselect</b>(<i>array</i>, <i>k</i>, <i>left</i> = 0, <i>right</i> = <i>array</i>.length - 1, <i>compare</i> = ascending) [<>](https://github.com/d3/d3-array/blob/master/src/quickselect.js "Source")
+
+See [mourner/quickselect](https://github.com/mourner/quickselect/blob/master/README.md).
+
 <a name="ascending" href="#ascending">#</a> d3.<b>ascending</b>(<i>a</i>, <i>b</i>) [<>](https://github.com/d3/d3-array/blob/master/src/ascending.js "Source")
 
 Returns -1 if *a* is less than *b*, or 1 if *a* is greater than *b*, or 0. This is the comparator function for natural order, and can be used in conjunction with the built-in [*array*.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) method to arrange elements in ascending order. It is implemented as:
@@ -202,9 +206,111 @@ Note that if no comparator function is specified to the built-in sort method, th
 
 Methods for transforming arrays and for generating new arrays.
 
-<a name="cross" href="#cross">#</a> d3.<b>cross</b>(<i>a</i>, <i>b</i>[, <i>reducer</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/cross.js "Source")
+<a name="group" href="#group">#</a> d3.<b>group</b>(<i>iterable</i>, <i>...keys</i>)
 
-Returns the [Cartesian product](https://en.wikipedia.org/wiki/Cartesian_product) of the two arrays *a* and *b*. For each element *i* in the specified array *a* and each element *j* in the specified array *b*, in order, invokes the specified *reducer* function passing the element *i* and element *j*. If a *reducer* is not specified, it defaults to a function which creates a two-element array for each pair:
+Groups the specified *iterable* of values into a Map from *key* to array of value. For example, given some data:
+
+```js
+data = [
+  {name: "jim",   amount: "34.0",   date: "11/12/2015"},
+  {name: "carl",  amount: "120.11", date: "11/12/2015"},
+  {name: "stacy", amount: "12.01",  date: "01/04/2016"},
+  {name: "stacy", amount: "34.05",  date: "01/04/2016"}
+]
+```
+
+To group the data by name:
+
+```js
+group(data, d => d.name)
+```
+
+This produces:
+
+```js
+Map(3) {
+  "jim" => Array(1)
+  "carl" => Array(1)
+  "stacy" => Array(2)
+}
+```
+
+If more than one *key* is specified, a nested Map is returned. For example:
+
+```js
+group(data, d => d.name, d => d.date)
+```
+
+This produces:
+
+```js
+Map(3) {
+  "jim" => Map(1) {
+    "11/12/2015" => Array(1)
+  }
+  "carl" => Map(1) {
+    "11/12/2015" => Array(1)
+  }
+  "stacy" => Map(1) {
+    "01/04/2016" => Array(2)
+  }
+}
+```
+
+<a name="rollup" href="#rollup">#</a> d3.<b>rollup</b>(<i>iterable</i>, <i>reduce</i>, <i>...keys</i>)
+
+[Groups](#group) and reduces the specified *iterable* of values into a Map from *key* to value. For example, given some data:
+
+```js
+data = [
+  {name: "jim",   amount: "34.0",   date: "11/12/2015"},
+  {name: "carl",  amount: "120.11", date: "11/12/2015"},
+  {name: "stacy", amount: "12.01",  date: "01/04/2016"},
+  {name: "stacy", amount: "34.05",  date: "01/04/2016"}
+]
+```
+
+To count the number of elements by name:
+
+```js
+rollup(data, v => v.length, d => d.name)
+```
+
+This produces:
+
+```js
+Map(3) {
+  "jim" => 1
+  "carl" => 1
+  "stacy" => 2
+}
+```
+
+If more than one *key* is specified, a nested Map is returned. For example:
+
+```js
+rollup(data, v => v.length, d => d.name, d => d.date)
+```
+
+This produces:
+
+```js
+Map(3) {
+  "jim" => Map(1) {
+    "11/12/2015" => 1
+  }
+  "carl" => Map(1) {
+    "11/12/2015" => 1
+  }
+  "stacy" => Map(1) {
+    "01/04/2016" => 2
+  }
+}
+```
+
+<a name="cross" href="#cross">#</a> d3.<b>cross</b>(<i>...iterables</i>[, <i>reducer</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/cross.js "Source")
+
+Returns the [Cartesian product](https://en.wikipedia.org/wiki/Cartesian_product) of the specified *iterables*. For example, if two iterables *a* and *b* are specified, for each element *i* in the iterable *a* and each element *j* in the iterable *b*, in order, invokes the specified *reducer* function passing the element *i* and element *j*. If a *reducer* is not specified, it defaults to a function which creates a two-element array for each pair:
 
 ```js
 function pair(a, b) {
@@ -219,17 +325,17 @@ d3.cross([1, 2], ["x", "y"]); // returns [[1, "x"], [1, "y"], [2, "x"], [2, "y"]
 d3.cross([1, 2], ["x", "y"], (a, b) => a + b); // returns ["1x", "1y", "2x", "2y"]
 ```
 
-<a name="merge" href="#merge">#</a> d3.<b>merge</b>(<i>arrays</i>) [<>](https://github.com/d3/d3-array/blob/master/src/merge.js "Source")
+<a name="merge" href="#merge">#</a> d3.<b>merge</b>(<i>iterables</i>) [<>](https://github.com/d3/d3-array/blob/master/src/merge.js "Source")
 
-Merges the specified *arrays* into a single array. This method is similar to the built-in array concat method; the only difference is that it is more convenient when you have an array of arrays.
+Merges the specified iterable of *iterables* into a single array. This method is similar to the built-in array concat method; the only difference is that it is more convenient when you have an array of arrays.
 
 ```js
 d3.merge([[1], [2, 3]]); // returns [1, 2, 3]
 ```
 
-<a name="pairs" href="#pairs">#</a> d3.<b>pairs</b>(<i>array</i>[, <i>reducer</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/pairs.js "Source")
+<a name="pairs" href="#pairs">#</a> d3.<b>pairs</b>(<i>iterable</i>[, <i>reducer</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/pairs.js "Source")
 
-For each adjacent pair of elements in the specified *array*, in order, invokes the specified *reducer* function passing the element *i* and element *i* - 1. If a *reducer* is not specified, it defaults to a function which creates a two-element array for each pair:
+For each adjacent pair of elements in the specified *iterable*, in order, invokes the specified *reducer* function passing the element *i* and element *i* - 1. If a *reducer* is not specified, it defaults to a function which creates a two-element array for each pair:
 
 ```js
 function pair(a, b) {
@@ -244,12 +350,17 @@ d3.pairs([1, 2, 3, 4]); // returns [[1, 2], [2, 3], [3, 4]]
 d3.pairs([1, 2, 3, 4], (a, b) => b - a); // returns [1, 1, 1];
 ```
 
-If the specified array has fewer than two elements, returns the empty array.
+If the specified iterable has fewer than two elements, returns the empty array.
 
 <a name="permute" href="#permute">#</a> d3.<b>permute</b>(<i>array</i>, <i>indexes</i>) [<>](https://github.com/d3/d3-array/blob/master/src/permute.js "Source")
 
-Returns a permutation of the specified *array* using the specified array of *indexes*. The returned array contains the corresponding element in array for each index in indexes, in order. For example, permute(["a", "b", "c"], [1, 2, 0])
-returns ["b", "c", "a"]. It is acceptable for the array of indexes to be a different length from the array of elements, and for indexes to be duplicated or omitted.
+Returns a permutation of the specified *array* using the specified array of *indexes*. The returned array contains the corresponding element in array for each index in indexes, in order. For example:
+
+```js
+permute(["a", "b", "c"], [1, 2, 0]); // returns ["b", "c", "a"]
+```
+
+It is acceptable for the array of indexes to be a different length from the array of elements, and for indexes to be duplicated or omitted.
 
 This method can also be used to extract the values from an object into an array with a stable order. Extracting keyed values in order can be useful for generating data arrays in nested selections. For example:
 
@@ -323,7 +434,7 @@ Constructs a new histogram generator with the default settings.
 
 <a name="_histogram" href="#_histogram">#</a> <i>histogram</i>(<i>data</i>) [<>](https://github.com/d3/d3-array/blob/master/src/histogram.js#L14 "Source")
 
-Computes the histogram for the given array of *data* samples. Returns an array of bins, where each bin is an array containing the associated elements from the input *data*. Thus, the `length` of the bin is the number of elements in that bin. Each bin has two additional attributes:
+Computes the histogram for the given iterable of *data* samples. Returns an array of bins, where each bin is an array containing the associated elements from the input *data*. Thus, the `length` of the bin is the number of elements in that bin. Each bin has two additional attributes:
 
 * `x0` - the lower bound of the bin (inclusive).
 * `x1` - the upper bound of the bin (exclusive, except for the last bin).
