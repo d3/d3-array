@@ -16,13 +16,8 @@ export default function() {
     var i,
         n = data.length,
         x,
-        values = new Array(n);
-
-    for (i = 0; i < n; ++i) {
-      values[i] = value(data[i], i, data);
-    }
-
-    var xz = domain(values),
+        values = Array.from(data, value),
+        xz = domain(values),
         x0 = xz[0],
         x1 = xz[1],
         tz = threshold(values, x0, x1);
