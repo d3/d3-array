@@ -1,20 +1,17 @@
-import ascending from "./ascending";
+import ascending from "./ascending.js";
 
-export default function(values, compare) {
-  if (!(n = values.length)) return;
-  var n,
-      i = 0,
-      j = 0,
-      xi,
-      xj = values[j];
-
-  if (compare == null) compare = ascending;
-
-  while (++i < n) {
-    if (compare(xi = values[i], xj) < 0 || compare(xj, xj) !== 0) {
-      xj = xi, j = i;
+export default function scan(values, compare = ascending) {
+  let min;
+  let minIndex;
+  let index = -1;
+  for (const value of values) {
+    ++index;
+    if (minIndex === undefined
+        ? compare(value, value) === 0
+        : compare(value, min) < 0) {
+      min = value;
+      minIndex = index;
     }
   }
-
-  if (compare(xj, xj) === 0) return j;
+  return minIndex;
 }
