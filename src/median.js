@@ -1,28 +1,29 @@
-import ascending from "./ascending";
-import number from "./number";
 import quantile from "./quantile";
+import quickselect from "./quickselect";
+
+function* numbers(values, valueof) {
+  if (valueof === undefined) {
+    for (let value of values) {
+      if (value != null && (value = +value) >= value) {
+        yield value;
+      }
+    }
+  } else {
+    let index = -1;
+    for (let value of values) {
+      if ((value = valueof(value, ++index, values)) != null && (value = +value) >= value) {
+        yield value;
+      }
+    }
+  }
+}
 
 export default function(values, valueof) {
-  var n = values.length,
-      i = -1,
-      value,
-      numbers = [];
-
-  if (valueof == null) {
-    while (++i < n) {
-      if (!isNaN(value = number(values[i]))) {
-        numbers.push(value);
-      }
-    }
-  }
-
-  else {
-    while (++i < n) {
-      if (!isNaN(value = number(valueof(values[i], i, values)))) {
-        numbers.push(value);
-      }
-    }
-  }
-
-  return quantile(numbers.sort(ascending), 0.5);
+  values = Float64Array.from(numbers(values, valueof));
+  if (!values.length) return;
+  const n = values.length;
+  const i = n >> 1;
+  quickselect(values, i - 1, 0);
+  if ((n & 1) === 0) quickselect(values, i, i);
+  return quantile(values, 0.5);
 }

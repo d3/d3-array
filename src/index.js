@@ -18,6 +18,7 @@ export {default as min} from "./min";
 export {default as pairs} from "./pairs";
 export {default as permute} from "./permute";
 export {default as quantile} from "./quantile";
+export {default as quickselect} from "./quickselect";
 export {default as range} from "./range";
 export {default as rollup} from "./rollup";
 export {default as scan} from "./scan";

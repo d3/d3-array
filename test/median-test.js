@@ -4,6 +4,7 @@ var tape = require("tape"),
 
 tape("median(array) returns the median value for numbers", function(test) {
   test.equal(arrays.median([1]), 1);
+  test.equal(arrays.median([5, 1, 2, 3]), 2.5);
   test.equal(arrays.median([5, 1, 2, 3, 4]), 3);
   test.equal(arrays.median([20, 3]), 11.5);
   test.equal(arrays.median([3, 20]), 11.5);

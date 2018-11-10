@@ -1,7 +1,6 @@
 import number from "./number";
 
-export default function(values, p, valueof) {
-  if (valueof == null) valueof = number;
+export default function quantile(values, p, valueof = number) {
   if (!(n = values.length)) return;
   if ((p = +p) <= 0 || n < 2) return +valueof(values[0], 0, values);
   if (p >= 1) return +valueof(values[n - 1], n - 1, values);

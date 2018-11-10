@@ -1,4 +1,4 @@
-import ascending from "./ascending.js";
+import ascending from "./ascending";
 
 export default function scan(values, compare = ascending) {
   let min;

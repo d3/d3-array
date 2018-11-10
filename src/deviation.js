@@ -1,4 +1,4 @@
-import variance from "./variance.js";
+import variance from "./variance";
 
 export default function deviation(values, valueof) {
   const v = variance(values, valueof);
