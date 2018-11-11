@@ -1,6 +1,9 @@
 function* product(head, ...rest) {
   if (rest.length) {
-    const tail = rest.pop();
+    let tail = rest.pop();
+    if (!Array.isArray(tail)) {
+      tail = Array.from(tail);
+    }
     for (const p of product(head, ...rest)) {
       for (const t of tail) {
         yield [...p, t];

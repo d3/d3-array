@@ -6,6 +6,14 @@ tape("cross(a, b) returns Cartesian product a×b", function(test) {
   test.end();
 });
 
+tape("cross(a, b) returns Cartesian product a×b for iterables which can only iterate once", function(test) {
+  function *gen(...values) {
+    yield *values;
+  }
+  test.deepEqual(arrays.cross(gen(1, 2), gen("x", "y")), [[1, "x"], [1, "y"], [2, "x"], [2, "y"]]);
+  test.end();
+});
+
 tape("cross(a, b, c) returns Cartesian product a×b×c", function(test) {
   test.deepEqual(arrays.cross([1, 2], [3, 4], [5, 6, 7]), [
     [1, 3, 5],
