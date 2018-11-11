@@ -16,6 +16,24 @@ tape("cross([1, 2], []) returns an empty array", function(test) {
   test.end();
 });
 
+tape("cross({length: weird}) returns an empty array", function(test) {
+  test.deepEqual(arrays.cross({length: NaN}), []);
+  test.deepEqual(arrays.cross({length: 0.5}), []);
+  test.deepEqual(arrays.cross({length: -1}), []);
+  test.deepEqual(arrays.cross({length: undefined}), []);
+  test.end();
+});
+
+tape("cross(...strings) returns the expected result", function(test) {
+  test.deepEqual(arrays.cross("foo", "bar", (a, b) => a + b), ["fb", "fa", "fr", "ob", "oa", "or", "ob", "oa", "or"]);
+  test.end();
+});
+
+tape("cross(a) returns the expected result", function(test) {
+  test.deepEqual(arrays.cross([1, 2]), [[1], [2]]);
+  test.end();
+});
+
 tape("cross(a, b) returns Cartesian product a×b", function(test) {
   test.deepEqual(arrays.cross([1, 2], ["x", "y"]), [[1, "x"], [1, "y"], [2, "x"], [2, "y"]]);
   test.end();
