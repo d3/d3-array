@@ -1,6 +1,21 @@
 var tape = require("tape"),
     arrays = require("../");
 
+tape("cross() returns an empty array", function(test) {
+  test.deepEqual(arrays.cross(), []);
+  test.end();
+});
+
+tape("cross([]) returns an empty array", function(test) {
+  test.deepEqual(arrays.cross([]), []);
+  test.end();
+});
+
+tape("cross([1, 2], []) returns an empty array", function(test) {
+  test.deepEqual(arrays.cross([1, 2], []), []);
+  test.end();
+});
+
 tape("cross(a, b) returns Cartesian product a×b", function(test) {
   test.deepEqual(arrays.cross([1, 2], ["x", "y"]), [[1, "x"], [1, "y"], [2, "x"], [2, "y"]]);
   test.end();
