@@ -1,8 +1,9 @@
 function* product(head, ...tail) {
   if (tail.length) {
-    for (const h of head) {
-      for (const t of product(...tail)) {
-        yield [h, ...t];
+    const last = tail.pop();
+    for (const h of product(head, ...tail)) {
+      for (const t of last) {
+        yield [...h, t];
       }
     }
   } else {
