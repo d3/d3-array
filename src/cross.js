@@ -1,16 +1,9 @@
-function* product(head, ...rest) {
-  if (rest.length) {
-    const tail = rest.pop();
-    for (const p of product(head, ...rest)) {
-      for (const t of tail) {
-        yield [...p, t];
-      }
-    }
-  } else {
-    for (const h of head) {
-      yield [h];
-    }
-  }
+function length(array) {
+  return array.length;
+}
+
+function arrayify(values) {
+  return typeof values !== "object" || "length" in values ? values : Array.from(values);
 }
 
 function reducer(reduce) {
@@ -18,6 +11,18 @@ function reducer(reduce) {
 }
 
 export default function cross(...values) {
-  const reduce = typeof values[values.length - 1] === "function" ? reducer(values.pop()) : undefined;
-  return Array.from(product(...values), reduce);
+  const reduce = typeof values[values.length - 1] === "function" && reducer(values.pop());
+  values = values.map(arrayify);
+  const lengths = values.map(length);
+  const j = values.length - 1;
+  const index = new Array(j + 1).fill(0);
+  const product = [];
+  while (true) {
+    product.push(index.map((j, i) => values[i][j]));
+    let i = j;
+    while (++index[i] === lengths[i]) {
+      if (i === 0) return reduce ? product.map(reduce) : product;
+      index[i--] = 0;
+    }
+  }
 }

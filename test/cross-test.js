@@ -33,3 +33,12 @@ tape("cross(a, b, c, f) invokes the specified function for each triple", functio
   test.deepEqual(arrays.cross([1, 2], [3, 4], [5, 6, 7], (a, b, c) => a + b + c), [9, 10, 11, 10, 11, 12, 10, 11, 12, 11, 12, 13]);
   test.end();
 });
+
+tape("cross(a, b) returns Cartesian product a×b of generators", function(test) {
+  test.deepEqual(arrays.cross(generate(1, 2), generate("x", "y")), [[1, "x"], [1, "y"], [2, "x"], [2, "y"]]);
+  test.end();
+});
+
+function* generate(...values) {
+  yield* values;
+}
