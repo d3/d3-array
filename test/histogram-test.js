@@ -20,6 +20,17 @@ tape("histogram(data) computes a histogram of the specified array of data", func
   test.end();
 });
 
+tape("histogram(iterable) is equivalent to histogram(array)", function(test) {
+  var h = arrays.histogram();
+  test.deepEqual(h(iterable([0, 0, 0, 10, 20, 20])), [
+    bin([0, 0, 0], 0, 5),
+    bin([], 5, 10),
+    bin([10], 10, 15),
+    bin([20, 20], 15, 20) // Note: inclusive upper bound for last bin.
+  ]);
+  test.end();
+});
+
 tape("histogram.value(number) sets the constant value", function(test) {
   var h = arrays.histogram().value(12); // Pointless, but for consistency.
   test.deepEqual(h([0, 0, 0, 1, 2, 2]), [
@@ -138,4 +149,8 @@ function bin(bin, x0, x1)  {
   bin.x0 = x0;
   bin.x1 = x1;
   return bin;
+}
+
+function* iterable(array) {
+  yield* array;
 }
