@@ -220,7 +220,7 @@ data = [
 To group the data by name:
 
 ```js
-group(data, d => d.name)
+d3.group(data, d => d.name)
 ```
 
 This produces:
@@ -236,7 +236,7 @@ Map(3) {
 If more than one *key* is specified, a nested Map is returned. For example:
 
 ```js
-group(data, d => d.name, d => d.date)
+d3.group(data, d => d.name, d => d.date)
 ```
 
 This produces:
@@ -271,7 +271,7 @@ data = [
 To count the number of elements by name:
 
 ```js
-rollup(data, v => v.length, d => d.name)
+d3.rollup(data, v => v.length, d => d.name)
 ```
 
 This produces:
@@ -287,7 +287,7 @@ Map(3) {
 If more than one *key* is specified, a nested Map is returned. For example:
 
 ```js
-rollup(data, v => v.length, d => d.name, d => d.date)
+d3.rollup(data, v => v.length, d => d.name, d => d.date)
 ```
 
 This produces:
