@@ -204,7 +204,7 @@ Note that if no comparator function is specified to the built-in sort method, th
 
 Methods for transforming arrays and for generating new arrays.
 
-<a name="group" href="#group">#</a> d3.<b>group</b>(<i>iterable</i>, <i>...keys</i>)
+<a name="group" href="#group">#</a> d3.<b>group</b>(<i>iterable</i>, <i>...keys</i>) [<>](https://github.com/d3/d3-array/blob/master/src/group.js "Source")
 
 Groups the specified *iterable* of values into a Map from *key* to array of value. For example, given some data:
 
@@ -255,7 +255,7 @@ Map(3) {
 }
 ```
 
-<a name="rollup" href="#rollup">#</a> d3.<b>rollup</b>(<i>iterable</i>, <i>reduce</i>, <i>...keys</i>)
+<a name="rollup" href="#rollup">#</a> d3.<b>rollup</b>(<i>iterable</i>, <i>reduce</i>, <i>...keys</i>) [<>](https://github.com/d3/d3-array/blob/master/src/rollup.js "Source")
 
 [Groups](#group) and reduces the specified *iterable* of values into a Map from *key* to value. For example, given some data:
 
