@@ -255,6 +255,40 @@ Map(3) {
 }
 ```
 
+To convert a Map to an Array, use [Array.from](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from). For example:
+
+```js
+Array.from(d3.group(data, d => d.name))
+```
+
+This produces:
+
+```js
+[
+  ["jim", Array(1)],
+  ["carl", Array(1)],
+  ["stacy", Array(2)]
+]
+```
+
+You can also simultaneously convert the [*key*, *value*] to some other representation by passing a map function to Array.from:
+
+```js
+Array.from(d3.group(data, d => d.name), ([key, value]) => ({key, value}))
+```
+
+This produces:
+
+```js
+[
+  {key: "jim", value: Array(1)},
+  {key: "carl", value: Array(1)},
+  {key: "stacy", value: Array(2)}
+]
+```
+
+In the near future, [*selection*.data](https://github.com/d3/d3-selection/blob/master/README.md#selection_data) will accept iterables directly, meaning that you can use a Map (or Set or other iterable) to perform a data join without first needing to convert to an array.
+
 <a name="rollup" href="#rollup">#</a> d3.<b>rollup</b>(<i>iterable</i>, <i>reduce</i>, <i>...keys</i>) [<>](https://github.com/d3/d3-array/blob/master/src/rollup.js "Source")
 
 [Groups](#group) and reduces the specified *iterable* of values into a Map from *key* to value. For example, given some data:
@@ -305,6 +339,8 @@ Map(3) {
   }
 }
 ```
+
+To convert a Map to an Array, use [Array.from](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from). See [d3.group](#group) for examples.
 
 <a name="cross" href="#cross">#</a> d3.<b>cross</b>(<i>...iterables</i>[, <i>reducer</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/cross.js "Source")
 
