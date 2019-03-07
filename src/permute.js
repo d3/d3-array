@@ -1,5 +1,5 @@
 export default function(array, indexes) {
-  var i = indexes.length, permutes = new Array(i);
-  while (i--) permutes[i] = array[indexes[i]];
-  return permutes;
+  var i = 0, permutes = array.slice();
+  for (var p of indexes) permutes[i++] = array[p];
+  return permutes.slice(0,i);
 }
