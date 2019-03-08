@@ -28,7 +28,7 @@ tape("permute(array) can return more elements", function(test) {
   test.end();
 });
 
-tape("permute(array) can return more elements", function(test) {
+tape("permute(typed array) can return more elements", function(test) {
   test.deepEqual(arrays.permute(Uint8Array.from([3, 4, 5]), [0, 0, 1, 2]), [3, 3, 4, 5]);
   test.deepEqual(arrays.permute(Uint8Array.from([50, 24]),
     new Uint8Array(100000).map((_, i) => i % 2)
