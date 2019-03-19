@@ -48,8 +48,7 @@ var min = d3.min(array);
 * [Statistics](#statistics)
 * [Search](#search)
 * [Transformations](#transformations)
-* [Histograms](#histograms)
-* [Histogram Thresholds](#histogram-thresholds)
+* [Bins](#Bins)
 
 ### Statistics
 
@@ -456,39 +455,39 @@ Returns an array of arrays, where the *i*th array contains the *i*th element fro
 d3.zip([1, 2], [3, 4]); // returns [[1, 3], [2, 4]]
 ```
 
-### Histograms
+### Bins
 
 [<img src="https://raw.githubusercontent.com/d3/d3-array/master/img/histogram.png" width="480" height="250" alt="Histogram">](http://bl.ocks.org/mbostock/3048450)
 
-Histograms bin many discrete samples into a smaller number of consecutive, non-overlapping intervals. They are often used to visualize the distribution of numerical data.
+Binning groups discrete samples into a smaller number of consecutive, non-overlapping intervals. They are often used to visualize the distribution of numerical data as histograms.
 
-<a name="histogram" href="#histogram">#</a> d3.<b>histogram</b>() [<>](https://github.com/d3/d3-array/blob/master/src/histogram.js "Source")
+<a name="bin" href="#bin">#</a> d3.<b>bin</b>() [<>](https://github.com/d3/d3-array/blob/master/src/bin.js "Source")
 
-Constructs a new histogram generator with the default settings.
+Constructs a new bin generator with the default settings.
 
-<a name="_histogram" href="#_histogram">#</a> <i>histogram</i>(<i>data</i>) [<>](https://github.com/d3/d3-array/blob/master/src/histogram.js#L14 "Source")
+<a name="_bin" href="#_bin">#</a> <i>bin</i>(<i>data</i>) [<>](https://github.com/d3/d3-array/blob/master/src/bin.js#L14 "Source")
 
-Computes the histogram for the given iterable of *data* samples. Returns an array of bins, where each bin is an array containing the associated elements from the input *data*. Thus, the `length` of the bin is the number of elements in that bin. Each bin has two additional attributes:
+Bins the given iterable of *data* samples. Returns an array of bins, where each bin is an array containing the associated elements from the input *data*. Thus, the `length` of the bin is the number of elements in that bin. Each bin has two additional attributes:
 
 * `x0` - the lower bound of the bin (inclusive).
 * `x1` - the upper bound of the bin (exclusive, except for the last bin).
 
-<a name="histogram_value" href="#histogram_value">#</a> <i>histogram</i>.<b>value</b>([<i>value</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/histogram.js#L58 "Source")
+<a name="bin_value" href="#bin_value">#</a> <i>bin</i>.<b>value</b>([<i>value</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/bin.js#L58 "Source")
 
-If *value* is specified, sets the value accessor to the specified function or constant and returns this histogram generator. If *value* is not specified, returns the current value accessor, which defaults to the identity function.
+If *value* is specified, sets the value accessor to the specified function or constant and returns this bin generator. If *value* is not specified, returns the current value accessor, which defaults to the identity function.
 
-When a histogram is [generated](#_histogram), the value accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default value accessor assumes that the input data are orderable (comparable), such as numbers or dates. If your data are not, then you should specify an accessor that returns the corresponding orderable value for a given datum.
+When bins are [generated](#_bin), the value accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default value accessor assumes that the input data are orderable (comparable), such as numbers or dates. If your data are not, then you should specify an accessor that returns the corresponding orderable value for a given datum.
 
-This is similar to mapping your data to values before invoking the histogram generator, but has the benefit that the input data remains associated with the returned bins, thereby making it easier to access other fields of the data.
+This is similar to mapping your data to values before invoking the bin generator, but has the benefit that the input data remains associated with the returned bins, thereby making it easier to access other fields of the data.
 
-<a name="histogram_domain" href="#histogram_domain">#</a> <i>histogram</i>.<b>domain</b>([<i>domain</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/histogram.js#L62 "Source")
+<a name="bin_domain" href="#bin_domain">#</a> <i>bin</i>.<b>domain</b>([<i>domain</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/bin.js#L62 "Source")
 
-If *domain* is specified, sets the domain accessor to the specified function or array and returns this histogram generator. If *domain* is not specified, returns the current domain accessor, which defaults to [extent](#extent). The histogram domain is defined as an array [*min*, *max*], where *min* is the minimum observable value and *max* is the maximum observable value; both values are inclusive. Any value outside of this domain will be ignored when the histogram is [generated](#_histogram).
+If *domain* is specified, sets the domain accessor to the specified function or array and returns this bin generator. If *domain* is not specified, returns the current domain accessor, which defaults to [extent](#extent). The bin domain is defined as an array [*min*, *max*], where *min* is the minimum observable value and *max* is the maximum observable value; both values are inclusive. Any value outside of this domain will be ignored when the bins are [generated](#_bin).
 
-For example, if you are using the the histogram in conjunction with a [linear scale](https://github.com/d3/d3-scale/blob/master/README.md#linear-scales) `x`, you might say:
+For example, if you are using the bin generator in conjunction with a [linear scale](https://github.com/d3/d3-scale/blob/master/README.md#linear-scales) `x`, you might say:
 
 ```js
-var histogram = d3.histogram()
+var bin = d3.bin()
     .domain(x.domain())
     .thresholds(x.ticks(20));
 ```
@@ -496,23 +495,23 @@ var histogram = d3.histogram()
 You can then compute the bins from an array of numbers like so:
 
 ```js
-var bins = histogram(numbers);
+var bins = bin(numbers);
 ```
 
-Note that the domain accessor is invoked on the materialized array of [values](#histogram_value), not on the input data array.
+Note that the domain accessor is invoked on the materialized array of [values](#bin_value), not on the input data array.
 
-<a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>count</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/histogram.js#L66 "Source")
-<br><a name="histogram_thresholds" href="#histogram_thresholds">#</a> <i>histogram</i>.<b>thresholds</b>([<i>thresholds</i>])  [<>](https://github.com/d3/d3-array/blob/master/src/histogram.js#L66 "Source")
+<a name="bin_thresholds" href="#bin_thresholds">#</a> <i>bin</i>.<b>thresholds</b>([<i>count</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/bin.js#L66 "Source")
+<br><a name="bin_thresholds" href="#bin_thresholds">#</a> <i>bin</i>.<b>thresholds</b>([<i>thresholds</i>])  [<>](https://github.com/d3/d3-array/blob/master/src/bin.js#L66 "Source")
 
-If *thresholds* is specified, sets the [threshold generator](#histogram-thresholds) to the specified function or array and returns this histogram generator. If *thresholds* is not specified, returns the current threshold generator, which by default implements [Sturges’ formula](#thresholdSturges). (Thus by default, the histogram values must be numbers!) Thresholds are defined as an array of values [*x0*, *x1*, …]. Any value less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated histogram](#_histogram) will have *thresholds*.length + 1 bins. See [histogram thresholds](#histogram-thresholds) for more information.
+If *thresholds* is specified, sets the [threshold generator](#bin-thresholds) to the specified function or array and returns this bin generator. If *thresholds* is not specified, returns the current threshold generator, which by default implements [Sturges’ formula](#thresholdSturges). (Thus by default, the values to be binned must be numbers!) Thresholds are defined as an array of values [*x0*, *x1*, …]. Any value less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated bins](#_bin) will have *thresholds*.length + 1 bins. See [bin thresholds](#bin-thresholds) for more information.
 
-Any threshold values outside the [domain](#histogram_domain) are ignored. The first *bin*.x0 is always equal to the minimum domain value, and the last *bin*.x1 is always equal to the maximum domain value.
+Any threshold values outside the [domain](#bin_domain) are ignored. The first *bin*.x0 is always equal to the minimum domain value, and the last *bin*.x1 is always equal to the maximum domain value.
 
-If a *count* is specified instead of an array of *thresholds*, then the [domain](#histogram_domain) will be uniformly divided into approximately *count* bins; see [ticks](#ticks).
+If a *count* is specified instead of an array of *thresholds*, then the [domain](#bin_domain) will be uniformly divided into approximately *count* bins; see [ticks](#ticks).
 
-### Histogram Thresholds
+#### Bin Thresholds
 
-These functions are typically not used directly; instead, pass them to [*histogram*.thresholds](#histogram_thresholds). You may also implement your own threshold generator taking three arguments: the array of input [*values*](#histogram_value) derived from the data, and the [observable domain](#histogram_domain) represented as *min* and *max*. The generator may then return either the array of numeric thresholds or the *count* of bins; in the latter case the domain is divided uniformly into approximately *count* bins; see [ticks](#ticks).
+These functions are typically not used directly; instead, pass them to [*bin*.thresholds](#bin_thresholds). You may also implement your own threshold generator taking three arguments: the array of input [*values*](#bin_value) derived from the data, and the [observable domain](#bin_domain) represented as *min* and *max*. The generator may then return either the array of numeric thresholds or the *count* of bins; in the latter case the domain is divided uniformly into approximately *count* bins; see [ticks](#ticks).
 
 <a name="thresholdFreedmanDiaconis" href="#thresholdFreedmanDiaconis">#</a> d3.<b>thresholdFreedmanDiaconis</b>(<i>values</i>, <i>min</i>, <i>max</i>) [<>](https://github.com/d3/d3-array/blob/master/src/threshold/freedmanDiaconis.js "Source")
 

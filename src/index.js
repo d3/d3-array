@@ -6,7 +6,7 @@ export {default as descending} from "./descending.js";
 export {default as deviation} from "./deviation.js";
 export {default as extent} from "./extent.js";
 export {default as group} from "./group.js";
-export {default as histogram} from "./histogram.js";
+export {default as bin, default as histogram} from "./bin.js";
 export {default as thresholdFreedmanDiaconis} from "./threshold/freedmanDiaconis.js";
 export {default as thresholdScott} from "./threshold/scott.js";
 export {default as thresholdSturges} from "./threshold/sturges.js";

@@ -1,16 +1,21 @@
 var tape = require("tape"),
     arrays = require("../");
 
-tape("histogram() returns a default histogram generator", function(test) {
-  var h = arrays.histogram();
+tape("histogram is a deprecated alias for bin", function(test) {
+  test.strictEqual(arrays.histogram, arrays.bin);
+  test.end();
+});
+
+tape("bin() returns a default bin generator", function(test) {
+  var h = arrays.bin();
   test.equal(h.value()(42), 42);
   test.equal(h.domain(), arrays.extent);
   test.deepEqual(h.thresholds(), arrays.thresholdSturges);
   test.end();
 });
 
-tape("histogram(data) computes a histogram of the specified array of data", function(test) {
-  var h = arrays.histogram();
+tape("bin(data) computes bins of the specified array of data", function(test) {
+  var h = arrays.bin();
   test.deepEqual(h([0, 0, 0, 10, 20, 20]), [
     bin([0, 0, 0], 0, 5),
     bin([], 5, 10),
@@ -20,8 +25,8 @@ tape("histogram(data) computes a histogram of the specified array of data", func
   test.end();
 });
 
-tape("histogram(iterable) is equivalent to histogram(array)", function(test) {
-  var h = arrays.histogram();
+tape("bin(iterable) is equivalent to bin(array)", function(test) {
+  var h = arrays.bin();
   test.deepEqual(h(iterable([0, 0, 0, 10, 20, 20])), [
     bin([0, 0, 0], 0, 5),
     bin([], 5, 10),
@@ -31,16 +36,16 @@ tape("histogram(iterable) is equivalent to histogram(array)", function(test) {
   test.end();
 });
 
-tape("histogram.value(number) sets the constant value", function(test) {
-  var h = arrays.histogram().value(12); // Pointless, but for consistency.
+tape("bin.value(number) sets the constant value", function(test) {
+  var h = arrays.bin().value(12); // Pointless, but for consistency.
   test.deepEqual(h([0, 0, 0, 1, 2, 2]), [
     bin([0, 0, 0, 1, 2, 2], 12, 12),
   ]);
   test.end();
 });
 
-tape("histogram.value(function) sets the value accessor", function(test) {
-  var h = arrays.histogram().value(function(d) { return d.value; }),
+tape("bin.value(function) sets the value accessor", function(test) {
+  var h = arrays.bin().value(function(d) { return d.value; }),
       a = {value: 0},
       b = {value: 10},
       c = {value: 20};
@@ -53,8 +58,8 @@ tape("histogram.value(function) sets the value accessor", function(test) {
   test.end();
 });
 
-tape("histogram.domain(array) sets the domain", function(test) {
-  var h = arrays.histogram().domain([0, 20]);
+tape("bin.domain(array) sets the domain", function(test) {
+  var h = arrays.bin().domain([0, 20]);
   test.deepEqual(h.domain()(), [0, 20]);
   test.deepEqual(h([1, 2, 2, 10, 18, 18]), [
     bin([1, 2, 2], 0, 5),
@@ -65,11 +70,11 @@ tape("histogram.domain(array) sets the domain", function(test) {
   test.end();
 });
 
-tape("histogram.domain(function) sets the domain accessor", function(test) {
+tape("bin.domain(function) sets the domain accessor", function(test) {
   var values = [1, 2, 2, 10, 18, 18],
       actual,
       domain = function(values) { actual = values; return [0, 20]; },
-      h = arrays.histogram().domain(domain);
+      h = arrays.bin().domain(domain);
   test.equal(h.domain(), domain);
   test.deepEqual(h(values), [
     bin([1, 2, 2], 0, 5),
@@ -81,8 +86,8 @@ tape("histogram.domain(function) sets the domain accessor", function(test) {
   test.end();
 });
 
-tape("histogram.thresholds(number) sets the approximate number of bin thresholds", function(test) {
-  var h = arrays.histogram().thresholds(3);
+tape("bin.thresholds(number) sets the approximate number of bin thresholds", function(test) {
+  var h = arrays.bin().thresholds(3);
   test.deepEqual(h([0, 0, 0, 10, 30, 30]), [
     bin([0, 0, 0], 0, 10),
     bin([10], 10, 20),
@@ -91,8 +96,8 @@ tape("histogram.thresholds(number) sets the approximate number of bin thresholds
   test.end();
 });
 
-tape("histogram.thresholds(array) sets the bin thresholds", function(test) {
-  var h = arrays.histogram().thresholds([10, 20]);
+tape("bin.thresholds(array) sets the bin thresholds", function(test) {
+  var h = arrays.bin().thresholds([10, 20]);
   test.deepEqual(h([0, 0, 0, 10, 30, 30]), [
     bin([0, 0, 0], 0, 10),
     bin([10], 10, 20),
@@ -101,8 +106,8 @@ tape("histogram.thresholds(array) sets the bin thresholds", function(test) {
   test.end();
 });
 
-tape("histogram.thresholds(array) ignores thresholds outside the domain", function(test) {
-  var h = arrays.histogram().thresholds([0, 1, 2, 3]);
+tape("bin.thresholds(array) ignores thresholds outside the domain", function(test) {
+  var h = arrays.bin().thresholds([0, 1, 2, 3]);
   test.deepEqual(h([0, 1, 2, 3]), [
     bin([0], 0, 1),
     bin([1], 1, 2),
@@ -112,10 +117,10 @@ tape("histogram.thresholds(array) ignores thresholds outside the domain", functi
   test.end();
 });
 
-tape("histogram.thresholds(function) sets the bin thresholds accessor", function(test) {
+tape("bin.thresholds(function) sets the bin thresholds accessor", function(test) {
   var actual,
       values = [0, 0, 0, 10, 30, 30],
-      h = arrays.histogram().thresholds(function(values, x0, x1) { actual = [values, x0, x1]; return [10, 20]; });
+      h = arrays.bin().thresholds(function(values, x0, x1) { actual = [values, x0, x1]; return [10, 20]; });
   test.deepEqual(h(values), [
     bin([0, 0, 0], 0, 10),
     bin([10], 10, 20),
@@ -133,8 +138,8 @@ tape("histogram.thresholds(function) sets the bin thresholds accessor", function
   test.end();
 });
 
-tape("histogram()() returns bins whose rightmost bin is not too wide", function(test) {
-  var h = arrays.histogram();
+tape("bin()() returns bins whose rightmost bin is not too wide", function(test) {
+  var h = arrays.bin();
   test.deepEqual(h([9.8, 10, 11, 12, 13, 13.2]), [
     bin([9.8], 9.8, 10),
     bin([10], 10, 11),
