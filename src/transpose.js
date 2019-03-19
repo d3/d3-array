@@ -1,4 +1,4 @@
-import min from "./min";
+import min from "./min.js";
 
 export default function(matrix) {
   if (!(n = matrix.length)) return [];

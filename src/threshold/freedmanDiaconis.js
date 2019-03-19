@@ -1,7 +1,7 @@
-import {map} from "../array";
-import ascending from "../ascending";
-import number from "../number";
-import quantile from "../quantile";
+import {map} from "../array.js";
+import ascending from "../ascending.js";
+import number from "../number.js";
+import quantile from "../quantile.js";
 
 export default function(values, min, max) {
   values = map.call(values, number).sort(ascending);

@@ -1,5 +1,5 @@
-import quantile from "./quantile";
-import quickselect from "./quickselect";
+import quantile from "./quantile.js";
+import quickselect from "./quickselect.js";
 
 function* numbers(values, valueof) {
   if (valueof === undefined) {

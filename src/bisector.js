@@ -1,4 +1,4 @@
-import ascending from "./ascending";
+import ascending from "./ascending.js";
 
 export default function(compare) {
   if (compare.length === 1) compare = ascendingComparator(compare);

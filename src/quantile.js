@@ -1,4 +1,4 @@
-import number from "./number";
+import number from "./number.js";
 
 export default function quantile(values, p, valueof = number) {
   if (!(n = values.length)) return;
