@@ -524,3 +524,88 @@ Returns the number of bins according to [Scott’s normal reference rule](https:
 <a name="thresholdSturges" href="#thresholdSturges">#</a> d3.<b>thresholdSturges</b>(<i>values</i>) [<>](https://github.com/d3/d3-array/blob/master/src/threshold/sturges.js "Source")
 
 Returns the number of bins according to [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition); the input *values* must be numbers.
+
+### 2D Bins
+
+2D bins categorize many discrete samples into a smaller number of 2D cell, laid out on a grid where x and y bins are non-overlapping intervals. They are often used to visualize the distribution of numerical data.
+
+<a name="bin2d" href="#bin2d">#</a> d3.<b>bin2d</b>() [<>](https://github.com/d3/d3-array/blob/master/src/bin2d.js "Source")
+
+Constructs a new bin2d generator with the default settings.
+
+<a name="_bin_2d" href="#_bin_2d">#</a> <i>bin2d</i>(<i>data</i>) [<>](https://github.com/d3/d3-array/blob/master/src/bin2d.js#L14 "Source")
+
+Computes the bin2d for the given iterable of *data* samples. Returns an array of bins, where each bin is an array containing the associated elements from the input *data*. Thus, the `length` of the bin is the number of elements in that bin. Each bin has four additional attributes:
+
+* `x0` - the lower x bound of the bin (inclusive).
+* `x1` - the upper x bound of the bin (exclusive, except for the last bin).
+* `y0` - the lower y bound of the bin (inclusive).
+* `y1` - the upper y bound of the bin (exclusive, except for the last bin).
+
+<a name="bin2d_value_x" href="#bin2d_value_x">#</a> <i>bin2d</i>.<b>valueX</b>([<i>valueX</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/bin2d.js#L58 "Source")
+
+If *valueX* is specified, sets the value accessor for the X value to the specified function or constant and returns this bin2d generator. If *valueX* is not specified, returns the current value accessor, which defaults to the identity function.
+
+When a bin2d is [generated](#_bin2d), the value accessor will be invoked for each element in the input data array, being passed the element `d`, the index `i`, and the array `data` as three arguments. The default value accessor assumes that the input data are orderable (comparable), such as numbers or dates. If your data are not, then you should specify an accessor that returns the corresponding orderable value for a given datum.
+
+This is similar to mapping your data to values before invoking the bin2d generator, but has the benefit that the input data remains associated with the returned bins, thereby making it easier to access other fields of the data.
+
+<a name="bin2d_domain_x" href="#bin2d_domain_x">#</a> <i>bin2d</i>.<b>domainX</b>([<i>domain</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/bin2d.js#L62 "Source")
+
+If *domainX* is specified, sets the X domain accessor to the specified function or array and returns this bin2d generator. If *domainX* is not specified, returns the current domain accessor, which defaults to [extentX](#extent_x). The bin2d domain is defined as an array [*min*, *max*], where *min* is the minimum observable X value and *max* is the maximum observable Y value; both values are inclusive. Any value outside of this domain will be ignored when the bin2d is [generated](#_bin2d).
+
+For example, if you are using the the bin2d in conjunction with a [linear scale](https://github.com/d3/d3-scale/blob/master/README.md#linear-scales) `x`, you might say:
+
+```js
+var bin2d = d3.bin2d()
+    .domainX(x.domain())
+    .thresholdsX(x.ticks(20));
+```
+
+<a name="bin2d_domain_x" href="#bin2d_domain_x">#</a> <i>bin2d</i>.<b>domainY</b>([<i>domain</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/bin2d.js#L62 "Source")
+
+If *domainY* is specified, sets the X domain accessor to the specified function or array and returns this bin2d generator. If *domainY* is not specified, returns the current domain accessor, which defaults to [extentX](#extent_x). The bin2d domain is defined as an array [*min*, *max*], where *min* is the minimum observable X value and *max* is the maximum observable Y value; both values are inclusive. Any value outside of this domain will be ignored when the bin2d is [generated](#_bin2d).
+
+For example, if you are using the the bin2d in conjunction with a [linear scale](https://github.com/d3/d3-scale/blob/master/README.md#linear-scales) `x`, you might say:
+
+```js
+var bin2d = d3.bin2d()
+    .domainY(x.domain())
+    .thresholdsX(x.ticks(20));
+```
+
+You can then compute the bins from an array of numbers like so:
+
+```js
+var bins = bin2d(numbers);
+```
+
+Note that the domain accessor is invoked on the materialized array of [values](#bin2d_value_x), not on the input data array.
+
+<a name="bin2d_thresholds_x" href="#bin2d_thresholds_x">#</a> <i>bin2d</i>.<b>thresholdsX</b>([<i>count</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/bin2d.js#L66 "Source")
+<br><a name="bin2d_thresholds_x" href="#bin2d_thresholds_x">#</a> <i>bin2d</i>.<b>thresholdsX</b>([<i>thresholds</i>])  [<>](https://github.com/d3/d3-array/blob/master/src/bin2d.js#L66 "Source")
+
+If *thresholdsX* is specified, sets the [threshold X generator](#bin2d-thresholds_x) to the specified function or array and returns this bin2d generator. If *thresholdsX* is not specified, returns the current threshold generator, which by default implements [Sturges’ formula](#thresholdSturges). (Thus by default, the bin2d values must be numbers!) Thresholds are defined as an array of values [*x0*, *x1*, …]. Any X value less than *x0* will be placed in the first bin; any X value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated 2d bin2d](#_bin2d_2d) will have *thresholdsX*.length + 1 bins. See [bin2d thresholdsX](#bin2d-thresholds_x) for more information.
+
+Any threshold values outside the [domainX](#bin2d_domain_x) are ignored. The first *bin*.x0 is always equal to the minimum domain value, and the last *bin*.x1 is always equal to the maximum domain value.
+
+If a *count* is specified instead of an array of *thresholds*, then the [domainX](#bin2d_domain_x) will be uniformly divided into approximately *count* bins; see [ticks](#ticks).
+
+<a name="bin2d_thresholds_y" href="#bin2d_thresholds_y">#</a> <i>bin2d</i>.<b>thresholdsY</b>([<i>count</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/bin2d.js#L66 "Source")
+<br><a name="bin2d_thresholds_y" href="#bin2d_thresholds_y">#</a> <i>bin2d</i>.<b>thresholdsY</b>([<i>thresholds</i>])  [<>](https://github.com/d3/d3-array/blob/master/src/bin2d.js#L66 "Source")
+
+If *thresholdsY* is specified, sets the [threshold Y generator](#bin2d-thresholds_y) to the specified function or array and returns this bin2d generator. If *thresholdsY* is not specified, returns the current threshold generator, which by default implements [Sturges’ formula](#thresholdSturges). (Thus by default, the bin2d values must be numbers!) Thresholds are defined as an array of values [*x0*, *x1*, …]. Any X value less than *x0* will be placed in the first bin; any X value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated 2d bin2d](#_bin2d_2d) will have *thresholdsY*.length + 1 bins. See [bin2d thresholdsY](#bin2d-thresholds_x) for more information.
+
+Any threshold values outside the [domainY](#bin2d_domain_y) are ignored. The first *bin*.x0 is always equal to the minimum domain value, and the last *bin*.x1 is always equal to the maximum domain value.
+
+If a *count* is specified instead of an array of *thresholds*, then the [domainY](#bin2d_domain_y) will be uniformly divided into approximately *count* bins; see [ticks](#ticks).
+
+### 2D bin Thresholds
+
+These functions are typically not used directly; instead, pass them to [*bin2d*.thresholdsX](#bin2d_thresholds_x) or [*bin2d*.thresholdsY](#bin2d_thresholds_y). You may also implement your own threshold generator taking three arguments: the array of input [*values*](#bin2d_value) derived from the data, and the [observable domain](#bin2d_domain) represented as *min* and *max*. The generator may then return either the array of numeric thresholds or the *count* of bins; in the latter case the domain is divided uniformly into approximately *count* bins; see [ticks](#ticks).
+
+<a name="thresholdFreedmanDiaconis" href="#thresholdFreedmanDiaconis">#</a> d3.<b>thresholdFreedmanDiaconis</b>(<i>values</i>, <i>min</i>, <i>max</i>) [<>](https://github.com/d3/d3-array/blob/master/src/threshold/freedmanDiaconis.js "Source")
+
+<a name="thresholdScott" href="#thresholdScott">#</a> d3.<b>thresholdScott</b>(<i>values</i>, <i>min</i>, <i>max</i>) [<>](https://github.com/d3/d3-array/blob/master/src/threshold/scott.js "Source")
+
+<a name="thresholdSturges" href="#thresholdSturges">#</a> d3.<b>thresholdSturges</b>(<i>values</i>) [<>](https://github.com/d3/d3-array/blob/master/src/threshold/sturges.js "Source")
