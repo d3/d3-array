@@ -1,11 +1,20 @@
 var tape = require("tape"),
     arrays = require("../");
 
-tape("quantile(array, p) requires sorted numeric input", function(test) {
+tape("quantileSorted(array, p) requires sorted numeric input, quantile doesn't", function(test) {
+  test.equal(arrays.quantileSorted([1, 2, 3, 4], 0), 1);
+  test.equal(arrays.quantileSorted([1, 2, 3, 4], 1), 4);
+  test.equal(arrays.quantileSorted([4, 3, 2, 1], 0), 4);
+  test.equal(arrays.quantileSorted([4, 3, 2, 1], 1), 1);
   test.equal(arrays.quantile([1, 2, 3, 4], 0), 1);
   test.equal(arrays.quantile([1, 2, 3, 4], 1), 4);
-  test.equal(arrays.quantile([4, 3, 2, 1], 0), 4);
-  test.equal(arrays.quantile([4, 3, 2, 1], 1), 1);
+  test.equal(arrays.quantile([4, 3, 2, 1], 0), 1);
+  test.equal(arrays.quantile([4, 3, 2, 1], 1), 4);
+  test.end();
+});
+
+tape("quantile() accepts an iterable", function(test) {
+  test.equal(arrays.quantile(new Set([1, 2, 3, 4]), 1), 4);
   test.end();
 });
 

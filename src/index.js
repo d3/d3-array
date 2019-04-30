@@ -20,7 +20,7 @@ export {default as min} from "./min.js";
 export {default as minIndex} from "./minIndex.js";
 export {default as pairs} from "./pairs.js";
 export {default as permute} from "./permute.js";
-export {default as quantile} from "./quantile.js";
+export {default as quantile, quantileSorted} from "./quantile.js";
 export {default as quickselect} from "./quickselect.js";
 export {default as range} from "./range.js";
 export {default as least} from "./least.js";
