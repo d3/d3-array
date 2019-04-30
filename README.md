@@ -88,7 +88,7 @@ Returns the median of the given *iterable* of numbers using the [R-7 method](htt
 
 <a name="quantile" href="#quantile">#</a> d3.<b>quantile</b>(<i>array</i>, <i>p</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/quantile.js "Source")
 
-Returns the *p*-quantile of the given **sorted** *array* of numbers, where *p* is a number in the range [0, 1]. For example, the median can be computed using *p* = 0.5, the first quartile at *p* = 0.25, and the third quartile at *p* = 0.75. This particular implementation uses the [R-7 method](http://en.wikipedia.org/wiki/Quantile#Quantiles_of_a_population), which is the default for the R programming language and Excel. For example:
+Returns the *p*-quantile of the given *iterable* of numbers, where *p* is a number in the range [0, 1]. For example, the median can be computed using *p* = 0.5, the first quartile at *p* = 0.25, and the third quartile at *p* = 0.75. This particular implementation uses the [R-7 method](http://en.wikipedia.org/wiki/Quantile#Quantiles_of_a_population), which is the default for the R programming language and Excel. For example:
 
 ```js
 var a = [0, 10, 30];
@@ -100,7 +100,11 @@ d3.quantile(a, 0.75); // 20
 d3.quantile(a, 0.1); // 2
 ```
 
-An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the quantile, except that it is only called on the elements needed to compute the quantile.
+An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the quantile.
+
+<a name="quantileSorted" href="#quantileSorted">#</a> d3.<b>quantileSorted</b>(<i>array</i>, <i>p</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/quantile.js "Source")
+
+Similar to *quantile*, but expects the input to be a **sorted** *array* of values. In contrast with *quantile*, the accessor is only called on the elements needed to compute the quantile.
 
 <a name="variance" href="#variance">#</a> d3.<b>variance</b>(<i>iterable</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/variance.js "Source")
 
