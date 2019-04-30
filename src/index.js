@@ -1,6 +1,7 @@
 export {default as bisect, bisectRight, bisectLeft} from "./bisect.js";
 export {default as ascending} from "./ascending.js";
 export {default as bisector} from "./bisector.js";
+export {default as count} from "./count.js";
 export {default as cross} from "./cross.js";
 export {default as descending} from "./descending.js";
 export {default as deviation} from "./deviation.js";
