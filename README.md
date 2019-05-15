@@ -126,17 +126,17 @@ d3.scan(array, (a, b) => b.foo - a.foo); // 1
 
 This function is similar to [min](#min), except it allows the use of a comparator rather than an accessor and it returns the index instead of the accessed value. See also [bisect](#bisect).
 
-<a name="bisectLeft" href="#bisectLeft">#</a> d3.<b>bisectLeft</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisect.js#L6)
+<a name="bisectLeft" href="#bisectLeft">#</a> d3.<b>bisectLeft</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisect.js)
 
 Returns the insertion point for *x* in *array* to maintain sorted order. The arguments *lo* and *hi* may be used to specify a subset of the array which should be considered; by default the entire array is used. If *x* is already present in *array*, the insertion point will be before (to the left of) any existing entries. The return value is suitable for use as the first argument to [splice](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) assuming that *array* is already sorted. The returned insertion point *i* partitions the *array* into two halves so that all *v* < *x* for *v* in *array*.slice(*lo*, *i*) for the left side and all *v* >= *x* for *v* in *array*.slice(*i*, *hi*) for the right side.
 
-<a name="bisect" href="#bisect">#</a> d3.<b>bisect</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisect.js "Source">
-<a name="bisectRight" href="#bisectRight">#</a> d3.<b>bisectRight</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisect.js#L6)
+<a name="bisect" href="#bisect">#</a> d3.<b>bisect</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisect.js)
+<br><a name="bisectRight" href="#bisectRight">#</a> d3.<b>bisectRight</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]])
 
 Similar to [bisectLeft](#bisectLeft), but returns an insertion point which comes after (to the right of) any existing entries of *x* in *array*. The returned insertion point *i* partitions the *array* into two halves so that all *v* <= *x* for *v* in *array*.slice(*lo*, *i*) for the left side and all *v* > *x* for *v* in *array*.slice(*i*, *hi*) for the right side.
 
 <a name="bisector" href="#bisector">#</a> d3.<b>bisector</b>(<i>accessor</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/bisector.js)
-<br><a name="bisector" href="#bisector">#</a> d3.<b>bisector</b>(<i>comparator</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/bisector.js)
+<br><a name="bisector" href="#bisector">#</a> d3.<b>bisector</b>(<i>comparator</i>)
 
 Returns a new bisector using the specified *accessor* or *comparator* function. This method can be used to bisect arrays of objects instead of being limited to simple arrays of primitives. For example, given the following array of objects:
 
@@ -163,11 +163,11 @@ var bisectDate = d3.bisector(function(d, x) { return d.date - x; }).right;
 
 And then applied as *bisectDate*(*array*, *date*), returning an index. Note that the comparator is always passed the search value *x* as the second argument. Use a comparator rather than an accessor if you want values to be sorted in an order different than natural order, such as in descending rather than ascending order.
 
-<a name="bisector_left" href="#bisector_left">#</a> <i>bisector</i>.<b>left</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisector.js#L6)
+<a name="bisector_left" href="#bisector_left">#</a> <i>bisector</i>.<b>left</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisector.js)
 
 Equivalent to [bisectLeft](#bisectLeft), but uses this bisector’s associated comparator.
 
-<a name="bisector_right" href="#bisector_right">#</a> <i>bisector</i>.<b>right</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisector.js#L16)
+<a name="bisector_right" href="#bisector_right">#</a> <i>bisector</i>.<b>right</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisector.js)
 
 Equivalent to [bisectRight](#bisectRight), but uses this bisector’s associated comparator.
 
@@ -414,11 +414,11 @@ Returns an array of approximately *count* + 1 uniformly-spaced, nicely-rounded v
 
 Ticks are inclusive in the sense that they may include the specified *start* and *stop* values if (and only if) they are exact, nicely-rounded values consistent with the inferred [step](#tickStep). More formally, each returned tick *t* satisfies *start* ≤ *t* and *t* ≤ *stop*.
 
-<a name="tickIncrement" href="#tickIncrement">#</a> d3.<b>tickIncrement</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/ticks.js#L16)
+<a name="tickIncrement" href="#tickIncrement">#</a> d3.<b>tickIncrement</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/ticks.js)
 
 Like [d3.tickStep](#tickStep), except requires that *start* is always less than or equal to *step*, and if the tick step for the given *start*, *stop* and *count* would be less than one, returns the negative inverse tick step instead. This method is always guaranteed to return an integer, and is used by [d3.ticks](#ticks) to guarantee that the returned tick values are represented as precisely as possible in IEEE 754 floating point.
 
-<a name="tickStep" href="#tickStep">#</a> d3.<b>tickStep</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/ticks.js#L16)
+<a name="tickStep" href="#tickStep">#</a> d3.<b>tickStep</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/ticks.js)
 
 Returns the difference between adjacent tick values if the same arguments were passed to [d3.ticks](#ticks): a nicely-rounded value that is a power of ten multiplied by 1, 2 or 5. Note that due to the limited precision of IEEE 754 floating point, the returned value may not be exact decimals; use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
 
@@ -465,14 +465,14 @@ Binning groups discrete samples into a smaller number of consecutive, non-overla
 
 Constructs a new bin generator with the default settings.
 
-<a name="_bin" href="#_bin">#</a> <i>bin</i>(<i>data</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js#L14)
+<a name="_bin" href="#_bin">#</a> <i>bin</i>(<i>data</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js)
 
 Bins the given iterable of *data* samples. Returns an array of bins, where each bin is an array containing the associated elements from the input *data*. Thus, the `length` of the bin is the number of elements in that bin. Each bin has two additional attributes:
 
 * `x0` - the lower bound of the bin (inclusive).
 * `x1` - the upper bound of the bin (exclusive, except for the last bin).
 
-<a name="bin_value" href="#bin_value">#</a> <i>bin</i>.<b>value</b>([<i>value</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js#L58)
+<a name="bin_value" href="#bin_value">#</a> <i>bin</i>.<b>value</b>([<i>value</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js)
 
 If *value* is specified, sets the value accessor to the specified function or constant and returns this bin generator. If *value* is not specified, returns the current value accessor, which defaults to the identity function.
 
@@ -480,7 +480,7 @@ When bins are [generated](#_bin), the value accessor will be invoked for each el
 
 This is similar to mapping your data to values before invoking the bin generator, but has the benefit that the input data remains associated with the returned bins, thereby making it easier to access other fields of the data.
 
-<a name="bin_domain" href="#bin_domain">#</a> <i>bin</i>.<b>domain</b>([<i>domain</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js#L62)
+<a name="bin_domain" href="#bin_domain">#</a> <i>bin</i>.<b>domain</b>([<i>domain</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js)
 
 If *domain* is specified, sets the domain accessor to the specified function or array and returns this bin generator. If *domain* is not specified, returns the current domain accessor, which defaults to [extent](#extent). The bin domain is defined as an array [*min*, *max*], where *min* is the minimum observable value and *max* is the maximum observable value; both values are inclusive. Any value outside of this domain will be ignored when the bins are [generated](#_bin).
 
@@ -500,8 +500,8 @@ var bins = bin(numbers);
 
 Note that the domain accessor is invoked on the materialized array of [values](#bin_value), not on the input data array.
 
-<a name="bin_thresholds" href="#bin_thresholds">#</a> <i>bin</i>.<b>thresholds</b>([<i>count</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js#L66)
-<br><a name="bin_thresholds" href="#bin_thresholds">#</a> <i>bin</i>.<b>thresholds</b>([<i>thresholds</i>])  · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js#L66)
+<a name="bin_thresholds" href="#bin_thresholds">#</a> <i>bin</i>.<b>thresholds</b>([<i>count</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js)
+<br><a name="bin_thresholds" href="#bin_thresholds">#</a> <i>bin</i>.<b>thresholds</b>([<i>thresholds</i>])
 
 If *thresholds* is specified, sets the [threshold generator](#bin-thresholds) to the specified function or array and returns this bin generator. If *thresholds* is not specified, returns the current threshold generator, which by default implements [Sturges’ formula](#thresholdSturges). (Thus by default, the values to be binned must be numbers!) Thresholds are defined as an array of values [*x0*, *x1*, …]. Any value less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated bins](#_bin) will have *thresholds*.length + 1 bins. See [bin thresholds](#bin-thresholds) for more information.
 
