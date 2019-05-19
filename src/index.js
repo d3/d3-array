@@ -6,7 +6,7 @@ export {default as descending} from "./descending.js";
 export {default as deviation} from "./deviation.js";
 export {default as extent} from "./extent.js";
 export {default as group} from "./group.js";
-export {default as bin, default as histogram} from "./bin.js";
+export {default as bin, default as histogram} from "./bin.js"; // Deprecated alias: histogram.
 export {default as thresholdFreedmanDiaconis} from "./threshold/freedmanDiaconis.js";
 export {default as thresholdScott} from "./threshold/scott.js";
 export {default as thresholdSturges} from "./threshold/sturges.js";
@@ -21,7 +21,8 @@ export {default as quantile} from "./quantile.js";
 export {default as quickselect} from "./quickselect.js";
 export {default as range} from "./range.js";
 export {default as rollup} from "./rollup.js";
-export {default as scan} from "./scan.js";
+export {default as least} from "./least.js";
+export {default as scan, default as leastIndex} from "./leastIndex.js"; // Deprecated alias: scan.
 export {default as shuffle} from "./shuffle.js";
 export {default as sum} from "./sum.js";
 export {default as ticks, tickIncrement, tickStep} from "./ticks.js";
