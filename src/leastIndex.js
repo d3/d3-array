@@ -1,6 +1,6 @@
 import ascending from "./ascending.js";
 
-export default function scan(values, compare = ascending) {
+export default function leastIndex(values, compare = ascending) {
   let min;
   let minIndex;
   let index = -1;
