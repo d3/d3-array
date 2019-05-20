@@ -2,10 +2,10 @@ export default function(values, valueof) {
   let min;
   let max;
   if (valueof === undefined) {
-    for (let value of values) {
-      if (value != null && value >= value) {
+    for (const value of values) {
+      if (value != null) {
         if (min === undefined) {
-          min = max = value;
+          if (value >= value) min = max = value;
         } else {
           if (min > value) min = value;
           if (max < value) max = value;
@@ -15,9 +15,9 @@ export default function(values, valueof) {
   } else {
     let index = -1;
     for (let value of values) {
-      if ((value = valueof(value, ++index, values)) != null && value >= value) {
+      if ((value = valueof(value, ++index, values)) != null) {
         if (min === undefined) {
-          min = max = value;
+          if (value >= value) min = max = value;
         } else {
           if (min > value) min = value;
           if (max < value) max = value;
