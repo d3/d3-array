@@ -1,16 +1,10 @@
-import number from "./number.js";
-import identity from "./identity.js";
+import {default as number, numbers} from "./number.js";
 
 export default function quantile(values, p, valueof = number) {
-  values = Array.from(values)
-    .map((d, i) => valueof(d, i, values))
+  values = Float64Array.from(numbers(values, valueof))
     .filter(v => !isNaN(v))
     .sort((a, b) => a - b);
-  var n = values.length;
-  if (!n) return;
-  if ((p = +p) <= 0 || n < 2) return +values[0];
-  if (p >= 1) return +values.pop();
-  return quantileSorted(values, p, identity);
+  return quantileSorted(values, p);
 }
 
 export function quantileSorted(values, p, valueof = number) {
