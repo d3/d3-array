@@ -28,14 +28,14 @@ tape("leastIndex(array, compare) compares using the specified compare function",
   test.end();
 });
 
-tape("leastIndex(array) returns undefined if the array is empty", function(test) {
-  test.strictEqual(arrays.leastIndex([]), undefined);
+tape("leastIndex(array) returns -1 if the array is empty", function(test) {
+  test.strictEqual(arrays.leastIndex([]), -1);
   test.end();
 });
 
-tape("leastIndex(array) returns undefined if the array contains only incomparable values", function(test) {
-  test.strictEqual(arrays.leastIndex([NaN, undefined]), undefined);
-  test.strictEqual(arrays.leastIndex([NaN, "foo"], function(a, b) { return a - b; }), undefined);
+tape("leastIndex(array) returns -1 if the array contains only incomparable values", function(test) {
+  test.strictEqual(arrays.leastIndex([NaN, undefined]), -1);
+  test.strictEqual(arrays.leastIndex([NaN, "foo"], function(a, b) { return a - b; }), -1);
   test.end();
 });
 

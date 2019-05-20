@@ -2,11 +2,11 @@ import ascending from "./ascending.js";
 
 export default function leastIndex(values, compare = ascending) {
   let min;
-  let minIndex;
+  let minIndex = -1;
   let index = -1;
   for (const value of values) {
     ++index;
-    if (minIndex === undefined
+    if (minIndex < 0
         ? compare(value, value) === 0
         : compare(value, min) < 0) {
       min = value;
