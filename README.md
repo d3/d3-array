@@ -132,8 +132,8 @@ Returns the least element of the specified *iterable* according to the specified
 
 ```js
 const array = [{foo: 42}, {foo: 91}];
-d3.scan(array, (a, b) => a.foo - b.foo); // {foo: 42}
-d3.scan(array, (a, b) => b.foo - a.foo); // {foo: 91}
+d3.least(array, (a, b) => a.foo - b.foo); // {foo: 42}
+d3.least(array, (a, b) => b.foo - a.foo); // {foo: 91}
 ```
 
 This function is similar to [min](#min), except it allows the use of a comparator rather than an accessor.
@@ -144,8 +144,8 @@ Returns the index of the least element of the specified *iterable* according to 
 
 ```js
 const array = [{foo: 42}, {foo: 91}];
-d3.scan(array, (a, b) => a.foo - b.foo); // 0
-d3.scan(array, (a, b) => b.foo - a.foo); // 1
+d3.leastIndex(array, (a, b) => a.foo - b.foo); // 0
+d3.leastIndex(array, (a, b) => b.foo - a.foo); // 1
 ```
 
 This function is similar to [minIndex](#minIndex), except it allows the use of a comparator rather than an accessor.
