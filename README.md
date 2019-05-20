@@ -48,7 +48,7 @@ var min = d3.min(array);
 * [Statistics](#statistics)
 * [Search](#search)
 * [Transformations](#transformations)
-* [Bins](#Bins)
+* [Bins](#bins)
 
 ### Statistics
 
