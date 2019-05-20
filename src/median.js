@@ -1,22 +1,6 @@
+import {numbers} from "./number.js";
 import quantile from "./quantile.js";
 import quickselect from "./quickselect.js";
-
-function* numbers(values, valueof) {
-  if (valueof === undefined) {
-    for (let value of values) {
-      if (value != null && (value = +value) >= value) {
-        yield value;
-      }
-    }
-  } else {
-    let index = -1;
-    for (let value of values) {
-      if ((value = valueof(value, ++index, values)) != null && (value = +value) >= value) {
-        yield value;
-      }
-    }
-  }
-}
 
 export default function(values, valueof) {
   values = Float64Array.from(numbers(values, valueof));
