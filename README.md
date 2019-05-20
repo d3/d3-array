@@ -341,6 +341,16 @@ Map(3) {
 
 To convert a Map to an Array, use [Array.from](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from). See [d3.group](#group) for examples.
 
+<a name="count" href="#count">#</a> d3.<b>count</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/count.js "Source")
+
+Returns the number of valid number values (*i.e.*, not null, NaN, or undefined) in the specified *iterable*; accepts an accessor.
+
+For example:
+
+```js
+d3.count([{n: "Alice", age: NaN}, {n: "Bob", age: 18}, {n: "Other"}], d => d.age) // 1
+```
+
 <a name="cross" href="#cross">#</a> d3.<b>cross</b>(<i>...iterables</i>[, <i>reducer</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/cross.js), [Examples](https://observablehq.com/@d3/d3-cross)
 
 Returns the [Cartesian product](https://en.wikipedia.org/wiki/Cartesian_product) of the specified *iterables*. For example, if two iterables *a* and *b* are specified, for each element *i* in the iterable *a* and each element *j* in the iterable *b*, in order, invokes the specified *reducer* function passing the element *i* and element *j*. If a *reducer* is not specified, it defaults to a function which creates a two-element array for each pair:
