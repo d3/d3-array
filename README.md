@@ -60,7 +60,13 @@ Returns the minimum value in the given *iterable* using natural order. If the it
 
 Unlike the built-in [Math.min](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/min), this method ignores undefined, null and NaN values; this is useful for ignoring missing data. In addition, elements are compared using natural order rather than numeric order. For example, the minimum of the strings [“20”, “3”] is “20”, while the minimum of the numbers [20, 3] is 3.
 
-See also [scan](#scan) and [extent](#extent).
+See also [extent](#extent).
+
+<a name="minIndex" href="#minIndex">#</a> d3.<b>minIndex</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/minIndex.js)
+
+Returns the index of the minimum value in the given *iterable* using natural order. If the iterable contains no comparable values, returns -1. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the minimum value.
+
+Unlike the built-in [Math.min](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/min), this method ignores undefined, null and NaN values; this is useful for ignoring missing data. In addition, elements are compared using natural order rather than numeric order. For example, the minimum of the strings [“20”, “3”] is “20”, while the minimum of the numbers [20, 3] is 3.
 
 <a name="max" href="#max">#</a> d3.<b>max</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/max.js)
 
@@ -68,7 +74,13 @@ Returns the maximum value in the given *iterable* using natural order. If the it
 
 Unlike the built-in [Math.max](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/max), this method ignores undefined values; this is useful for ignoring missing data. In addition, elements are compared using natural order rather than numeric order. For example, the maximum of the strings [“20”, “3”] is “3”, while the maximum of the numbers [20, 3] is 20.
 
-See also [scan](#scan) and [extent](#extent).
+See also [extent](#extent).
+
+<a name="maxIndex" href="#maxIndex">#</a> d3.<b>maxIndex</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/maxIndex.js)
+
+Returns the index of the maximum value in the given *iterable* using natural order. If the iterable contains no comparable values, returns -1. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the maximum value.
+
+Unlike the built-in [Math.max](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/max), this method ignores undefined values; this is useful for ignoring missing data. In addition, elements are compared using natural order rather than numeric order. For example, the maximum of the strings [“20”, “3”] is “3”, while the maximum of the numbers [20, 3] is 20.
 
 <a name="extent" href="#extent">#</a> d3.<b>extent</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/extent.js)
 
@@ -114,9 +126,21 @@ Returns the standard deviation, defined as the square root of the [bias-correcte
 
 Methods for searching arrays for a specific element.
 
-<a name="scan" href="#scan">#</a> d3.<b>scan</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/scan.js)
+<a name="least" href="#least">#</a> d3.<b>least</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/least.js)
 
-Performs a linear scan of the specified *iterable*, returning the index of the least element according to the specified *comparator*. If the given *iterable* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
+Returns the least element of the specified *iterable* according to the specified *comparator*. If the given *iterable* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
+
+```js
+const array = [{foo: 42}, {foo: 91}];
+d3.scan(array, (a, b) => a.foo - b.foo); // {foo: 42}
+d3.scan(array, (a, b) => b.foo - a.foo); // {foo: 91}
+```
+
+This function is similar to [min](#min), except it allows the use of a comparator rather than an accessor.
+
+<a name="leastIndex" href="#leastIndex">#</a> d3.<b>leastIndex</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/leastIndex.js)
+
+Returns the index of the least element of the specified *iterable* according to the specified *comparator*. If the given *iterable* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns -1. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
 
 ```js
 const array = [{foo: 42}, {foo: 91}];
@@ -124,7 +148,11 @@ d3.scan(array, (a, b) => a.foo - b.foo); // 0
 d3.scan(array, (a, b) => b.foo - a.foo); // 1
 ```
 
-This function is similar to [min](#min), except it allows the use of a comparator rather than an accessor and it returns the index instead of the accessed value. See also [bisect](#bisect).
+This function is similar to [minIndex](#minIndex), except it allows the use of a comparator rather than an accessor.
+
+<a name="scan" href="#scan">#</a> d3.<b>scan</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/scan.js)
+
+Deprecated; use [leastIndex](#leastIndex) instead.
 
 <a name="bisectLeft" href="#bisectLeft">#</a> d3.<b>bisectLeft</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisect.js)
 
