@@ -423,21 +423,21 @@ d3.pairs([1, 2, 3, 4], (a, b) => b - a); // returns [1, 1, 1];
 
 If the specified iterable has fewer than two elements, returns the empty array.
 
-<a name="permute" href="#permute">#</a> d3.<b>permute</b>(<i>array</i>, <i>indexes</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/permute.js), [Examples](https://observablehq.com/@d3/d3-permute)
+<a name="permute" href="#permute">#</a> d3.<b>permute</b>(<i>source</i>, <i>keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/permute.js), [Examples](https://observablehq.com/@d3/d3-permute)
 
-Returns a permutation of the specified *array* using the specified array of *indexes*. The returned array contains the corresponding element in array for each index in indexes, in order. For example:
+Returns a permutation of the specified *source* object (or array) using the specified iterable of *keys*. The returned array contains the corresponding property of the source object for each key in *keys*, in order. For example:
 
 ```js
 permute(["a", "b", "c"], [1, 2, 0]); // returns ["b", "c", "a"]
 ```
 
-It is acceptable for the array of indexes to be a different length from the array of elements, and for indexes to be duplicated or omitted.
+It is acceptable to have more keys than source elements, and for keys to be duplicated or omitted.
 
 This method can also be used to extract the values from an object into an array with a stable order. Extracting keyed values in order can be useful for generating data arrays in nested selections. For example:
 
 ```js
-var object = {yield: 27, variety: "Manchuria", year: 1931, site: "University Farm"},
-    fields = ["site", "variety", "yield"];
+let object = {yield: 27, variety: "Manchuria", year: 1931, site: "University Farm"};
+let fields = ["site", "variety", "yield"];
 
 d3.permute(object, fields); // returns ["University Farm", "Manchuria", 27]
 ```
