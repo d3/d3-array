@@ -28,6 +28,13 @@ tape("leastIndex(array, compare) compares using the specified compare function",
   test.end();
 });
 
+tape("leastIndex(array, accessor) uses the specified accessor function", function(test) {
+  var a = {name: "a", v: 42}, b = {name: "b", v: 0.42};
+  test.deepEqual(arrays.leastIndex([a, b], d => d.name), 0);
+  test.deepEqual(arrays.leastIndex([a, b], d => d.v), 1);
+  test.end();
+});
+
 tape("leastIndex(array) returns -1 if the array is empty", function(test) {
   test.strictEqual(arrays.leastIndex([]), -1);
   test.end();
