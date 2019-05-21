@@ -127,25 +127,29 @@ Returns the standard deviation, defined as the square root of the [bias-correcte
 Methods for searching arrays for a specific element.
 
 <a name="least" href="#least">#</a> d3.<b>least</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/least.js), [Examples](https://observablehq.com/@d3/d3-least)
+<br><a name="least" href="#least">#</a> d3.<b>least</b>(<i>iterable</i>[, <i>accessor</i>])
 
-Returns the least element of the specified *iterable* according to the specified *comparator*. If the given *iterable* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
+Returns the least element of the specified *iterable* according to the specified *comparator* or *accessor*. If the given *iterable* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
 
 ```js
 const array = [{foo: 42}, {foo: 91}];
 d3.least(array, (a, b) => a.foo - b.foo); // {foo: 42}
 d3.least(array, (a, b) => b.foo - a.foo); // {foo: 91}
+d3.least(array, a => a.foo); // {foo: 42}
 ```
 
 This function is similar to [min](#min), except it allows the use of a comparator rather than an accessor.
 
 <a name="leastIndex" href="#leastIndex">#</a> d3.<b>leastIndex</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/leastIndex.js), [Examples](https://observablehq.com/@d3/d3-least)
+<br><a name="leastIndex" href="#leastIndex">#</a> d3.<b>leastIndex</b>(<i>iterable</i>[, <i>comparator</i>])
 
-Returns the index of the least element of the specified *iterable* according to the specified *comparator*. If the given *iterable* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns -1. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
+Returns the index of the least element of the specified *iterable* according to the specified *comparator* or *accessor*. If the given *iterable* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns -1. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
 
 ```js
 const array = [{foo: 42}, {foo: 91}];
 d3.leastIndex(array, (a, b) => a.foo - b.foo); // 0
 d3.leastIndex(array, (a, b) => b.foo - a.foo); // 1
+d3.leastIndex(array, a => a.foo); // 0
 ```
 
 This function is similar to [minIndex](#minIndex), except it allows the use of a comparator rather than an accessor.

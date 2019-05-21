@@ -28,6 +28,13 @@ tape("least(array, compare) compares using the specified compare function", func
   test.end();
 });
 
+tape("least(array, accessor) uses the specified accessor function", function(test) {
+  var a = {name: "a", v: 42}, b = {name: "b", v: 0.42};
+  test.deepEqual(arrays.least([a, b], d => d.name), a);
+  test.deepEqual(arrays.least([a, b], d => d.v), b);
+  test.end();
+});
+
 tape("least(array) returns undefined if the array is empty", function(test) {
   test.strictEqual(arrays.least([]), undefined);
   test.end();
