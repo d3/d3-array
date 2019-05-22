@@ -8,7 +8,7 @@ const data = [
   {name: "stacy", amount: "3405",  date: "01/04/2016"}
 ];
 
-tape("rollups(data, reduce, accessor) returns the expected map", function(test) {
+tape("rollups(data, reduce, accessor) returns the expected array", function(test) {
   test.deepEqual(
     d3.rollups(data, v => v.length, d => d.name),
     [
@@ -28,7 +28,7 @@ tape("rollups(data, reduce, accessor) returns the expected map", function(test) 
   test.end();
 });
 
-tape("rollups(data, reduce, accessor, accessor) returns the expected map", function(test) {
+tape("rollups(data, reduce, accessor, accessor) returns the expected array", function(test) {
   test.deepEqual(
     d3.rollups(data, v => v.length, d => d.name, d => d.amount),
     [

@@ -8,7 +8,7 @@ const data = [
   {name: "stacy", amount: "34.05",  date: "01/04/2016"}
 ];
 
-tape("groups(data, accessor) returns the expected map", function(test) {
+tape("groups(data, accessor) returns the expected array", function(test) {
   test.deepEqual(
     d3.groups(data, d => d.name),
     [
@@ -52,7 +52,7 @@ tape("groups(data, accessor) returns the expected map", function(test) {
   test.end();
 });
 
-tape("groups(data, accessor, accessor) returns the expected map", function(test) {
+tape("groups(data, accessor, accessor) returns the expected array", function(test) {
   test.deepEqual(
     d3.groups(data, d => d.name, d => d.amount),
     [
