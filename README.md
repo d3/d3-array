@@ -316,7 +316,11 @@ This produces:
 
 In the near future, [*selection*.data](https://github.com/d3/d3-selection/blob/master/README.md#selection_data) will accept iterables directly, meaning that you can use a Map (or Set or other iterable) to perform a data join without first needing to convert to an array.
 
-<a name="rollup" href="#rollup">#</a> d3.<b>rollup</b>(<i>iterable</i>, <i>reduce</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/rollup.js)
+<a name="groups" href="#groups">#</a> d3.<b>groups</b>(<i>iterable</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/group.js)
+
+Equivalent to [group](#group), but returns nested arrays instead of nested maps.
+
+<a name="rollup" href="#rollup">#</a> d3.<b>rollup</b>(<i>iterable</i>, <i>reduce</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/group.js)
 
 [Groups](#group) and reduces the specified *iterable* of values into a Map from *key* to value. For example, given some data:
 
@@ -378,6 +382,9 @@ For example:
 ```js
 d3.count([{n: "Alice", age: NaN}, {n: "Bob", age: 18}, {n: "Other"}], d => d.age) // 1
 ```
+<a name="rollups" href="#rollups">#</a> d3.<b>rollups</b>(<i>iterable</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/group.js)
+
+Equivalent to [rollup](#rollup), but returns nested arrays instead of nested maps.
 
 <a name="cross" href="#cross">#</a> d3.<b>cross</b>(<i>...iterables</i>[, <i>reducer</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/cross.js), [Examples](https://observablehq.com/@d3/d3-cross)
 
