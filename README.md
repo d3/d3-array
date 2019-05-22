@@ -141,7 +141,7 @@ d3.least(array, a => a.foo); // {foo: 42}
 This function is similar to [min](#min), except it allows the use of a comparator rather than an accessor.
 
 <a name="leastIndex" href="#leastIndex">#</a> d3.<b>leastIndex</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/leastIndex.js), [Examples](https://observablehq.com/@d3/d3-least)
-<br><a name="leastIndex" href="#leastIndex">#</a> d3.<b>leastIndex</b>(<i>iterable</i>[, <i>comparator</i>])
+<br><a name="leastIndex" href="#leastIndex">#</a> d3.<b>leastIndex</b>(<i>iterable</i>[, <i>accessor</i>])
 
 Returns the index of the least element of the specified *iterable* according to the specified *comparator* or *accessor*. If the given *iterable* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns -1. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
 
