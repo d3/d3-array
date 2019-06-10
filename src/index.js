@@ -25,6 +25,8 @@ export {default as quickselect} from "./quickselect.js";
 export {default as range} from "./range.js";
 export {default as least} from "./least.js";
 export {default as leastIndex} from "./leastIndex.js";
+export {default as greatest} from "./greatest.js";
+export {default as greatestIndex} from "./greatestIndex.js";
 export {default as scan} from "./scan.js"; // Deprecated; use leastIndex.
 export {default as shuffle} from "./shuffle.js";
 export {default as sum} from "./sum.js";
