@@ -86,7 +86,7 @@ Unlike the built-in [Math.max](https://developer.mozilla.org/docs/Web/JavaScript
 
 Returns the [minimum](#min) and [maximum](#max) value in the given *iterable* using natural order. If the iterable contains no comparable values, returns [undefined, undefined]. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the extent.
 
-<a name="sum" href="#sum">#</a> d3.<b>sum</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/sum.js)
+<a name="sum" href="#sum">#</a> d3.<b>sum</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/sum.js), [Examples](https://observablehq.com/@d3/d3-sum)
 
 Returns the sum of the given *iterable* of numbers. If the iterable contains no numbers, returns 0. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the sum. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
@@ -162,7 +162,7 @@ Deprecated; use [leastIndex](#leastIndex) instead.
 
 Returns the insertion point for *x* in *array* to maintain sorted order. The arguments *lo* and *hi* may be used to specify a subset of the array which should be considered; by default the entire array is used. If *x* is already present in *array*, the insertion point will be before (to the left of) any existing entries. The return value is suitable for use as the first argument to [splice](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) assuming that *array* is already sorted. The returned insertion point *i* partitions the *array* into two halves so that all *v* < *x* for *v* in *array*.slice(*lo*, *i*) for the left side and all *v* >= *x* for *v* in *array*.slice(*i*, *hi*) for the right side.
 
-<a name="bisect" href="#bisect">#</a> d3.<b>bisect</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisect.js)
+<a name="bisect" href="#bisect">#</a> d3.<b>bisect</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisect.js), [Examples](https://observablehq.com/@d3/d3-bisect)
 <br><a name="bisectRight" href="#bisectRight">#</a> d3.<b>bisectRight</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]])
 
 Similar to [bisectLeft](#bisectLeft), but returns an insertion point which comes after (to the right of) any existing entries of *x* in *array*. The returned insertion point *i* partitions the *array* into two halves so that all *v* <= *x* for *v* in *array*.slice(*lo*, *i*) for the left side and all *v* > *x* for *v* in *array*.slice(*i*, *hi*) for the right side.
@@ -203,7 +203,7 @@ Equivalent to [bisectLeft](#bisectLeft), but uses this bisector’s associated c
 
 Equivalent to [bisectRight](#bisectRight), but uses this bisector’s associated comparator.
 
-<a name="quickselect" href="#quickselect">#</a> d3.<b>quickselect</b>(<i>array</i>, <i>k</i>, <i>left</i> = 0, <i>right</i> = <i>array</i>.length - 1, <i>compare</i> = ascending) · [Source](https://github.com/d3/d3-array/blob/master/src/quickselect.js)
+<a name="quickselect" href="#quickselect">#</a> d3.<b>quickselect</b>(<i>array</i>, <i>k</i>, <i>left</i> = 0, <i>right</i> = <i>array</i>.length - 1, <i>compare</i> = ascending) · [Source](https://github.com/d3/d3-array/blob/master/src/quickselect.js), [Examples](https://observablehq.com/@d3/d3-quickselect)
 
 See [mourner/quickselect](https://github.com/mourner/quickselect/blob/master/README.md).
 
@@ -492,11 +492,11 @@ d3.range(0, 1, 1 / 49); // BAD: returns 50 elements!
 d3.range(49).map(function(d) { return d / 49; }); // GOOD: returns 49 elements.
 ```
 
-<a name="transpose" href="#transpose">#</a> d3.<b>transpose</b>(<i>matrix</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/transpose.js)
+<a name="transpose" href="#transpose">#</a> d3.<b>transpose</b>(<i>matrix</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/transpose.js), [Examples](https://observablehq.com/@d3/d3-transpose)
 
 Uses the [zip](#zip) operator as a two-dimensional [matrix transpose](http://en.wikipedia.org/wiki/Transpose).
 
-<a name="zip" href="#zip">#</a> d3.<b>zip</b>(<i>arrays…</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/zip.js)
+<a name="zip" href="#zip">#</a> d3.<b>zip</b>(<i>arrays…</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/zip.js), [Examples](https://observablehq.com/@d3/d3-transpose)
 
 Returns an array of arrays, where the *i*th array contains the *i*th element from each of the argument *arrays*. The returned array is truncated in length to the shortest array in *arrays*. If *arrays* contains only a single array, the returned array contains one-element arrays. With no arguments, the returned array is empty.
 
