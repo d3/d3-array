@@ -510,18 +510,18 @@ d3.zip([1, 2], [3, 4]); // returns [[1, 3], [2, 4]]
 
 Binning groups discrete samples into a smaller number of consecutive, non-overlapping intervals. They are often used to visualize the distribution of numerical data as histograms.
 
-<a name="bin" href="#bin">#</a> d3.<b>bin</b>() · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js)
+<a name="bin" href="#bin">#</a> d3.<b>bin</b>() · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js), [Examples](https://observablehq.com/@d3/d3-bin)
 
 Constructs a new bin generator with the default settings.
 
-<a name="_bin" href="#_bin">#</a> <i>bin</i>(<i>data</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js)
+<a name="_bin" href="#_bin">#</a> <i>bin</i>(<i>data</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js), [Examples](https://observablehq.com/@d3/d3-bin)
 
 Bins the given iterable of *data* samples. Returns an array of bins, where each bin is an array containing the associated elements from the input *data*. Thus, the `length` of the bin is the number of elements in that bin. Each bin has two additional attributes:
 
 * `x0` - the lower bound of the bin (inclusive).
 * `x1` - the upper bound of the bin (exclusive, except for the last bin).
 
-<a name="bin_value" href="#bin_value">#</a> <i>bin</i>.<b>value</b>([<i>value</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js)
+<a name="bin_value" href="#bin_value">#</a> <i>bin</i>.<b>value</b>([<i>value</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js), [Examples](https://observablehq.com/@d3/d3-bin)
 
 If *value* is specified, sets the value accessor to the specified function or constant and returns this bin generator. If *value* is not specified, returns the current value accessor, which defaults to the identity function.
 
@@ -529,7 +529,7 @@ When bins are [generated](#_bin), the value accessor will be invoked for each el
 
 This is similar to mapping your data to values before invoking the bin generator, but has the benefit that the input data remains associated with the returned bins, thereby making it easier to access other fields of the data.
 
-<a name="bin_domain" href="#bin_domain">#</a> <i>bin</i>.<b>domain</b>([<i>domain</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js)
+<a name="bin_domain" href="#bin_domain">#</a> <i>bin</i>.<b>domain</b>([<i>domain</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js), [Examples](https://observablehq.com/@d3/d3-bin)
 
 If *domain* is specified, sets the domain accessor to the specified function or array and returns this bin generator. If *domain* is not specified, returns the current domain accessor, which defaults to [extent](#extent). The bin domain is defined as an array [*min*, *max*], where *min* is the minimum observable value and *max* is the maximum observable value; both values are inclusive. Any value outside of this domain will be ignored when the bins are [generated](#_bin).
 
@@ -549,7 +549,7 @@ var bins = bin(numbers);
 
 Note that the domain accessor is invoked on the materialized array of [values](#bin_value), not on the input data array.
 
-<a name="bin_thresholds" href="#bin_thresholds">#</a> <i>bin</i>.<b>thresholds</b>([<i>count</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js)
+<a name="bin_thresholds" href="#bin_thresholds">#</a> <i>bin</i>.<b>thresholds</b>([<i>count</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js), [Examples](https://observablehq.com/@d3/d3-bin)
 <br><a name="bin_thresholds" href="#bin_thresholds">#</a> <i>bin</i>.<b>thresholds</b>([<i>thresholds</i>])
 
 If *thresholds* is specified, sets the [threshold generator](#bin-thresholds) to the specified function or array and returns this bin generator. If *thresholds* is not specified, returns the current threshold generator, which by default implements [Sturges’ formula](#thresholdSturges). (Thus by default, the values to be binned must be numbers!) Thresholds are defined as an array of values [*x0*, *x1*, …]. Any value less than *x0* will be placed in the first bin; any value greater than or equal to *x0* but less than *x1* will be placed in the second bin; and so on. Thus, the [generated bins](#_bin) will have *thresholds*.length + 1 bins. See [bin thresholds](#bin-thresholds) for more information.
@@ -562,14 +562,14 @@ If a *count* is specified instead of an array of *thresholds*, then the [domain]
 
 These functions are typically not used directly; instead, pass them to [*bin*.thresholds](#bin_thresholds). You may also implement your own threshold generator taking three arguments: the array of input [*values*](#bin_value) derived from the data, and the [observable domain](#bin_domain) represented as *min* and *max*. The generator may then return either the array of numeric thresholds or the *count* of bins; in the latter case the domain is divided uniformly into approximately *count* bins; see [ticks](#ticks).
 
-<a name="thresholdFreedmanDiaconis" href="#thresholdFreedmanDiaconis">#</a> d3.<b>thresholdFreedmanDiaconis</b>(<i>values</i>, <i>min</i>, <i>max</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/threshold/freedmanDiaconis.js)
+<a name="thresholdFreedmanDiaconis" href="#thresholdFreedmanDiaconis">#</a> d3.<b>thresholdFreedmanDiaconis</b>(<i>values</i>, <i>min</i>, <i>max</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/threshold/freedmanDiaconis.js), [Examples](https://observablehq.com/@d3/d3-bin)
 
 Returns the number of bins according to the [Freedman–Diaconis rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition); the input *values* must be numbers.
 
-<a name="thresholdScott" href="#thresholdScott">#</a> d3.<b>thresholdScott</b>(<i>values</i>, <i>min</i>, <i>max</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/threshold/scott.js)
+<a name="thresholdScott" href="#thresholdScott">#</a> d3.<b>thresholdScott</b>(<i>values</i>, <i>min</i>, <i>max</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/threshold/scott.js), [Examples](https://observablehq.com/@d3/d3-bin)
 
 Returns the number of bins according to [Scott’s normal reference rule](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition); the input *values* must be numbers.
 
-<a name="thresholdSturges" href="#thresholdSturges">#</a> d3.<b>thresholdSturges</b>(<i>values</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/threshold/sturges.js)
+<a name="thresholdSturges" href="#thresholdSturges">#</a> d3.<b>thresholdSturges</b>(<i>values</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/threshold/sturges.js), [Examples](https://observablehq.com/@d3/d3-bin)
 
 Returns the number of bins according to [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition); the input *values* must be numbers.
