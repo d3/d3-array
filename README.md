@@ -120,7 +120,7 @@ Similar to *quantile*, but expects the input to be a **sorted** *array* of value
 
 <a name="variance" href="#variance">#</a> d3.<b>variance</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/variance.js), [Examples](https://observablehq.com/@d3/d3-mean-d3-median-and-friends)
 
-Returns an [unbiased estimator of the population variance](http://mathworld.wolfram.com/SampleVariance.html) of the given *iterable* of numbers. If the iterable has fewer than two numbers, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the variance. This method ignores undefined and NaN values; this is useful for ignoring missing data.
+Returns an [unbiased estimator of the population variance](http://mathworld.wolfram.com/SampleVariance.html) of the given *iterable* of numbers using [Welford’s algorithm](https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Welford's_online_algorithm). If the iterable has fewer than two numbers, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the variance. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
 <a name="deviation" href="#deviation">#</a> d3.<b>deviation</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/deviation.js), [Examples](https://observablehq.com/@d3/d3-mean-d3-median-and-friends)
 
