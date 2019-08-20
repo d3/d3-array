@@ -1,5 +1,5 @@
 import ascending from "./ascending.js";
-import maxIndex from "./minIndex.js";
+import maxIndex from "./maxIndex.js";
 
 export default function greatestIndex(values, compare = ascending) {
   if (compare.length === 1) return maxIndex(values, compare);
