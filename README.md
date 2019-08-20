@@ -186,10 +186,6 @@ d3.greatestIndex(array, a => a.foo); // 1
 
 This function is similar to [maxIndex](#maxIndex), except it allows the use of a comparator rather than an accessor.
 
-<a name="scan" href="#scan">#</a> d3.<b>scan</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/scan.js)
-
-Deprecated; use [leastIndex](#leastIndex) or [greatestIndex](#greatestIndex) instead.
-
 <a name="bisectLeft" href="#bisectLeft">#</a> d3.<b>bisectLeft</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisect.js)
 
 Returns the insertion point for *x* in *array* to maintain sorted order. The arguments *lo* and *hi* may be used to specify a subset of the array which should be considered; by default the entire array is used. If *x* is already present in *array*, the insertion point will be before (to the left of) any existing entries. The return value is suitable for use as the first argument to [splice](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) assuming that *array* is already sorted. The returned insertion point *i* partitions the *array* into two halves so that all *v* < *x* for *v* in *array*.slice(*lo*, *i*) for the left side and all *v* >= *x* for *v* in *array*.slice(*i*, *hi*) for the right side.
