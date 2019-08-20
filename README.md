@@ -114,7 +114,7 @@ d3.quantile(a, 0.1); // 2
 
 An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the quantile.
 
-<a name="quantileSorted" href="#quantileSorted">#</a> d3.<b>quantileSorted</b>(<i>array</i>, <i>p</i>[, <i>accessor</i>]) [<>](https://github.com/d3/d3-array/blob/master/src/quantile.js "Source")
+<a name="quantileSorted" href="#quantileSorted">#</a> d3.<b>quantileSorted</b>(<i>array</i>, <i>p</i>[, <i>accessor</i>]) [Source](https://github.com/d3/d3-array/blob/master/src/quantile.js "Source")
 
 Similar to *quantile*, but expects the input to be a **sorted** *array* of values. In contrast with *quantile*, the accessor is only called on the elements needed to compute the quantile.
 
