@@ -158,9 +158,37 @@ d3.leastIndex(array, a => a.foo); // 0
 
 This function is similar to [minIndex](#minIndex), except it allows the use of a comparator rather than an accessor.
 
+<a name="greatest" href="#greatest">#</a> d3.<b>greatest</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/greatest.js), [Examples](https://observablehq.com/@d3/d3-least)
+<br><a name="greatest" href="#greatest">#</a> d3.<b>greatest</b>(<i>iterable</i>[, <i>accessor</i>])
+
+Returns the greatest element of the specified *iterable* according to the specified *comparator* or *accessor*. If the given *iterable* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
+
+```js
+const array = [{foo: 42}, {foo: 91}];
+d3.greatest(array, (a, b) => a.foo - b.foo); // {foo: 91}
+d3.greatest(array, (a, b) => b.foo - a.foo); // {foo: 42}
+d3.greatest(array, a => a.foo); // {foo: 91}
+```
+
+This function is similar to [max](#max), except it allows the use of a comparator rather than an accessor.
+
+<a name="greatestIndex" href="#greatestIndex">#</a> d3.<b>greatestIndex</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/greatestIndex.js), [Examples](https://observablehq.com/@d3/d3-least)
+<br><a name="greatestIndex" href="#greatestIndex">#</a> d3.<b>greatestIndex</b>(<i>iterable</i>[, <i>accessor</i>])
+
+Returns the index of the greatest element of the specified *iterable* according to the specified *comparator* or *accessor*. If the given *iterable* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns -1. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
+
+```js
+const array = [{foo: 42}, {foo: 91}];
+d3.greatestIndex(array, (a, b) => a.foo - b.foo); // 1
+d3.greatestIndex(array, (a, b) => b.foo - a.foo); // 0
+d3.greatestIndex(array, a => a.foo); // 1
+```
+
+This function is similar to [maxIndex](#maxIndex), except it allows the use of a comparator rather than an accessor.
+
 <a name="scan" href="#scan">#</a> d3.<b>scan</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/scan.js)
 
-Deprecated; use [leastIndex](#leastIndex) instead.
+Deprecated; use [leastIndex](#leastIndex) or [greatestIndex](#greatestIndex) instead.
 
 <a name="bisectLeft" href="#bisectLeft">#</a> d3.<b>bisectLeft</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisect.js)
 
