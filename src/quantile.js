@@ -1,10 +1,8 @@
-import {default as number, numbers} from "./number.js";
+import ascending from "./ascending.js";
+import number, {numbers} from "./number.js";
 
-export default function quantile(values, p, valueof = number) {
-  values = Float64Array.from(numbers(values, valueof))
-    .filter(v => !isNaN(v))
-    .sort((a, b) => a - b);
-  return quantileSorted(values, p);
+export default function quantile(values, p, valueof) {
+  return quantileSorted(Float64Array.from(numbers(values, valueof)).sort(ascending), p);
 }
 
 export function quantileSorted(values, p, valueof = number) {
