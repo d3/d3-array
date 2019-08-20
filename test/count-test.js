@@ -13,9 +13,14 @@ tape("count() ignores NaN, null", function(test) {
   test.end();
 });
 
+tape("count() coerces to a number", function(test) {
+  test.deepEqual(arrays.count(["1", " 2", "Fred"]), 2);
+  test.end();
+});
+
 tape("count() accepts an accessor", function(test) {
   test.deepEqual(arrays.count([{v:NaN}, {}, {v:0}, {v:1}], d => d.v), 2);
-    test.deepEqual(arrays.count([{n: "Alice", age: NaN}, {n: "Bob", age: 18}, {n: "Other"}], d => d.age), 1);
+  test.deepEqual(arrays.count([{n: "Alice", age: NaN}, {n: "Bob", age: 18}, {n: "Other"}], d => d.age), 1);
   test.end();
 });
 
