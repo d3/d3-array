@@ -12,11 +12,7 @@ export default function quantile(values, p, valueof = number) {
       i = (n - 1) * p,
       i0 = Math.floor(i);
   quickselect(v, i0);
-  var value0 = -Infinity, value1 = +Infinity;
-  for (var j = 0; j < n; j++) {
-    if (j <= i0 && v[j] > value0) value0 = v[j];
-    if (j > i0 && v[j] < value1) value1 = v[j];
-  }
+  var value0 = max(v.subarray(0, i0 + 1)), value1 = min(v.subarray(i0 + 1));
   return value0 + (value1 - value0) * (i - i0);
 }
 
