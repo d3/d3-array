@@ -53,6 +53,20 @@ tape("quantile(array, p) returns an exact value for integer p-values", function(
   test.end();
 });
 
+tape("quantile(array, p) returns the expected value for integer or fractional p", function(test) {
+  var data = [3, 1, 2, 4, 0];
+  test.equal(arrays.quantile(data, 0 / 4), 0);
+  test.equal(arrays.quantile(data, 0.1 / 4), 0.1);
+  test.equal(arrays.quantile(data, 1 / 4), 1);
+  test.equal(arrays.quantile(data, 1.5 / 4), 1.5);
+  test.equal(arrays.quantile(data, 2 / 4), 2);
+  test.equal(arrays.quantile(data, 2.5 / 4), 2.5);
+  test.equal(arrays.quantile(data, 3 / 4), 3);
+  test.equal(arrays.quantile(data, 3.2 / 4), 3.2);
+  test.equal(arrays.quantile(data, 4 / 4), 4);
+  test.end();
+});
+
 tape("quantile(array, p) returns the first value for p = 0", function(test) {
   var data = [1, 2, 3, 4];
   test.equal(arrays.quantile(data, 0), 1);
