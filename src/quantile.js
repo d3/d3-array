@@ -2,7 +2,9 @@ import ascending from "./ascending.js";
 import number, {numbers} from "./number.js";
 
 export default function quantile(values, p, valueof) {
-  return quantileSorted(Float64Array.from(numbers(values, valueof)).sort(ascending), p);
+  values = Float64Array.from(numbers(values, valueof));
+  values.sort(ascending);
+  return quantileSorted(values, p);
 }
 
 export function quantileSorted(values, p, valueof = number) {
