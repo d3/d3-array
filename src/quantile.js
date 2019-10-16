@@ -3,7 +3,7 @@ import min from "./min.js";
 import quickselect from "./quickselect.js";
 import number, {numbers} from "./number.js";
 
-export default function quantile(values, p, valueof = number) {
+export default function quantile(values, p, valueof) {
   values = Float64Array.from(numbers(values, valueof));
   if (!(n = values.length)) return;
   if ((p = +p) <= 0 || n < 2) return min(values);
