@@ -1,5 +1,5 @@
 import {numbers} from "./number.js";
-import quantile from "./quantile.js";
+import {quantileSorted} from "./quantile.js";
 import quickselect from "./quickselect.js";
 
 export default function(values, valueof) {
@@ -9,5 +9,5 @@ export default function(values, valueof) {
   const i = n >> 1;
   quickselect(values, i - 1, 0);
   if ((n & 1) === 0) quickselect(values, i, i);
-  return quantile(values, 0.5);
+  return quantileSorted(values, 0.5);
 }
