@@ -4,15 +4,15 @@ import quickselect from "./quickselect.js";
 import number, {numbers} from "./number.js";
 
 export default function quantile(values, p, valueof = number) {
-  var v = Float64Array.from(numbers(values, valueof));
-  if (!(n = v.length)) return;
-  if ((p = +p) <= 0 || n < 2) return min(v);
-  if (p >= 1) return max(v);
+  values = Float64Array.from(numbers(values, valueof));
+  if (!(n = values.length)) return;
+  if ((p = +p) <= 0 || n < 2) return min(values);
+  if (p >= 1) return max(values);
   var n,
       i = (n - 1) * p,
       i0 = Math.floor(i);
-  quickselect(v, i0);
-  var value0 = max(v.subarray(0, i0 + 1)), value1 = min(v.subarray(i0 + 1));
+  quickselect(values, i0);
+  var value0 = max(values.subarray(0, i0 + 1)), value1 = min(values.subarray(i0 + 1));
   return value0 + (value1 - value0) * (i - i0);
 }
 
