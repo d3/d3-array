@@ -10,9 +10,9 @@ export default function quantile(values, p, valueof) {
   if (p >= 1) return max(values);
   var n,
       i = (n - 1) * p,
-      i0 = Math.floor(i);
-  quickselect(values, i0);
-  var value0 = max(values.subarray(0, i0 + 1)), value1 = min(values.subarray(i0 + 1));
+      i0 = Math.floor(i),
+      value0 = max(quickselect(values, i0).subarray(0, i0 + 1)),
+      value1 = min(values.subarray(i0 + 1));
   return value0 + (value1 - value0) * (i - i0);
 }
 
