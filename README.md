@@ -98,7 +98,7 @@ Returns the mean of the given *iterable* of numbers. If the iterable contains no
 
 Returns the median of the given *iterable* of numbers using the [R-7 method](https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample). If the iterable contains no numbers, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the median. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
-<a name="cumsum" href="#cumsum">#</a> d3.<b>cumsum</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/cumsum.js)<!--, [Examples](https://observablehq.com/@d3/d3-cumsum) -->
+<a name="cumsum" href="#cumsum">#</a> d3.<b>cumsum</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/cumsum.js), [Examples](https://observablehq.com/@d3/d3-cumsum)
 
 Returns the cumulative sum of the given *iterable* of numbers, as a Float64Array of the same length. If the iterable contains no numbers, returns zeros. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the cumulative sum. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
