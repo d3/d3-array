@@ -98,6 +98,10 @@ Returns the mean of the given *iterable* of numbers. If the iterable contains no
 
 Returns the median of the given *iterable* of numbers using the [R-7 method](https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample). If the iterable contains no numbers, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the median. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
+<a name="cumsum" href="#cumsum">#</a> d3.<b>cumsum</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/cumsum.js), [Examples](https://observablehq.com/@d3/d3-cumsum)
+
+Returns the cumulative sum of the given *iterable* of numbers, as a Float64Array of the same length. If the iterable contains no numbers, returns zeros. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the cumulative sum. This method ignores undefined and NaN values; this is useful for ignoring missing data.
+
 <a name="quantile" href="#quantile">#</a> d3.<b>quantile</b>(<i>iterable</i>, <i>p</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/quantile.js), [Examples](https://observablehq.com/@d3/d3-mean-d3-median-and-friends)
 
 Returns the *p*-quantile of the given *iterable* of numbers, where *p* is a number in the range [0, 1]. For example, the median can be computed using *p* = 0.5, the first quartile at *p* = 0.25, and the third quartile at *p* = 0.75. This particular implementation uses the [R-7 method](http://en.wikipedia.org/wiki/Quantile#Quantiles_of_a_population), which is the default for the R programming language and Excel. For example:
