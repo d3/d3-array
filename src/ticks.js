@@ -20,10 +20,11 @@ export default function(start, stop, count) {
     ticks = new Array(n = Math.ceil(stop - start + 1));
     while (++i < n) ticks[i] = (start + i) * step;
   } else {
+    step = -step;
     start = Math.floor(start * step);
     stop = Math.ceil(stop * step);
-    ticks = new Array(n = Math.ceil(start - stop + 1));
-    while (++i < n) ticks[i] = (start - i) / step;
+    ticks = new Array(n = Math.ceil(stop - start + 1));
+    while (++i < n) ticks[i] = (start + i) / step;
   }
 
   if (reverse) ticks.reverse();
