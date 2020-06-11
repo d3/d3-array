@@ -652,7 +652,7 @@ Returns a new interval [*niceStart*, *niceStop*] covering the given interval [*s
 
 <a name="range" href="#range">#</a> d3.<b>range</b>([<i>start</i>, ]<i>stop</i>[, <i>step</i>]) · [Source](https://github.com/d3/d3-array/blob/main/src/range.js), [Examples](https://observablehq.com/@d3/d3-range)
 
-Returns an array containing an arithmetic progression, similar to the Python built-in [range](http://docs.python.org/library/functions.html#range). This method is often used to iterate over a sequence of uniformly-spaced numeric values, such as the indexes of an array or the ticks of a linear scale. (See also [d3.ticks](#ticks) for nicely-rounded values.)
+Returns an array containing an arithmetic progression, similar to the Python built-in [range](http://docs.python.org/library/functions.html#range). This method is often used to iterate over a sequence of uniformly-spaced numeric values, such as the indexes of an array or the ticks of a linear scale. (See also [d3.ticks](#ticks) for nicely-rounded values, and [d3.linspace](#linspace) if you prefer to specify the number of values rather than the step.)
 
 If *step* is omitted, it defaults to 1. If *start* is omitted, it defaults to 0. The *stop* value is exclusive; it is not included in the result. If *step* is positive, the last element is the largest *start* + *i* \* *step* less than *stop*; if *step* is negative, the last element is the smallest *start* + *i* \* *step* greater than *stop*. If the returned array would contain an infinite number of values, an empty range is returned.
 
@@ -669,6 +669,15 @@ Likewise, if the returned array should have a specific length, consider using [a
 ```js
 d3.range(0, 1, 1 / 49); // BAD: returns 50 elements!
 d3.range(49).map(function(d) { return d / 49; }); // GOOD: returns 49 elements.
+```
+
+<a name="linspace" href="#linspace">#</a> d3.<b>linspace</b>(<i>start</i>, <i>stop</i>[, <i>n</i>][, <i>endpoint</i>]) · [Source](https://github.com/d3/d3-array/blob/main/src/linspace.js)<!-- , [Examples](https://observablehq.com/@d3/d3-linspace) -->
+
+Returns an array containing an arithmetic progression of *n* values ranging from *start* to *end*, including *end* if *endpoint* is requested. Similar to numpy’s [linspace](https://numpy.org/doc/stable/reference/generated/numpy.linspace.html). Defaults to *n* = 50 and *endpoint* = true.
+
+```js
+d3.linspace(0, 1, 101); // [0, 0.01, 0.02, …, 0.99, 1]
+d3.linspace(1, 0, 10, false); // [1, 0.9, 0.8, …, 0.1]
 ```
 
 <a name="transpose" href="#transpose">#</a> d3.<b>transpose</b>(<i>matrix</i>) · [Source](https://github.com/d3/d3-array/blob/main/src/transpose.js), [Examples](https://observablehq.com/@d3/d3-transpose)
