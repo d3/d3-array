@@ -95,6 +95,11 @@ tape("sum(array, f) uses the global context", function(test) {
   test.end();
 });
 
+tape("sum(array, f) uses Kahan summation", function(test) {
+  test.equal(arrays.sum([10000.0, 3.14159, 2.71828]), 10005.85987);
+  test.end();
+});
+
 function box(value) {
   return {value: value};
 }
