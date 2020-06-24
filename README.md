@@ -132,27 +132,30 @@ Returns the standard deviation, defined as the square root of the [bias-correcte
 
 <a name="fsum" href="#fsum">#</a> d3.<b>fsum</b>([<i>values</i>][, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/fsum.js)<!-- , [Examples](https://observablehq.com/@d3/d3-fsum) -->
 
-Returns an full precision summation for [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) floating point numbers (adder). The optional *values* and *accessor* will immediately be passed to <a href="#fsum_add">*fsum*.add</a>.
+Returns an full precision sum.
 
 ```js
-const adder = d3.fsum([.1, .1, .1, .1, .1]);
-adder.add([.1, .1, .1, .1, .1]);
-+adder; // 1 (the usual summation would return 0.9999999999999999)
+d3.fsum([.1, .1, .1, .1, .1, .1, .1, .1, .1, .1]); // 1
+d3.sum([.1, .1, .1, .1, .1, .1, .1, .1, .1, .1]); // 0.9999999999999999
 ```
 
-Although slower, +d3.fsum can replace d3.sum everywhere an exact summation is needed.
+Although slower, d3.fsum can replace d3.sum everywhere an exact summation is needed. Uses <a href="#adder">d3.Adder</a>.
 
-<a name="fsum_add" href="#fsum_add">#</a> *fsum*.<b>add</b>(<i>value</i>[, <i>accessor</i>])
+<a name="adder" href="#adder">#</a> new d3.<b>Adder</b>()
 
-If *value* is a number, adds it the the current value. If an iterable, adds its elements to the current value. An optional *accessor* function may be specified, which is equivalent to calling Array.from on the iterable. Null and NaN values are ignored.
+Creates a full precision adder for [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) floating point numbers.
 
-<a name="fsum_reset" href="#fsum_reset">#</a> *fsum*.<b>reset</b>()
+<a name="adder_add" href="#adder_add">#</a> *adder*.<b>add</b>(number)
 
-Resets the adder’s current value to 0.
+Adds *number* to the adder’s current value.
 
-<a name="fsum_valueOf" href="#fsum_valueOf">#</a> *fsum*.<b>valueOf</b>()
+<a name="adder_reset" href="#adder_reset">#</a> *adder*.<b>reset</b>()
 
-Returns the IEEE 754 double precision representation of the adder’s current value. Equivalent to the short-hand notation `+adder`.
+Sets the adder’s current value to 0.
+
+<a name="adder_valueOf" href="#adder_valueOf">#</a> *adder*.<b>valueOf</b>()
+
+Returns the IEEE 754 double precision representation of the adder’s current value. Most useful as the short-hand notation `+adder`.
 
 ### Search
 

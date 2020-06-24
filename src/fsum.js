@@ -1,74 +1,64 @@
 // adapted from https://github.com/python/cpython/blob/master/Modules/mathmodule.c#L1444
-export default function(iterable, valueof) {
-  const partials = [];
-
-  const isIterable = object =>
-    object != null && typeof object[Symbol.iterator] === 'function';
-
-  const Adder = {
-    partials,
-    add: function(t, valueof) {
-      const p = partials;
-      let n = p.length, i, j, tmp, y, hi, lo, index = -1;
-      if (valueof && isIterable(t)) for (let x of t) {
-        x = +valueof(x, ++index, t);
-        if (isNaN(x)) continue;
-        for (i = j = 0; j < n && j < 32; j++) {
-          if (Math.abs(x) < Math.abs(y = p[j])) tmp = x, x = y, y = tmp;
-          hi = x + y;
-          lo = y - (hi - x);
-          if (lo) p[i++] = lo;
-          x = hi;
-        }
-        n = i;
-        p[n++] = x;
-      }
-      else for (let x of isIterable(t) ? t : [t]) {
-        if (isNaN(x = +x)) continue;
-        for (i = j = 0; j < n && j < 32; j++) {
-          if (Math.abs(x) < Math.abs(y = p[j])) tmp = x, x = y, y = tmp;
-          hi = x + y;
-          lo = y - (hi - x);
-          if (lo) p[i++] = lo;
-          x = hi;
-        }
-        n = i;
-        p[n++] = x;
-      }
-      p.splice(n, 32);
-      return Adder;
-    },
-    valueOf: function() {
-      let n = partials.length,
-        x,
-        y,
-        hi = 0,
-        lo;
-      if (n > 0) {
-        hi = partials[--n];
-        while (n > 0) {
-          x = hi;
-          y = partials[--n];
-          hi = x + y;
-          lo = y - (hi - x);
-          if (lo) break;
-        }
-        if (
-          n > 0 &&
-          ((lo < 0 && partials[n - 1] < 0) || (lo > 0 && partials[n - 1] > 0))
-        ) {
-          y = lo * 2.0;
-          x = hi + y;
-          if (y == x - hi) hi = x;
-        }
-      }
-      return hi;
-    },
-    reset: function() {
-      partials.length = 0;
+export class Adder {
+  constructor() {
+    this.reset();
+  }
+  add(x) {
+    const p = this.partials;
+    let i = 0;
+    for (let j = 0; j < this.n && j < 32; j++) {
+      const y = p[j],
+        hi = x + y,
+        lo = Math.abs(x) < Math.abs(y) ? x - (hi - y) : y - (hi - x);
+      if (lo) p[i++] = lo;
+      x = hi;
     }
-  };
+    p[i] = x;
+    this.n = i + 1;
+    return this;
+  }
+  valueOf() {
+    const p = this.partials;
+    let n = this.n, x, y, lo, hi = 0;
+    if (n > 0) {
+      hi = p[--n];
+      while (n > 0) {
+        x = hi;
+        y = p[--n];
+        hi = x + y;
+        lo = y - (hi - x);
+        if (lo) break;
+      }
+      if (n > 0 && ((lo < 0 && p[n - 1] < 0) || (lo > 0 && p[n - 1] > 0))) {
+        y = lo * 2;
+        x = hi + y;
+        if (y == x - hi) hi = x;
+      }
+    }
+    return hi;
+  }
+  reset() {
+    this.partials = new Float64Array(32).fill(0);
+    this.n = 0;
+    return this;
+  }
+}
 
-  if (iterable) Adder.add(iterable, valueof);
-  return Adder;
+export default function(values, valueof) {
+  const adder = new Adder();
+  if (valueof === undefined) {
+    for (let value of values) {
+      if (value = +value) {
+        adder.add(value);
+      }
+    }
+  } else {
+    let index = -1;
+    for (let value of values) {
+      if (value = +valueof(value, ++index, values)) {
+        adder.add(value);
+      }
+    }
+  }
+  return +adder;
 }
