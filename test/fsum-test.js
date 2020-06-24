@@ -4,7 +4,6 @@ var tape = require("tape"),
 tape("new Adder() returns an Adder", function(test) {
   test.equal(typeof new arrays.Adder().add, "function");
   test.equal(typeof new arrays.Adder().valueOf, "function");
-  test.equal(typeof new arrays.Adder().reset, "function");
   test.end();
 });
 

@@ -143,15 +143,11 @@ Although slower, d3.fsum can replace d3.sum everywhere an exact summation is nee
 
 <a name="adder" href="#adder">#</a> new d3.<b>Adder</b>()
 
-Creates a full precision adder for [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) floating point numbers.
+Creates a full precision adder for [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) floating point numbers, setting its value to 0.
 
 <a name="adder_add" href="#adder_add">#</a> *adder*.<b>add</b>(number)
 
 Adds *number* to the adder’s current value.
-
-<a name="adder_reset" href="#adder_reset">#</a> *adder*.<b>reset</b>()
-
-Sets the adder’s current value to 0.
 
 <a name="adder_valueOf" href="#adder_valueOf">#</a> *adder*.<b>valueOf</b>()
 
