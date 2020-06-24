@@ -258,6 +258,10 @@ Equivalent to [bisectLeft](#bisectLeft), but uses this bisector’s associated c
 
 Equivalent to [bisectRight](#bisectRight), but uses this bisector’s associated comparator.
 
+<a name="bisector_center" href="#bisector_center">#</a> <i>bisector</i>.<b>center</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisector.js)
+
+Returns the index of the closest value to *x* in the given sorted *array*. This expects that the bisector’s associated accessor returns a quantitative value, or that the bisector’s associated comparator returns a signed distance; otherwise, this method is equivalent to *bisector*.left.
+
 <a name="quickselect" href="#quickselect">#</a> d3.<b>quickselect</b>(<i>array</i>, <i>k</i>, <i>left</i> = 0, <i>right</i> = <i>array</i>.length - 1, <i>compare</i> = ascending) · [Source](https://github.com/d3/d3-array/blob/master/src/quickselect.js), [Examples](https://observablehq.com/@d3/d3-quickselect)
 
 See [mourner/quickselect](https://github.com/mourner/quickselect/blob/master/README.md).

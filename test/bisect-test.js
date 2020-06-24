@@ -19,6 +19,10 @@ tape("bisectLeft(array, value) returns the index of the first match", (test) => 
   test.equal(d3.bisectLeft(numbers, 3), 3);
 });
 
+tape("bisectLeft(empty, value) returns zero", (test) => {
+  test.equal(d3.bisectLeft([], 1), 0);
+});
+
 tape("bisectLeft(array, value) returns the insertion point of a non-exact match", (test) => {
   const numbers = [1, 2, 3];
   test.equal(d3.bisectLeft(numbers, 0.5), 0);
@@ -85,6 +89,10 @@ tape("bisectRight(array, value) returns the index after the last match", (test) 
   test.equal(d3.bisectRight(numbers, 1), 1);
   test.equal(d3.bisectRight(numbers, 2), 3);
   test.equal(d3.bisectRight(numbers, 3), 4);
+});
+
+tape("bisectRight(empty, value) returns zero", (test) => {
+  test.equal(d3.bisectRight([], 1), 0);
 });
 
 tape("bisectRight(array, value) returns the insertion point of a non-exact match", (test) => {

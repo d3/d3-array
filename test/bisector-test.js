@@ -17,6 +17,10 @@ tape("bisector(comparator).left(array, value) returns the index of the first mat
   test.equal(bisectLeft(boxes, box(3)), 3);
 });
 
+tape("bisector(comparator).left(empty, value) returns zero", (test) => {
+  test.equal(d3.bisector(() => { throw new Error(); }).left([], 1), 0);
+});
+
 tape("bisector(comparator).left(array, value) returns the insertion point of a non-exact match", (test) => {
   const boxes = [1, 2, 3].map(box);
   const bisectLeft = d3.bisector(ascendingBox).left;
@@ -90,6 +94,10 @@ tape("bisector(comparator).right(array, value) returns the index after the last 
   test.equal(bisectRight(boxes, box(1)), 1);
   test.equal(bisectRight(boxes, box(2)), 3);
   test.equal(bisectRight(boxes, box(3)), 4);
+});
+
+tape("bisector(comparator).right(empty, value) returns zero", (test) => {
+  test.equal(d3.bisector(() => { throw new Error(); }).right([], 1), 0);
 });
 
 tape("bisector(comparator).right(array, value) returns the insertion point of a non-exact match", (test) => {
@@ -283,6 +291,46 @@ tape("bisector(accessor).right(array, value) handles large sparse d3", (test) =>
   test.equal(bisectRight(boxes, 4, i - 5, i), i - 1);
   test.equal(bisectRight(boxes, 5, i - 5, i), i - 0);
   test.equal(bisectRight(boxes, 6, i - 5, i), i - 0);
+});
+
+tape("bisector(accessor).center(array, value) returns the closest index", (test) => {
+  const data = [0, 1, 2, 3, 4];
+  const bisectCenter = d3.bisector(d => +d).center;
+  test.equal(bisectCenter(data, 2), 2);
+  test.equal(bisectCenter(data, 2.2), 2);
+  test.equal(bisectCenter(data, 2.6), 3);
+  test.equal(bisectCenter(data, 3), 3);
+});
+
+tape("bisector(comparator).center(array, value) returns the closest index", (test) => {
+  const data = [0, 1, 2, 3, 4];
+  const bisectCenter = d3.bisector((d, x) => +d - x).center;
+  test.equal(bisectCenter(data, 2), 2);
+  test.equal(bisectCenter(data, 2.2), 2);
+  test.equal(bisectCenter(data, 2.6), 3);
+  test.equal(bisectCenter(data, 3), 3);
+});
+
+tape("bisector(comparator).center(empty, value) returns zero", (test) => {
+  test.equal(d3.bisector(() => { throw new Error(); }).center([], 1), 0);
+});
+
+tape("bisector(ascending).center(array, value) returns the left value", (test) => {
+  const data = [0, 1, 2, 3, 4];
+  const bisectCenter = d3.bisector(d3.ascending).center;
+  test.equal(bisectCenter(data, 2.0), 2);
+  test.equal(bisectCenter(data, 2.2), 3);
+  test.equal(bisectCenter(data, 2.6), 3);
+  test.equal(bisectCenter(data, 3.0), 3);
+});
+
+tape("bisector(ordinalAccessor).center(array, value) returns the left value", (test) => {
+  const data = ["aa", "bb", "cc", "dd", "ee"];
+  const bisectCenter = d3.bisector(d => d).center;
+  test.equal(bisectCenter(data, "cc"), 2);
+  test.equal(bisectCenter(data, "ce"), 3);
+  test.equal(bisectCenter(data, "cf"), 3);
+  test.equal(bisectCenter(data, "dd"), 3);
 });
 
 function box(value) {
