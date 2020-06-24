@@ -592,7 +592,7 @@ If a *count* is specified instead of an array of *thresholds*, then the [domain]
 
 #### Bin Thresholds
 
-These functions are typically not used directly; instead, pass them to [*bin*.thresholds](#bin_thresholds). You may also implement your own threshold generator taking three arguments: the array of input [*values*](#bin_value) derived from the data, and the [observable domain](#bin_domain) represented as *min* and *max*. The generator may then return either the array of numeric thresholds or the *count* of bins; in the latter case the domain is divided uniformly into approximately *count* bins; see [ticks](#ticks).
+These functions are typically not used directly; instead, pass them to [*bin*.thresholds](#bin_thresholds).
 
 <a name="thresholdFreedmanDiaconis" href="#thresholdFreedmanDiaconis">#</a> d3.<b>thresholdFreedmanDiaconis</b>(<i>values</i>, <i>min</i>, <i>max</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/threshold/freedmanDiaconis.js), [Examples](https://observablehq.com/@d3/d3-bin)
 
@@ -605,3 +605,7 @@ Returns the number of bins according to [Scott’s normal reference rule](https:
 <a name="thresholdSturges" href="#thresholdSturges">#</a> d3.<b>thresholdSturges</b>(<i>values</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/threshold/sturges.js), [Examples](https://observablehq.com/@d3/d3-bin)
 
 Returns the number of bins according to [Sturges’ formula](https://en.wikipedia.org/wiki/Histogram#Mathematical_definition); the input *values* must be numbers.
+
+You may also implement your own threshold generator taking three arguments: the array of input [*values*](#bin_value) derived from the data, and the [observable domain](#bin_domain) represented as *min* and *max*. The generator may then return either the array of numeric thresholds or the *count* of bins; in the latter case the domain is divided uniformly into approximately *count* bins; see [ticks](#ticks).
+
+For instance, when binning date values, you might want to use the ticks from a time scale ([Example](https://observablehq.com/@d3/d3-bin-time-thresholds)).
