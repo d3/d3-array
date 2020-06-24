@@ -7,6 +7,14 @@ tape("new Adder() returns an Adder", function(test) {
   test.end();
 });
 
+tape("+adder can be applied several times", function(test) {
+  const adder = new arrays.Adder();
+  for (let i = 0; i < 10; i++) adder.add(.1);
+  test.equal(+adder, 1);
+  test.equal(+adder, 1);
+  test.end();
+});
+
 tape("fsum(array) is an exact sum", function(test) {
   test.equal(arrays.fsum([.1, .1, .1, .1, .1, .1, .1, .1, .1, .1]), 1);
   test.equal(arrays.fsum([.3, .3, .3, .3, .3, .3, .3, .3, .3, .3, -.3, -.3, -.3, -.3, -.3, -.3, -.3, -.3, -.3, -.3]), 0);

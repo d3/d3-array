@@ -5,9 +5,9 @@ export class Adder {
     this._n = 0;
   }
   add(x) {
-    const p = this.partials;
+    const p = this._partials;
     let i = 0;
-    for (let j = 0; j < this.n && j < 32; j++) {
+    for (let j = 0; j < this._n && j < 32; j++) {
       const y = p[j],
         hi = x + y,
         lo = Math.abs(x) < Math.abs(y) ? x - (hi - y) : y - (hi - x);
@@ -15,12 +15,12 @@ export class Adder {
       x = hi;
     }
     p[i] = x;
-    this.n = i + 1;
+    this._n = i + 1;
     return this;
   }
   valueOf() {
-    const p = this.partials;
-    let n = this.n, x, y, lo, hi = 0;
+    const p = this._partials;
+    let n = this._n, x, y, lo, hi = 0;
     if (n > 0) {
       hi = p[--n];
       while (n > 0) {
