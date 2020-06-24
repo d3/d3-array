@@ -147,7 +147,7 @@ Creates a full precision adder for [IEEE 754](https://en.wikipedia.org/wiki/IEEE
 
 <a name="adder_add" href="#adder_add">#</a> *adder*.<b>add</b>(number)
 
-Adds *number* to the adder’s current value.
+Adds *number* to the adder’s current value and returns the adder.
 
 <a name="adder_valueOf" href="#adder_valueOf">#</a> *adder*.<b>valueOf</b>()
 
