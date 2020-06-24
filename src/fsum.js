@@ -1,8 +1,8 @@
 // adapted from https://github.com/python/cpython/blob/master/Modules/mathmodule.c#L1444
 export class Adder {
   constructor() {
-    this.partials = new Float64Array(32).fill(0);
-    this.n = 0;
+    this._partials = new Float64Array(32).fill(0);
+    this._n = 0;
   }
   add(x) {
     const p = this.partials;
