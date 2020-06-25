@@ -8,7 +8,7 @@ export {default as descending} from "./descending.js";
 export {default as deviation} from "./deviation.js";
 export {default as extent} from "./extent.js";
 export {default as fsum, Adder} from "./fsum.js";
-export {default as group, groups, rollup, rollups} from "./group.js";
+export {default as group, groups, index, indexes, rollup, rollups} from "./group.js";
 export {default as bin, default as histogram} from "./bin.js"; // Deprecated; use bin.
 export {default as thresholdFreedmanDiaconis} from "./threshold/freedmanDiaconis.js";
 export {default as thresholdScott} from "./threshold/scott.js";

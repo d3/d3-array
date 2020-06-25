@@ -379,6 +379,39 @@ In the near future, [*selection*.data](https://github.com/d3/d3-selection/blob/m
 
 Equivalent to [group](#group), but returns nested arrays instead of nested maps.
 
+<a name="index" href="#index">#</a> d3.<b>index</b>(<i>iterable</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/group.js)<!-- , [Examples](https://observablehq.com/@d3/d3-index) -->
+
+Equivalent to [group](#group) but returns a unique value per compound key instead of an array, throwing if the key is not unique.
+
+For example, given the data defined above,
+
+```js
+d3.index(data, d => d.amount)
+```
+
+returns
+
+```js
+Map(4) {
+  "34.0" => Object {name: "jim", amount: "34.0", date: "11/12/2015"}
+  "120.11" => Object {name: "carl", amount: "120.11", date: "11/12/2015"}
+  "12.01" => Object {name: "stacy", amount: "12.01", date: "01/04/2016"}
+  "34.05" => Object {name: "stacy", amount: "34.05", date: "01/04/2016"}
+}
+```
+
+On the other hand,
+
+```js
+d3.index(data, d => d.name)
+```
+
+throws an error because two objects share the same name.
+
+<a name="indexes" href="#indexes">#</a> d3.<b>indexes</b>(<i>iterable</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/group.js)<!-- , [Examples](https://observablehq.com/@d3/d3-index) -->
+
+Equivalent to [index](#index), but returns nested arrays instead of nested maps.
+
 <a name="rollup" href="#rollup">#</a> d3.<b>rollup</b>(<i>iterable</i>, <i>reduce</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/group.js), [Examples](https://observablehq.com/@d3/d3-group-d3-rollup)
 
 [Groups](#group) and reduces the specified *iterable* of values into a Map from *key* to value. For example, given some data:
