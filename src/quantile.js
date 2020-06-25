@@ -27,3 +27,17 @@ export function quantileSorted(values, p, valueof = number) {
       value1 = +valueof(values[i0 + 1], i0 + 1, values);
   return value0 + (value1 - value0) * (i - i0);
 }
+
+export function quantileIndex(values, p, valueof) {
+  if (valueof) values = Float64Array.from(numbers(values, valueof));
+  const q = quantile(values, p);
+
+  let index, v = -Infinity;
+  for (let i = 0; i < values.length; i++) {
+    const x = values[i];
+    if (x <= q) {
+      if (x > v) index = i, v = x;
+    }
+  }
+  return index;
+}

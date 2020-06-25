@@ -1,5 +1,5 @@
 import assert from "assert";
-import {quantile, quantileSorted} from "../src/index.js";
+import {quantile, quantileIndex, quantileSorted} from "../src/index.js";
 
 it("quantileSorted(array, p) requires sorted numeric input, quantile doesn't", () => {
   assert.strictEqual(quantileSorted([1, 2, 3, 4], 0), 1);
@@ -81,6 +81,15 @@ it("quantile(array, p, f) observes the specified accessor", () => {
   assert.strictEqual(quantile([], 0, unbox), undefined);
   assert.strictEqual(quantile([], 0.5, unbox), undefined);
   assert.strictEqual(quantile([], 1, unbox), undefined);
+});
+
+it("quantileIndex(array) returns the index", () => {
+  assert.deepEqual(quantileIndex([1, 2], 0.2), 0);
+  assert.deepEqual(quantileIndex([1, 2, 3], 0.2), 0);
+  assert.deepEqual(quantileIndex([1, 3, 2], 0.2), 0);
+  assert.deepEqual(quantileIndex([2, 3, 1], 0.2), 2);
+  assert.deepEqual(quantileIndex([1], 0.2), 0);
+  assert.deepEqual(quantileIndex([], 0.2), undefined);
 });
 
 function box(value) {
