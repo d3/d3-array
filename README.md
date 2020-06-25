@@ -526,7 +526,7 @@ d3.range(49).map(function(d) { return d / 49; }); // GOOD: returns 49 elements.
 
 <a name="transpose" href="#transpose">#</a> d3.<b>transpose</b>(<i>matrix</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/transpose.js), [Examples](https://observablehq.com/@d3/d3-transpose)
 
-Uses the [zip](#zip) operator as a two-dimensional [matrix transpose](http://en.wikipedia.org/wiki/Transpose).
+A two-dimensional [matrix transpose](http://en.wikipedia.org/wiki/Transpose). Accepts matrices as arrays of arrays [[]], arrays of objects [{}], objects of arrays {[]} and objects of objects {{}}.
 
 <a name="zip" href="#zip">#</a> d3.<b>zip</b>(<i>arrays…</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/zip.js), [Examples](https://observablehq.com/@d3/d3-transpose)
 
