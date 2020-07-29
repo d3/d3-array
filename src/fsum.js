@@ -1,4 +1,4 @@
-// adapted from https://github.com/python/cpython/blob/master/Modules/mathmodule.c#L1444
+// https://github.com/python/cpython/blob/a74eea238f5baba15797e2e8b570d153bc8690a7/Modules/mathmodule.c#L1423
 export class Adder {
   constructor() {
     this._partials = new Float64Array(32).fill(0);
