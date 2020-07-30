@@ -130,6 +130,29 @@ Returns an [unbiased estimator of the population variance](http://mathworld.wolf
 
 Returns the standard deviation, defined as the square root of the [bias-corrected variance](#variance), of the given *iterable* of numbers. If the iterable has fewer than two numbers, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the standard deviation. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
+<a name="fsum" href="#fsum">#</a> d3.<b>fsum</b>([<i>values</i>][, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/fsum.js)<!-- , [Examples](https://observablehq.com/@d3/d3-fsum) -->
+
+Returns an full precision sum.
+
+```js
+d3.fsum([.1, .1, .1, .1, .1, .1, .1, .1, .1, .1]); // 1
+d3.sum([.1, .1, .1, .1, .1, .1, .1, .1, .1, .1]); // 0.9999999999999999
+```
+
+Although slower, d3.fsum can replace d3.sum everywhere an exact summation is needed. Uses <a href="#adder">d3.Adder</a>.
+
+<a name="adder" href="#adder">#</a> new d3.<b>Adder</b>()
+
+Creates a full precision adder for [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) floating point numbers, setting its value to 0.
+
+<a name="adder_add" href="#adder_add">#</a> *adder*.<b>add</b>(number)
+
+Adds *number* to the adder’s current value and returns the adder.
+
+<a name="adder_valueOf" href="#adder_valueOf">#</a> *adder*.<b>valueOf</b>()
+
+Returns the IEEE 754 double precision representation of the adder’s current value. Most useful as the short-hand notation `+adder`.
+
 ### Search
 
 Methods for searching arrays for a specific element.
