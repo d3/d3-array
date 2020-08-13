@@ -42,6 +42,11 @@ tape("ticks(start, stop, count) does not include negative zero", function(test) 
   test.end();
 });
 
+tape("ticks(start, stop, count) is inside the domain (#162)", function(test) {
+  test.equal(array.ticks(0, 2.2, 3).pop(), 2);
+  test.end();
+});
+
 tape("ticks(start, stop, count) returns approximately count + 1 ticks when start < stop", function(test) {
   test.deepEqual(array.ticks(  0,  1, 10), [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]);
   test.deepEqual(array.ticks(  0,  1,  9), [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]);
