@@ -21,8 +21,8 @@ export default function(start, stop, count) {
     while (++i < n) ticks[i] = (start + i) * step;
   } else {
     step = -step;
-    start = Math.floor(start * step);
-    stop = Math.ceil(stop * step);
+    start = Math.ceil(start * step);
+    stop = Math.floor(stop * step);
     ticks = new Array(n = Math.ceil(stop - start + 1));
     while (++i < n) ticks[i] = (start + i) / step;
   }
