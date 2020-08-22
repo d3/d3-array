@@ -1,5 +1,5 @@
-var tape = require("tape"),
-    d3 = require("../");
+const tape = require("tape-await");
+const d3 = require("../");
 
 const data = [
   {name: "jim",   amount: "3400",   date: "11/12/2015"},
@@ -8,7 +8,7 @@ const data = [
   {name: "stacy", amount: "3405",  date: "01/04/2016"}
 ];
 
-tape("rollups(data, reduce, accessor) returns the expected array", function(test) {
+tape("rollups(data, reduce, accessor) returns the expected array", (test) => {
   test.deepEqual(
     d3.rollups(data, v => v.length, d => d.name),
     [
@@ -25,10 +25,9 @@ tape("rollups(data, reduce, accessor) returns the expected array", function(test
       ["stacy", 4606]
     ]
   );
-  test.end();
 });
 
-tape("rollups(data, reduce, accessor, accessor) returns the expected array", function(test) {
+tape("rollups(data, reduce, accessor, accessor) returns the expected array", (test) => {
   test.deepEqual(
     d3.rollups(data, v => v.length, d => d.name, d => d.amount),
     [
@@ -53,5 +52,4 @@ tape("rollups(data, reduce, accessor, accessor) returns the expected array", fun
       ]
     ]
   );
-  test.end();
 });

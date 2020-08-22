@@ -1,7 +1,7 @@
-var tape = require("tape"),
-    array = require("../");
+const tape = require("tape-await");
+const array = require("../");
 
-tape("ticks(start, stop, count) returns the empty array if any argument is NaN", function(test) {
+tape("ticks(start, stop, count) returns the empty array if any argument is NaN", (test) => {
   test.deepEqual(array.ticks(NaN, 1, 1), []);
   test.deepEqual(array.ticks(0, NaN, 1), []);
   test.deepEqual(array.ticks(0, 1, NaN), []);
@@ -9,45 +9,38 @@ tape("ticks(start, stop, count) returns the empty array if any argument is NaN",
   test.deepEqual(array.ticks(0, NaN, NaN), []);
   test.deepEqual(array.ticks(NaN, 1, NaN), []);
   test.deepEqual(array.ticks(NaN, NaN, NaN), []);
-  test.end();
 });
 
-tape("ticks(start, stop, count) returns the empty array if start === stop and count is non-positive", function(test) {
+tape("ticks(start, stop, count) returns the empty array if start === stop and count is non-positive", (test) => {
   test.deepEqual(array.ticks(1, 1, -1), []);
   test.deepEqual(array.ticks(1, 1, 0), []);
   test.deepEqual(array.ticks(1, 1, NaN), []);
-  test.end();
 });
 
-tape("ticks(start, stop, count) returns the empty array if start === stop and count is positive", function(test) {
+tape("ticks(start, stop, count) returns the empty array if start === stop and count is positive", (test) => {
   test.deepEqual(array.ticks(1, 1, 1), [1]);
   test.deepEqual(array.ticks(1, 1, 10), [1]);
-  test.end();
 });
 
-tape("ticks(start, stop, count) returns the empty array if count is not positive", function(test) {
+tape("ticks(start, stop, count) returns the empty array if count is not positive", (test) => {
   test.deepEqual(array.ticks(0, 1, 0), []);
   test.deepEqual(array.ticks(0, 1, -1), []);
   test.deepEqual(array.ticks(0, 1, NaN), []);
-  test.end();
 });
 
-tape("ticks(start, stop, count) returns the empty array if count is infinity", function(test) {
+tape("ticks(start, stop, count) returns the empty array if count is infinity", (test) => {
   test.deepEqual(array.ticks(0, 1, Infinity), []);
-  test.end();
 });
 
-tape("ticks(start, stop, count) does not include negative zero", function(test) {
+tape("ticks(start, stop, count) does not include negative zero", (test) => {
   test.equal(1 / array.ticks(-1, 0, 5).pop(), Infinity);
-  test.end();
 });
 
-tape("ticks(start, stop, count) remains within the domain", function(test) {
+tape("ticks(start, stop, count) remains within the domain", (test) => {
   test.deepEqual(array.ticks(0, 2.2, 3), [0, 1, 2]);
-  test.end();
 });
 
-tape("ticks(start, stop, count) returns approximately count + 1 ticks when start < stop", function(test) {
+tape("ticks(start, stop, count) returns approximately count + 1 ticks when start < stop", (test) => {
   test.deepEqual(array.ticks(  0,  1, 10), [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]);
   test.deepEqual(array.ticks(  0,  1,  9), [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]);
   test.deepEqual(array.ticks(  0,  1,  8), [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]);
@@ -78,10 +71,9 @@ tape("ticks(start, stop, count) returns approximately count + 1 ticks when start
   test.deepEqual(array.ticks(-10, 10,  3), [-10,       -5,       0,      5,     10]);
   test.deepEqual(array.ticks(-10, 10,  2), [-10,                 0,             10]);
   test.deepEqual(array.ticks(-10, 10,  1), [                     0,               ]);
-  test.end();
 });
 
-tape("ticks(start, stop, count) returns the reverse of ticks(stop, start, count)", function(test) {
+tape("ticks(start, stop, count) returns the reverse of ticks(stop, start, count)", (test) => {
   test.deepEqual(array.ticks( 1,   0, 10), array.ticks(  0,  1, 10).reverse());
   test.deepEqual(array.ticks( 1,   0,  9), array.ticks(  0,  1,  9).reverse());
   test.deepEqual(array.ticks( 1,   0,  8), array.ticks(  0,  1,  8).reverse());
@@ -112,5 +104,4 @@ tape("ticks(start, stop, count) returns the reverse of ticks(stop, start, count)
   test.deepEqual(array.ticks(10, -10,  3), array.ticks(-10, 10,  3).reverse());
   test.deepEqual(array.ticks(10, -10,  2), array.ticks(-10, 10,  2).reverse());
   test.deepEqual(array.ticks(10, -10,  1), array.ticks(-10, 10,  1).reverse());
-  test.end();
 });

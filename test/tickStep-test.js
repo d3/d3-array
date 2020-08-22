@@ -1,7 +1,7 @@
-var tape = require("tape"),
-    array = require("../");
+const tape = require("tape-await");
+const array = require("../");
 
-tape("tickStep(start, stop, count) returns NaN if any argument is NaN", function(test) {
+tape("tickStep(start, stop, count) returns NaN if any argument is NaN", (test) => {
   test.ok(isNaN(array.tickStep(NaN, 1, 1)));
   test.ok(isNaN(array.tickStep(0, NaN, 1)));
   test.ok(isNaN(array.tickStep(0, 1, NaN)));
@@ -9,30 +9,26 @@ tape("tickStep(start, stop, count) returns NaN if any argument is NaN", function
   test.ok(isNaN(array.tickStep(0, NaN, NaN)));
   test.ok(isNaN(array.tickStep(NaN, 1, NaN)));
   test.ok(isNaN(array.tickStep(NaN, NaN, NaN)));
-  test.end();
 });
 
-tape("tickStep(start, stop, count) returns NaN or 0 if start === stop", function(test) {
+tape("tickStep(start, stop, count) returns NaN or 0 if start === stop", (test) => {
   test.ok(isNaN(array.tickStep(1, 1, -1)));
   test.ok(isNaN(array.tickStep(1, 1, 0)));
   test.ok(isNaN(array.tickStep(1, 1, NaN)));
   test.equal(array.tickStep(1, 1, 1), 0);
   test.equal(array.tickStep(1, 1, 10), 0);
-  test.end();
 });
 
-tape("tickStep(start, stop, count) returns 0 or Infinity if count is not positive", function(test) {
+tape("tickStep(start, stop, count) returns 0 or Infinity if count is not positive", (test) => {
   test.equal(array.tickStep(0, 1, -1), Infinity);
   test.equal(array.tickStep(0, 1, 0), Infinity);
-  test.end();
 });
 
-tape("tickStep(start, stop, count) returns 0 if count is infinity", function(test) {
+tape("tickStep(start, stop, count) returns 0 if count is infinity", (test) => {
   test.equal(array.tickStep(0, 1, Infinity), 0);
-  test.end();
 });
 
-tape("tickStep(start, stop, count) returns approximately count + 1 tickStep when start < stop", function(test) {
+tape("tickStep(start, stop, count) returns approximately count + 1 tickStep when start < stop", (test) => {
   test.equal(array.tickStep(  0,  1, 10), 0.1);
   test.equal(array.tickStep(  0,  1,  9), 0.1);
   test.equal(array.tickStep(  0,  1,  8), 0.1);
@@ -63,10 +59,9 @@ tape("tickStep(start, stop, count) returns approximately count + 1 tickStep when
   test.equal(array.tickStep(-10, 10,  3),  5);
   test.equal(array.tickStep(-10, 10,  2), 10);
   test.equal(array.tickStep(-10, 10,  1), 20);
-  test.end();
 });
 
-tape("tickStep(start, stop, count) returns -tickStep(stop, start, count)", function(test) {
+tape("tickStep(start, stop, count) returns -tickStep(stop, start, count)", (test) => {
   test.equal(array.tickStep(  0,  1, 10), -array.tickStep( 1,   0, 10));
   test.equal(array.tickStep(  0,  1,  9), -array.tickStep( 1,   0,  9));
   test.equal(array.tickStep(  0,  1,  8), -array.tickStep( 1,   0,  8));
@@ -97,5 +92,4 @@ tape("tickStep(start, stop, count) returns -tickStep(stop, start, count)", funct
   test.equal(array.tickStep(-10, 10,  3), -array.tickStep(10, -10,  3));
   test.equal(array.tickStep(-10, 10,  2), -array.tickStep(10, -10,  2));
   test.equal(array.tickStep(-10, 10,  1), -array.tickStep(10, -10,  1));
-  test.end();
 });

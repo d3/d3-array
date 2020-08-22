@@ -1,5 +1,5 @@
-var tape = require("tape"),
-    d3 = require("../");
+const tape = require("tape-await");
+const d3 = require("../");
 
 const data = [
   {name: "jim",   amount: "34.0",   date: "11/12/2015"},
@@ -8,7 +8,7 @@ const data = [
   {name: "stacy", amount: "34.05",  date: "01/04/2016"}
 ];
 
-tape("group(data, accessor) returns the expected map", function(test) {
+tape("group(data, accessor) returns the expected map", (test) => {
   test.deepEqual(
     entries(d3.group(data, d => d.name), 1),
     [
@@ -49,10 +49,9 @@ tape("group(data, accessor) returns the expected map", function(test) {
       ]
     ]
   );
-  test.end();
 });
 
-tape("group(data, accessor, accessor) returns the expected map", function(test) {
+tape("group(data, accessor, accessor) returns the expected map", (test) => {
   test.deepEqual(
     entries(d3.group(data, d => d.name, d => d.amount), 2),
     [
@@ -113,7 +112,6 @@ tape("group(data, accessor, accessor) returns the expected map", function(test) 
       ]
     ]
   );
-  test.end();
 });
 
 function entries(map, depth) {
