@@ -1,5 +1,6 @@
 export default function max(values, valueof) {
   let max;
+  let unused = true;
   if (valueof === undefined) {
     for (const value of values) {
       if (value != null
