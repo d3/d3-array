@@ -300,6 +300,8 @@ tape("bisector(accessor).center(array, value) returns the closest index", (test)
   test.equal(bisectCenter(data, 2.2), 2);
   test.equal(bisectCenter(data, 2.6), 3);
   test.equal(bisectCenter(data, 3), 3);
+  test.equal(bisectCenter(data, 4), 4);
+  test.equal(bisectCenter(data, 4.5), 4);
 });
 
 tape("bisector(comparator).center(array, value) returns the closest index", (test) => {

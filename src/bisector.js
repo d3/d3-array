@@ -34,7 +34,7 @@ export default function(f) {
   function center(a, x, lo, hi) {
     if (lo == null) lo = 0;
     if (hi == null) hi = a.length;
-    const i = left(a, x, lo, hi);
+    const i = left(a, x, lo, hi - 1);
     return i > lo && delta(a[i - 1], x) > -delta(a[i], x) ? i - 1 : i;
   }
 

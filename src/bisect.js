@@ -1,7 +1,9 @@
 import ascending from "./ascending.js";
 import bisector from "./bisector.js";
+import number from "./number.js";
 
-var ascendingBisect = bisector(ascending);
-export var bisectRight = ascendingBisect.right;
-export var bisectLeft = ascendingBisect.left;
+const ascendingBisect = bisector(ascending);
+export const bisectRight = ascendingBisect.right;
+export const bisectLeft = ascendingBisect.left;
+export const bisectCenter = bisector(number).center;
 export default bisectRight;

@@ -1,4 +1,4 @@
-export {default as bisect, bisectRight, bisectLeft} from "./bisect.js";
+export {default as bisect, bisectRight, bisectLeft, bisectCenter} from "./bisect.js";
 export {default as ascending} from "./ascending.js";
 export {default as bisector} from "./bisector.js";
 export {default as count} from "./count.js";
