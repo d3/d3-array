@@ -555,6 +555,17 @@ d3.permute(object, fields); // returns ["University Farm", "Manchuria", 27]
 
 Randomizes the order of the specified *array* in-place using the [Fisher–Yates shuffle](https://bost.ocks.org/mike/shuffle/) and returns the *array*. If *start* is specified, it is the starting index (inclusive) of the *array* to shuffle; if *start* is not specified, it defaults to zero. If *stop* is specified, it is the ending index (exclusive) of the *array* to shuffle; if *stop* is not specified, it defaults to *array*.length. For example, to shuffle the first ten elements of the *array*: shuffle(*array*, 0, 10).
 
+<a name="shuffler" href="#shuffler">#</a> d3.<b>shuffler</b>(<i>random</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/shuffle.js)
+
+Returns a [shuffle function](#shuffle) given the specified random source. For example, using [d3.randomLcg](https://github.com/d3/d3-random/blob/master/README.md#randomLcg):
+
+```js
+const random = d3.randomLcg(0.9051667019185816);
+const shuffle = d3.shuffler(random);
+
+shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]); // returns [7, 4, 5, 3, 9, 0, 6, 1, 2, 8]
+```
+
 <a name="ticks" href="#ticks">#</a> d3.<b>ticks</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/ticks.js), [Examples](https://observablehq.com/@d3/d3-ticks)
 
 Returns an array of approximately *count* + 1 uniformly-spaced, nicely-rounded values between *start* and *stop* (inclusive). Each value is a power of ten multiplied by 1, 2 or 5. See also [d3.tickIncrement](#tickIncrement), [d3.tickStep](#tickStep) and [*linear*.ticks](https://github.com/d3/d3-scale/blob/master/README.md#linear_ticks).

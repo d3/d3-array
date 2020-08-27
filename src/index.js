@@ -30,7 +30,7 @@ export {default as leastIndex} from "./leastIndex.js";
 export {default as greatest} from "./greatest.js";
 export {default as greatestIndex} from "./greatestIndex.js";
 export {default as scan} from "./scan.js"; // Deprecated; use leastIndex.
-export {default as shuffle} from "./shuffle.js";
+export {default as shuffle, shuffler} from "./shuffle.js";
 export {default as sum} from "./sum.js";
 export {default as ticks, tickIncrement, tickStep} from "./ticks.js";
 export {default as transpose} from "./transpose.js";
