@@ -126,6 +126,17 @@ tape("bin.thresholds(function) sets the bin thresholds accessor", (test) => {
   ]);
 });
 
+tape("bin(data) uses nice thresholds", (test) => {
+  const h = d3.bin().domain([0, 1]).thresholds(5);
+  test.deepEqual(h([]).map(b => [b.x0, b.x1]), [
+    [0.0, 0.2],
+    [0.2, 0.4],
+    [0.4, 0.6],
+    [0.6, 0.8],
+    [0.8, 1.0]
+  ]);
+});
+
 tape("bin()() returns bins whose rightmost bin is not too wide", (test) => {
   const h = d3.bin();
   test.deepEqual(h([9.8, 10, 11, 12, 13, 13.2]), [

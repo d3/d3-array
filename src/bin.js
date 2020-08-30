@@ -3,8 +3,7 @@ import bisect from "./bisect.js";
 import constant from "./constant.js";
 import extent from "./extent.js";
 import identity from "./identity.js";
-import range from "./range.js";
-import {tickStep} from "./ticks.js";
+import ticks from "./ticks.js";
 import sturges from "./threshold/sturges.js";
 
 export default function() {
@@ -31,8 +30,8 @@ export default function() {
 
     // Convert number of thresholds into uniform thresholds.
     if (!Array.isArray(tz)) {
-      tz = tickStep(x0, x1, tz);
-      tz = range(Math.ceil(x0 / tz) * tz, x1, tz); // exclusive
+      tz = ticks(x0, x1, tz);
+      if (tz[tz.length - 1] === x1) tz.pop(); // exclusive
     }
 
     // Remove any thresholds outside the domain.
