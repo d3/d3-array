@@ -222,7 +222,7 @@ Returns the insertion point for *x* in *array* to maintain sorted order. The arg
 
 Similar to [bisectLeft](#bisectLeft), but returns an insertion point which comes after (to the right of) any existing entries of *x* in *array*. The returned insertion point *i* partitions the *array* into two halves so that all *v* <= *x* for *v* in *array*.slice(*lo*, *i*) for the left side and all *v* > *x* for *v* in *array*.slice(*i*, *hi*) for the right side.
 
-<a name="bisectCenter" href="#bisectCenter">#</a> d3.<b>bisectCenter</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisect.js)
+<a name="bisectCenter" href="#bisectCenter">#</a> d3.<b>bisectCenter</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisect.js), [Examples](https://observablehq.com/@d3/multi-line-chart)
 
 Returns the index of the value closest to *x* in the given *array* of numbers. The arguments *lo* (inclusive) and *hi* (exclusive) may be used to specify a subset of the array which should be considered; by default the entire array is used.
 
