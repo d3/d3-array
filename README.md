@@ -45,10 +45,71 @@ var min = d3.min(array);
 
 ## API Reference
 
+* [Iterables](#iterables)
 * [Statistics](#statistics)
 * [Search](#search)
 * [Transformations](#transformations)
 * [Bins](#bins)
+
+### Iterables
+
+These are equivalent to built-in array methods, but work with any iterable including Map, Set, and Generator.
+
+<a name="every" href="#every">#</a> d3.<b>every</b>(<i>iterable</i>, <i>test</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/every.js)
+
+Returns true if the given *test* function returns true for every value in the given *iterable*. This method returns as soon as *test* returns a non-truthy value or all values are iterated over. Equivalent to [*array*.every](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every):
+
+```js
+Array.from(iterable).every(test)
+```
+
+<a name="some" href="#some">#</a> d3.<b>some</b>(<i>iterable</i>, <i>test</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/some.js)
+
+Returns true if the given *test* function returns true for any value in the given *iterable*. This method returns as soon as *test* returns a truthy value or all values are iterated over. Equivalent to [*array*.some](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some):
+
+```js
+Array.from(iterable).some(test)
+```
+
+<a name="filter" href="#filter">#</a> d3.<b>filter</b>(<i>iterable</i>, <i>test</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/filter.js)
+
+Returns a new array containing the values from *iterable*, in order, for which the given *test* function returns true. Equivalent to [*array*.filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter):
+
+```js
+Array.from(iterable).filter(test)
+```
+
+<a name="map" href="#map">#</a> d3.<b>map</b>(<i>iterable</i>, <i>mapper</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/map.js)
+
+Returns a new array containing the mapped values from *iterable*, in order, as defined by given *mapper* function. Equivalent to [*array*.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) and [Array.from](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from):
+
+```js
+Array.from(iterable, mapper)
+```
+
+<a name="reduce" href="#reduce">#</a> d3.<b>reduce</b>(<i>iterable</i>, <i>reducer</i>[, <i>initialValue</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/reduce.js)
+
+Returns the reduced value defined by given *reducer* function, which is repeatedly invoked for each value in *iterable*, being passed the current reduced value and the next value. Equivalent to [*array*.reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce):
+
+```js
+Array.from(iterable).reduce(reducer, initialValue)
+```
+
+<a name="reverse" href="#reverse">#</a> d3.<b>reverse</b>(<i>iterable</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/reverse.js)
+
+Returns an array containing the values in the given *iterable* in reverse order. Equivalent to [*array*.reverse](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse), except that it does not mutate the given *iterable*:
+
+```js
+Array.from(iterable).reverse()
+```
+
+<a name="sort" href="#sort">#</a> d3.<b>sort</b>(<i>iterable</i>, <i>comparator</i> = d3.ascending) · [Source](https://github.com/d3/d3-array/blob/master/src/sort.js)
+
+Returns an array containing the values in the given *iterable* in the sorted order defined by the given *comparator* function. If *comparator* is not specified, it defaults to [d3.ascending](#ascending). Equivalent to [*array*.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort), except that it does not mutate the given *iterable*, and the comparator defaults to natural order instead of lexicographic order:
+
+```js
+Array.from(iterable).sort(comparator)
+```
 
 ### Statistics
 
