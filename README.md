@@ -532,9 +532,31 @@ d3.pairs([1, 2, 3, 4], (a, b) => b - a); // returns [1, 1, 1];
 
 If the specified iterable has fewer than two elements, returns the empty array.
 
-<a name="permute" href="#permute">#</a> d3.<b>permute</b>(<i>source</i>, <i>keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/permute.js), [Examples](https://observablehq.com/@d3/d3-permute)
+<a name="permute" href="#permute">#</a> d3.<b>permute</b>(<i>source</i>[, <i>keys</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/permute.js), [Examples](https://observablehq.com/@d3/d3-permute)
 
-Returns a permutation of the specified *source* object (or array) using the specified iterable of *keys*. The returned array contains the corresponding property of the source object for each key in *keys*, in order. For example:
+Returns a generator of permutations or a single permutation of the specified *source* object (or array).
+
+If *keys* is omitted then a [generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) is returned which, when iterated, generates all permutations of the input. For example:
+
+```js
+const permutations = permute(["a", "b", "c"]);
+permutations.next().value; // returns ["a", "b", "c"]
+permutations.next().value; // returns ["a", "c", "b"]
+permutations.next().value; // returns ["c", "a", "b"]
+permutations.next().value; // returns ["c", "b", "a"]
+permutations.next().value; // returns ["b", "c", "a"]
+permutations.next().value; // returns ["b", "a", "c"]
+```
+
+Generators are iterable and can be used in [`for…of`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of):
+
+```js
+for (const permutation of permute(["a", "b", "c"])) {
+  // code looping over each permutation
+}
+```
+
+If *keys* is specified then a single permutation is returned. The returned array contains the corresponding property of the source object for each key in *keys*, in order. For example:
 
 ```js
 permute(["a", "b", "c"], [1, 2, 0]); // returns ["b", "c", "a"]
