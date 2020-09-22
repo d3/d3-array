@@ -3,6 +3,7 @@ import bisect from "./bisect.js";
 import constant from "./constant.js";
 import extent from "./extent.js";
 import identity from "./identity.js";
+import nice from "./nice.js";
 import ticks from "./ticks.js";
 import sturges from "./threshold/sturges.js";
 
@@ -28,8 +29,11 @@ export default function() {
         x1 = xz[1],
         tz = threshold(values, x0, x1);
 
-    // Convert number of thresholds into uniform thresholds.
+    // Convert number of thresholds into uniform thresholds,
+    // and nice the default domain accordingly.
     if (!Array.isArray(tz)) {
+      tz = +tz;
+      if (domain === extent) [x0, x1] = nice(x0, x1, tz);
       tz = ticks(x0, x1, tz);
       if (tz[tz.length - 1] === x1) tz.pop(); // exclusive
     }

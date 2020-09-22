@@ -574,11 +574,15 @@ Ticks are inclusive in the sense that they may include the specified *start* and
 
 <a name="tickIncrement" href="#tickIncrement">#</a> d3.<b>tickIncrement</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/ticks.js), [Examples](https://observablehq.com/@d3/d3-ticks)
 
-Like [d3.tickStep](#tickStep), except requires that *start* is always less than or equal to *step*, and if the tick step for the given *start*, *stop* and *count* would be less than one, returns the negative inverse tick step instead. This method is always guaranteed to return an integer, and is used by [d3.ticks](#ticks) to guarantee that the returned tick values are represented as precisely as possible in IEEE 754 floating point.
+Like [d3.tickStep](#tickStep), except requires that *start* is always less than or equal to *stop*, and if the tick step for the given *start*, *stop* and *count* would be less than one, returns the negative inverse tick step instead. This method is always guaranteed to return an integer, and is used by [d3.ticks](#ticks) to guarantee that the returned tick values are represented as precisely as possible in IEEE 754 floating point.
 
 <a name="tickStep" href="#tickStep">#</a> d3.<b>tickStep</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/ticks.js), [Examples](https://observablehq.com/@d3/d3-ticks)
 
 Returns the difference between adjacent tick values if the same arguments were passed to [d3.ticks](#ticks): a nicely-rounded value that is a power of ten multiplied by 1, 2 or 5. Note that due to the limited precision of IEEE 754 floating point, the returned value may not be exact decimals; use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
+
+<a name="nice" href="#nice">#</a> d3.<b>nice</b>(<i>start</i>, <i>stop</i>, <i>count</i>)
+
+Returns a new interval [*niceStart*, *niceStop*] covering the given interval [*start*, *stop*] and where *niceStart* and *niceStop* are guaranteed to align with the corresponding [tick step](#tickStep). Like [d3.tickIncrement](#tickIncrement), this requires that *start* is less than or equal to *stop*.
 
 <a name="range" href="#range">#</a> d3.<b>range</b>([<i>start</i>, ]<i>stop</i>[, <i>step</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/range.js), [Examples](https://observablehq.com/@d3/d3-range)
 
@@ -655,6 +659,8 @@ You can then compute the bins from an array of numbers like so:
 ```js
 var bins = bin(numbers);
 ```
+
+If the default [extent](#extent) domain is used and the [thresholds](#bin_thresholds) are specified as a count (rather than explicit values), then the computed domain will be [niced](#nice) such that all bins are uniform width.
 
 Note that the domain accessor is invoked on the materialized array of [values](#bin_value), not on the input data array.
 

@@ -140,11 +140,11 @@ tape("bin(data) uses nice thresholds", (test) => {
 tape("bin()() returns bins whose rightmost bin is not too wide", (test) => {
   const h = d3.bin();
   test.deepEqual(h([9.8, 10, 11, 12, 13, 13.2]), [
-    bin([9.8], 9.8, 10),
+    bin([9.8], 9, 10),
     bin([10], 10, 11),
     bin([11], 11, 12),
     bin([12], 12, 13),
-    bin([13, 13.2], 13, 13.2),
+    bin([13, 13.2], 13, 14),
   ]);
 });
 

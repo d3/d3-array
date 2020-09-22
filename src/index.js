@@ -20,6 +20,7 @@ export {default as median} from "./median.js";
 export {default as merge} from "./merge.js";
 export {default as min} from "./min.js";
 export {default as minIndex} from "./minIndex.js";
+export {default as nice} from "./nice.js";
 export {default as pairs} from "./pairs.js";
 export {default as permute} from "./permute.js";
 export {default as quantile, quantileSorted} from "./quantile.js";
