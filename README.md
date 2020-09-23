@@ -582,7 +582,7 @@ Like [d3.tickStep](#tickStep), except requires that *start* is always less than 
 
 Returns the difference between adjacent tick values if the same arguments were passed to [d3.ticks](#ticks): a nicely-rounded value that is a power of ten multiplied by 1, 2 or 5. Note that due to the limited precision of IEEE 754 floating point, the returned value may not be exact decimals; use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
 
-<a name="nice" href="#nice">#</a> d3.<b>nice</b>(<i>start</i>, <i>stop</i>, <i>count</i>)
+<a name="nice" href="#nice">#</a> d3.<b>nice</b>(<i>start</i>, <i>stop</i>, <i>count</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/nice.js)
 
 Returns a new interval [*niceStart*, *niceStop*] covering the given interval [*start*, *stop*] and where *niceStart* and *niceStop* are guaranteed to align with the corresponding [tick step](#tickStep). Like [d3.tickIncrement](#tickIncrement), this requires that *start* is less than or equal to *stop*.
 
