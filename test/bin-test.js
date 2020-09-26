@@ -18,7 +18,8 @@ tape("bin(data) computes bins of the specified array of data", (test) => {
     bin([0, 0, 0], 0, 5),
     bin([], 5, 10),
     bin([10], 10, 15),
-    bin([20, 20], 15, 20) // Note: inclusive upper bound for last bin.
+    bin([], 15, 20),
+    bin([20, 20], 20, 25)
   ]);
 });
 
@@ -28,7 +29,8 @@ tape("bin(iterable) is equivalent to bin(array)", (test) => {
     bin([0, 0, 0], 0, 5),
     bin([], 5, 10),
     bin([10], 10, 15),
-    bin([20, 20], 15, 20) // Note: inclusive upper bound for last bin.
+    bin([], 15, 20),
+    bin([20, 20], 20, 25)
   ]);
 });
 
@@ -48,7 +50,8 @@ tape("bin.value(function) sets the value accessor", (test) => {
     bin([a, a, a], 0, 5),
     bin([], 5, 10),
     bin([b], 10, 15),
-    bin([c, c], 15, 20)
+    bin([], 15, 20),
+    bin([c, c], 20, 25)
   ]);
 });
 
@@ -83,7 +86,8 @@ tape("bin.thresholds(number) sets the approximate number of bin thresholds", (te
   test.deepEqual(h([0, 0, 0, 10, 30, 30]), [
     bin([0, 0, 0], 0, 10),
     bin([10], 10, 20),
-    bin([30, 30], 20, 30) // Note: inclusive upper bound for last bin.
+    bin([], 20, 30),
+    bin([30, 30], 30, 40)
   ]);
 });
 
@@ -92,17 +96,17 @@ tape("bin.thresholds(array) sets the bin thresholds", (test) => {
   test.deepEqual(h([0, 0, 0, 10, 30, 30]), [
     bin([0, 0, 0], 0, 10),
     bin([10], 10, 20),
-    bin([30, 30], 20, 30) // Note: inclusive upper bound for last bin.
+    bin([30, 30], 20, 30)
   ]);
 });
 
 tape("bin.thresholds(array) ignores thresholds outside the domain", (test) => {
-  const h = d3.bin().thresholds([0, 1, 2, 3]);
+  const h = d3.bin().thresholds([0, 1, 2, 3, 4]);
   test.deepEqual(h([0, 1, 2, 3]), [
     bin([0], 0, 1),
     bin([1], 1, 2),
     bin([2], 2, 3),
-    bin([3], 3, 3) // Note: inclusive upper bound for last bin.
+    bin([3], 3, 3)
   ]);
 });
 
@@ -113,7 +117,7 @@ tape("bin.thresholds(function) sets the bin thresholds accessor", (test) => {
   test.deepEqual(h(values), [
     bin([0, 0, 0], 0, 10),
     bin([10], 10, 20),
-    bin([30, 30], 20, 30) // Note: inclusive upper bound for last bin.
+    bin([30, 30], 20, 30)
   ]);
   test.deepEqual(actual, [values, 0, 30]);
   test.deepEqual(h.thresholds(() => 5)(values), [
@@ -122,7 +126,8 @@ tape("bin.thresholds(function) sets the bin thresholds accessor", (test) => {
     bin([10], 10, 15),
     bin([], 15, 20),
     bin([], 20, 25),
-    bin([30, 30], 25, 30) // Note: inclusive upper bound for last bin.
+    bin([], 25, 30),
+    bin([30, 30], 30, 35)
   ]);
 });
 
@@ -144,7 +149,7 @@ tape("bin()() returns bins whose rightmost bin is not too wide", (test) => {
     bin([10], 10, 11),
     bin([11], 11, 12),
     bin([12], 12, 13),
-    bin([13, 13.2], 13, 14),
+    bin([13, 13.2], 13, 14)
   ]);
 });
 
