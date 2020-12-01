@@ -12,6 +12,11 @@ tape("sort(values) defaults to ascending, not lexicographic", (test) => {
   test.deepEqual(d3.sort(input), [1, 2, "10"]);
 });
 
+tape("sort(values, accessor) uses the specified accessor in natural order", (test) => {
+  test.deepEqual(d3.sort([1, 3, 2, 5, 4], d => d), [1, 2, 3, 4, 5]);
+  test.deepEqual(d3.sort([1, 3, 2, 5, 4], d => -d), [5, 4, 3, 2, 1]);
+});
+
 tape("sort(values, comparator) uses the specified comparator", (test) => {
   test.deepEqual(d3.sort([1, 3, 2, 5, 4], d3.descending), [5, 4, 3, 2, 1]);
 });
