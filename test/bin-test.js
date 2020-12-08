@@ -153,6 +153,21 @@ tape("bin()() returns bins whose rightmost bin is not too wide", (test) => {
   ]);
 });
 
+tape("bin(data) coerces values to numbers as expected", (test) => {
+  const h = d3.bin().thresholds(10);
+  test.deepEqual(h(["1", "2", "3", "4", "5"]), [
+    bin(["1"], 1, 1.5),
+    bin([], 1.5, 2),
+    bin(["2"], 2, 2.5),
+    bin([], 2.5, 3),
+    bin(["3"], 3, 3.5),
+    bin([], 3.5, 4),
+    bin(["4"], 4, 4.5),
+    bin([], 4.5, 5),
+    bin(["5"], 5, 5.5)
+  ]);
+});
+
 function bin(bin, x0, x1)  {
   bin.x0 = x0;
   bin.x1 = x1;
