@@ -38,6 +38,7 @@
   },
   "sideEffects": false,
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^11.1.0",
     "d3-random": "2",
     "eslint": "7",
     "jsdom": "16",
@@ -45,5 +46,8 @@
     "rollup-plugin-terser": "7",
     "tape": "4",
     "tape-await": "0.1"
+  },
+  "dependencies": {
+    "internmap": "^1.0.0"
   }
 }

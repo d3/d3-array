@@ -50,3 +50,4 @@ export {default as intersection} from "./intersection.js";
 export {default as subset} from "./subset.js";
 export {default as superset} from "./superset.js";
 export {default as union} from "./union.js";
+export {InternMap, InternSet} from "internmap";

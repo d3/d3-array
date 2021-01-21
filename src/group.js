@@ -1,3 +1,4 @@
+import {InternMap} from "internmap";
 import identity from "./identity.js";
 
 export default function group(values, ...keys) {
@@ -32,7 +33,7 @@ function unique(values) {
 function nest(values, map, reduce, keys) {
   return (function regroup(values, i) {
     if (i >= keys.length) return reduce(values);
-    const groups = new Map();
+    const groups = new InternMap();
     const keyof = keys[i++];
     let index = -1;
     for (const value of values) {

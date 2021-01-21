@@ -1,3 +1,4 @@
+import {nodeResolve} from "@rollup/plugin-node-resolve";
 import {terser} from "rollup-plugin-terser";
 import * as meta from "./package.json";
 
@@ -13,7 +14,9 @@ const config = {
     banner: `// ${meta.homepage} v${meta.version} Copyright ${(new Date).getFullYear()} ${meta.author.name}`,
     globals: Object.assign({}, ...Object.keys(meta.dependencies || {}).filter(key => /^d3-/.test(key)).map(key => ({[key]: "d3"})))
   },
-  plugins: []
+  plugins: [
+    nodeResolve()
+  ]
 };
 
 export default [

@@ -114,6 +114,21 @@ tape("group(data, accessor, accessor) returns the expected map", (test) => {
   );
 });
 
+tape("group(data, accessor) interns keys", (test) => {
+  const a1 = new Date(Date.UTC(2001, 0, 1));
+  const a2 = new Date(Date.UTC(2001, 0, 1));
+  const b = new Date(Date.UTC(2002, 0, 1));
+  const map = d3.group([[a1, 1], [a2, 2], [b, 3]], ([date]) => date);
+  test.deepEqual(map.get(a1), [[a1, 1], [a2, 2]]);
+  test.deepEqual(map.get(a2), [[a1, 1], [a2, 2]]);
+  test.deepEqual(map.get(b), [[b, 3]]);
+  test.deepEqual(map.get(+a1), [[a1, 1], [a2, 2]]);
+  test.deepEqual(map.get(+a2), [[a1, 1], [a2, 2]]);
+  test.deepEqual(map.get(+b), [[b, 3]]);
+  test.strictEqual([...map.keys()][0], a1);
+  test.strictEqual([...map.keys()][1], b);
+});
+
 function entries(map, depth) {
   if (depth > 0) {
     return Array.from(map, ([k, v]) => [k, entries(v, depth - 1)]);
