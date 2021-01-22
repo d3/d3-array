@@ -825,8 +825,7 @@ For instance, when binning date values, you might want to use the ticks from a t
 
 ### Interning
 
-<a name="InternMap" href="#InternMap">#</a> new d3.<b>InternMap</b>([<i>iterable</i>][,<i>key</i>]) · [Source](https://github.com/mbostock/internmap/blob/main/src/index.js), [Examples](https://observablehq.com/d/d4c5f6ad343866b9)
-
-<a name="InternSet" href="#InternSet">#</a> new d3.<b>InternSet</b>([<i>iterable</i>][,<i>key</i>]) · [Source](https://github.com/mbostock/internmap/blob/main/src/index.js), [Examples](https://observablehq.com/d/d4c5f6ad343866b9)
+<a name="InternMap" href="#InternMap">#</a> new d3.<b>InternMap</b>([<i>iterable</i>][, <i>key</i>]) · [Source](https://github.com/mbostock/internmap/blob/main/src/index.js), [Examples](https://observablehq.com/d/d4c5f6ad343866b9)
+<br><a name="InternSet" href="#InternSet">#</a> new d3.<b>InternSet</b>([<i>iterable</i>][, <i>key</i>]) · [Source](https://github.com/mbostock/internmap/blob/main/src/index.js), [Examples](https://observablehq.com/d/d4c5f6ad343866b9)
 
 The [InternMap and InternSet](https://github.com/mbostock/internmap) classes extend the native JavaScript Map and Set classes, respectively, allowing Dates and other non-primitive keys by bypassing the [SameValueZero algorithm](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness) when determining key equality. d3.group, d3.rollup and d3.index use an InternMap rather than a native Map. These two classes are exported for convenience.
