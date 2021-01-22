@@ -385,7 +385,7 @@ This produces:
 ]
 ```
 
-In the near future, [*selection*.data](https://github.com/d3/d3-selection/blob/master/README.md#selection_data) will accept iterables directly, meaning that you can use a Map (or Set or other iterable) to perform a data join without first needing to convert to an array.
+[*selection*.data](https://github.com/d3/d3-selection/blob/master/README.md#selection_data) accepts iterables directly, meaning that you can use a Map (or Set or other iterable) to perform a data join without first needing to convert to an array.
 
 <a name="groups" href="#groups">#</a> d3.<b>groups</b>(<i>iterable</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/group.js), [Examples](https://observablehq.com/@d3/d3-group-d3-rollup)
 
