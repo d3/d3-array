@@ -56,7 +56,7 @@ var min = d3.min(array);
 
 Methods for computing basic summary statistics.
 
-<a name="min" href="#min">#</a> d3.<b>min</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/min.js), [Examples](https://observablehq.com/@d3/d3-min-d3-max-d3-extent)
+<a name="min" href="#min">#</a> d3.<b>min</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/min.js), [Examples](https://observablehq.com/@d3/extent)
 
 Returns the minimum value in the given *iterable* using natural order. If the iterable contains no comparable values, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the minimum value.
 
@@ -64,13 +64,13 @@ Unlike the built-in [Math.min](https://developer.mozilla.org/docs/Web/JavaScript
 
 See also [extent](#extent).
 
-<a name="minIndex" href="#minIndex">#</a> d3.<b>minIndex</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/minIndex.js), [Examples](https://observablehq.com/@d3/d3-min-d3-max-d3-extent)
+<a name="minIndex" href="#minIndex">#</a> d3.<b>minIndex</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/minIndex.js), [Examples](https://observablehq.com/@d3/extent)
 
 Returns the index of the minimum value in the given *iterable* using natural order. If the iterable contains no comparable values, returns -1. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the minimum value.
 
 Unlike the built-in [Math.min](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/min), this method ignores undefined, null and NaN values; this is useful for ignoring missing data. In addition, elements are compared using natural order rather than numeric order. For example, the minimum of the strings [“20”, “3”] is “20”, while the minimum of the numbers [20, 3] is 3.
 
-<a name="max" href="#max">#</a> d3.<b>max</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/max.js), [Examples](https://observablehq.com/@d3/d3-min-d3-max-d3-extent)
+<a name="max" href="#max">#</a> d3.<b>max</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/max.js), [Examples](https://observablehq.com/@d3/extent)
 
 Returns the maximum value in the given *iterable* using natural order. If the iterable contains no comparable values, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the maximum value.
 
@@ -78,13 +78,13 @@ Unlike the built-in [Math.max](https://developer.mozilla.org/docs/Web/JavaScript
 
 See also [extent](#extent).
 
-<a name="maxIndex" href="#maxIndex">#</a> d3.<b>maxIndex</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/maxIndex.js), [Examples](https://observablehq.com/@d3/d3-min-d3-max-d3-extent)
+<a name="maxIndex" href="#maxIndex">#</a> d3.<b>maxIndex</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/maxIndex.js), [Examples](https://observablehq.com/@d3/extent)
 
 Returns the index of the maximum value in the given *iterable* using natural order. If the iterable contains no comparable values, returns -1. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the maximum value.
 
 Unlike the built-in [Math.max](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/max), this method ignores undefined values; this is useful for ignoring missing data. In addition, elements are compared using natural order rather than numeric order. For example, the maximum of the strings [“20”, “3”] is “3”, while the maximum of the numbers [20, 3] is 20.
 
-<a name="extent" href="#extent">#</a> d3.<b>extent</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/extent.js), [Examples](https://observablehq.com/@d3/d3-min-d3-max-d3-extent)
+<a name="extent" href="#extent">#</a> d3.<b>extent</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/extent.js), [Examples](https://observablehq.com/@d3/extent)
 
 Returns the [minimum](#min) and [maximum](#max) value in the given *iterable* using natural order. If the iterable contains no comparable values, returns [undefined, undefined]. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the extent.
 
