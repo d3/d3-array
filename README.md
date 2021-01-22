@@ -304,7 +304,7 @@ Methods for transforming arrays and for generating new arrays.
 
 <a name="group" href="#group">#</a> d3.<b>group</b>(<i>iterable</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/group.js), [Examples](https://observablehq.com/@d3/d3-group-d3-rollup)
 
-Groups the specified *iterable* of values into a Map from *key* to array of value. For example, given some data:
+Groups the specified *iterable* of values into an [InternMap](#InternMap) from *key* to array of value. For example, given some data:
 
 ```js
 data = [
@@ -331,7 +331,7 @@ Map(3) {
 }
 ```
 
-If more than one *key* is specified, a nested Map is returned. For example:
+If more than one *key* is specified, a nested InternMap is returned. For example:
 
 ```js
 d3.group(data, d => d.name, d => d.date)
@@ -426,7 +426,7 @@ Equivalent to [index](#index), but returns nested arrays instead of nested maps.
 
 <a name="rollup" href="#rollup">#</a> d3.<b>rollup</b>(<i>iterable</i>, <i>reduce</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/group.js), [Examples](https://observablehq.com/@d3/d3-group-d3-rollup)
 
-[Groups](#group) and reduces the specified *iterable* of values into a Map from *key* to value. For example, given some data:
+[Groups](#group) and reduces the specified *iterable* of values into an InternMap from *key* to value. For example, given some data:
 
 ```js
 data = [
@@ -821,3 +821,24 @@ Returns the number of bins according to [Sturges’ formula](https://en.wikipedi
 You may also implement your own threshold generator taking three arguments: the array of input [*values*](#bin_value) derived from the data, and the [observable domain](#bin_domain) represented as *min* and *max*. The generator may then return either the array of numeric thresholds or the *count* of bins; in the latter case the domain is divided uniformly into approximately *count* bins; see [ticks](#ticks).
 
 For instance, when binning date values, you might want to use the ticks from a time scale ([Example](https://observablehq.com/@d3/d3-bin-time-thresholds)).
+
+
+### Maps and Sets
+
+<a name="InternMap" href="#InternMap">#</a> new d3.<b>InternMap</b>([<i>iterable</i>][,<i>key</i>]) · [Source](https://github.com/mbostock/internmap/blob/main/src/index.js), [Examples](https://observablehq.com/d/d4c5f6ad343866b9)
+
+<a name="InternSet" href="#InternSet">#</a> new d3.<b>InternSet</b>([<i>iterable</i>][,<i>key</i>]) · [Source](https://github.com/mbostock/internmap/blob/main/src/index.js), [Examples](https://observablehq.com/d/d4c5f6ad343866b9)
+
+The InternMap and InternSet classes are an extension of the native JavaScript Map and Set classes, allowing to use Dates (or other objects) as keys, bypassing the [SameValueZero algorithm](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness) which determines key equality. See [this repository](https://github.com/mbostock/internmap) for details. d3.group, d3.rollup and d3.index use an InternMap rather than a native Map.
+
+These two classes are exported for convenience. Note that a Map can be upgraded to an InternMap simply by calling d3.InternMap(map):
+```js
+const g = new d3.InternMap(
+  d3.group(
+    [[["foo", "bar"], 1], [["foo", "baz"], 2], [["goo", "bee"], 3]],
+    d => d[0]
+  ),
+  JSON.stringify
+);
+g.get(["foo", "bar"]); // 1
+```
