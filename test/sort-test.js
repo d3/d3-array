@@ -17,6 +17,11 @@ tape("sort(values, accessor) uses the specified accessor in natural order", (tes
   test.deepEqual(d3.sort([1, 3, 2, 5, 4], d => -d), [5, 4, 3, 2, 1]);
 });
 
+tape("sort(values, ...accessors) accepts multiple accessors", (test) => {
+  test.deepEqual(d3.sort([[1, 0], [2, 1], [2, 0], [1, 1], [3, 0]], ([x]) => x, ([, y]) => y), [[1, 0], [1, 1], [2, 0], [2, 1], [3, 0]]);
+  test.deepEqual(d3.sort([{x: 1, y: 0}, {x: 2, y: 1}, {x: 2, y: 0}, {x: 1, y: 1}, {x: 3, y: 0}], ({x}) => x, ({y}) => y), [{x: 1, y: 0}, {x: 1, y: 1}, {x: 2, y: 0}, {x: 2, y: 1}, {x: 3, y: 0}]);
+});
+
 tape("sort(values, comparator) uses the specified comparator", (test) => {
   test.deepEqual(d3.sort([1, 3, 2, 5, 4], d3.descending), [5, 4, 3, 2, 1]);
 });
