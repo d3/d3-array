@@ -482,6 +482,23 @@ To convert a Map to an Array, use [Array.from](https://developer.mozilla.org/en-
 
 Equivalent to [rollup](#rollup), but returns nested arrays instead of nested maps.
 
+<a name="groupSort" href="#groupSort">#</a> d3.<b>groupSort</b>(<i>iterable</i>, <i>comparator</i>, <i>key</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/groupSort.js), [Examples](https://observablehq.com/@d3/d3-groupsort)
+<br><a name="groupSort" href="#groupSort">#</a> d3.<b>groupSort</b>(<i>iterable</i>, <i>accessor</i>, <i>key</i>)
+
+Groups the specified *iterable* of elements according to the specified *key* function, sorts the groups according to the specified *comparator*, and then returns an array of keys in sorted order. For example, if you had a table of barley yields for different varieties, sites, and years, to sort the barley varieties by ascending median yield:
+
+```js
+d3.groupSort(barley, g => d3.median(g, d => d.yield), d => d.variety)
+```
+
+For descending order, negate the group value:
+
+```js
+d3.groupSort(barley, g => -d3.median(g, d => d.yield), d => d.variety)
+```
+
+If a *comparator* is passed instead of an *accessor* (i.e., if the second argument is a function that takes two arguments), it will be asked to compare two groups *a* and *b* and should return a negative value if *a* should be before *b*, a positive value if *a* should be after *b*, or zero for a partial ordering.
+
 <a name="count" href="#count">#</a> d3.<b>count</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/count.js), [Examples](https://observablehq.com/@d3/d3-count)
 
 Returns the number of valid number values (*i.e.*, not null, NaN, or undefined) in the specified *iterable*; accepts an accessor.
