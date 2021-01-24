@@ -690,7 +690,7 @@ d3.reverse(new Set([0, 2, 3, 1])) // [1, 3, 2, 0]
 ```
 
 <a name="sort" href="#sort">#</a> d3.<b>sort</b>(<i>iterable</i>, <i>comparator</i> = d3.ascending) · [Source](https://github.com/d3/d3-array/blob/master/src/sort.js)
-<br><a name="sort" href="#sort">#</a> d3.<b>sort</b>(<i>iterable</i>, <i>accessor</i>)
+<br><a name="sort" href="#sort">#</a> d3.<b>sort</b>(<i>iterable</i>, ...<i>accessors</i>)
 
 Returns an array containing the values in the given *iterable* in the sorted order defined by the given *comparator* or *accessor* function. If *comparator* is not specified, it defaults to [d3.ascending](#ascending). Equivalent to [*array*.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort), except that it does not mutate the given *iterable*, and the comparator defaults to natural order instead of lexicographic order:
 
@@ -710,7 +710,19 @@ it is equivalent to a *comparator* using [natural order](#ascending):
 d3.sort(data, (a, b) => d3.ascending(a.value, b.value))
 ```
 
-The *accessor* is only invoked once per element, and thus may be nondeterministic.
+The *accessor* is only invoked once per element, and thus the returned sorted order is consistent even if the accessor is nondeterministic.
+
+Multiple accessors may be specified to break ties:
+
+```js
+d3.sort(points, ({x}) => x, ({y}) => y)
+```
+
+This is equivalent to:
+
+```js
+d3.sort(data, (a, b) => d3.ascending(a.x, b.x) || d3.ascending(a.y, b.y))
+```
 
 ### Sets
 
