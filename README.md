@@ -144,6 +144,17 @@ d3.sum([.1, .1, .1, .1, .1, .1, .1, .1, .1, .1]); // 0.9999999999999999
 
 Although slower, d3.fsum can replace d3.sum wherever greater precision is needed. Uses <a href="#adder">d3.Adder</a>.
 
+<a name="fcumsum" href="#fcumsum">#</a> d3.<b>fcumsum</b>([<i>values</i>][, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/fsum.js), [Examples](https://observablehq.com/@d3/d3-fcumsum)
+
+Returns a full precision cumulative sum of the given *values*.
+
+```js
+d3.fcumsum([1, 1e-14, -1]); // [1, 1.00000000000001, 1e-14]
+d3.cumsum([1, 1e-14, -1]); // [1, 1.00000000000001, 9.992e-15]
+```
+
+Although slower, d3.fcumsum can replace d3.cumsum when greater precision is needed. Uses <a href="#adder">d3.Adder</a>.
+
 <a name="adder" href="#adder">#</a> new d3.<b>Adder</b>()
 
 Creates a full precision adder for [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) floating point numbers, setting its initial value to 0.
