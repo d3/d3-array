@@ -310,6 +310,10 @@ function descending(a, b) {
 
 Note that if no comparator function is specified to the built-in sort method, the default order is lexicographic (alphabetical), not natural! This can lead to surprising behavior when sorting an array of numbers.
 
+<a name="lexicographic" href="#lexicographic">#</a> d3.<b>lexicographic</b>(<i>a</i>, <i>b</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/lexicographic.js), [Examples](https://observablehq.com/@d3/d3-lexicographic)
+
+Compares the arrays a and b in lexicographic order. Starting at index 0, returns if the [ascending](#ascending) comparison of a[index] and b[index] is not null, otherwise advances to the next index.
+
 ### Transformations
 
 Methods for transforming arrays and for generating new arrays.
