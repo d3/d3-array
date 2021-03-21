@@ -522,6 +522,10 @@ d3.groupSort(barley, g => -d3.median(g, d => d.yield), d => d.variety)
 
 If a *comparator* is passed instead of an *accessor* (i.e., if the second argument is a function that takes two arguments), it will be asked to compare two groups *a* and *b* and should return a negative value if *a* should be before *b*, a positive value if *a* should be after *b*, or zero for a partial ordering.
 
+<a name="flatGroupSort" href="#flatGroupSort">#</a> d3.<b>flatGroupSort</b>(<i>iterable</i>, <i>comparator</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/groupSort.js), [Examples](https://observablehq.com/@d3/d3-flatgroup)
+
+Like [groupSort](#groupSort), but accepts multiple keys.
+
 <a name="count" href="#count">#</a> d3.<b>count</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/count.js), [Examples](https://observablehq.com/@d3/d3-count)
 
 Returns the number of valid number values (*i.e.*, not null, NaN, or undefined) in the specified *iterable*; accepts an accessor.
