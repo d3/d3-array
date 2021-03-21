@@ -9,6 +9,14 @@ export function groups(values, ...keys) {
   return nest(values, Array.from, identity, keys);
 }
 
+export function flatGroup(values, ...keys) {
+  let groups = groups(values, ...keys);
+  for (let i = 1, n = keys.length; i < n; ++i) {
+    groups = groups.flatMap(g => g.pop().map(([key, value]) => [...g, key, value]));
+  }
+  return groups;
+}
+
 export function rollup(values, reduce, ...keys) {
   return nest(values, identity, reduce, keys);
 }
