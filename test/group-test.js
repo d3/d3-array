@@ -114,6 +114,41 @@ tape("group(data, accessor, accessor) returns the expected map", (test) => {
   );
 });
 
+tape("flatGroup(data, accessor, accessor) returns the expected array", (test) => {
+  test.deepEqual(
+    d3.flatGroup(data, d => d.name, d => d.amount),
+    [
+      ['jim', '34.0', [{name: 'jim', amount: '34.0', date: '11/12/2015'}]],
+      ['carl', '120.11', [{name: 'carl', amount: '120.11', date: '11/12/2015'}]],
+      ['stacy', '12.01', [{name: 'stacy', amount: '12.01', date: '01/04/2016'}]],
+      ['stacy', '34.05', [{name: 'stacy', amount: '34.05', date: '01/04/2016'}]]
+    ]
+  );
+});
+
+tape("flatRollup(data, reduce, accessor) returns the expected array", (test) => {
+  test.deepEqual(
+    d3.flatRollup(data, v => v.length, d => d.name),
+    [
+      ['jim', 1],
+      ['carl', 1],
+      ['stacy', 2]
+    ]
+  );
+});
+
+tape("flatRollup(data, reduce, accessor, accessor) returns the expected array", (test) => {
+  test.deepEqual(
+    d3.flatRollup(data, v => v.length, d => d.name, d => d.amount),
+    [
+      ['jim', '34.0', 1],
+      ['carl', '120.11', 1],
+      ['stacy', '12.01', 1],
+      ['stacy', '34.05', 1]
+    ]
+  );
+});
+
 tape("group(data, accessor) interns keys", (test) => {
   const a1 = new Date(Date.UTC(2001, 0, 1));
   const a2 = new Date(Date.UTC(2001, 0, 1));
