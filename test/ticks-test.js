@@ -105,3 +105,7 @@ tape("ticks(start, stop, count) returns the reverse of ticks(stop, start, count)
   test.deepEqual(array.ticks(10, -10,  2), array.ticks(-10, 10,  2).reverse());
   test.deepEqual(array.ticks(10, -10,  1), array.ticks(-10, 10,  1).reverse());
 });
+
+tape("ticks(start, stop, count) handles precision problems", (test) => {
+  test.deepEqual(array.ticks(0.98, 1.14, 10), [0.98, 1, 1.02, 1.04, 1.06, 1.08, 1.1, 1.12, 1.14]);
+});
