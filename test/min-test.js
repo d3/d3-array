@@ -84,10 +84,10 @@ it("min(array, f) passes the accessor d, i, and array", () => {
   assert.deepEqual(results, [["a", 0, array], ["b", 1, array], ["c", 2, array]]);
 });
 
-it.skip("min(array, f) uses the global context", () => {
+it("min(array, f) uses the global context", () => {
   const results = [];
   d3.min([1, 2], function() { results.push(this); });
-  assert.deepEqual(results, [global, global]);
+  assert.deepEqual(results, [undefined, undefined]);
 });
 
 function box(value) {

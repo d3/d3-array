@@ -29,28 +29,28 @@ it("reduce(values, reducer) enforces that values is iterable", () => {
   assert.throws(() => d3.reduce({}, () => true), TypeError);
 });
 
-it.skip("reduce(values, reducer) passes reducer (reduced, value, index, values)", () => {
+it("reduce(values, reducer) passes reducer (reduced, value, index, values)", () => {
   const calls = [];
   const values = new Set([5, 4, 3, 2, 1]);
   d3.reduce(values, function(p, v) { calls.push([this, ...arguments]); return p + v; });
   assert.deepEqual(calls, [
-    [global, 5, 4, 1, values],
-    [global, 9, 3, 2, values],
-    [global, 12, 2, 3, values],
-    [global, 14, 1, 4, values]
+    [undefined, 5, 4, 1, values],
+    [undefined, 9, 3, 2, values],
+    [undefined, 12, 2, 3, values],
+    [undefined, 14, 1, 4, values]
   ]);
 });
 
-it.skip("reduce(values, reducer, initial) passes reducer (reduced, value, index, values)", () => {
+it("reduce(values, reducer, initial) passes reducer (reduced, value, index, values)", () => {
   const calls = [];
   const values = new Set([5, 4, 3, 2, 1]);
   d3.reduce(values, function(p, v) { calls.push([this, ...arguments]); return p + v; }, 0);
   assert.deepEqual(calls, [
-    [global, 0, 5, 0, values],
-    [global, 5, 4, 1, values],
-    [global, 9, 3, 2, values],
-    [global, 12, 2, 3, values],
-    [global, 14, 1, 4, values]
+    [undefined, 0, 5, 0, values],
+    [undefined, 5, 4, 1, values],
+    [undefined, 9, 3, 2, values],
+    [undefined, 12, 2, 3, values],
+    [undefined, 14, 1, 4, values]
   ]);
 });
 

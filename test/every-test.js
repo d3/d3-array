@@ -24,16 +24,16 @@ it("every(values, test) enforces that values is iterable", () => {
   assert.throws(() => d3.every({}, () => true), TypeError);
 });
 
-it.skip("every(values, test) passes test (value, index, values)", () => {
+it("every(values, test) passes test (value, index, values)", () => {
   const calls = [];
   const values = new Set([5, 4, 3, 2, 1]);
   d3.every(values, function() { return calls.push([this, ...arguments]); });
   assert.deepEqual(calls, [
-    [global, 5, 0, values],
-    [global, 4, 1, values],
-    [global, 3, 2, values],
-    [global, 2, 3, values],
-    [global, 1, 4, values]
+    [undefined, 5, 0, values],
+    [undefined, 4, 1, values],
+    [undefined, 3, 2, values],
+    [undefined, 2, 3, values],
+    [undefined, 1, 4, values]
   ]);
 });
 

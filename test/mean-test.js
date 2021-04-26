@@ -77,10 +77,10 @@ it("mean(array, f) passes the accessor d, i, and array", () => {
   assert.deepEqual(results, [["a", 0, strings], ["b", 1, strings], ["c", 2, strings]]);
 });
 
-it.skip("mean(array, f) uses the global context", () => {
+it("mean(array, f) uses the global context", () => {
   const results = [];
   d3.mean([1, 2], function() { results.push(this); });
-  assert.deepEqual(results, [global, global]);
+  assert.deepEqual(results, [undefined, undefined]);
 });
 
 function box(value) {

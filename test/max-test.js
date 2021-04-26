@@ -84,10 +84,10 @@ it("max(array, f) passes the accessor d, i, and array", () => {
   assert.deepEqual(results, [["a", 0, array], ["b", 1, array], ["c", 2, array]]);
 });
 
-it.skip("max(array, f) uses the global context", () => {
+it("max(array, f) uses the global context", () => {
   const results = [];
   d3.max([1, 2], function() { results.push(this); });
-  assert.deepEqual(results, [global, global]);
+  assert.deepEqual(results, [undefined, undefined]);
 });
 
 function box(value) {
