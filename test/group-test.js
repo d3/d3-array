@@ -1,5 +1,5 @@
-const tape = require("tape-await");
-const d3 = require("../");
+import assert from "assert";
+import * as d3 from "../src/index.js";
 
 const data = [
   {name: "jim",   amount: "34.0",   date: "11/12/2015"},
@@ -8,8 +8,8 @@ const data = [
   {name: "stacy", amount: "34.05",  date: "01/04/2016"}
 ];
 
-tape("group(data, accessor) returns the expected map", (test) => {
-  test.deepEqual(
+it("group(data, accessor) returns the expected map", () => {
+  assert.deepEqual(
     entries(d3.group(data, d => d.name), 1),
     [
       [
@@ -51,8 +51,8 @@ tape("group(data, accessor) returns the expected map", (test) => {
   );
 });
 
-tape("group(data, accessor, accessor) returns the expected map", (test) => {
-  test.deepEqual(
+it("group(data, accessor, accessor) returns the expected map", () => {
+  assert.deepEqual(
     entries(d3.group(data, d => d.name, d => d.amount), 2),
     [
       [
@@ -114,19 +114,19 @@ tape("group(data, accessor, accessor) returns the expected map", (test) => {
   );
 });
 
-tape("group(data, accessor) interns keys", (test) => {
+it("group(data, accessor) interns keys", () => {
   const a1 = new Date(Date.UTC(2001, 0, 1));
   const a2 = new Date(Date.UTC(2001, 0, 1));
   const b = new Date(Date.UTC(2002, 0, 1));
   const map = d3.group([[a1, 1], [a2, 2], [b, 3]], ([date]) => date);
-  test.deepEqual(map.get(a1), [[a1, 1], [a2, 2]]);
-  test.deepEqual(map.get(a2), [[a1, 1], [a2, 2]]);
-  test.deepEqual(map.get(b), [[b, 3]]);
-  test.deepEqual(map.get(+a1), [[a1, 1], [a2, 2]]);
-  test.deepEqual(map.get(+a2), [[a1, 1], [a2, 2]]);
-  test.deepEqual(map.get(+b), [[b, 3]]);
-  test.strictEqual([...map.keys()][0], a1);
-  test.strictEqual([...map.keys()][1], b);
+  assert.deepEqual(map.get(a1), [[a1, 1], [a2, 2]]);
+  assert.deepEqual(map.get(a2), [[a1, 1], [a2, 2]]);
+  assert.deepEqual(map.get(b), [[b, 3]]);
+  assert.deepEqual(map.get(+a1), [[a1, 1], [a2, 2]]);
+  assert.deepEqual(map.get(+a2), [[a1, 1], [a2, 2]]);
+  assert.deepEqual(map.get(+b), [[b, 3]]);
+  assert.strictEqual([...map.keys()][0], a1);
+  assert.strictEqual([...map.keys()][1], b);
 });
 
 function entries(map, depth) {

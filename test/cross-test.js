@@ -1,39 +1,39 @@
-const tape = require("tape-await");
-const d3 = require("../");
+import assert from "assert";
+import * as d3 from "../src/index.js";
 
-tape("cross() returns an empty array", (test) => {
-  test.deepEqual(d3.cross(), []);
+it("cross() returns an empty array", () => {
+  assert.deepEqual(d3.cross(), []);
 });
 
-tape("cross([]) returns an empty array", (test) => {
-  test.deepEqual(d3.cross([]), []);
+it("cross([]) returns an empty array", () => {
+  assert.deepEqual(d3.cross([]), []);
 });
 
-tape("cross([1, 2], []) returns an empty array", (test) => {
-  test.deepEqual(d3.cross([1, 2], []), []);
+it("cross([1, 2], []) returns an empty array", () => {
+  assert.deepEqual(d3.cross([1, 2], []), []);
 });
 
-tape("cross({length: weird}) returns an empty array", (test) => {
-  test.deepEqual(d3.cross({length: NaN}), []);
-  test.deepEqual(d3.cross({length: 0.5}), []);
-  test.deepEqual(d3.cross({length: -1}), []);
-  test.deepEqual(d3.cross({length: undefined}), []);
+it("cross({length: weird}) returns an empty array", () => {
+  assert.deepEqual(d3.cross({length: NaN}), []);
+  assert.deepEqual(d3.cross({length: 0.5}), []);
+  assert.deepEqual(d3.cross({length: -1}), []);
+  assert.deepEqual(d3.cross({length: undefined}), []);
 });
 
-tape("cross(...strings) returns the expected result", (test) => {
-  test.deepEqual(d3.cross("foo", "bar", (a, b) => a + b), ["fb", "fa", "fr", "ob", "oa", "or", "ob", "oa", "or"]);
+it("cross(...strings) returns the expected result", () => {
+  assert.deepEqual(d3.cross("foo", "bar", (a, b) => a + b), ["fb", "fa", "fr", "ob", "oa", "or", "ob", "oa", "or"]);
 });
 
-tape("cross(a) returns the expected result", (test) => {
-  test.deepEqual(d3.cross([1, 2]), [[1], [2]]);
+it("cross(a) returns the expected result", () => {
+  assert.deepEqual(d3.cross([1, 2]), [[1], [2]]);
 });
 
-tape("cross(a, b) returns Cartesian product a×b", (test) => {
-  test.deepEqual(d3.cross([1, 2], ["x", "y"]), [[1, "x"], [1, "y"], [2, "x"], [2, "y"]]);
+it("cross(a, b) returns Cartesian product a×b", () => {
+  assert.deepEqual(d3.cross([1, 2], ["x", "y"]), [[1, "x"], [1, "y"], [2, "x"], [2, "y"]]);
 });
 
-tape("cross(a, b, c) returns Cartesian product a×b×c", (test) => {
-  test.deepEqual(d3.cross([1, 2], [3, 4], [5, 6, 7]), [
+it("cross(a, b, c) returns Cartesian product a×b×c", () => {
+  assert.deepEqual(d3.cross([1, 2], [3, 4], [5, 6, 7]), [
     [1, 3, 5],
     [1, 3, 6],
     [1, 3, 7],
@@ -49,16 +49,16 @@ tape("cross(a, b, c) returns Cartesian product a×b×c", (test) => {
   ]);
 });
 
-tape("cross(a, b, f) invokes the specified function for each pair", (test) => {
-  test.deepEqual(d3.cross([1, 2], ["x", "y"], (a, b) => a + b), ["1x", "1y", "2x", "2y"]);
+it("cross(a, b, f) invokes the specified function for each pair", () => {
+  assert.deepEqual(d3.cross([1, 2], ["x", "y"], (a, b) => a + b), ["1x", "1y", "2x", "2y"]);
 });
 
-tape("cross(a, b, c, f) invokes the specified function for each triple", (test) => {
-  test.deepEqual(d3.cross([1, 2], [3, 4], [5, 6, 7], (a, b, c) => a + b + c), [9, 10, 11, 10, 11, 12, 10, 11, 12, 11, 12, 13]);
+it("cross(a, b, c, f) invokes the specified function for each triple", () => {
+  assert.deepEqual(d3.cross([1, 2], [3, 4], [5, 6, 7], (a, b, c) => a + b + c), [9, 10, 11, 10, 11, 12, 10, 11, 12, 11, 12, 13]);
 });
 
-tape("cross(a, b) returns Cartesian product a×b of generators", (test) => {
-  test.deepEqual(d3.cross(generate(1, 2), generate("x", "y")), [[1, "x"], [1, "y"], [2, "x"], [2, "y"]]);
+it("cross(a, b) returns Cartesian product a×b of generators", () => {
+  assert.deepEqual(d3.cross(generate(1, 2), generate("x", "y")), [[1, "x"], [1, "y"], [2, "x"], [2, "y"]]);
 });
 
 function* generate(...values) {

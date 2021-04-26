@@ -1,20 +1,20 @@
-const tape = require("tape-await");
-const d3 = require("../");
+import assert from "assert";
+import * as d3 from "../src/index.js";
 
-tape("histogram is a deprecated alias for bin", (test) => {
-  test.strictEqual(d3.histogram, d3.bin);
+it("histogram is a deprecated alias for bin", () => {
+  assert.strictEqual(d3.histogram, d3.bin);
 });
 
-tape("bin() returns a default bin generator", (test) => {
+it("bin() returns a default bin generator", () => {
   const h = d3.bin();
-  test.equal(h.value()(42), 42);
-  test.equal(h.domain(), d3.extent);
-  test.deepEqual(h.thresholds(), d3.thresholdSturges);
+  assert.equal(h.value()(42), 42);
+  assert.equal(h.domain(), d3.extent);
+  assert.deepEqual(h.thresholds(), d3.thresholdSturges);
 });
 
-tape("bin(data) computes bins of the specified array of data", (test) => {
+it("bin(data) computes bins of the specified array of data", () => {
   const h = d3.bin();
-  test.deepEqual(h([0, 0, 0, 10, 20, 20]), [
+  assert.deepEqual(h([0, 0, 0, 10, 20, 20]), [
     bin([0, 0, 0], 0, 5),
     bin([], 5, 10),
     bin([10], 10, 15),
@@ -23,9 +23,9 @@ tape("bin(data) computes bins of the specified array of data", (test) => {
   ]);
 });
 
-tape("bin(iterable) is equivalent to bin(array)", (test) => {
+it("bin(iterable) is equivalent to bin(array)", () => {
   const h = d3.bin();
-  test.deepEqual(h(iterable([0, 0, 0, 10, 20, 20])), [
+  assert.deepEqual(h(iterable([0, 0, 0, 10, 20, 20])), [
     bin([0, 0, 0], 0, 5),
     bin([], 5, 10),
     bin([10], 10, 15),
@@ -34,19 +34,19 @@ tape("bin(iterable) is equivalent to bin(array)", (test) => {
   ]);
 });
 
-tape("bin.value(number) sets the constant value", (test) => {
+it("bin.value(number) sets the constant value", () => {
   const h = d3.bin().value(12); // Pointless, but for consistency.
-  test.deepEqual(h([0, 0, 0, 1, 2, 2]), [
+  assert.deepEqual(h([0, 0, 0, 1, 2, 2]), [
     bin([0, 0, 0, 1, 2, 2], 12, 12),
   ]);
 });
 
-tape("bin.value(function) sets the value accessor", (test) => {
+it("bin.value(function) sets the value accessor", () => {
   const h = d3.bin().value((d) => d.value);
   const a = {value: 0};
   const b = {value: 10};
   const c = {value: 20};
-  test.deepEqual(h([a, a, a, b, c, c]), [
+  assert.deepEqual(h([a, a, a, b, c, c]), [
     bin([a, a, a], 0, 5),
     bin([], 5, 10),
     bin([b], 10, 15),
@@ -55,10 +55,10 @@ tape("bin.value(function) sets the value accessor", (test) => {
   ]);
 });
 
-tape("bin.domain(array) sets the domain", (test) => {
+it("bin.domain(array) sets the domain", () => {
   const h = d3.bin().domain([0, 20]);
-  test.deepEqual(h.domain()(), [0, 20]);
-  test.deepEqual(h([1, 2, 2, 10, 18, 18]), [
+  assert.deepEqual(h.domain()(), [0, 20]);
+  assert.deepEqual(h([1, 2, 2, 10, 18, 18]), [
     bin([1, 2, 2], 0, 5),
     bin([], 5, 10),
     bin([10], 10, 15),
@@ -66,24 +66,24 @@ tape("bin.domain(array) sets the domain", (test) => {
   ]);
 });
 
-tape("bin.domain(function) sets the domain accessor", (test) => {
+it("bin.domain(function) sets the domain accessor", () => {
   let actual;
   const values = [1, 2, 2, 10, 18, 18];
   const domain = (values) => { actual = values; return [0, 20]; };
   const h = d3.bin().domain(domain);
-  test.equal(h.domain(), domain);
-  test.deepEqual(h(values), [
+  assert.equal(h.domain(), domain);
+  assert.deepEqual(h(values), [
     bin([1, 2, 2], 0, 5),
     bin([], 5, 10),
     bin([10], 10, 15),
     bin([18, 18], 15, 20)
   ]);
-  test.deepEqual(actual, values);
+  assert.deepEqual(actual, values);
 });
 
-tape("bin.thresholds(number) sets the approximate number of bin thresholds", (test) => {
+it("bin.thresholds(number) sets the approximate number of bin thresholds", () => {
   const h = d3.bin().thresholds(3);
-  test.deepEqual(h([0, 0, 0, 10, 30, 30]), [
+  assert.deepEqual(h([0, 0, 0, 10, 30, 30]), [
     bin([0, 0, 0], 0, 10),
     bin([10], 10, 20),
     bin([], 20, 30),
@@ -91,18 +91,18 @@ tape("bin.thresholds(number) sets the approximate number of bin thresholds", (te
   ]);
 });
 
-tape("bin.thresholds(array) sets the bin thresholds", (test) => {
+it("bin.thresholds(array) sets the bin thresholds", () => {
   const h = d3.bin().thresholds([10, 20]);
-  test.deepEqual(h([0, 0, 0, 10, 30, 30]), [
+  assert.deepEqual(h([0, 0, 0, 10, 30, 30]), [
     bin([0, 0, 0], 0, 10),
     bin([10], 10, 20),
     bin([30, 30], 20, 30)
   ]);
 });
 
-tape("bin.thresholds(array) ignores thresholds outside the domain", (test) => {
+it("bin.thresholds(array) ignores thresholds outside the domain", () => {
   const h = d3.bin().thresholds([0, 1, 2, 3, 4]);
-  test.deepEqual(h([0, 1, 2, 3]), [
+  assert.deepEqual(h([0, 1, 2, 3]), [
     bin([0], 0, 1),
     bin([1], 1, 2),
     bin([2], 2, 3),
@@ -110,17 +110,17 @@ tape("bin.thresholds(array) ignores thresholds outside the domain", (test) => {
   ]);
 });
 
-tape("bin.thresholds(function) sets the bin thresholds accessor", (test) => {
+it("bin.thresholds(function) sets the bin thresholds accessor", () => {
   let actual;
   const values = [0, 0, 0, 10, 30, 30];
   const h = d3.bin().thresholds((values, x0, x1) => { actual = [values, x0, x1]; return [10, 20]; });
-  test.deepEqual(h(values), [
+  assert.deepEqual(h(values), [
     bin([0, 0, 0], 0, 10),
     bin([10], 10, 20),
     bin([30, 30], 20, 30)
   ]);
-  test.deepEqual(actual, [values, 0, 30]);
-  test.deepEqual(h.thresholds(() => 5)(values), [
+  assert.deepEqual(actual, [values, 0, 30]);
+  assert.deepEqual(h.thresholds(() => 5)(values), [
     bin([0, 0, 0], 0, 5),
     bin([], 5, 10),
     bin([10], 10, 15),
@@ -131,9 +131,9 @@ tape("bin.thresholds(function) sets the bin thresholds accessor", (test) => {
   ]);
 });
 
-tape("bin(data) uses nice thresholds", (test) => {
+it("bin(data) uses nice thresholds", () => {
   const h = d3.bin().domain([0, 1]).thresholds(5);
-  test.deepEqual(h([]).map(b => [b.x0, b.x1]), [
+  assert.deepEqual(h([]).map(b => [b.x0, b.x1]), [
     [0.0, 0.2],
     [0.2, 0.4],
     [0.4, 0.6],
@@ -142,9 +142,9 @@ tape("bin(data) uses nice thresholds", (test) => {
   ]);
 });
 
-tape("bin()() returns bins whose rightmost bin is not too wide", (test) => {
+it("bin()() returns bins whose rightmost bin is not too wide", () => {
   const h = d3.bin();
-  test.deepEqual(h([9.8, 10, 11, 12, 13, 13.2]), [
+  assert.deepEqual(h([9.8, 10, 11, 12, 13, 13.2]), [
     bin([9.8], 9, 10),
     bin([10], 10, 11),
     bin([11], 11, 12),
@@ -153,9 +153,9 @@ tape("bin()() returns bins whose rightmost bin is not too wide", (test) => {
   ]);
 });
 
-tape("bin(data) coerces values to numbers as expected", (test) => {
+it("bin(data) coerces values to numbers as expected", () => {
   const h = d3.bin().thresholds(10);
-  test.deepEqual(h(["1", "2", "3", "4", "5"]), [
+  assert.deepEqual(h(["1", "2", "3", "4", "5"]), [
     bin(["1"], 1, 1.5),
     bin([], 1.5, 2),
     bin(["2"], 2, 2.5),

@@ -1,5 +1,5 @@
-const tape = require("tape-await");
-const d3 = require("../");
+import assert from "assert";
+import * as d3 from "../src/index.js";
 
 const data = [
   {name: "jim",   amount: "34.0",   date: "11/12/2015"},
@@ -8,8 +8,8 @@ const data = [
   {name: "stacy", amount: "34.05",  date: "01/04/2016"}
 ];
 
-tape("groups(data, accessor) returns the expected array", (test) => {
-  test.deepEqual(
+it("groups(data, accessor) returns the expected array", () => {
+  assert.deepEqual(
     d3.groups(data, d => d.name),
     [
       [
@@ -51,8 +51,8 @@ tape("groups(data, accessor) returns the expected array", (test) => {
   );
 });
 
-tape("groups(data, accessor, accessor) returns the expected array", (test) => {
-  test.deepEqual(
+it("groups(data, accessor, accessor) returns the expected array", () => {
+  assert.deepEqual(
     d3.groups(data, d => d.name, d => d.amount),
     [
       [

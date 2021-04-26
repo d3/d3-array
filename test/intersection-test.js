@@ -1,21 +1,21 @@
-const tape = require("tape-await");
-const d3 = require("../");
+import assert from "assert";
+import * as d3 from "../src/index.js";
 
-require("./setEqual");
+import setEqual from "./setEqual.js";
 
-tape("intersection(values) returns a set of values", (test) => {
-  test.setEqual(d3.intersection([1, 2, 3, 2, 1]), new Set([1, 2, 3]));
+it("intersection(values) returns a set of values", () => {
+  assert(setEqual(d3.intersection([1, 2, 3, 2, 1]), new Set([1, 2, 3])));
 });
 
-tape("intersection(values, other) returns a set of values", (test) => {
-  test.setEqual(d3.intersection([1, 2], [2, 3, 1]), new Set([1, 2]));
-  test.setEqual(d3.intersection([2, 1, 3], [4, 3, 1]), new Set([1, 3]));
+it("intersection(values, other) returns a set of values", () => {
+  assert(setEqual(d3.intersection([1, 2], [2, 3, 1]), new Set([1, 2])));
+  assert(setEqual(d3.intersection([2, 1, 3], [4, 3, 1]), new Set([1, 3])));
 });
 
-tape("intersection(...values) returns a set of values", (test) => {
-  test.setEqual(d3.intersection([1, 2], [2, 1], [2, 3]), new Set([2]));
+it("intersection(...values) returns a set of values", () => {
+  assert(setEqual(d3.intersection([1, 2], [2, 1], [2, 3]), new Set([2])));
 });
 
-tape("intersection(...values) accepts iterables", (test) => {
-  test.setEqual(d3.intersection(new Set([1, 2, 3])), new Set([1, 2, 3]));
+it("intersection(...values) accepts iterables", () => {
+  assert(setEqual(d3.intersection(new Set([1, 2, 3])), new Set([1, 2, 3])));
 });
