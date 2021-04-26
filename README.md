@@ -42,7 +42,7 @@ const m = min(array);
 </script>
 ```
 
-For legacy environments, you can load d3-delaunay’s UMD bundle from an npm-based CDN such as jsDelivr; a `d3` global is exported:
+For legacy environments, you can load d3-array’s UMD bundle from an npm-based CDN such as jsDelivr; a `d3` global is exported:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/d3-array@3"></script>
