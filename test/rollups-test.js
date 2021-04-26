@@ -9,7 +9,7 @@ const data = [
 ];
 
 it("rollups(data, reduce, accessor) returns the expected array", () => {
-  assert.deepEqual(
+  assert.deepStrictEqual(
     d3.rollups(data, v => v.length, d => d.name),
     [
       ["jim", 1],
@@ -17,7 +17,7 @@ it("rollups(data, reduce, accessor) returns the expected array", () => {
       ["stacy", 2]
     ]
   );
-  assert.deepEqual(
+  assert.deepStrictEqual(
     d3.rollups(data, v => d3.sum(v, d => d.amount), d => d.name),
     [
       ["jim", 3400],
@@ -28,7 +28,7 @@ it("rollups(data, reduce, accessor) returns the expected array", () => {
 });
 
 it("rollups(data, reduce, accessor, accessor) returns the expected array", () => {
-  assert.deepEqual(
+  assert.deepStrictEqual(
     d3.rollups(data, v => v.length, d => d.name, d => d.amount),
     [
       [

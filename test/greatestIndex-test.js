@@ -28,8 +28,8 @@ it("greatestIndex(array, compare) compares using the specified compare function"
 
 it("greatestIndex(array, accessor) uses the specified accessor function", () => {
   const a = {name: "a", v: 42}, b = {name: "b", v: 0.42};
-  assert.deepEqual(d3.greatestIndex([a, b], d => d.name), 1);
-  assert.deepEqual(d3.greatestIndex([a, b], d => d.v), 0);
+  assert.deepStrictEqual(d3.greatestIndex([a, b], d => d.name), 1);
+  assert.deepStrictEqual(d3.greatestIndex([a, b], d => d.v), 0);
 });
 
 it("greatestIndex(array) returns -1 if the array is empty", () => {

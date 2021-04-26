@@ -9,7 +9,7 @@ const data = [
 ];
 
 it("group(data, accessor) returns the expected map", () => {
-  assert.deepEqual(
+  assert.deepStrictEqual(
     entries(d3.group(data, d => d.name), 1),
     [
       [
@@ -52,7 +52,7 @@ it("group(data, accessor) returns the expected map", () => {
 });
 
 it("group(data, accessor, accessor) returns the expected map", () => {
-  assert.deepEqual(
+  assert.deepStrictEqual(
     entries(d3.group(data, d => d.name, d => d.amount), 2),
     [
       [
@@ -119,12 +119,12 @@ it("group(data, accessor) interns keys", () => {
   const a2 = new Date(Date.UTC(2001, 0, 1));
   const b = new Date(Date.UTC(2002, 0, 1));
   const map = d3.group([[a1, 1], [a2, 2], [b, 3]], ([date]) => date);
-  assert.deepEqual(map.get(a1), [[a1, 1], [a2, 2]]);
-  assert.deepEqual(map.get(a2), [[a1, 1], [a2, 2]]);
-  assert.deepEqual(map.get(b), [[b, 3]]);
-  assert.deepEqual(map.get(+a1), [[a1, 1], [a2, 2]]);
-  assert.deepEqual(map.get(+a2), [[a1, 1], [a2, 2]]);
-  assert.deepEqual(map.get(+b), [[b, 3]]);
+  assert.deepStrictEqual(map.get(a1), [[a1, 1], [a2, 2]]);
+  assert.deepStrictEqual(map.get(a2), [[a1, 1], [a2, 2]]);
+  assert.deepStrictEqual(map.get(b), [[b, 3]]);
+  assert.deepStrictEqual(map.get(+a1), [[a1, 1], [a2, 2]]);
+  assert.deepStrictEqual(map.get(+a2), [[a1, 1], [a2, 2]]);
+  assert.deepStrictEqual(map.get(+b), [[b, 3]]);
   assert.strictEqual([...map.keys()][0], a1);
   assert.strictEqual([...map.keys()][1], b);
 });

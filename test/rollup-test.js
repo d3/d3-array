@@ -9,7 +9,7 @@ const data = [
 ];
 
 it("rollup(data, reduce, accessor) returns the expected map", () => {
-  assert.deepEqual(
+  assert.deepStrictEqual(
     entries(d3.rollup(data, v => v.length, d => d.name), 1),
     [
       ["jim", 1],
@@ -17,7 +17,7 @@ it("rollup(data, reduce, accessor) returns the expected map", () => {
       ["stacy", 2]
     ]
   );
-  assert.deepEqual(
+  assert.deepStrictEqual(
     entries(d3.rollup(data, v => d3.sum(v, d => d.amount), d => d.name), 1),
     [
       ["jim", 3400],
@@ -28,7 +28,7 @@ it("rollup(data, reduce, accessor) returns the expected map", () => {
 });
 
 it("rollup(data, reduce, accessor, accessor) returns the expected map", () => {
-  assert.deepEqual(
+  assert.deepStrictEqual(
     entries(d3.rollup(data, v => v.length, d => d.name, d => d.amount), 2),
     [
       [

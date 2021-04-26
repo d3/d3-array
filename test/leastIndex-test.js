@@ -28,8 +28,8 @@ it("leastIndex(array, compare) compares using the specified compare function", (
 
 it("leastIndex(array, accessor) uses the specified accessor function", () => {
   const a = {name: "a", v: 42}, b = {name: "b", v: 0.42};
-  assert.deepEqual(d3.leastIndex([a, b], d => d.name), 0);
-  assert.deepEqual(d3.leastIndex([a, b], d => d.v), 1);
+  assert.deepStrictEqual(d3.leastIndex([a, b], d => d.name), 0);
+  assert.deepStrictEqual(d3.leastIndex([a, b], d => d.v), 1);
 });
 
 it("leastIndex(array) returns -1 if the array is empty", () => {

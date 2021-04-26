@@ -9,7 +9,7 @@ const data = [
 ];
 
 it("groups(data, accessor) returns the expected array", () => {
-  assert.deepEqual(
+  assert.deepStrictEqual(
     d3.groups(data, d => d.name),
     [
       [
@@ -52,7 +52,7 @@ it("groups(data, accessor) returns the expected array", () => {
 });
 
 it("groups(data, accessor, accessor) returns the expected array", () => {
-  assert.deepEqual(
+  assert.deepStrictEqual(
     d3.groups(data, d => d.name, d => d.amount),
     [
       [

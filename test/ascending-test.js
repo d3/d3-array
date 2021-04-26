@@ -12,10 +12,10 @@ it("ascending(a, b) returns a positive number if a > b", () => {
 });
 
 it("ascending(a, b) returns zero if a >= b and a <= b", () => {
-  assert.equal(d3.ascending(0, 0), 0);
-  assert.equal(d3.ascending("a", "a"), 0);
-  assert.equal(d3.ascending("0", 0), 0);
-  assert.equal(d3.ascending(0, "0"), 0);
+  assert.strictEqual(d3.ascending(0, 0), 0);
+  assert.strictEqual(d3.ascending("a", "a"), 0);
+  assert.strictEqual(d3.ascending("0", 0), 0);
+  assert.strictEqual(d3.ascending(0, "0"), 0);
 });
 
 it("ascending(a, b) returns NaN if a and b are not comparable", () => {

@@ -12,7 +12,7 @@ it("reduce(values, reducer, initial) returns the reduced value", () => {
   assert.strictEqual(d3.reduce([1, 2, 3, 2, 1], (p, v) => p + v, 0), 9);
   assert.strictEqual(d3.reduce([1], (p, v) => p + v, 0), 1);
   assert.strictEqual(d3.reduce([], (p, v) => p + v, 0), 0);
-  assert.deepEqual(d3.reduce([1, 2, 3, 2, 1], (p, v) => p.concat(v), []), [1, 2, 3, 2, 1]);
+  assert.deepStrictEqual(d3.reduce([1, 2, 3, 2, 1], (p, v) => p.concat(v), []), [1, 2, 3, 2, 1]);
 });
 
 it("reduce(values, reducer) accepts an iterable", () => {
@@ -33,7 +33,7 @@ it("reduce(values, reducer) passes reducer (reduced, value, index, values)", () 
   const calls = [];
   const values = new Set([5, 4, 3, 2, 1]);
   d3.reduce(values, function(p, v) { calls.push([this, ...arguments]); return p + v; });
-  assert.deepEqual(calls, [
+  assert.deepStrictEqual(calls, [
     [undefined, 5, 4, 1, values],
     [undefined, 9, 3, 2, values],
     [undefined, 12, 2, 3, values],
@@ -45,7 +45,7 @@ it("reduce(values, reducer, initial) passes reducer (reduced, value, index, valu
   const calls = [];
   const values = new Set([5, 4, 3, 2, 1]);
   d3.reduce(values, function(p, v) { calls.push([this, ...arguments]); return p + v; }, 0);
-  assert.deepEqual(calls, [
+  assert.deepStrictEqual(calls, [
     [undefined, 0, 5, 0, values],
     [undefined, 5, 4, 1, values],
     [undefined, 9, 3, 2, values],

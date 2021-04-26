@@ -18,7 +18,7 @@ it("least(array) compares using natural order", () => {
 
 it("least(array, compare) compares using the specified compare function", () => {
   const a = {name: "a"}, b = {name: "b"};
-  assert.deepEqual(d3.least([a, b], (a, b) => a.name.localeCompare(b.name)), {name: "a"});
+  assert.deepStrictEqual(d3.least([a, b], (a, b) => a.name.localeCompare(b.name)), {name: "a"});
   assert.strictEqual(d3.least([1, 0], d3.descending), 1);
   assert.strictEqual(d3.least(["1", 0], d3.descending), "1");
   assert.strictEqual(d3.least(["2", "10"], d3.descending), "2");
@@ -28,8 +28,8 @@ it("least(array, compare) compares using the specified compare function", () => 
 
 it("least(array, accessor) uses the specified accessor function", () => {
   const a = {name: "a", v: 42}, b = {name: "b", v: 0.42};
-  assert.deepEqual(d3.least([a, b], d => d.name), a);
-  assert.deepEqual(d3.least([a, b], d => d.v), b);
+  assert.deepStrictEqual(d3.least([a, b], d => d.name), a);
+  assert.deepStrictEqual(d3.least([a, b], d => d.v), b);
 });
 
 it("least(array) returns undefined if the array is empty", () => {
@@ -42,8 +42,8 @@ it("least(array) returns undefined if the array contains only incomparable value
 });
 
 it("least(array) returns the first of equal values", () => {
-  assert.deepEqual(d3.least([2, 2, 1, 1, 0, 0, 0, 3, 0].map(box), ascendingValue), {value: 0, index: 4});
-  assert.deepEqual(d3.least([3, 2, 2, 1, 1, 0, 0, 0, 3, 0].map(box), descendingValue), {value: 3, index: 0});
+  assert.deepStrictEqual(d3.least([2, 2, 1, 1, 0, 0, 0, 3, 0].map(box), ascendingValue), {value: 0, index: 4});
+  assert.deepStrictEqual(d3.least([3, 2, 2, 1, 1, 0, 0, 0, 3, 0].map(box), descendingValue), {value: 3, index: 0});
 });
 
 function box(value, index) {

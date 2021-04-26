@@ -28,7 +28,7 @@ it("some(values, test) passes test (value, index, values)", () => {
   const calls = [];
   const values = new Set([5, 4, 3, 2, 1]);
   d3.some(values, function() { calls.push([this, ...arguments]); });
-  assert.deepEqual(calls, [
+  assert.deepStrictEqual(calls, [
     [undefined, 5, 0, values],
     [undefined, 4, 1, values],
     [undefined, 3, 2, values],
@@ -47,5 +47,5 @@ it("some(values, test) short-circuts when test returns truthy", () => {
 
 it("some(values, test) does not skip sparse elements", () => {
   // eslint-disable-next-line no-sparse-arrays
-  assert.deepEqual(d3.some([, 1, 2,,], x => x === undefined), true);
+  assert.deepStrictEqual(d3.some([, 1, 2,,], x => x === undefined), true);
 });
