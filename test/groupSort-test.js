@@ -1,9 +1,8 @@
 import assert from "assert";
 import * as d3 from "../src/index.js";
+import { readFileSync } from "fs";
 
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const barley = require("./data/barley.json");
+const barley = JSON.parse(readFileSync("./test/data/barley.json"));
 
 it("groupSort(data, reduce, key) returns sorted keys when reduce is an accessor", () => {
   assert.deepStrictEqual(
