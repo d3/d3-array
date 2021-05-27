@@ -41,6 +41,17 @@ it("bin.value(number) sets the constant value", () => {
   ]);
 });
 
+it("bin(data) does not bin null, undefined, or NaN", () => {
+  const h = bin();
+  assert.deepStrictEqual(h([0, null, undefined, NaN, 10, 20, 20]), [
+    box([0], 0, 5),
+    box([], 5, 10),
+    box([10], 10, 15),
+    box([], 15, 20),
+    box([20, 20], 20, 25)
+  ]);
+});
+
 it("bin.value(function) sets the value accessor", () => {
   const h = bin().value((d) => d.value);
   const a = {value: 0};
