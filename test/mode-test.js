@@ -14,6 +14,7 @@ tape("mode(array) returns the most frequent value for strings", (test) => {
 tape("mode(array) returns the most frequent value for heterogenous types", (test) => {
   test.strictEqual(d3.mode(["1"]), "1");
   test.strictEqual(d3.mode(["5", "1", "1", 2, 2, "2", 1, 1, 1, "3", "4"]), 1);
+  test.strictEqual(d3.mode(["5", 2, 2, "2", "2", 1, 1, 1, "3", "4"]), 1);
 });
 
 tape("mode(array) returns the first of the most frequent values", (test) => {
