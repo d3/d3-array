@@ -46,12 +46,12 @@ tape("least(array) returns the first of equal values", (test) => {
   test.deepEqual(d3.least([3, 2, 2, 1, 1, 0, 0, 0, 3, 0].map(box), descendingValue), {value: 3, index: 0});
 });
 
-tape("least(array) ignores nulls", (test) => {
-  test.deepEqual(d3.least([null, 2, null]), 2);
+tape("least(array) ignores null and undefined", (test) => {
+  test.deepEqual(d3.least([null, 2, undefined]), 2);
 });
 
-tape("least(array, accessor) ignores nulls", (test) => {
-  test.deepEqual(d3.least([null, 2, null], d => d), 2);
+tape("least(array, accessor) ignores null and undefined", (test) => {
+  test.deepEqual(d3.least([null, 2, undefined], d => d), 2);
 });
 
 function box(value, index) {
