@@ -7,10 +7,10 @@ export default function least(values, compare = ascending) {
     let minValue;
     for (const element of values) {
       const value = compare(element);
-      if ((defined
+      if (value != null && (defined
           ? ascending(value, minValue) < 0
           : ascending(value, value) === 0
-        ) && value !== null) {
+        )) {
         min = element;
         minValue = value;
         defined = true;
@@ -18,10 +18,10 @@ export default function least(values, compare = ascending) {
     }
   } else {
     for (const value of values) {
-      if ((defined
+      if (value != null && (defined
           ? compare(value, min) < 0
           : compare(value, value) === 0
-        ) && value !== null) {
+        )) {
         min = value;
         defined = true;
       }
