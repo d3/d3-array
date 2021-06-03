@@ -7,10 +7,9 @@ export default function greatest(values, compare = ascending) {
     let maxValue;
     for (const element of values) {
       const value = compare(element);
-      if (value != null && (defined
+      if (defined
           ? ascending(value, maxValue) > 0
-          : ascending(value, value) === 0
-        )) {
+          : ascending(value, value) === 0) {
         max = element;
         maxValue = value;
         defined = true;
@@ -18,10 +17,9 @@ export default function greatest(values, compare = ascending) {
     }
   } else {
     for (const value of values) {
-      if (value != null && (defined
+      if (defined
           ? compare(value, max) > 0
-          : compare(value, value) === 0
-        )) {
+          : compare(value, value) === 0) {
         max = value;
         defined = true;
       }

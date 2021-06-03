@@ -46,12 +46,12 @@ it("greatest(array) returns the first of equal values", () => {
   assert.deepStrictEqual(greatest([3, 2, 2, 1, 1, 0, 0, 0, 3, 0].map(box), ascendingValue), {value: 3, index: 0});
 });
 
-tape("greatest(array) ignores null and undefined", (test) => {
-  test.deepEqual(d3.greatest([null, -2, undefined]), -2);
+it("greatest(array) ignores null and undefined", () => {
+  assert.deepStrictEqual(greatest([null, -2, undefined]), -2);
 });
 
-tape("greatest(array, accessor) ignores null and undefined", (test) => {
-  test.deepEqual(d3.greatest([null, -2, undefined], d => d), -2);
+it("greatest(array, accessor) ignores null and undefined", () => {
+  assert.deepStrictEqual(greatest([null, -2, undefined], d => d), -2);
 });
 
 function box(value, index) {
