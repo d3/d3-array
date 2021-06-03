@@ -45,3 +45,11 @@ tape("greatestIndex(array) returns the first of equal values", (test) => {
   test.strictEqual(d3.greatestIndex([-2, -2, -1, -1, 0, 0, 0, -3, 0]), 4);
   test.strictEqual(d3.greatestIndex([-3, -2, -2, -1, -1, 0, 0, 0, -3, 0], d3.descending), 0);
 });
+
+tape("greatestIndex(array) ignores nulls", (test) => {
+  test.deepEqual(d3.greatestIndex([null, -2, null]), 1);
+});
+
+tape("greatestIndex(array, accessor) ignores nulls", (test) => {
+  test.deepEqual(d3.greatestIndex([null, -2, null], d => d), 1);
+});

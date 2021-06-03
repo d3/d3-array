@@ -46,6 +46,14 @@ tape("greatest(array) returns the first of equal values", (test) => {
   test.deepEqual(d3.greatest([3, 2, 2, 1, 1, 0, 0, 0, 3, 0].map(box), ascendingValue), {value: 3, index: 0});
 });
 
+tape("greatest(array) ignores nulls", (test) => {
+  test.deepEqual(d3.greatest([null, -2, null]), -2);
+});
+
+tape("greatest(array, accessor) ignores nulls", (test) => {
+  test.deepEqual(d3.greatest([null, -2, null], d => d), -2);
+});
+
 function box(value, index) {
   return {value, index};
 }
