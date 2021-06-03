@@ -8,9 +8,10 @@ export default function leastIndex(values, compare = ascending) {
   let index = -1;
   for (const value of values) {
     ++index;
-    if (min < 0
+    if ((min < 0
         ? compare(value, value) === 0
-        : compare(value, minValue) < 0) {
+        : compare(value, minValue) < 0
+      ) && value !== null) {
       minValue = value;
       min = index;
     }

@@ -45,3 +45,11 @@ it("leastIndex(array) returns the first of equal values", () => {
   assert.strictEqual(leastIndex([2, 2, 1, 1, 0, 0, 0, 3, 0]), 4);
   assert.strictEqual(leastIndex([3, 2, 2, 1, 1, 0, 0, 0, 3, 0], descending), 0);
 });
+
+tape("leastIndex(array) ignores nulls", (test) => {
+  test.deepEqual(d3.leastIndex([null, 2, null]), 1);
+});
+
+tape("leastIndex(array, accessor) ignores nulls", (test) => {
+  test.deepEqual(d3.leastIndex([null, 2, null], d => d), 1);
+});

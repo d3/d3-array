@@ -8,9 +8,10 @@ export default function greatestIndex(values, compare = ascending) {
   let index = -1;
   for (const value of values) {
     ++index;
-    if (max < 0
+    if ((max < 0
         ? compare(value, value) === 0
-        : compare(value, maxValue) > 0) {
+        : compare(value, maxValue) > 0
+      ) && value !== null) {
       maxValue = value;
       max = index;
     }
