@@ -1,5 +1,5 @@
 import assert from "assert";
-import * as d3 from "../src/index.js";
+import {groups} from "../src/index.js";
 
 const data = [
   {name: "jim",   amount: "34.0",   date: "11/12/2015"},
@@ -10,7 +10,7 @@ const data = [
 
 it("groups(data, accessor) returns the expected array", () => {
   assert.deepStrictEqual(
-    d3.groups(data, d => d.name),
+    groups(data, d => d.name),
     [
       [
         "jim",
@@ -53,7 +53,7 @@ it("groups(data, accessor) returns the expected array", () => {
 
 it("groups(data, accessor, accessor) returns the expected array", () => {
   assert.deepStrictEqual(
-    d3.groups(data, d => d.name, d => d.amount),
+    groups(data, d => d.name, d => d.amount),
     [
       [
         "jim",

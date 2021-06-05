@@ -46,6 +46,5 @@ it("some(values, test) short-circuts when test returns truthy", () => {
 });
 
 it("some(values, test) does not skip sparse elements", () => {
-  // eslint-disable-next-line no-sparse-arrays
-  assert.deepStrictEqual(some([, 1, 2,,], x => x === undefined), true);
+  assert.deepStrictEqual(some([, 1, 2,, ], x => x === undefined), true);
 });

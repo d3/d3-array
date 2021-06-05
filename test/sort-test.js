@@ -45,6 +45,5 @@ it("sort(values, comparator) enforces that comparator is a function", () => {
 });
 
 it("sort(values) does not skip sparse elements", () => {
-  // eslint-disable-next-line no-sparse-arrays
-  assert.deepStrictEqual(sort([, 1, 2,,]), [1, 2, undefined, undefined]);
+  assert.deepStrictEqual(sort([, 1, 2,, ]), [1, 2, undefined, undefined]);
 });

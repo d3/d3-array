@@ -36,6 +36,5 @@ it("map(values, mapper) passes test (value, index, values)", () => {
 });
 
 it("map(values, mapper) does not skip sparse elements", () => {
-  // eslint-disable-next-line no-sparse-arrays
-  assert.deepStrictEqual(map([, 1, 2,,], x => x * 2), [NaN, 2, 4, NaN]);
+  assert.deepStrictEqual(map([, 1, 2,, ], x => x * 2), [NaN, 2, 4, NaN]);
 });

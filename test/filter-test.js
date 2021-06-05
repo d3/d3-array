@@ -36,6 +36,5 @@ it("filter(values, test) passes test (value, index, values)", () => {
 });
 
 it("filter(values, test) does not skip sparse elements", () => {
-  // eslint-disable-next-line no-sparse-arrays
-  assert.deepStrictEqual(d3.filter([, 1, 2,,], () => true), [undefined, 1, 2, undefined]);
+  assert.deepStrictEqual(d3.filter([, 1, 2,, ], () => true), [undefined, 1, 2, undefined]);
 });
