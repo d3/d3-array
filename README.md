@@ -36,9 +36,11 @@ If you use npm, `npm install d3-array`. You can also download the [latest releas
 
 ```html
 <script type="module">
+
 import {min} from "https://cdn.skypack.dev/d3-array@3";
 
 const m = min(array);
+
 </script>
 ```
 
