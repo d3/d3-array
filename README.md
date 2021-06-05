@@ -814,6 +814,8 @@ Bins the given iterable of *data* samples. Returns an array of bins, where each 
 * `x0` - the lower bound of the bin (inclusive).
 * `x1` - the upper bound of the bin (exclusive, except for the last bin).
 
+Any null or non-comparable values in the given *data*, or those outside the [domain](#bin_domain), are ignored.
+
 <a name="bin_value" href="#bin_value">#</a> <i>bin</i>.<b>value</b>([<i>value</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/bin.js), [Examples](https://observablehq.com/@d3/d3-bin)
 
 If *value* is specified, sets the value accessor to the specified function or constant and returns this bin generator. If *value* is not specified, returns the current value accessor, which defaults to the identity function.
