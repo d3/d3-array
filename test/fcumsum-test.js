@@ -91,7 +91,7 @@ it("fcumsum(array, f) passes the accessor d, i, and array", () => {
   assert.deepStrictEqual(results, [["a", 0, array], ["b", 1, array], ["c", 2, array]]);
 });
 
-it("fcumsum(array, f) uses the global context", () => {
+it("fcumsum(array, f) uses the undefined context", () => {
   const results = [];
   lastc([1, 2], function() { results.push(this); });
   assert.deepStrictEqual(results, [undefined, undefined]);

@@ -77,7 +77,7 @@ it("mean(array, f) passes the accessor d, i, and array", () => {
   assert.deepStrictEqual(results, [["a", 0, strings], ["b", 1, strings], ["c", 2, strings]]);
 });
 
-it("mean(array, f) uses the global context", () => {
+it("mean(array, f) uses the undefined context", () => {
   const results = [];
   mean([1, 2], function() { results.push(this); });
   assert.deepStrictEqual(results, [undefined, undefined]);
