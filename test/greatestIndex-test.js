@@ -45,3 +45,11 @@ it("greatestIndex(array) returns the first of equal values", () => {
   assert.strictEqual(greatestIndex([-2, -2, -1, -1, 0, 0, 0, -3, 0]), 4);
   assert.strictEqual(greatestIndex([-3, -2, -2, -1, -1, 0, 0, 0, -3, 0], descending), 0);
 });
+
+it("greatestIndex(array) ignores null and undefined", () => {
+  assert.deepStrictEqual(greatestIndex([null, -2, undefined]), 1);
+});
+
+it("greatestIndex(array, accessor) ignores null and undefined", () => {
+  assert.deepStrictEqual(greatestIndex([null, -2, undefined], d => d), 1);
+});

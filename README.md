@@ -302,7 +302,7 @@ Returns -1 if *a* is less than *b*, or 1 if *a* is greater than *b*, or 0. This 
 
 ```js
 function ascending(a, b) {
-  return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
+  return a == null || b == null ? NaN : a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
 }
 ```
 
@@ -310,11 +310,11 @@ Note that if no comparator function is specified to the built-in sort method, th
 
 <a name="descending" href="#descending">#</a> d3.<b>descending</b>(<i>a</i>, <i>b</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/descending.js), [Examples](https://observablehq.com/@d3/d3-ascending)
 
-Returns -1 if *a* is greater than *b*, or 1 if *a* is less than *b*, or 0. This is the comparator function for reverse natural order, and can be used in conjunction with the built-in array sort method to arrange elements in descending order.  It is implemented as:
+Returns -1 if *a* is greater than *b*, or 1 if *a* is less than *b*, or 0. This is the comparator function for reverse natural order, and can be used in conjunction with the built-in array sort method to arrange elements in descending order. It is implemented as:
 
 ```js
 function descending(a, b) {
-  return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
+  return a == null || b == null ? NaN : b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
 }
 ```
 
