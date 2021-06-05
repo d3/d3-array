@@ -417,6 +417,10 @@ This produces:
 
 Equivalent to [group](#group), but returns nested arrays instead of nested maps.
 
+<a name="flatGroup" href="#flatGroup">#</a> d3.<b>flatGroup</b>(<i>iterable</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/group.js), [Examples](https://observablehq.com/@d3/d3-flatgroup)
+
+Equivalent to [group](#group), but returns a flat array of [*key0*, *key1*, …, *values*] instead of nested maps.
+
 <a name="index" href="#index">#</a> d3.<b>index</b>(<i>iterable</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/group.js), [Examples](https://observablehq.com/@d3/d3-group)
 
 Equivalent to [group](#group) but returns a unique value per compound key instead of an array, throwing if the key is not unique.
@@ -506,6 +510,10 @@ To convert a Map to an Array, use [Array.from](https://developer.mozilla.org/en-
 <a name="rollups" href="#rollups">#</a> d3.<b>rollups</b>(<i>iterable</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/group.js), [Examples](https://observablehq.com/@d3/d3-group-d3-rollup)
 
 Equivalent to [rollup](#rollup), but returns nested arrays instead of nested maps.
+
+<a name="flatRollup" href="#flatRollup">#</a> d3.<b>flatRollup</b>(<i>iterable</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/group.js), [Examples](https://observablehq.com/@d3/d3-flatgroup)
+
+Equivalent to [rollup](#rollup), but returns a flat array of [*key0*, *key1*, …, *value*] instead of nested maps.
 
 <a name="groupSort" href="#groupSort">#</a> d3.<b>groupSort</b>(<i>iterable</i>, <i>comparator</i>, <i>key</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/groupSort.js), [Examples](https://observablehq.com/@d3/d3-groupsort)
 <br><a name="groupSort" href="#groupSort">#</a> d3.<b>groupSort</b>(<i>iterable</i>, <i>accessor</i>, <i>key</i>)
