@@ -1,5 +1,5 @@
 import assert from "assert";
-import * as d3 from "../src/index.js";
+import {rollups, sum} from "../src/index.js";
 
 const data = [
   {name: "jim",   amount: "3400",   date: "11/12/2015"},
@@ -10,7 +10,7 @@ const data = [
 
 it("rollups(data, reduce, accessor) returns the expected array", () => {
   assert.deepStrictEqual(
-    d3.rollups(data, v => v.length, d => d.name),
+    rollups(data, v => v.length, d => d.name),
     [
       ["jim", 1],
       ["carl", 1],
@@ -18,7 +18,7 @@ it("rollups(data, reduce, accessor) returns the expected array", () => {
     ]
   );
   assert.deepStrictEqual(
-    d3.rollups(data, v => d3.sum(v, d => d.amount), d => d.name),
+    rollups(data, v => sum(v, d => d.amount), d => d.name),
     [
       ["jim", 3400],
       ["carl", 12011],
@@ -29,7 +29,7 @@ it("rollups(data, reduce, accessor) returns the expected array", () => {
 
 it("rollups(data, reduce, accessor, accessor) returns the expected array", () => {
   assert.deepStrictEqual(
-    d3.rollups(data, v => v.length, d => d.name, d => d.amount),
+    rollups(data, v => v.length, d => d.name, d => d.amount),
     [
       [
         "jim",

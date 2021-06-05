@@ -1,9 +1,9 @@
 import assert from "assert";
-import * as d3 from "../src/index.js";
+import {ascending, bisector} from "../src/index.js";
 
 it("bisector(comparator).left(array, value) returns the index of an exact match", () => {
   const boxes = [1, 2, 3].map(box);
-  const bisectLeft = d3.bisector(ascendingBox).left;
+  const bisectLeft = bisector(ascendingBox).left;
   assert.strictEqual(bisectLeft(boxes, box(1)), 0);
   assert.strictEqual(bisectLeft(boxes, box(2)), 1);
   assert.strictEqual(bisectLeft(boxes, box(3)), 2);
@@ -11,19 +11,19 @@ it("bisector(comparator).left(array, value) returns the index of an exact match"
 
 it("bisector(comparator).left(array, value) returns the index of the first match", () => {
   const boxes = [1, 2, 2, 3].map(box);
-  const bisectLeft = d3.bisector(ascendingBox).left;
+  const bisectLeft = bisector(ascendingBox).left;
   assert.strictEqual(bisectLeft(boxes, box(1)), 0);
   assert.strictEqual(bisectLeft(boxes, box(2)), 1);
   assert.strictEqual(bisectLeft(boxes, box(3)), 3);
 });
 
 it("bisector(comparator).left(empty, value) returns zero", () => {
-  assert.strictEqual(d3.bisector(() => { throw new Error(); }).left([], 1), 0);
+  assert.strictEqual(bisector(() => { throw new Error(); }).left([], 1), 0);
 });
 
 it("bisector(comparator).left(array, value) returns the insertion point of a non-exact match", () => {
   const boxes = [1, 2, 3].map(box);
-  const bisectLeft = d3.bisector(ascendingBox).left;
+  const bisectLeft = bisector(ascendingBox).left;
   assert.strictEqual(bisectLeft(boxes, box(0.5)), 0);
   assert.strictEqual(bisectLeft(boxes, box(1.5)), 1);
   assert.strictEqual(bisectLeft(boxes, box(2.5)), 2);
@@ -32,7 +32,7 @@ it("bisector(comparator).left(array, value) returns the insertion point of a non
 
 it("bisector(comparator).left(array, value) has undefined behavior if the search value is unorderable", () => {
   const boxes = [1, 2, 3].map(box);
-  const bisectLeft = d3.bisector(ascendingBox).left;
+  const bisectLeft = bisector(ascendingBox).left;
   bisectLeft(boxes, box(new Date(NaN))); // who knows what this will return!
   bisectLeft(boxes, box(undefined));
   bisectLeft(boxes, box(NaN));
@@ -40,7 +40,7 @@ it("bisector(comparator).left(array, value) has undefined behavior if the search
 
 it("bisector(comparator).left(array, value, lo) observes the specified lower bound", () => {
   const boxes = [1, 2, 3, 4, 5].map(box);
-  const bisectLeft = d3.bisector(ascendingBox).left;
+  const bisectLeft = bisector(ascendingBox).left;
   assert.strictEqual(bisectLeft(boxes, box(0), 2), 2);
   assert.strictEqual(bisectLeft(boxes, box(1), 2), 2);
   assert.strictEqual(bisectLeft(boxes, box(2), 2), 2);
@@ -52,7 +52,7 @@ it("bisector(comparator).left(array, value, lo) observes the specified lower bou
 
 it("bisector(comparator).left(array, value, lo, hi) observes the specified bounds", () => {
   const boxes = [1, 2, 3, 4, 5].map(box);
-  const bisectLeft = d3.bisector(ascendingBox).left;
+  const bisectLeft = bisector(ascendingBox).left;
   assert.strictEqual(bisectLeft(boxes, box(0), 2, 3), 2);
   assert.strictEqual(bisectLeft(boxes, box(1), 2, 3), 2);
   assert.strictEqual(bisectLeft(boxes, box(2), 2, 3), 2);
@@ -64,7 +64,7 @@ it("bisector(comparator).left(array, value, lo, hi) observes the specified bound
 
 it("bisector(comparator).left(array, value) handles large sparse d3", () => {
   const boxes = [];
-  const bisectLeft = d3.bisector(ascendingBox).left;
+  const bisectLeft = bisector(ascendingBox).left;
   let i = 1 << 30;
   boxes[i++] = box(1);
   boxes[i++] = box(2);
@@ -82,7 +82,7 @@ it("bisector(comparator).left(array, value) handles large sparse d3", () => {
 
 it("bisector(comparator).right(array, value) returns the index after an exact match", () => {
   const boxes = [1, 2, 3].map(box);
-  const bisectRight = d3.bisector(ascendingBox).right;
+  const bisectRight = bisector(ascendingBox).right;
   assert.strictEqual(bisectRight(boxes, box(1)), 1);
   assert.strictEqual(bisectRight(boxes, box(2)), 2);
   assert.strictEqual(bisectRight(boxes, box(3)), 3);
@@ -90,19 +90,19 @@ it("bisector(comparator).right(array, value) returns the index after an exact ma
 
 it("bisector(comparator).right(array, value) returns the index after the last match", () => {
   const boxes = [1, 2, 2, 3].map(box);
-  const bisectRight = d3.bisector(ascendingBox).right;
+  const bisectRight = bisector(ascendingBox).right;
   assert.strictEqual(bisectRight(boxes, box(1)), 1);
   assert.strictEqual(bisectRight(boxes, box(2)), 3);
   assert.strictEqual(bisectRight(boxes, box(3)), 4);
 });
 
 it("bisector(comparator).right(empty, value) returns zero", () => {
-  assert.strictEqual(d3.bisector(() => { throw new Error(); }).right([], 1), 0);
+  assert.strictEqual(bisector(() => { throw new Error(); }).right([], 1), 0);
 });
 
 it("bisector(comparator).right(array, value) returns the insertion point of a non-exact match", () => {
   const boxes = [1, 2, 3].map(box);
-  const bisectRight = d3.bisector(ascendingBox).right;
+  const bisectRight = bisector(ascendingBox).right;
   assert.strictEqual(bisectRight(boxes, box(0.5)), 0);
   assert.strictEqual(bisectRight(boxes, box(1.5)), 1);
   assert.strictEqual(bisectRight(boxes, box(2.5)), 2);
@@ -111,7 +111,7 @@ it("bisector(comparator).right(array, value) returns the insertion point of a no
 
 it("bisector(comparator).right(array, value, lo) observes the specified lower bound", () => {
   const boxes = [1, 2, 3, 4, 5].map(box);
-  const bisectRight = d3.bisector(ascendingBox).right;
+  const bisectRight = bisector(ascendingBox).right;
   assert.strictEqual(bisectRight(boxes, box(0), 2), 2);
   assert.strictEqual(bisectRight(boxes, box(1), 2), 2);
   assert.strictEqual(bisectRight(boxes, box(2), 2), 2);
@@ -123,7 +123,7 @@ it("bisector(comparator).right(array, value, lo) observes the specified lower bo
 
 it("bisector(comparator).right(array, value, lo, hi) observes the specified bounds", () => {
   const boxes = [1, 2, 3, 4, 5].map(box);
-  const bisectRight = d3.bisector(ascendingBox).right;
+  const bisectRight = bisector(ascendingBox).right;
   assert.strictEqual(bisectRight(boxes, box(0), 2, 3), 2);
   assert.strictEqual(bisectRight(boxes, box(1), 2, 3), 2);
   assert.strictEqual(bisectRight(boxes, box(2), 2, 3), 2);
@@ -135,7 +135,7 @@ it("bisector(comparator).right(array, value, lo, hi) observes the specified boun
 
 it("bisector(comparator).right(array, value) handles large sparse d3", () => {
   const boxes = [];
-  const bisectRight = d3.bisector(ascendingBox).right;
+  const bisectRight = bisector(ascendingBox).right;
   let i = 1 << 30;
   boxes[i++] = box(1);
   boxes[i++] = box(2);
@@ -153,7 +153,7 @@ it("bisector(comparator).right(array, value) handles large sparse d3", () => {
 
 it("bisector(accessor).left(array, value) returns the index of an exact match", () => {
   const boxes = [1, 2, 3].map(box);
-  const bisectLeft = d3.bisector(unbox).left;
+  const bisectLeft = bisector(unbox).left;
   assert.strictEqual(bisectLeft(boxes, 1), 0);
   assert.strictEqual(bisectLeft(boxes, 2), 1);
   assert.strictEqual(bisectLeft(boxes, 3), 2);
@@ -161,7 +161,7 @@ it("bisector(accessor).left(array, value) returns the index of an exact match", 
 
 it("bisector(accessor).left(array, value) returns the index of the first match", () => {
   const boxes = [1, 2, 2, 3].map(box);
-  const bisectLeft = d3.bisector(unbox).left;
+  const bisectLeft = bisector(unbox).left;
   assert.strictEqual(bisectLeft(boxes, 1), 0);
   assert.strictEqual(bisectLeft(boxes, 2), 1);
   assert.strictEqual(bisectLeft(boxes, 3), 3);
@@ -169,7 +169,7 @@ it("bisector(accessor).left(array, value) returns the index of the first match",
 
 it("bisector(accessor).left(array, value) returns the insertion point of a non-exact match", () => {
   const boxes = [1, 2, 3].map(box);
-  const bisectLeft = d3.bisector(unbox).left;
+  const bisectLeft = bisector(unbox).left;
   assert.strictEqual(bisectLeft(boxes, 0.5), 0);
   assert.strictEqual(bisectLeft(boxes, 1.5), 1);
   assert.strictEqual(bisectLeft(boxes, 2.5), 2);
@@ -178,7 +178,7 @@ it("bisector(accessor).left(array, value) returns the insertion point of a non-e
 
 it("bisector(accessor).left(array, value) has undefined behavior if the search value is unorderable", () => {
   const boxes = [1, 2, 3].map(box);
-  const bisectLeft = d3.bisector(unbox).left;
+  const bisectLeft = bisector(unbox).left;
   bisectLeft(boxes, new Date(NaN)); // who knows what this will return!
   bisectLeft(boxes, undefined);
   bisectLeft(boxes, NaN);
@@ -186,7 +186,7 @@ it("bisector(accessor).left(array, value) has undefined behavior if the search v
 
 it("bisector(accessor).left(array, value, lo) observes the specified lower bound", () => {
   const boxes = [1, 2, 3, 4, 5].map(box);
-  const bisectLeft = d3.bisector(unbox).left;
+  const bisectLeft = bisector(unbox).left;
   assert.strictEqual(bisectLeft(boxes, 0, 2), 2);
   assert.strictEqual(bisectLeft(boxes, 1, 2), 2);
   assert.strictEqual(bisectLeft(boxes, 2, 2), 2);
@@ -198,7 +198,7 @@ it("bisector(accessor).left(array, value, lo) observes the specified lower bound
 
 it("bisector(accessor).left(array, value, lo, hi) observes the specified bounds", () => {
   const boxes = [1, 2, 3, 4, 5].map(box);
-  const bisectLeft = d3.bisector(unbox).left;
+  const bisectLeft = bisector(unbox).left;
   assert.strictEqual(bisectLeft(boxes, 0, 2, 3), 2);
   assert.strictEqual(bisectLeft(boxes, 1, 2, 3), 2);
   assert.strictEqual(bisectLeft(boxes, 2, 2, 3), 2);
@@ -210,7 +210,7 @@ it("bisector(accessor).left(array, value, lo, hi) observes the specified bounds"
 
 it("bisector(accessor).left(array, value) handles large sparse d3", () => {
   const boxes = [];
-  const bisectLeft = d3.bisector(unbox).left;
+  const bisectLeft = bisector(unbox).left;
   let i = 1 << 30;
   boxes[i++] = box(1);
   boxes[i++] = box(2);
@@ -228,7 +228,7 @@ it("bisector(accessor).left(array, value) handles large sparse d3", () => {
 
 it("bisector(accessor).right(array, value) returns the index after an exact match", () => {
   const boxes = [1, 2, 3].map(box);
-  const bisectRight = d3.bisector(unbox).right;
+  const bisectRight = bisector(unbox).right;
   assert.strictEqual(bisectRight(boxes, 1), 1);
   assert.strictEqual(bisectRight(boxes, 2), 2);
   assert.strictEqual(bisectRight(boxes, 3), 3);
@@ -236,7 +236,7 @@ it("bisector(accessor).right(array, value) returns the index after an exact matc
 
 it("bisector(accessor).right(array, value) returns the index after the last match", () => {
   const boxes = [1, 2, 2, 3].map(box);
-  const bisectRight = d3.bisector(unbox).right;
+  const bisectRight = bisector(unbox).right;
   assert.strictEqual(bisectRight(boxes, 1), 1);
   assert.strictEqual(bisectRight(boxes, 2), 3);
   assert.strictEqual(bisectRight(boxes, 3), 4);
@@ -244,7 +244,7 @@ it("bisector(accessor).right(array, value) returns the index after the last matc
 
 it("bisector(accessor).right(array, value) returns the insertion point of a non-exact match", () => {
   const boxes = [1, 2, 3].map(box);
-  const bisectRight = d3.bisector(unbox).right;
+  const bisectRight = bisector(unbox).right;
   assert.strictEqual(bisectRight(boxes, 0.5), 0);
   assert.strictEqual(bisectRight(boxes, 1.5), 1);
   assert.strictEqual(bisectRight(boxes, 2.5), 2);
@@ -253,7 +253,7 @@ it("bisector(accessor).right(array, value) returns the insertion point of a non-
 
 it("bisector(accessor).right(array, value, lo) observes the specified lower bound", () => {
   const boxes = [1, 2, 3, 4, 5].map(box);
-  const bisectRight = d3.bisector(unbox).right;
+  const bisectRight = bisector(unbox).right;
   assert.strictEqual(bisectRight(boxes, 0, 2), 2);
   assert.strictEqual(bisectRight(boxes, 1, 2), 2);
   assert.strictEqual(bisectRight(boxes, 2, 2), 2);
@@ -265,7 +265,7 @@ it("bisector(accessor).right(array, value, lo) observes the specified lower boun
 
 it("bisector(accessor).right(array, value, lo, hi) observes the specified bounds", () => {
   const boxes = [1, 2, 3, 4, 5].map(box);
-  const bisectRight = d3.bisector(unbox).right;
+  const bisectRight = bisector(unbox).right;
   assert.strictEqual(bisectRight(boxes, 0, 2, 3), 2);
   assert.strictEqual(bisectRight(boxes, 1, 2, 3), 2);
   assert.strictEqual(bisectRight(boxes, 2, 2, 3), 2);
@@ -277,7 +277,7 @@ it("bisector(accessor).right(array, value, lo, hi) observes the specified bounds
 
 it("bisector(accessor).right(array, value) handles large sparse d3", () => {
   const boxes = [];
-  const bisectRight = d3.bisector(unbox).right;
+  const bisectRight = bisector(unbox).right;
   let i = 1 << 30;
   boxes[i++] = box(1);
   boxes[i++] = box(2);
@@ -295,7 +295,7 @@ it("bisector(accessor).right(array, value) handles large sparse d3", () => {
 
 it("bisector(accessor).center(array, value) returns the closest index", () => {
   const data = [0, 1, 2, 3, 4];
-  const bisectCenter = d3.bisector(d => +d).center;
+  const bisectCenter = bisector(d => +d).center;
   assert.strictEqual(bisectCenter(data, 2), 2);
   assert.strictEqual(bisectCenter(data, 2.2), 2);
   assert.strictEqual(bisectCenter(data, 2.6), 3);
@@ -306,7 +306,7 @@ it("bisector(accessor).center(array, value) returns the closest index", () => {
 
 it("bisector(comparator).center(array, value) returns the closest index", () => {
   const data = [0, 1, 2, 3, 4];
-  const bisectCenter = d3.bisector((d, x) => +d - x).center;
+  const bisectCenter = bisector((d, x) => +d - x).center;
   assert.strictEqual(bisectCenter(data, 2), 2);
   assert.strictEqual(bisectCenter(data, 2.2), 2);
   assert.strictEqual(bisectCenter(data, 2.6), 3);
@@ -314,12 +314,12 @@ it("bisector(comparator).center(array, value) returns the closest index", () => 
 });
 
 it("bisector(comparator).center(empty, value) returns zero", () => {
-  assert.strictEqual(d3.bisector(() => { throw new Error(); }).center([], 1), 0);
+  assert.strictEqual(bisector(() => { throw new Error(); }).center([], 1), 0);
 });
 
 it("bisector(ascending).center(array, value) returns the left value", () => {
   const data = [0, 1, 2, 3, 4];
-  const bisectCenter = d3.bisector(d3.ascending).center;
+  const bisectCenter = bisector(ascending).center;
   assert.strictEqual(bisectCenter(data, 2.0), 2);
   assert.strictEqual(bisectCenter(data, 2.2), 3);
   assert.strictEqual(bisectCenter(data, 2.6), 3);
@@ -328,7 +328,7 @@ it("bisector(ascending).center(array, value) returns the left value", () => {
 
 it("bisector(ordinalAccessor).center(array, value) returns the left value", () => {
   const data = ["aa", "bb", "cc", "dd", "ee"];
-  const bisectCenter = d3.bisector(d => d).center;
+  const bisectCenter = bisector(d => d).center;
   assert.strictEqual(bisectCenter(data, "cc"), 2);
   assert.strictEqual(bisectCenter(data, "ce"), 3);
   assert.strictEqual(bisectCenter(data, "cf"), 3);
@@ -344,5 +344,5 @@ function unbox(box) {
 }
 
 function ascendingBox(a, b) {
-  return d3.ascending(a.value, b.value);
+  return ascending(a.value, b.value);
 }

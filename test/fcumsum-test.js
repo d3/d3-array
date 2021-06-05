@@ -1,16 +1,16 @@
 import assert from "assert";
-import * as d3 from "../src/index.js";
+import {cumsum, fcumsum} from "../src/index.js";
 
 it("fcumsum(array) returns a Float64Array of the expected length", () => {
-  const A = [.1, .1, .1, .1, .1, .1, .1, .1, .1, .1];
-  const R = d3.cumsum(A);
+  const A = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1];
+  const R = cumsum(A);
   assert(R instanceof Float64Array);
   assert.strictEqual(R.length, A.length);
 });
 
 it("fcumsum(array) is an exact cumsum", () => {
-  assert.strictEqual(lastc([.1, .1, .1, .1, .1, .1, .1, .1, .1, .1]), 1);
-  assert.strictEqual(lastc([.3, .3, .3, .3, .3, .3, .3, .3, .3, .3, -.3, -.3, -.3, -.3, -.3, -.3, -.3, -.3, -.3, -.3]), 0);
+  assert.strictEqual(lastc([0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]), 1);
+  assert.strictEqual(lastc([0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, -0.3, -0.3, -0.3, -0.3, -0.3, -0.3, -0.3, -0.3, -0.3, -0.3]), 0);
   assert.strictEqual(lastc(["20", "3"].map(box), unbox), 23);
 });
 
@@ -42,11 +42,11 @@ it("fcumsum(array) ignores null, undefined and NaN", () => {
 });
 
 it("fcumsum(array) returns an array of zeros if there are no numbers", () => {
-  assert.deepStrictEqual(Array.from(d3.fcumsum([])), []);
-  assert.deepStrictEqual(Array.from(d3.fcumsum([NaN])), [0]);
-  assert.deepStrictEqual(Array.from(d3.fcumsum([undefined])), [0]);
-  assert.deepStrictEqual(Array.from(d3.fcumsum([undefined, NaN])), [0, 0]);
-  assert.deepStrictEqual(Array.from(d3.fcumsum([undefined, NaN, {}])), [0, 0, 0]);
+  assert.deepStrictEqual(Array.from(fcumsum([])), []);
+  assert.deepStrictEqual(Array.from(fcumsum([NaN])), [0]);
+  assert.deepStrictEqual(Array.from(fcumsum([undefined])), [0]);
+  assert.deepStrictEqual(Array.from(fcumsum([undefined, NaN])), [0, 0]);
+  assert.deepStrictEqual(Array.from(fcumsum([undefined, NaN, {}])), [0, 0, 0]);
 });
 
 it("fcumsum(array, f) returns the fsum of the specified numbers", () => {
@@ -77,11 +77,11 @@ it("fcumsum(array, f) ignores null, undefined and NaN", () => {
 });
 
 it("fcumsum(array, f) returns zero if there are no numbers", () => {
-  assert.deepStrictEqual(Array.from(d3.fcumsum([].map(box), unbox)), []);
-  assert.deepStrictEqual(Array.from(d3.fcumsum([NaN].map(box), unbox)), [0]);
-  assert.deepStrictEqual(Array.from(d3.fcumsum([undefined].map(box), unbox)), [0]);
-  assert.deepStrictEqual(Array.from(d3.fcumsum([undefined, NaN].map(box), unbox)), [0, 0]);
-  assert.deepStrictEqual(Array.from(d3.fcumsum([undefined, NaN, {}].map(box), unbox)), [0, 0, 0]);
+  assert.deepStrictEqual(Array.from(fcumsum([].map(box), unbox)), []);
+  assert.deepStrictEqual(Array.from(fcumsum([NaN].map(box), unbox)), [0]);
+  assert.deepStrictEqual(Array.from(fcumsum([undefined].map(box), unbox)), [0]);
+  assert.deepStrictEqual(Array.from(fcumsum([undefined, NaN].map(box), unbox)), [0, 0]);
+  assert.deepStrictEqual(Array.from(fcumsum([undefined, NaN, {}].map(box), unbox)), [0, 0, 0]);
 });
 
 it("fcumsum(array, f) passes the accessor d, i, and array", () => {
@@ -106,6 +106,6 @@ function unbox(box) {
 }
 
 function lastc(values, valueof) {
-  const array = d3.fcumsum(values, valueof);
+  const array = fcumsum(values, valueof);
   return array[array.length -1];
 }
