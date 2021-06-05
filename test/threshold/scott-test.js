@@ -1,6 +1,6 @@
-const tape = require("tape-await");
-const d3 = require("../../");
+import assert from "assert";
+import {thresholdScott} from "../../src/index.js";
 
-tape("thresholdScott(values, min, max) returns the expected result", (test) => {
-  test.equal(d3.thresholdScott([4, 3, 2, 1, NaN], 1, 4), 2);
+it("thresholdScott(values, min, max) returns the expected result", () => {
+  assert.strictEqual(thresholdScott([4, 3, 2, 1, NaN], 1, 4), 2);
 });

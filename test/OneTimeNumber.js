@@ -1,6 +1,4 @@
-module.exports = OneTimeNumber;
-
-function OneTimeNumber(value) {
+export function OneTimeNumber(value) {
   this.value = value;
 }
 

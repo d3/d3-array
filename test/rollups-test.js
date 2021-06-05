@@ -1,5 +1,5 @@
-const tape = require("tape-await");
-const d3 = require("../");
+import assert from "assert";
+import {rollups, sum} from "../src/index.js";
 
 const data = [
   {name: "jim",   amount: "3400",   date: "11/12/2015"},
@@ -8,17 +8,17 @@ const data = [
   {name: "stacy", amount: "3405",  date: "01/04/2016"}
 ];
 
-tape("rollups(data, reduce, accessor) returns the expected array", (test) => {
-  test.deepEqual(
-    d3.rollups(data, v => v.length, d => d.name),
+it("rollups(data, reduce, accessor) returns the expected array", () => {
+  assert.deepStrictEqual(
+    rollups(data, v => v.length, d => d.name),
     [
       ["jim", 1],
       ["carl", 1],
       ["stacy", 2]
     ]
   );
-  test.deepEqual(
-    d3.rollups(data, v => d3.sum(v, d => d.amount), d => d.name),
+  assert.deepStrictEqual(
+    rollups(data, v => sum(v, d => d.amount), d => d.name),
     [
       ["jim", 3400],
       ["carl", 12011],
@@ -27,9 +27,9 @@ tape("rollups(data, reduce, accessor) returns the expected array", (test) => {
   );
 });
 
-tape("rollups(data, reduce, accessor, accessor) returns the expected array", (test) => {
-  test.deepEqual(
-    d3.rollups(data, v => v.length, d => d.name, d => d.amount),
+it("rollups(data, reduce, accessor, accessor) returns the expected array", () => {
+  assert.deepStrictEqual(
+    rollups(data, v => v.length, d => d.name, d => d.amount),
     [
       [
         "jim",

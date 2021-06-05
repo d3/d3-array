@@ -1,86 +1,86 @@
-const tape = require("tape-await");
-const d3 = require("../");
-const OneTimeNumber = require("./OneTimeNumber");
+import assert from "assert";
+import {mean} from "../src/index.js";
+import {OneTimeNumber} from "./OneTimeNumber.js";
 
-tape("mean(array) returns the mean value for numbers", (test) => {
-  test.equal(d3.mean([1]), 1);
-  test.equal(d3.mean([5, 1, 2, 3, 4]), 3);
-  test.equal(d3.mean([20, 3]), 11.5);
-  test.equal(d3.mean([3, 20]), 11.5);
+it("mean(array) returns the mean value for numbers", () => {
+  assert.strictEqual(mean([1]), 1);
+  assert.strictEqual(mean([5, 1, 2, 3, 4]), 3);
+  assert.strictEqual(mean([20, 3]), 11.5);
+  assert.strictEqual(mean([3, 20]), 11.5);
 });
 
-tape("mean(array) ignores null, undefined and NaN", (test) => {
-  test.equal(d3.mean([NaN, 1, 2, 3, 4, 5]), 3);
-  test.equal(d3.mean([1, 2, 3, 4, 5, NaN]), 3);
-  test.equal(d3.mean([10, null, 3, undefined, 5, NaN]), 6);
+it("mean(array) ignores null, undefined and NaN", () => {
+  assert.strictEqual(mean([NaN, 1, 2, 3, 4, 5]), 3);
+  assert.strictEqual(mean([1, 2, 3, 4, 5, NaN]), 3);
+  assert.strictEqual(mean([10, null, 3, undefined, 5, NaN]), 6);
 });
 
-tape("mean(array) returns undefined if the array contains no observed values", (test) => {
-  test.equal(d3.mean([]), undefined);
-  test.equal(d3.mean([null]), undefined);
-  test.equal(d3.mean([undefined]), undefined);
-  test.equal(d3.mean([NaN]), undefined);
-  test.equal(d3.mean([NaN, NaN]), undefined);
+it("mean(array) returns undefined if the array contains no observed values", () => {
+  assert.strictEqual(mean([]), undefined);
+  assert.strictEqual(mean([null]), undefined);
+  assert.strictEqual(mean([undefined]), undefined);
+  assert.strictEqual(mean([NaN]), undefined);
+  assert.strictEqual(mean([NaN, NaN]), undefined);
 });
 
-tape("mean(array) coerces values to numbers", (test) => {
-  test.equal(d3.mean(["1"]), 1);
-  test.equal(d3.mean(["5", "1", "2", "3", "4"]), 3);
-  test.equal(d3.mean(["20", "3"]), 11.5);
-  test.equal(d3.mean(["3", "20"]), 11.5);
+it("mean(array) coerces values to numbers", () => {
+  assert.strictEqual(mean(["1"]), 1);
+  assert.strictEqual(mean(["5", "1", "2", "3", "4"]), 3);
+  assert.strictEqual(mean(["20", "3"]), 11.5);
+  assert.strictEqual(mean(["3", "20"]), 11.5);
 });
 
-tape("mean(array) coerces values exactly once", (test) => {
+it("mean(array) coerces values exactly once", () => {
   const numbers = [1, new OneTimeNumber(3)];
-  test.equal(d3.mean(numbers), 2);
-  test.equal(d3.mean(numbers), 1);
+  assert.strictEqual(mean(numbers), 2);
+  assert.strictEqual(mean(numbers), 1);
 });
 
-tape("mean(array, f) returns the mean value for numbers", (test) => {
-  test.equal(d3.mean([1].map(box), unbox), 1);
-  test.equal(d3.mean([5, 1, 2, 3, 4].map(box), unbox), 3);
-  test.equal(d3.mean([20, 3].map(box), unbox), 11.5);
-  test.equal(d3.mean([3, 20].map(box), unbox), 11.5);
+it("mean(array, f) returns the mean value for numbers", () => {
+  assert.strictEqual(mean([1].map(box), unbox), 1);
+  assert.strictEqual(mean([5, 1, 2, 3, 4].map(box), unbox), 3);
+  assert.strictEqual(mean([20, 3].map(box), unbox), 11.5);
+  assert.strictEqual(mean([3, 20].map(box), unbox), 11.5);
 });
 
-tape("mean(array, f) ignores null, undefined and NaN", (test) => {
-  test.equal(d3.mean([NaN, 1, 2, 3, 4, 5].map(box), unbox), 3);
-  test.equal(d3.mean([1, 2, 3, 4, 5, NaN].map(box), unbox), 3);
-  test.equal(d3.mean([10, null, 3, undefined, 5, NaN].map(box), unbox), 6);
+it("mean(array, f) ignores null, undefined and NaN", () => {
+  assert.strictEqual(mean([NaN, 1, 2, 3, 4, 5].map(box), unbox), 3);
+  assert.strictEqual(mean([1, 2, 3, 4, 5, NaN].map(box), unbox), 3);
+  assert.strictEqual(mean([10, null, 3, undefined, 5, NaN].map(box), unbox), 6);
 });
 
-tape("mean(array, f) returns undefined if the array contains no observed values", (test) => {
-  test.equal(d3.mean([].map(box), unbox), undefined);
-  test.equal(d3.mean([null].map(box), unbox), undefined);
-  test.equal(d3.mean([undefined].map(box), unbox), undefined);
-  test.equal(d3.mean([NaN].map(box), unbox), undefined);
-  test.equal(d3.mean([NaN, NaN].map(box), unbox), undefined);
+it("mean(array, f) returns undefined if the array contains no observed values", () => {
+  assert.strictEqual(mean([].map(box), unbox), undefined);
+  assert.strictEqual(mean([null].map(box), unbox), undefined);
+  assert.strictEqual(mean([undefined].map(box), unbox), undefined);
+  assert.strictEqual(mean([NaN].map(box), unbox), undefined);
+  assert.strictEqual(mean([NaN, NaN].map(box), unbox), undefined);
 });
 
-tape("mean(array, f) coerces values to numbers", (test) => {
-  test.equal(d3.mean(["1"].map(box), unbox), 1);
-  test.equal(d3.mean(["5", "1", "2", "3", "4"].map(box), unbox), 3);
-  test.equal(d3.mean(["20", "3"].map(box), unbox), 11.5);
-  test.equal(d3.mean(["3", "20"].map(box), unbox), 11.5);
+it("mean(array, f) coerces values to numbers", () => {
+  assert.strictEqual(mean(["1"].map(box), unbox), 1);
+  assert.strictEqual(mean(["5", "1", "2", "3", "4"].map(box), unbox), 3);
+  assert.strictEqual(mean(["20", "3"].map(box), unbox), 11.5);
+  assert.strictEqual(mean(["3", "20"].map(box), unbox), 11.5);
 });
 
-tape("mean(array, f) coerces values exactly once", (test) => {
+it("mean(array, f) coerces values exactly once", () => {
   const numbers = [1, new OneTimeNumber(3)].map(box);
-  test.equal(d3.mean(numbers, unbox), 2);
-  test.equal(d3.mean(numbers, unbox), 1);
+  assert.strictEqual(mean(numbers, unbox), 2);
+  assert.strictEqual(mean(numbers, unbox), 1);
 });
 
-tape("mean(array, f) passes the accessor d, i, and array", (test) => {
+it("mean(array, f) passes the accessor d, i, and array", () => {
   const results = [];
   const strings = ["a", "b", "c"];
-  d3.mean(strings, (d, i, array) => results.push([d, i, array]));
-  test.deepEqual(results, [["a", 0, strings], ["b", 1, strings], ["c", 2, strings]]);
+  mean(strings, (d, i, array) => results.push([d, i, array]));
+  assert.deepStrictEqual(results, [["a", 0, strings], ["b", 1, strings], ["c", 2, strings]]);
 });
 
-tape("mean(array, f) uses the global context", (test) => {
+it("mean(array, f) uses the undefined context", () => {
   const results = [];
-  d3.mean([1, 2], function() { results.push(this); });
-  test.deepEqual(results, [global, global]);
+  mean([1, 2], function() { results.push(this); });
+  assert.deepStrictEqual(results, [undefined, undefined]);
 });
 
 function box(value) {

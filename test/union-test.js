@@ -1,21 +1,19 @@
-const tape = require("tape-await");
-const d3 = require("../");
+import {union} from "../src/index.js";
+import {assertSetEqual} from "./asserts.js";
 
-require("./setEqual");
-
-tape("union(values) returns a set of values", (test) => {
-  test.setEqual(d3.union([1, 2, 3, 2, 1]), new Set([1, 2, 3]));
+it("union(values) returns a set of values", () => {
+  assertSetEqual(union([1, 2, 3, 2, 1]), new Set([1, 2, 3]));
 });
 
-tape("union(values, other) returns a set of values", (test) => {
-  test.setEqual(d3.union([1, 2], [2, 3, 1]), new Set([1, 2, 3]));
+it("union(values, other) returns a set of values", () => {
+  assertSetEqual(union([1, 2], [2, 3, 1]), new Set([1, 2, 3]));
 });
 
-tape("union(...values) returns a set of values", (test) => {
-  test.setEqual(d3.union([1], [2], [2, 3], [1]), new Set([1, 2, 3]));
+it("union(...values) returns a set of values", () => {
+  assertSetEqual(union([1], [2], [2, 3], [1]), new Set([1, 2, 3]));
 });
 
-tape("union(...values) accepts iterables", (test) => {
-  test.setEqual(d3.union(new Set([1, 2, 3])), new Set([1, 2, 3]));
-  test.setEqual(d3.union(Uint8Array.of(1, 2, 3)), new Set([1, 2, 3]));
+it("union(...values) accepts iterables", () => {
+  assertSetEqual(union(new Set([1, 2, 3])), new Set([1, 2, 3]));
+  assertSetEqual(union(Uint8Array.of(1, 2, 3)), new Set([1, 2, 3]));
 });

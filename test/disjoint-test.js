@@ -1,18 +1,18 @@
-const tape = require("tape-await");
-const d3 = require("../");
+import assert from "assert";
+import {disjoint} from "../src/index.js";
 
-tape("disjoint(values, other) returns true if sets are disjoint", (test) => {
-  test.equal(d3.disjoint([1], [2]), true);
-  test.equal(d3.disjoint([2, 3], [3, 4]), false);
-  test.equal(d3.disjoint([1], []), true);
+it("disjoint(values, other) returns true if sets are disjoint", () => {
+  assert.strictEqual(disjoint([1], [2]), true);
+  assert.strictEqual(disjoint([2, 3], [3, 4]), false);
+  assert.strictEqual(disjoint([1], []), true);
 });
 
-tape("disjoint(values, other) allows values to be infinite", (test) => {
-  test.equal(d3.disjoint(odds(), [0, 2, 4, 5]), false);
+it("disjoint(values, other) allows values to be infinite", () => {
+  assert.strictEqual(disjoint(odds(), [0, 2, 4, 5]), false);
 });
 
-tape("disjoint(values, other) allows other to be infinite", (test) => {
-  test.equal(d3.disjoint([2], repeat(1, 3, 2)), false);
+it("disjoint(values, other) allows other to be infinite", () => {
+  assert.strictEqual(disjoint([2], repeat(1, 3, 2)), false);
 });
 
 function* odds() {
