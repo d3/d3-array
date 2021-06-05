@@ -99,6 +99,10 @@ Unlike the built-in [Math.max](https://developer.mozilla.org/docs/Web/JavaScript
 
 Returns the [minimum](#min) and [maximum](#max) value in the given *iterable* using natural order. If the iterable contains no comparable values, returns [undefined, undefined]. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the extent.
 
+<a name="mode" href="#mode">#</a> d3.<b>mode</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/mode.js), [Examples](https://observablehq.com/@d3/d3-mode)
+
+Returns the mode of the given *iterable*, *i.e.* the value which appears the most often. In case of equality, returns the first of the relevant values. If the iterable contains no comparable values, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the mode. This method ignores undefined, null and NaN values; this is useful for ignoring missing data.
+
 <a name="sum" href="#sum">#</a> d3.<b>sum</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/sum.js), [Examples](https://observablehq.com/@d3/d3-sum)
 
 Returns the sum of the given *iterable* of numbers. If the iterable contains no numbers, returns 0. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the sum. This method ignores undefined and NaN values; this is useful for ignoring missing data.
