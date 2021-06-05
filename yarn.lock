@@ -814,9 +814,9 @@ inherits@2:
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
 "internmap@1 - 2":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/internmap/-/internmap-2.0.0.tgz#cc38ce0c33eaf4501c07c990673c07caa782179a"
-  integrity sha512-XpWRFi4iwmWoSbMQQPUL7c3Qze/wfEnJxtpMC32awNzo7QC06vNZ6xXz/bLZyHxmMGoiX93eSxXEyTFQB83ukQ==
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/internmap/-/internmap-2.0.1.tgz#33d0fa016185397549fb1a14ea3dbe5a2949d1cd"
+  integrity sha512-Ujwccrj9FkGqjbY3iVoxD1VV+KdZZeENx0rphrtzmRXbFvkFO88L80BL/zeSIguX/7T+y8k04xqtgWgS5vxwxw==
 
 is-binary-path@~2.1.0:
   version "2.1.0"
