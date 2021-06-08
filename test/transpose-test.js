@@ -29,3 +29,29 @@ it("transpose(…) returns a copy", () => {
   matrix[0][0] = matrix[0][1] = matrix[1][0] = matrix[1][1] = 0;
   assert.deepStrictEqual(t, [[1, 3], [2, 4]]);
 });
+
+tape("transpose([objects]) transposes an array of objects", function(test) {
+  test.deepEqual(arrays.transpose([{a:1, b:2}, {a:3, b:4}, {a:5, b:6}]), {a: [1, 3, 5], b: [2, 4, 6]});
+  test.end();
+});
+
+tape("transpose([objects]) only uses properties present in all the objects", function(test) {
+  test.deepEqual(arrays.transpose([{a:1, b:2, c:-1}, {a:3, b:4}, {a:5, b:6, d:-1}]), {a: [1, 3, 5], b:[2, 4, 6]});
+  test.end();
+});
+
+tape("transpose(object) transposes an object of arrays", function(test) {
+  test.deepEqual(arrays.transpose({a: [1, 3, 5], b: [2, 4, 6]}), [{a:1, b:2}, {a:3, b:4}, {a:5, b:6}]);
+  test.end();
+});
+
+tape("transpose(object) ignores extra elements", function(test) {
+  test.deepEqual(arrays.transpose({a: [1, 3, 5], b: [2, 4, 6, 8]}), [{a:1, b:2}, {a:3, b:4}, {a:5, b:6}]);
+  test.end();
+});
+
+tape("transpose(object) transposes an object of objects", function(test) {
+  test.deepEqual(arrays.transpose({A: {a:1, b:2, c:-1}, B: {a:3, b:4}, C: {a:5, b:6, d:-1}}), { a: { A: 1, B: 3, C: 5 }, b: { A: 2, B: 4, C: 6 } });
+  test.end();
+});
+
