@@ -117,6 +117,10 @@ Returns the mean of the given *iterable* of numbers. If the iterable contains no
 
 Returns the median of the given *iterable* of numbers using the [R-7 method](https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample). If the iterable contains no numbers, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the median. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
+<a name="medianIndex" href="#medianIndex">#</a> d3.<b>medianIndex</b>(<i>array</i>, <i>p</i>[, <i>accessor</i>]) [Source](https://github.com/d3/d3-array/blob/master/src/median.js "Source")
+
+Similar to *median*, but returns the indices of the elements used to compute the median (the indices can be the same when a value is repeated or when the number of elements is odd).
+
 <a name="cumsum" href="#cumsum">#</a> d3.<b>cumsum</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/cumsum.js), [Examples](https://observablehq.com/@d3/d3-cumsum)
 
 Returns the cumulative sum of the given *iterable* of numbers, as a Float64Array of the same length. If the iterable contains no numbers, returns zeros. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the cumulative sum. This method ignores undefined and NaN values; this is useful for ignoring missing data.
@@ -140,6 +144,10 @@ An optional *accessor* function may be specified, which is equivalent to calling
 <a name="quantileSorted" href="#quantileSorted">#</a> d3.<b>quantileSorted</b>(<i>array</i>, <i>p</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/quantile.js), [Examples](https://observablehq.com/@d3/d3-mean-d3-median-and-friends)
 
 Similar to *quantile*, but expects the input to be a **sorted** *array* of values. In contrast with *quantile*, the accessor is only called on the elements needed to compute the quantile.
+
+<a name="quantileIndex" href="#quantileIndex">#</a> d3.<b>quantileIndex</b>(<i>array</i>, <i>p</i>[, <i>accessor</i>]) [Source](https://github.com/d3/d3-array/blob/master/src/quantile.js "Source")
+
+Similar to *quantile*, but returns the indices of the selected elements that bracket *p* (the indices can be the same when a value is repeated or *p* is an exact fraction of the number of elements).
 
 <a name="variance" href="#variance">#</a> d3.<b>variance</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/variance.js), [Examples](https://observablehq.com/@d3/d3-mean-d3-median-and-friends)
 
