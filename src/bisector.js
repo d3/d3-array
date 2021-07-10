@@ -1,4 +1,4 @@
-import ascending from "./ascending.js";
+import ascendingDefined from "./ascendingDefined.js";
 
 export default function(f) {
   let delta = f;
@@ -42,5 +42,5 @@ export default function(f) {
 }
 
 function ascendingComparator(f) {
-  return (d, x) => ascending(f(d), x);
+  return (d, x) => ascendingDefined(f(d), x);
 }
