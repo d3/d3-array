@@ -12,6 +12,15 @@ it("sort(values) defaults to ascending, not lexicographic", () => {
   assert.deepStrictEqual(sort(input), [1, 2, "10"]);
 });
 
+// Per ECMAScript specification §23.1.3.27.1, undefined values are not passed to
+// the comparator; they are always put at the end of the sorted array.
+// https://262.ecma-international.org/12.0/#sec-sortcompare
+it("sort(values) puts non-orderable values last, followed by undefined", () => {
+  const date = new Date(NaN);
+  const input = [undefined, 1, null, 0, NaN, "10", date, 2];
+  assert.deepStrictEqual(sort(input), [0, 1, 2, "10", null, NaN, date, undefined]);
+});
+
 it("sort(values, accessor) uses the specified accessor in natural order", () => {
   assert.deepStrictEqual(sort([1, 3, 2, 5, 4], d => d), [1, 2, 3, 4, 5]);
   assert.deepStrictEqual(sort([1, 3, 2, 5, 4], d => -d), [5, 4, 3, 2, 1]);

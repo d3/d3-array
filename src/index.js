@@ -1,10 +1,12 @@
 export {default as bisect, bisectRight, bisectLeft, bisectCenter} from "./bisect.js";
 export {default as ascending} from "./ascending.js";
+export {default as ascendingDefined} from "./ascendingDefined.js";
 export {default as bisector} from "./bisector.js";
 export {default as count} from "./count.js";
 export {default as cross} from "./cross.js";
 export {default as cumsum} from "./cumsum.js";
 export {default as descending} from "./descending.js";
+export {default as descendingDefined} from "./descendingDefined.js";
 export {default as deviation} from "./deviation.js";
 export {default as extent} from "./extent.js";
 export {Adder, fsum, fcumsum} from "./fsum.js";
