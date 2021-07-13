@@ -18,6 +18,7 @@ export default function bin() {
     var i,
         n = data.length,
         x,
+        step,
         values = new Array(n);
 
     for (i = 0; i < n; ++i) {
@@ -45,7 +46,7 @@ export default function bin() {
       // compare order (>=) rather than strict equality (===)!
       if (tz[tz.length - 1] >= x1) {
         if (max >= x1 && domain === extent) {
-          const step = tickIncrement(x0, x1, tn);
+          step = tickIncrement(x0, x1, tn);
           if (isFinite(step)) {
             if (step > 0) {
               x1 = (Math.floor(x1 / step) + 1) * step;
@@ -75,10 +76,20 @@ export default function bin() {
     }
 
     // Assign data to bins by value, ignoring any outside the domain.
-    for (i = 0; i < n; ++i) {
-      x = values[i];
-      if (x != null && x0 <= x && x <= x1) {
-        bins[bisect(tz, x, 0, m)].push(data[i]);
+    if (step && isFinite(step)) {
+      step = step < 0 ? -step : 1 / step;
+      for (i = 0; i < n; ++i) {
+        x = values[i];
+        if (x != null && x0 <= x && x <= x1) {
+          bins[Math.floor((x - x0) * step)].push(data[i]);
+        }
+      }
+    } else {
+      for (i = 0; i < n; ++i) {
+        x = values[i];
+        if (x != null && x0 <= x && x <= x1) {
+          bins[bisect(tz, x, 0, m)].push(data[i]);
+        }
       }
     }
 
