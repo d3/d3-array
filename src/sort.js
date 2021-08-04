@@ -4,7 +4,7 @@ import permute from "./permute.js";
 export default function sort(values, ...F) {
   if (typeof values[Symbol.iterator] !== "function") throw new TypeError("values is not iterable");
   values = Array.from(values);
-  let [f = ascending] = F;
+  let [f = ascendingDefined] = F;
   if (f.length === 1 || F.length > 1) {
     const index = Uint32Array.from(values, (d, i) => i);
     if (F.length > 1) {
@@ -17,9 +17,17 @@ export default function sort(values, ...F) {
       });
     } else {
       f = values.map(f);
-      index.sort((i, j) => ascending(f[i], f[j]));
+      index.sort((i, j) => ascendingDefined(f[i], f[j]));
     }
     return permute(values, index);
   }
   return values.sort(f);
+}
+
+function defined(x) {
+  return x != null && !Number.isNaN(x);
+}
+
+function ascendingDefined(a, b) {
+  return defined(b) - defined(a) || ascending(a, b);
 }

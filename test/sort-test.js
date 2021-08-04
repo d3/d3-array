@@ -1,5 +1,5 @@
 import assert from "assert";
-import {descending, sort} from "../src/index.js";
+import {ascending, descending, sort} from "../src/index.js";
 
 it("sort(values) returns a sorted copy", () => {
   const input = [1, 3, 2, 5, 4];
@@ -46,4 +46,19 @@ it("sort(values, comparator) enforces that comparator is a function", () => {
 
 it("sort(values) does not skip sparse elements", () => {
   assert.deepStrictEqual(sort([, 1, 2,, ]), [1, 2, undefined, undefined]);
+});
+
+it("null, undefined are sorted to the end", () => {
+  assert.deepStrictEqual(sort([1, 2, null, -1, 3]), [-1, 1, 2, 3, null]);
+  assert.deepStrictEqual(sort([1, 2, undefined, -1, 3]), [-1, 1, 2, 3, undefined]);
+});
+
+it("null, undefined are sorted to the end (accessor)", () => {
+  assert.deepStrictEqual(sort([1, 2, null, -1, 3], d => d), [-1, 1, 2, 3, null]);
+  assert.deepStrictEqual(sort([1, 2, undefined, -1, 3], d => d), [-1, 1, 2, 3, undefined]);
+});
+
+it("null, undefined are not expected to be sorted to the end (comparator)", () => {
+  assert.notDeepStrictEqual(sort([1, 2, null, -1, 3], ascending), [-1, 1, 2, 3, null]);
+  // assert.notDeepStrictEqual(sort([1, 2, undefined, -1, 3], ascending), [-1, 1, 2, 3, undefined]);
 });
