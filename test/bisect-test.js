@@ -141,3 +141,21 @@ it("bisectRight(array, value) handles large sparse d3", () => {
   assert.strictEqual(bisectRight(numbers, 5, i - 5, i), i - 0);
   assert.strictEqual(bisectRight(numbers, 6, i - 5, i), i - 0);
 });
+
+it("bisectLeft(array, value, lo, hi) keeps non-comparable values to the right", () => {
+  const values = [1, 2, null, undefined, NaN];
+  assert.strictEqual(bisectLeft(values, 1), 0);
+  assert.strictEqual(bisectLeft(values, 2), 1);
+  assert.strictEqual(bisectLeft(values, null), 2);
+  assert.strictEqual(bisectLeft(values, undefined), 2);
+  assert.strictEqual(bisectLeft(values, NaN), 2);
+});
+
+it("bisectRight(array, value, lo, hi) keeps non-comparable values to the right", () => {
+  const values = [1, 2, null, undefined];
+  assert.strictEqual(bisectRight(values, 1), 1);
+  assert.strictEqual(bisectRight(values, 2), 2);
+  assert.strictEqual(bisectRight(values, null), 4);
+  assert.strictEqual(bisectRight(values, undefined), 4);
+  assert.strictEqual(bisectRight(values, NaN), 4);
+});

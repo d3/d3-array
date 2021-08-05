@@ -190,7 +190,7 @@ Methods for searching arrays for a specific element.
 <a name="least" href="#least">#</a> d3.<b>least</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/least.js), [Examples](https://observablehq.com/@d3/d3-least)
 <br><a name="least" href="#least">#</a> d3.<b>least</b>(<i>iterable</i>[, <i>accessor</i>])
 
-Returns the least element of the specified *iterable* according to the specified *comparator* or *accessor*. If the given *iterable* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
+Returns the least element of the specified *iterable* according to the specified *comparator* or *accessor*, ignoring any non-comparable element (*i.e.*, the comparator returns NaN when comparing the element to itself). If the given *iterable* contains no comparable elements, returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
 
 ```js
 const array = [{foo: 42}, {foo: 91}];
@@ -204,7 +204,7 @@ This function is similar to [min](#min), except it allows the use of a comparato
 <a name="leastIndex" href="#leastIndex">#</a> d3.<b>leastIndex</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/leastIndex.js), [Examples](https://observablehq.com/@d3/d3-least)
 <br><a name="leastIndex" href="#leastIndex">#</a> d3.<b>leastIndex</b>(<i>iterable</i>[, <i>accessor</i>])
 
-Returns the index of the least element of the specified *iterable* according to the specified *comparator* or *accessor*. If the given *iterable* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns -1. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
+Returns the index of the least element of the specified *iterable* according to the specified *comparator* or *accessor*, ignoring any non-comparable element (*i.e.*, the comparator returns NaN when comparing the element to itself). If the given *iterable* contains no comparable elements, returns -1. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
 
 ```js
 const array = [{foo: 42}, {foo: 91}];
@@ -218,7 +218,7 @@ This function is similar to [minIndex](#minIndex), except it allows the use of a
 <a name="greatest" href="#greatest">#</a> d3.<b>greatest</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/greatest.js), [Examples](https://observablehq.com/@d3/d3-least)
 <br><a name="greatest" href="#greatest">#</a> d3.<b>greatest</b>(<i>iterable</i>[, <i>accessor</i>])
 
-Returns the greatest element of the specified *iterable* according to the specified *comparator* or *accessor*. If the given *iterable* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
+Returns the greatest element of the specified *iterable* according to the specified *comparator* or *accessor*, ignoring any non-comparable element (*i.e.*, the comparator returns NaN when comparing the element to itself). If the given *iterable* contains no comparable elements, returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
 
 ```js
 const array = [{foo: 42}, {foo: 91}];
@@ -232,7 +232,7 @@ This function is similar to [max](#max), except it allows the use of a comparato
 <a name="greatestIndex" href="#greatestIndex">#</a> d3.<b>greatestIndex</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/greatestIndex.js), [Examples](https://observablehq.com/@d3/d3-least)
 <br><a name="greatestIndex" href="#greatestIndex">#</a> d3.<b>greatestIndex</b>(<i>iterable</i>[, <i>accessor</i>])
 
-Returns the index of the greatest element of the specified *iterable* according to the specified *comparator* or *accessor*. If the given *iterable* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns -1. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
+Returns the index of the greatest element of the specified *iterable* according to the specified *comparator* or *accessor*, ignoring any non-comparable element (*i.e.*, the comparator returns NaN when comparing the element to itself). If the given *iterable* contains no comparable elements, returns -1. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
 
 ```js
 const array = [{foo: 42}, {foo: 91}];
@@ -245,12 +245,12 @@ This function is similar to [maxIndex](#maxIndex), except it allows the use of a
 
 <a name="bisectLeft" href="#bisectLeft">#</a> d3.<b>bisectLeft</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisect.js)
 
-Returns the insertion point for *x* in *array* to maintain sorted order. The arguments *lo* and *hi* may be used to specify a subset of the array which should be considered; by default the entire array is used. If *x* is already present in *array*, the insertion point will be before (to the left of) any existing entries. The return value is suitable for use as the first argument to [splice](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) assuming that *array* is already sorted. The returned insertion point *i* partitions the *array* into two halves so that all *v* < *x* for *v* in *array*.slice(*lo*, *i*) for the left side and all *v* >= *x* for *v* in *array*.slice(*i*, *hi*) for the right side.
+Returns the insertion point for *x* in *array* to maintain sorted order. The arguments *lo* and *hi* may be used to specify a subset of the array which should be considered; by default the entire array is used. If *x* is already present in *array*, the insertion point will be before (to the left of) any existing entries. The return value is suitable for use as the first argument to [splice](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) assuming that *array* is already sorted. The returned insertion point *i* partitions the *array* into two halves so that all *v* < *x* for *v* in *array*.slice(*lo*, *i*) for the left side and all *v* >= *x* for *v* in *array*.slice(*i*, *hi*) for the right side. Non-comparable entries (null, NaN and undefined) are on the right side.
 
 <a name="bisect" href="#bisect">#</a> d3.<b>bisect</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisect.js), [Examples](https://observablehq.com/@d3/d3-bisect)
 <br><a name="bisectRight" href="#bisectRight">#</a> d3.<b>bisectRight</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]])
 
-Similar to [bisectLeft](#bisectLeft), but returns an insertion point which comes after (to the right of) any existing entries of *x* in *array*. The returned insertion point *i* partitions the *array* into two halves so that all *v* <= *x* for *v* in *array*.slice(*lo*, *i*) for the left side and all *v* > *x* for *v* in *array*.slice(*i*, *hi*) for the right side.
+Similar to [bisectLeft](#bisectLeft), but returns an insertion point which comes after (to the right of) any existing entries of *x* in *array*. The returned insertion point *i* partitions the *array* into two halves so that all *v* <= *x* for *v* in *array*.slice(*lo*, *i*) for the left side and all *v* > *x* for *v* in *array*.slice(*i*, *hi*) for the right side.Non-comparable entries (null, NaN and undefined) are on the right side.
 
 <a name="bisectCenter" href="#bisectCenter">#</a> d3.<b>bisectCenter</b>(<i>array</i>, <i>x</i>[, <i>lo</i>[, <i>hi</i>]]) · [Source](https://github.com/d3/d3-array/blob/master/src/bisect.js), [Examples](https://observablehq.com/@d3/multi-line-chart)
 
@@ -298,7 +298,7 @@ Equivalent to [bisectRight](#bisectRight), but uses this bisector’s associated
 
 Returns the index of the closest value to *x* in the given sorted *array*. This expects that the bisector’s associated accessor returns a quantitative value, or that the bisector’s associated comparator returns a signed distance; otherwise, this method is equivalent to *bisector*.left.
 
-<a name="quickselect" href="#quickselect">#</a> d3.<b>quickselect</b>(<i>array</i>, <i>k</i>, <i>left</i> = 0, <i>right</i> = <i>array</i>.length - 1, <i>compare</i> = ascending) · [Source](https://github.com/d3/d3-array/blob/master/src/quickselect.js), [Examples](https://observablehq.com/@d3/d3-quickselect)
+<a name="quickselect" href="#quickselect">#</a> d3.<b>quickselect</b>(<i>array</i>, <i>k</i>, <i>left</i> = 0, <i>right</i> = <i>array</i>.length - 1, <i>compare</i> = ascendingDefined) · [Source](https://github.com/d3/d3-array/blob/master/src/quickselect.js), [Examples](https://observablehq.com/@d3/d3-quickselect)
 
 See [mourner/quickselect](https://github.com/mourner/quickselect/blob/master/README.md).
 
@@ -325,6 +325,10 @@ function descending(a, b) {
 ```
 
 Note that if no comparator function is specified to the built-in sort method, the default order is lexicographic (alphabetical), not natural! This can lead to surprising behavior when sorting an array of numbers.
+
+<a name="ascendingDefined" href="#ascendingDefined">#</a> d3.<b>ascendingDefined</b>(<i>a</i>, <i>b</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/ascendingDefined.js)
+
+This variant of [ascending](#ascending) is used internally by sort, bisect, groupSort and quickselect, and considers any non-comparable value as “greater” than any defined value, thus sorting null, NaN, and undefined to the right side.
 
 ### Transformations
 
@@ -520,7 +524,7 @@ Equivalent to [rollup](#rollup), but returns a flat array of [*key0*, *key1*, �
 <a name="groupSort" href="#groupSort">#</a> d3.<b>groupSort</b>(<i>iterable</i>, <i>comparator</i>, <i>key</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/groupSort.js), [Examples](https://observablehq.com/@d3/d3-groupsort)
 <br><a name="groupSort" href="#groupSort">#</a> d3.<b>groupSort</b>(<i>iterable</i>, <i>accessor</i>, <i>key</i>)
 
-Groups the specified *iterable* of elements according to the specified *key* function, sorts the groups according to the specified *comparator*, and then returns an array of keys in sorted order. For example, if you had a table of barley yields for different varieties, sites, and years, to sort the barley varieties by ascending median yield:
+Groups the specified *iterable* of elements according to the specified *key* function, sorts the groups according to the specified *comparator*, and then returns an array of keys in sorted order (with [ascendingDefined](#ascendingDefined)). For example, if you had a table of barley yields for different varieties, sites, and years, to sort the barley varieties by ascending median yield:
 
 ```js
 d3.groupSort(barley, g => d3.median(g, d => d.yield), d => d.variety)
@@ -533,6 +537,8 @@ d3.groupSort(barley, g => -d3.median(g, d => d.yield), d => d.variety)
 ```
 
 If a *comparator* is passed instead of an *accessor* (i.e., if the second argument is a function that takes two arguments), it will be asked to compare two groups *a* and *b* and should return a negative value if *a* should be before *b*, a positive value if *a* should be after *b*, or zero for a partial ordering.
+
+If the *accessor* returns null, NaN, or undefined, the corresponding groups are put on the right side.
 
 <a name="count" href="#count">#</a> d3.<b>count</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/count.js), [Examples](https://observablehq.com/@d3/d3-count)
 
