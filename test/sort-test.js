@@ -21,6 +21,13 @@ it("sort(values) puts non-orderable values last, followed by undefined", () => {
   assert.deepStrictEqual(sort(input), [0, 1, 2, "10", null, NaN, date, undefined]);
 });
 
+// However we don't implement this spec when using an accessor
+it("sort(values) puts non-orderable values last", () => {
+  const date = new Date(NaN);
+  const input = [undefined, 1, null, 0, NaN, "10", date, 2];
+  assert.deepStrictEqual(sort(input, d => d), [0, 1, 2, "10", undefined, null, NaN, date]);
+});
+
 it("sort(values, accessor) uses the specified accessor in natural order", () => {
   assert.deepStrictEqual(sort([1, 3, 2, 5, 4], d => d), [1, 2, 3, 4, 5]);
   assert.deepStrictEqual(sort([1, 3, 2, 5, 4], d => -d), [5, 4, 3, 2, 1]);
