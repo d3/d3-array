@@ -298,9 +298,9 @@ Equivalent to [bisectRight](#bisectRight), but uses this bisector’s associated
 
 Returns the index of the closest value to *x* in the given sorted *array*. This expects that the bisector’s associated accessor returns a quantitative value, or that the bisector’s associated comparator returns a signed distance; otherwise, this method is equivalent to *bisector*.left.
 
-<a name="quickselect" href="#quickselect">#</a> d3.<b>quickselect</b>(<i>array</i>, <i>k</i>, <i>left</i> = 0, <i>right</i> = <i>array</i>.length - 1, <i>compare</i> = ascendingDefined) · [Source](https://github.com/d3/d3-array/blob/master/src/quickselect.js), [Examples](https://observablehq.com/@d3/d3-quickselect)
+<a name="quickselect" href="#quickselect">#</a> d3.<b>quickselect</b>(<i>array</i>, <i>k</i>, <i>left</i> = 0, <i>right</i> = <i>array</i>.length - 1, <i>compare</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/quickselect.js), [Examples](https://observablehq.com/@d3/d3-quickselect)
 
-See [mourner/quickselect](https://github.com/mourner/quickselect/blob/master/README.md).
+See [mourner/quickselect](https://github.com/mourner/quickselect/blob/master/README.md). If *compare* is not specified, natural order of values is used, with undefined values considered greater than all defined values.
 
 <a name="ascending" href="#ascending">#</a> d3.<b>ascending</b>(<i>a</i>, <i>b</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/ascending.js), [Examples](https://observablehq.com/@d3/d3-ascending)
 
@@ -325,10 +325,6 @@ function descending(a, b) {
 ```
 
 Note that if no comparator function is specified to the built-in sort method, the default order is lexicographic (alphabetical), not natural! This can lead to surprising behavior when sorting an array of numbers.
-
-<a name="ascendingDefined" href="#ascendingDefined">#</a> d3.<b>ascendingDefined</b>(<i>a</i>, <i>b</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/ascendingDefined.js)
-
-This variant of [ascending](#ascending) is used internally by sort, bisect, groupSort and quickselect, and considers any non-comparable value as “greater” than any defined value, thus sorting null, NaN, and undefined to the right side.
 
 ### Transformations
 
@@ -524,7 +520,7 @@ Equivalent to [rollup](#rollup), but returns a flat array of [*key0*, *key1*, �
 <a name="groupSort" href="#groupSort">#</a> d3.<b>groupSort</b>(<i>iterable</i>, <i>comparator</i>, <i>key</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/groupSort.js), [Examples](https://observablehq.com/@d3/d3-groupsort)
 <br><a name="groupSort" href="#groupSort">#</a> d3.<b>groupSort</b>(<i>iterable</i>, <i>accessor</i>, <i>key</i>)
 
-Groups the specified *iterable* of elements according to the specified *key* function, sorts the groups according to the specified *comparator*, and then returns an array of keys in sorted order (with [ascendingDefined](#ascendingDefined)). For example, if you had a table of barley yields for different varieties, sites, and years, to sort the barley varieties by ascending median yield:
+Groups the specified *iterable* of elements according to the specified *key* function, sorts the groups according to the specified *comparator*, and then returns an array of keys in sorted natural order (with undefined keys, if any, last). For example, if you had a table of barley yields for different varieties, sites, and years, to sort the barley varieties by ascending median yield:
 
 ```js
 d3.groupSort(barley, g => d3.median(g, d => d.yield), d => d.variety)
