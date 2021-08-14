@@ -4,7 +4,7 @@ export default function sort(values, ...F) {
   if (typeof values[Symbol.iterator] !== "function") throw new TypeError("values is not iterable");
   values = Array.from(values);
   let [f] = F;
-  if ((F.length === 1 && f.length === 1) || F.length > 1) {
+  if ((f && f.length === 1) || F.length > 1) {
     const index = Uint32Array.from(values, (d, i) => i);
     if (F.length > 1) {
       F = F.map(f => values.map(f));
