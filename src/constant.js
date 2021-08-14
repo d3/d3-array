@@ -1,5 +1,3 @@
-export default function(x) {
-  return function() {
-    return x;
-  };
+export default function constant(x) {
+  return () => x;
 }

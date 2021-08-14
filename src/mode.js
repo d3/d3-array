@@ -1,6 +1,6 @@
 import {InternMap} from "internmap";
 
-export default function(values, valueof) {
+export default function mode(values, valueof) {
   const counts = new InternMap();
   if (valueof === undefined) {
     for (let value of values) {
