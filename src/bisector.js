@@ -14,11 +14,13 @@ export default function bisector(f) {
   function left(a, x, lo, hi) {
     if (lo == null) lo = 0;
     if (hi == null) hi = a.length;
-    if (lo < hi && compare1(x, x) !== 0) return hi;
-    while (lo < hi) {
-      const mid = (lo + hi) >>> 1;
-      if (compare2(a[mid], x) < 0) lo = mid + 1;
-      else hi = mid;
+    if (lo < hi) {
+      if (compare1(x, x) !== 0) return hi;
+      do {
+        const mid = (lo + hi) >>> 1;
+        if (compare2(a[mid], x) < 0) lo = mid + 1;
+        else hi = mid;
+      } while (lo < hi);
     }
     return lo;
   }
@@ -26,11 +28,13 @@ export default function bisector(f) {
   function right(a, x, lo, hi) {
     if (lo == null) lo = 0;
     if (hi == null) hi = a.length;
-    if (lo < hi && compare1(x, x) !== 0) return hi;
-    while (lo < hi) {
-      const mid = (lo + hi) >>> 1;
-      if (compare2(a[mid], x) <= 0) lo = mid + 1;
-      else hi = mid;
+    if (lo < hi) {
+      if (compare1(x, x) !== 0) return hi;
+      do {
+        const mid = (lo + hi) >>> 1;
+        if (compare2(a[mid], x) <= 0) lo = mid + 1;
+        else hi = mid;
+      } while (lo < hi);
     }
     return lo;
   }
