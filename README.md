@@ -298,9 +298,9 @@ Equivalent to [bisectRight](#bisectRight), but uses this bisector’s associated
 
 Returns the index of the closest value to *x* in the given sorted *array*. This expects that the bisector’s associated accessor returns a quantitative value, or that the bisector’s associated comparator returns a signed distance; otherwise, this method is equivalent to *bisector*.left.
 
-<a name="quickselect" href="#quickselect">#</a> d3.<b>quickselect</b>(<i>array</i>, <i>k</i>, <i>left</i> = 0, <i>right</i> = <i>array</i>.length - 1, <i>compare</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/quickselect.js), [Examples](https://observablehq.com/@d3/d3-quickselect)
+<a name="quickselect" href="#quickselect">#</a> d3.<b>quickselect</b>(<i>array</i>, <i>k</i>, <i>left</i> = 0, <i>right</i> = <i>array</i>.length - 1[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/quickselect.js), [Examples](https://observablehq.com/@d3/d3-quickselect)
 
-See [mourner/quickselect](https://github.com/mourner/quickselect/blob/master/README.md). If *compare* is not specified, natural order of values is used, with undefined values considered greater than all defined values.
+See [mourner/quickselect](https://github.com/mourner/quickselect/blob/master/README.md). If a *comparator* is not specified, the natural order of values is used with undefined values considered greater than all defined values.
 
 <a name="ascending" href="#ascending">#</a> d3.<b>ascending</b>(<i>a</i>, <i>b</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/ascending.js), [Examples](https://observablehq.com/@d3/d3-ascending)
 
