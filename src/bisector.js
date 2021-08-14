@@ -7,7 +7,7 @@ export default function bisector(f) {
 
   if (f.length === 1) {
     delta = (d, x) => f(d) - x;
-    compare1 = x => ascending(x, x);
+    compare1 = ascending;
     compare2 = (d, x) => ascending(f(d), x);
   }
 
