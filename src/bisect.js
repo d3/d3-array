@@ -1,4 +1,4 @@
-import ascendingDefined from "./ascendingDefined.js";
+import {ascendingDefined} from "./ascending.js";
 import bisector from "./bisector.js";
 import number from "./number.js";
 

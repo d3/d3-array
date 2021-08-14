@@ -1,4 +1,4 @@
-import ascendingDefined from "./ascendingDefined.js";
+import {ascendingDefined} from "./ascending.js";
 
 export default function(f) {
   let delta = f;

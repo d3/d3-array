@@ -1,4 +1,4 @@
-import ascendingDefined from "./ascendingDefined.js";
+import {ascendingDefined} from "./ascending.js";
 
 // Based on https://github.com/mourner/quickselect
 // ISC license, Copyright 2018 Vladimir Agafonkin.

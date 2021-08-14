@@ -1,4 +1,4 @@
-import ascendingDefined from "./ascendingDefined.js";
+import {ascendingDefined} from "./ascending.js";
 import permute from "./permute.js";
 
 export default function sort(values, ...F) {

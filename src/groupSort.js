@@ -1,4 +1,4 @@
-import ascendingDefined from "./ascendingDefined.js";
+import {ascendingDefined} from "./ascending.js";
 import group, {rollup} from "./group.js";
 import sort from "./sort.js";
 

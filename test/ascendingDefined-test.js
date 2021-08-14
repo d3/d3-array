@@ -1,5 +1,5 @@
 import assert from "assert";
-import ascendingDefined from "../src/ascendingDefined.js";
+import {ascendingDefined} from "../src/ascending.js";
 
 it("ascendingDefined(a, b) returns a negative number if a < b", () => {
   assert(ascendingDefined(0, 1) < 0);
