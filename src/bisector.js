@@ -11,9 +11,7 @@ export default function bisector(f) {
     compare2 = (d, x) => ascending(f(d), x);
   }
 
-  function left(a, x, lo, hi) {
-    if (lo == null) lo = 0;
-    if (hi == null) hi = a.length;
+  function left(a, x, lo = 0, hi = a.length) {
     if (lo < hi) {
       if (compare1(x, x) !== 0) return hi;
       do {
@@ -25,9 +23,7 @@ export default function bisector(f) {
     return lo;
   }
 
-  function right(a, x, lo, hi) {
-    if (lo == null) lo = 0;
-    if (hi == null) hi = a.length;
+  function right(a, x, lo = 0, hi = a.length) {
     if (lo < hi) {
       if (compare1(x, x) !== 0) return hi;
       do {
@@ -39,9 +35,7 @@ export default function bisector(f) {
     return lo;
   }
 
-  function center(a, x, lo, hi) {
-    if (lo == null) lo = 0;
-    if (hi == null) hi = a.length;
+  function center(a, x, lo = 0, hi = a.length) {
     const i = left(a, x, lo, hi - 1);
     return i > lo && delta(a[i - 1], x) > -delta(a[i], x) ? i - 1 : i;
   }
