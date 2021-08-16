@@ -1,4 +1,4 @@
-export default function(values, valueof) {
+export default function extent(values, valueof) {
   let min;
   let max;
   if (valueof === undefined) {

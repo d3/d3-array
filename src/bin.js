@@ -7,7 +7,7 @@ import nice from "./nice.js";
 import ticks, {tickIncrement} from "./ticks.js";
 import sturges from "./threshold/sturges.js";
 
-export default function() {
+export default function bin() {
   var value = identity,
       domain = extent,
       threshold = sturges;

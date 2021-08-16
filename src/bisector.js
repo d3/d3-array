@@ -1,6 +1,6 @@
 import ascending from "./ascending.js";
 
-export default function(f) {
+export default function bisector(f) {
   let delta = f;
   let compare = f;
 

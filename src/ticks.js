@@ -2,7 +2,7 @@ var e10 = Math.sqrt(50),
     e5 = Math.sqrt(10),
     e2 = Math.sqrt(2);
 
-export default function(start, stop, count) {
+export default function ticks(start, stop, count) {
   var reverse,
       i = -1,
       n,
