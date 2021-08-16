@@ -1,5 +1,5 @@
 import assert from "assert";
-import {descending, sort} from "../src/index.js";
+import {ascending, descending, sort} from "../src/index.js";
 
 it("sort(values) returns a sorted copy", () => {
   const input = [1, 3, 2, 5, 4];
@@ -10,6 +10,30 @@ it("sort(values) returns a sorted copy", () => {
 it("sort(values) defaults to ascending, not lexicographic", () => {
   const input = [1, "10", 2];
   assert.deepStrictEqual(sort(input), [1, 2, "10"]);
+});
+
+// Per ECMAScript specification §23.1.3.27.1, undefined values are not passed to
+// the comparator; they are always put at the end of the sorted array.
+// https://262.ecma-international.org/12.0/#sec-sortcompare
+it("sort(values) puts non-orderable values last, followed by undefined", () => {
+  const date = new Date(NaN);
+  const input = [undefined, 1, null, 0, NaN, "10", date, 2];
+  assert.deepStrictEqual(sort(input), [0, 1, 2, "10", null, NaN, date, undefined]);
+});
+
+it("sort(values, comparator) puts non-orderable values last, followed by undefined", () => {
+  const date = new Date(NaN);
+  const input = [undefined, 1, null, 0, NaN, "10", date, 2];
+  assert.deepStrictEqual(sort(input, ascending), [0, 1, 2, "10", null, NaN, date, undefined]);
+  assert.deepStrictEqual(sort(input, descending), ["10", 2, 1, 0, null, NaN, date, undefined]);
+});
+
+// However we don't implement this spec when using an accessor
+it("sort(values, accessor) puts non-orderable values last", () => {
+  const date = new Date(NaN);
+  const input = [undefined, 1, null, 0, NaN, "10", date, 2];
+  assert.deepStrictEqual(sort(input, d => d), [0, 1, 2, "10", undefined, null, NaN, date]);
+  assert.deepStrictEqual(sort(input, d => d && -d), ["10", 2, 1, 0, undefined, null, NaN, date]);
 });
 
 it("sort(values, accessor) uses the specified accessor in natural order", () => {
@@ -37,11 +61,12 @@ it("sort(values) accepts an iterable", () => {
 });
 
 it("sort(values) enforces that values is iterable", () => {
-  assert.throws(() => sort({}), TypeError);
+  assert.throws(() => sort({}), {name: "TypeError", message: "values is not iterable"});
 });
 
 it("sort(values, comparator) enforces that comparator is a function", () => {
-  assert.throws(() => sort([], {}), TypeError);
+  assert.throws(() => sort([], {}), {name: "TypeError", message: "compare is not a function"});
+  assert.throws(() => sort([], null), {name: "TypeError", message: "compare is not a function"});
 });
 
 it("sort(values) does not skip sparse elements", () => {

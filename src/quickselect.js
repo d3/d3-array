@@ -1,8 +1,10 @@
-import ascending from "./ascending.js";
+import {ascendingDefined, compareDefined} from "./sort.js";
 
 // Based on https://github.com/mourner/quickselect
 // ISC license, Copyright 2018 Vladimir Agafonkin.
-export default function quickselect(array, k, left = 0, right = array.length - 1, compare = ascending) {
+export default function quickselect(array, k, left = 0, right = array.length - 1, compare) {
+  compare = compare === undefined ? ascendingDefined : compareDefined(compare);
+
   while (right > left) {
     if (right - left > 600) {
       const n = right - left + 1;
