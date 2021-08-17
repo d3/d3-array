@@ -141,6 +141,24 @@ An optional *accessor* function may be specified, which is equivalent to calling
 
 Similar to *quantile*, but expects the input to be a **sorted** *array* of values. In contrast with *quantile*, the accessor is only called on the elements needed to compute the quantile.
 
+<a name="rank" href="#rank">#</a> d3.<b>rank</b>(<i>iterable</i>[, <i>ties</i>][, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/rank.js)<!-- , [Examples](https://observablehq.com/@d3/rank) -->
+
+Returns an array with the rank of each value in the *iterable*, *i.e* the index of the value when the iterable is sorted. Nullish values are sorted to the end and ranked NaN. An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the ranks. Ties (equivalent values) all get the same rank, defined by default as the first time the value is found.
+
+The *ties* option sets a different strategy for ties:
+
+* `low` (default) - the first time the value was found
+* `mean` - the average time the value was found
+* `round` - the rounded average time the value was found
+* `high` - the last time the value was found
+* `order` - each tie has its own rank
+
+```js
+d3.rank([{x: 1}, {x: 2}, {x: 0}, {}], d => d.x); // returns [1, 2, 0, NaN]
+d3.rank(["b", "c", "b", "a"]); // returns [1, 3, 1, 0]
+d3.rank(["b", "c", "b", "a"], "order"); // returns [1, 3, 2, 0]
+```
+
 <a name="variance" href="#variance">#</a> d3.<b>variance</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/master/src/variance.js), [Examples](https://observablehq.com/@d3/d3-mean-d3-median-and-friends)
 
 Returns an [unbiased estimator of the population variance](http://mathworld.wolfram.com/SampleVariance.html) of the given *iterable* of numbers using [Welford’s algorithm](https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Welford's_online_algorithm). If the iterable has fewer than two numbers, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the variance. This method ignores undefined and NaN values; this is useful for ignoring missing data.
