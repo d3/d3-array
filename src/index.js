@@ -28,6 +28,7 @@ export {default as permute} from "./permute.js";
 export {default as quantile, quantileSorted} from "./quantile.js";
 export {default as quickselect} from "./quickselect.js";
 export {default as range} from "./range.js";
+export {default as rank} from "./rank.js";
 export {default as least} from "./least.js";
 export {default as leastIndex} from "./leastIndex.js";
 export {default as greatest} from "./greatest.js";
