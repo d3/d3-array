@@ -15,6 +15,12 @@ it("disjoint(values, other) allows other to be infinite", () => {
   assert.strictEqual(disjoint([2], repeat(1, 3, 2)), false);
 });
 
+it("disjoint(values, other) performs interning", () => {
+  assert.strictEqual(disjoint([new Date("2021-01-01")], [new Date("2021-01-02")]), true);
+  assert.strictEqual(disjoint([new Date("2021-01-02"), new Date("2021-01-03")], [new Date("2021-01-03"), new Date("2021-01-04")]), false);
+  assert.strictEqual(disjoint([new Date("2021-01-01")], []), true);
+});
+
 function* odds() {
   for (let i = 1; true; i += 2) {
     yield i;

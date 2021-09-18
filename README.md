@@ -765,7 +765,7 @@ This methods implement basic set operations for any iterable.
 
 <a name="difference" href="#difference">#</a> d3.<b>difference</b>(<i>iterable</i>, ...<i>others</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/difference.js)
 
-Returns a new Set containing every value in *iterable* that is not in any of the *others* iterables.
+Returns a new InternSet containing every value in *iterable* that is not in any of the *others* iterables.
 
 ```js
 d3.difference([0, 1, 2, 0], [1]) // Set {0, 2}
@@ -773,7 +773,7 @@ d3.difference([0, 1, 2, 0], [1]) // Set {0, 2}
 
 <a name="union" href="#union">#</a> d3.<b>union</b>(...<i>iterables</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/union.js)
 
-Returns a new Set containing every (distinct) value that appears in any of the given *iterables*. The order of values in the returned Set is based on their first occurrence in the given *iterables*.
+Returns a new InternSet containing every (distinct) value that appears in any of the given *iterables*. The order of values in the returned set is based on their first occurrence in the given *iterables*.
 
 ```js
 d3.union([0, 2, 1, 0], [1, 3]) // Set {0, 2, 1, 3}
@@ -781,7 +781,7 @@ d3.union([0, 2, 1, 0], [1, 3]) // Set {0, 2, 1, 3}
 
 <a name="intersection" href="#intersection">#</a> d3.<b>intersection</b>(...<i>iterables</i>) · [Source](https://github.com/d3/d3-array/blob/master/src/intersection.js)
 
-Returns a new Set containing every (distinct) value that appears in all of the given *iterables*. The order of values in the returned Set is based on their first occurrence in the given *iterables*.
+Returns a new InternSet containing every (distinct) value that appears in all of the given *iterables*. The order of values in the returned set is based on their first occurrence in the given *iterables*.
 
 ```js
 d3.intersection([0, 2, 1, 0], [1, 3]) // Set {1}
