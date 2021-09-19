@@ -1,12 +1,9 @@
 import assert from "assert";
+import {InternSet} from "internmap";
 
-export function assertSetEqual(A, B) {
-  assert(setEqual(A, B));
-}
-
-function setEqual(A, B) {
-  if (!(A instanceof Set)) throw new Error("not a set");
-  for (const a of A) if (!B.has(a)) return false;
-  for (const b of B) if (!A.has(b)) return false;
-  return true;
+export function assertSetEqual(actual, expected) {
+  assert(actual instanceof Set);
+  expected = new InternSet(expected);
+  for (const a of actual) assert(expected.has(a), `unexpected ${a}`);
+  for (const e of expected) assert(actual.has(e), `expected ${e}`);
 }

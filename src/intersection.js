@@ -1,7 +1,7 @@
-import set from "./set.js";
+import {InternSet} from "internmap";
 
 export default function intersection(values, ...others) {
-  values = new Set(values);
+  values = new InternSet(values);
   others = others.map(set);
   out: for (const value of values) {
     for (const other of others) {
@@ -12,4 +12,8 @@ export default function intersection(values, ...others) {
     }
   }
   return values;
+}
+
+function set(values) {
+  return values instanceof InternSet ? values : new InternSet(values);
 }
