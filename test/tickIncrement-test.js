@@ -60,3 +60,36 @@ it("tickIncrement(start, stop, count) returns approximately count + 1 tickIncrem
   assert.strictEqual(tickIncrement(-10, 10,  2), 10);
   assert.strictEqual(tickIncrement(-10, 10,  1), 20);
 });
+
+it("tickIncrement(start, stop, count, base) returns approximately count + 1 tickIncrement when start < stop", () => {
+  assert.strictEqual(tickIncrement(  0,  1, 10, 2), -8);
+  assert.strictEqual(tickIncrement(  0,  1,  9, 2), -8);
+  assert.strictEqual(tickIncrement(  0,  1,  8, 2), -8);
+  assert.strictEqual(tickIncrement(  0,  1,  7, 2), -8);
+  assert.strictEqual(tickIncrement(  0,  1,  6, 2), -8);
+  assert.strictEqual(tickIncrement(  0,  1,  5, 2), -4);
+  assert.strictEqual(tickIncrement(  0,  1,  4, 2), -4);
+  assert.strictEqual(tickIncrement(  0,  1,  3, 2), -4);
+  assert.strictEqual(tickIncrement(  0,  1,  2, 2), -2);
+  assert.strictEqual(tickIncrement(  0,  1,  1, 2), 1);
+  assert.strictEqual(tickIncrement(  0, 10, 10, 2), 1);
+  assert.strictEqual(tickIncrement(  0, 10,  9, 2), 1);
+  assert.strictEqual(tickIncrement(  0, 10,  8, 2), 1);
+  assert.strictEqual(tickIncrement(  0, 10,  7, 2), 2);
+  assert.strictEqual(tickIncrement(  0, 10,  6, 2), 2);
+  assert.strictEqual(tickIncrement(  0, 10,  5, 2), 2);
+  assert.strictEqual(tickIncrement(  0, 10,  4, 2), 2);
+  assert.strictEqual(tickIncrement(  0, 10,  3, 2), 4);
+  assert.strictEqual(tickIncrement(  0, 10,  2, 2), 4);
+  assert.strictEqual(tickIncrement(  0, 10,  1, 2), 8);
+  assert.strictEqual(tickIncrement(-10, 10, 10, 2),  2);
+  assert.strictEqual(tickIncrement(-10, 10,  9, 2),  2);
+  assert.strictEqual(tickIncrement(-10, 10,  8, 2),  2);
+  assert.strictEqual(tickIncrement(-10, 10,  7, 2),  4);
+  assert.strictEqual(tickIncrement(-10, 10,  6, 2),  4);
+  assert.strictEqual(tickIncrement(-10, 10,  5, 2),  4);
+  assert.strictEqual(tickIncrement(-10, 10,  4, 2),  4);
+  assert.strictEqual(tickIncrement(-10, 10,  3, 2),  8);
+  assert.strictEqual(tickIncrement(-10, 10,  2, 2), 8);
+  assert.strictEqual(tickIncrement(-10, 10,  1, 2), 16);
+});

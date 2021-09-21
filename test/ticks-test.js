@@ -109,3 +109,10 @@ it("ticks(start, stop, count) returns the reverse of ticks(stop, start, count)",
 it("ticks(start, stop, count) handles precision problems", () => {
   assert.deepStrictEqual(ticks(0.98, 1.14, 10), [0.98, 1, 1.02, 1.04, 1.06, 1.08, 1.1, 1.12, 1.14]);
 });
+
+it("ticks(start, stop, count, base) returns ticks in base 2", () => {
+  assert.deepStrictEqual(ticks(0,  10, 5, 2), [0, 2, 4, 6, 8, 10]);
+  assert.deepStrictEqual(ticks(0, 1024, 10, 2), [0, 128, 256, 384, 512, 640, 768, 896, 1024]);
+  assert.deepStrictEqual(ticks(-1024, 1024, 20, 2), [-1024, -896, -768, -640, -512, -384, -256, -128, 0, 128, 256, 384, 512, 640, 768, 896, 1024]);
+  assert.deepStrictEqual(ticks(0,  2000, 5, 2), [0, 512, 1024, 1536]);
+});

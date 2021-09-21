@@ -2,7 +2,7 @@ var e10 = Math.sqrt(50),
     e5 = Math.sqrt(10),
     e2 = Math.sqrt(2);
 
-export default function ticks(start, stop, count) {
+export default function ticks(start, stop, count, base = 10) {
   var reverse,
       i = -1,
       n,
@@ -12,7 +12,7 @@ export default function ticks(start, stop, count) {
   stop = +stop, start = +start, count = +count;
   if (start === stop && count > 0) return [start];
   if (reverse = stop < start) n = start, start = stop, stop = n;
-  if ((step = tickIncrement(start, stop, count)) === 0 || !isFinite(step)) return [];
+  if ((step = tickIncrement(start, stop, count, base)) === 0 || !isFinite(step)) return [];
 
   if (step > 0) {
     let r0 = Math.round(start / step), r1 = Math.round(stop / step);
@@ -34,18 +34,18 @@ export default function ticks(start, stop, count) {
   return ticks;
 }
 
-export function tickIncrement(start, stop, count) {
+export function tickIncrement(start, stop, count, base = 10) {
   var step = (stop - start) / Math.max(0, count),
-      power = Math.floor(Math.log(step) / Math.LN10),
-      error = step / Math.pow(10, power);
+      power = Math.floor(Math.log(step) / Math.log(base) + Number.EPSILON),
+      error = step / Math.pow(base, power);
   return power >= 0
-      ? (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1) * Math.pow(10, power)
-      : -Math.pow(10, -power) / (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1);
+      ? (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1) * Math.pow(base, power)
+      : -Math.pow(base, -power) / (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1);
 }
 
-export function tickStep(start, stop, count) {
+export function tickStep(start, stop, count, base = 10) {
   var step0 = Math.abs(stop - start) / Math.max(0, count),
-      step1 = Math.pow(10, Math.floor(Math.log(step0) / Math.LN10)),
+      step1 = Math.pow(base, Math.floor(Math.log(step0) / Math.log(base) + Number.EPSILON)),
       error = step0 / step1;
   if (error >= e10) step1 *= 10;
   else if (error >= e5) step1 *= 5;
