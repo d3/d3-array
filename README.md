@@ -141,8 +141,7 @@ An optional *accessor* function may be specified, which is equivalent to calling
 
 Similar to *quantile*, but expects the input to be a **sorted** *array* of values. In contrast with *quantile*, the accessor is only called on the elements needed to compute the quantile.
 
-<a name="rank" href="#rank">#</a> d3.<b>rank</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/main/src/rank.js), [Examp
-les](https://observablehq.com/@d3/rank)
+<a name="rank" href="#rank">#</a> d3.<b>rank</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/main/src/rank.js), [Examples](https://observablehq.com/@d3/rank)
 
 Returns an array with the rank of each value in the *iterable*, *i.e.* the index of the value when the iterable is sorted. Nullish values are sorted to the end and ranked NaN. An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the ranks. Ties (equivalent values) all get the same rank, defined as the first time the value is found.
 
