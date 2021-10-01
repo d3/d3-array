@@ -16,7 +16,6 @@ it("rank(dates) returns the rank of Dates", () => {
 
 it("rank(iterator) accepts an iterator", () => {
   assert.deepStrictEqual(rank(new Set(["B", "C", "A"])), Float64Array.of(1, 2, 0));
-  assert.deepStrictEqual(rank({length: 3}, (_, i) => i), Float64Array.of(0, 1, 2));
 });
 
 it("rank(undefineds) ranks undefined as NaN", () => {
