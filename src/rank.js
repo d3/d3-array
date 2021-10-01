@@ -2,6 +2,7 @@ import range from "./range.js";
 import sort from "./sort.js";
 
 export default function rank(values, valueof) {
+  if (typeof values[Symbol.iterator] !== "function") throw new TypeError("values is not iterable");
   values = Array.from(values, valueof);
   const n = values.length;
   const r = new Float64Array(n);
