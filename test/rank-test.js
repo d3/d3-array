@@ -8,10 +8,11 @@ it("rank(numbers) returns the rank of numbers", () => {
 
 it("rank(strings) returns the rank of letters", () => {
   assert.deepStrictEqual(rank([..."EDGFCBA"]), Float64Array.of(4, 3, 6, 5, 2, 1, 0));
+  assert.deepStrictEqual(rank("EDGFCBA"), Float64Array.of(4, 3, 6, 5, 2, 1, 0));
 });
 
 it("rank(dates) returns the rank of Dates", () => {
-  assert.deepStrictEqual(rank([new Date(2000, 0, 1), new Date(2000, 0, 1), new Date(1999, 0, 1), new Date(2001, 0, 1)]), Float64Array.of(1, 1, 0, 3));
+  assert.deepStrictEqual(rank([new Date("2000-01-01"), new Date("2000-01-01"), new Date("1999-01-01"), new Date("2001-01-01")]), Float64Array.of(1, 1, 0, 3));
 });
 
 it("rank(iterator) accepts an iterator", () => {
