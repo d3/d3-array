@@ -543,7 +543,7 @@ For descending order, negate the group value:
 d3.groupSort(barley, g => -d3.median(g, d => d.yield), d => d.variety)
 ```
 
-If a *comparator* is passed instead of an *accessor* (i.e., if the second argument is a function that takes two arguments), it will be asked to compare two groups *a* and *b* and should return a negative value if *a* should be before *b*, a positive value if *a* should be after *b*, or zero for a partial ordering.
+If a *comparator* is passed instead of an *accessor* (i.e., if the second argument is a function that takes exactly two arguments), it will be asked to compare two groups *a* and *b* and should return a negative value if *a* should be before *b*, a positive value if *a* should be after *b*, or zero for a partial ordering.
 
 <a name="count" href="#count">#</a> d3.<b>count</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/main/src/count.js), [Examples](https://observablehq.com/@d3/d3-count)
 
@@ -744,7 +744,7 @@ Returns an array containing the values in the given *iterable* in the sorted ord
 d3.sort(new Set([0, 2, 3, 1])) // [0, 1, 2, 3]
 ```
 
-If an *accessor* (a function that takes a single argument) is specified,
+If an *accessor* (a function that does not take exactly two arguments) is specified,
 
 ```js
 d3.sort(data, d => d.value)
