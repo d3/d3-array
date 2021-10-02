@@ -1,5 +1,6 @@
 import assert from "assert";
 import ascending from "../src/ascending.js";
+import descending from "../src/descending.js";
 import rank from "../src/rank.js";
 
 it("rank(numbers) returns the rank of numbers", () => {
@@ -33,6 +34,7 @@ it("rank(values, compare) accepts a comparator", () => {
   assert.deepStrictEqual(rank([{x: 3}, {x: 1}, {x: 2}, {x: 4}, {}], (a, b) => a.x - b.x), Float64Array.of(2, 0, 1, 3, NaN));
   assert.deepStrictEqual(rank([{x: 3}, {x: 1}, {x: 2}, {x: 4}, {}], (a, b) => b.x - a.x), Float64Array.of(1, 3, 2, 0, NaN));
   assert.deepStrictEqual(rank(["aa", "ba", "bc", "bb", "ca"], (a, b) => ascending(a[0], b[0]) || ascending(a[1], b[1])), Float64Array.of(0, 1, 3, 2, 4));
+  assert.deepStrictEqual(rank(["A", null, "B", "C", "D"], descending), Float64Array.of(3, NaN, 2, 1, 0));
 });
 
 it("rank(values) computes the ties as expected", () => {

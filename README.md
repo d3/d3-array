@@ -149,6 +149,7 @@ Returns an array with the rank of each value in the *iterable*, *i.e.* the zero-
 ```js
 d3.rank([{x: 1}, {}, {x: 2}, {x: 0}], d => d.x); // [1, NaN, 2, 0]
 d3.rank(["b", "c", "b", "a"]); // [1, 3, 1, 0]
+d3.rank([1, 2, 3], d3.descending); // [2, 1, 0]
 ```
 
 <a name="variance" href="#variance">#</a> d3.<b>variance</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/main/src/variance.js), [Examples](https://observablehq.com/@d3/d3-mean-d3-median-and-friends)
