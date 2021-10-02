@@ -141,9 +141,10 @@ An optional *accessor* function may be specified, which is equivalent to calling
 
 Similar to *quantile*, but expects the input to be a **sorted** *array* of values. In contrast with *quantile*, the accessor is only called on the elements needed to compute the quantile.
 
-<a name="rank" href="#rank">#</a> d3.<b>rank</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/main/src/rank.js), [Examples](https://observablehq.com/@d3/rank)
+<a name="rank" href="#rank">#</a> d3.<b>rank</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/main/src/rank.js), [Examples](https://observablehq.com/@d3/rank)
+<br><a name="rank" href="#rank">#</a> d3.<b>rank</b>(<i>iterable</i>[, <i>accessor</i>])
 
-Returns an array with the rank of each value in the *iterable*, *i.e.* the index of the value when the iterable is sorted. Nullish values are sorted to the end and ranked NaN. An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the ranks. Ties (equivalent values) all get the same rank, defined as the first time the value is found.
+Returns an array with the rank of each value in the *iterable*, *i.e.* the zero-based index of the value when the iterable is sorted. Nullish values are sorted to the end and ranked NaN. An optional *comparator* or *accessor* function may be specified; the latter is equivalent to calling *array*.map(*accessor*) before computing the ranks. If *comparator* is not specified, it defaults to [ascending](#ascending). Ties (equivalent values) all get the same rank, defined as the first time the value is found.
 
 ```js
 d3.rank([{x: 1}, {}, {x: 2}, {x: 0}], d => d.x); // [1, NaN, 2, 0]
