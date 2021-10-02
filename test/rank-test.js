@@ -1,5 +1,6 @@
 import assert from "assert";
 import rank from "../src/rank.js";
+import descending from "../src/descending.js";
 
 it("rank(numbers) returns the rank of numbers", () => {
   assert.deepStrictEqual(rank([1000, 10, 0]), Float64Array.of(2, 1, 0));
@@ -26,6 +27,11 @@ it("rank(undefineds) ranks undefined as NaN", () => {
 
 it("rank(values, valueof) accepts an accessor", () => {
   assert.deepStrictEqual(rank([{x: 3}, {x: 1}, {x: 2}, {x: 4}, {}], d => d.x), Float64Array.of(2, 0, 1, 3, NaN));
+});
+
+it("rank(values, valueof) accepts a comparator", () => {
+  assert.deepStrictEqual(rank([{x: 1}, {x: 2}, {x: 3}, {x: 4}, {}], (a, b) => b.x - a.x), Float64Array.of(3, 2, 1, 0, NaN));
+  assert.deepStrictEqual(rank(["A", null, "B", "C", "D"], descending), Float64Array.of(3, NaN, 2, 1, 0));
 });
 
 it("rank(values, ties) computes the ties as expected", () => {
