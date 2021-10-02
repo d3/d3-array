@@ -5,7 +5,7 @@ export default function rank(values, valueof = ascending) {
   if (typeof values[Symbol.iterator] !== "function") throw new TypeError("values is not iterable");
   let V = Array.from(values);
   const R = new Float64Array(V.length);
-  if (valueof.length === 1) V = V.map(valueof), valueof = ascending;
+  if (valueof.length !== 2) V = V.map(valueof), valueof = ascending;
   const compareIndex = (i, j) => valueof(V[i], V[j]);
   let k, r;
   Uint32Array
