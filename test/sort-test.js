@@ -61,12 +61,12 @@ it("sort(values) accepts an iterable", () => {
 });
 
 it("sort(values) enforces that values is iterable", () => {
-  assert.throws(() => sort({}), {name: "TypeError", message: "values is not iterable"});
+  assert.throws(() => sort({}), {name: "TypeError", message: /is not iterable/});
 });
 
 it("sort(values, comparator) enforces that comparator is a function", () => {
-  assert.throws(() => sort([], {}), {name: "TypeError", message: "compare is not a function"});
-  assert.throws(() => sort([], null), {name: "TypeError", message: "compare is not a function"});
+  assert.throws(() => sort([], {}), {name: "TypeError", message: /is not a function/});
+  assert.throws(() => sort([], null), {name: "TypeError", message: /is not a function/});
 });
 
 it("sort(values) does not skip sparse elements", () => {
