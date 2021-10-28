@@ -1,4 +1,5 @@
 import assert from "assert";
+import {normalizeLn} from "./tickIncrement-test.js";
 import {tickStep} from "../src/index.js";
 
 it("tickStep(start, stop, count) returns NaN if any argument is NaN", () => {
@@ -94,7 +95,7 @@ it("tickStep(start, stop, count) returns -tickStep(stop, start, count)", () => {
   assert.strictEqual(tickStep(-10, 10,  1), -tickStep(10, -10,  1));
 });
 
-it("tickStep(start, stop, count) with base 2 returns approximately count + 1 tickStep when start < stop", () => {
+it("tickStep(start, stop, count, base) with base 2 returns approximately count + 1 tickStep when start < stop", () => {
   assert.strictEqual(tickStep(  0,  1, 10, 2), 0.125);
   assert.strictEqual(tickStep(  0,  1,  9, 2), 0.125);
   assert.strictEqual(tickStep(  0,  1,  8, 2), 0.125);
@@ -125,6 +126,22 @@ it("tickStep(start, stop, count) with base 2 returns approximately count + 1 tic
   assert.strictEqual(tickStep(-10, 10,  3, 2), 8);
   assert.strictEqual(tickStep(-10, 10,  2, 2), 8);
   assert.strictEqual(tickStep(-10, 10,  1, 2), 16);
+});
+
+it("tickStep(start, stop, count, base) with base e returns approximately count + 1 tickStep when start < stop", () => {
+  assert.strictEqual(normalizeLn(tickStep(  0,  Math.E / 100, 10, Math.E)), 1);
+  assert.strictEqual(normalizeLn(tickStep(  0,  Math.E / 10, 10, Math.E)), 2);
+  assert.strictEqual(normalizeLn(tickStep(  0,  Math.E / 10, 1, Math.E)), 2);
+  assert.strictEqual(normalizeLn(tickStep(  0,  Math.E, 3, Math.E)), 2);
+  assert.strictEqual(normalizeLn(tickStep(  -Math.E,  Math.E, 2, Math.E)), 1);
+  assert.strictEqual(normalizeLn(tickStep(  0,  Math.E * 10, 10, Math.E)), 1);
+  assert.strictEqual(normalizeLn(tickStep(  1,  Math.E * 10, 10, Math.E)), 2);
+  assert.strictEqual(normalizeLn(tickStep(  -Math.E * 10,  Math.E * 10, 10, Math.E)), 2);
+  assert.strictEqual(normalizeLn(tickStep(  Math.E,  Math.E * 100, 10, Math.E)), 1);
+  assert.strictEqual(normalizeLn(tickStep(  -Math.E * 100,  Math.E * 100, 10, Math.E)), 2);
+  assert.strictEqual(normalizeLn(tickStep(  0,  Math.E * 100, 10, Math.E)), 1);
+  assert.strictEqual(tickStep(  0,  10, 10, Math.E), 1);
+  assert.strictEqual(tickStep(  -10,  10, 10, Math.E), 2);
 });
 
 it("tickStep(start, stop, count, base) with base 2 returns -tickStep(stop, start, count)", () => {
@@ -158,4 +175,37 @@ it("tickStep(start, stop, count, base) with base 2 returns -tickStep(stop, start
   assert.strictEqual(tickStep(-10, 10,  3, 2), -tickStep(10, -10,  3, 2));
   assert.strictEqual(tickStep(-10, 10,  2, 2), -tickStep(10, -10,  2, 2));
   assert.strictEqual(tickStep(-10, 10,  1, 2), -tickStep(10, -10,  1, 2));
+});
+
+it("tickStep(start, stop, count, base) with base e returns -tickStep(stop, start, count)", () => {
+  assert.strictEqual(tickStep(  0,  1, 10, Math.E), -tickStep( 1,   0, 10, Math.E));
+  assert.strictEqual(tickStep(  0,  1,  9, Math.E), -tickStep( 1,   0,  9, Math.E));
+  assert.strictEqual(tickStep(  0,  1,  8, Math.E), -tickStep( 1,   0,  8, Math.E));
+  assert.strictEqual(tickStep(  0,  1,  7, Math.E), -tickStep( 1,   0,  7, Math.E));
+  assert.strictEqual(tickStep(  0,  1,  6, Math.E), -tickStep( 1,   0,  6, Math.E));
+  assert.strictEqual(tickStep(  0,  1,  5, Math.E), -tickStep( 1,   0,  5, Math.E));
+  assert.strictEqual(tickStep(  0,  1,  4, Math.E), -tickStep( 1,   0,  4, Math.E));
+  assert.strictEqual(tickStep(  0,  1,  3, Math.E), -tickStep( 1,   0,  3, Math.E));
+  assert.strictEqual(tickStep(  0,  1,  2, Math.E), -tickStep( 1,   0,  2, Math.E));
+  assert.strictEqual(tickStep(  0,  1,  1, Math.E), -tickStep( 1,   0,  1, Math.E));
+  assert.strictEqual(tickStep(  0, 10, 10, Math.E), -tickStep(10,   0, 10, Math.E));
+  assert.strictEqual(tickStep(  0, 10,  9, Math.E), -tickStep(10,   0,  9, Math.E));
+  assert.strictEqual(tickStep(  0, 10,  8, Math.E), -tickStep(10,   0,  8, Math.E));
+  assert.strictEqual(tickStep(  0, 10,  7, Math.E), -tickStep(10,   0,  7, Math.E));
+  assert.strictEqual(tickStep(  0, 10,  6, Math.E), -tickStep(10,   0,  6, Math.E));
+  assert.strictEqual(tickStep(  0, 10,  5, Math.E), -tickStep(10,   0,  5, Math.E));
+  assert.strictEqual(tickStep(  0, 10,  4, Math.E), -tickStep(10,   0,  4, Math.E));
+  assert.strictEqual(tickStep(  0, 10,  3, Math.E), -tickStep(10,   0,  3, Math.E));
+  assert.strictEqual(tickStep(  0, 10,  2, Math.E), -tickStep(10,   0,  2, Math.E));
+  assert.strictEqual(tickStep(  0, 10,  1, Math.E), -tickStep(10,   0,  1, Math.E));
+  assert.strictEqual(tickStep(-10, 10, 10, Math.E), -tickStep(10, -10, 10, Math.E));
+  assert.strictEqual(tickStep(-10, 10,  9, Math.E), -tickStep(10, -10,  9, Math.E));
+  assert.strictEqual(tickStep(-10, 10,  8, Math.E), -tickStep(10, -10,  8, Math.E));
+  assert.strictEqual(tickStep(-10, 10,  7, Math.E), -tickStep(10, -10,  7, Math.E));
+  assert.strictEqual(tickStep(-10, 10,  6, Math.E), -tickStep(10, -10,  6, Math.E));
+  assert.strictEqual(tickStep(-10, 10,  5, Math.E), -tickStep(10, -10,  5, Math.E));
+  assert.strictEqual(tickStep(-10, 10,  4, Math.E), -tickStep(10, -10,  4, Math.E));
+  assert.strictEqual(tickStep(-10, 10,  3, Math.E), -tickStep(10, -10,  3, Math.E));
+  assert.strictEqual(tickStep(-10, 10,  2, Math.E), -tickStep(10, -10,  2, Math.E));
+  assert.strictEqual(tickStep(-10, 10,  1, Math.E), -tickStep(10, -10,  1, Math.E));
 });
