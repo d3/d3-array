@@ -117,7 +117,7 @@ it("ticks(start, stop, count, base) returns ticks in base 2", () => {
   assert.deepStrictEqual(ticks(    0, 2000,  5, 2), [0, 512, 1024, 1536]);
 });
 
-it.only("ticks(start, stop, count, base) returns ticks in base e", () => {
+it("ticks(start, stop, count, base) returns ticks in base e", () => {
   assert.deepStrictEqual(ticks(           0, 10, 5, Math.E), [0, 2, 4, 6, 8, 10]);
   assert.deepStrictEqual(ticks(           0, 10, 10, Math.E), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   assert.deepStrictEqual(ticks(           0, Math.E * 10, 10, Math.E), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((v) => v *= Math.E));
