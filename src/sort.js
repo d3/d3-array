@@ -1,10 +1,11 @@
+import ascending from "./ascending.js";
 import permute from "./permute.js";
 
 export default function sort(values, ...F) {
   if (typeof values[Symbol.iterator] !== "function") throw new TypeError("values is not iterable");
   values = Array.from(values);
   let [f] = F;
-  if ((f && f.length === 1) || F.length > 1) {
+  if ((f && f.length !== 2) || F.length > 1) {
     const index = Uint32Array.from(values, (d, i) => i);
     if (F.length > 1) {
       F = F.map(f => values.map(f));
@@ -20,10 +21,11 @@ export default function sort(values, ...F) {
     }
     return permute(values, index);
   }
-  return values.sort(f === undefined ? ascendingDefined : compareDefined(f));
+  return values.sort(compareDefined(f));
 }
 
-export function compareDefined(compare) {
+export function compareDefined(compare = ascending) {
+  if (compare === ascending) return ascendingDefined;
   if (typeof compare !== "function") throw new TypeError("compare is not a function");
   return (a, b) => {
     const x = compare(a, b);
