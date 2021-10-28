@@ -111,8 +111,25 @@ it("ticks(start, stop, count) handles precision problems", () => {
 });
 
 it("ticks(start, stop, count, base) returns ticks in base 2", () => {
-  assert.deepStrictEqual(ticks(0,  10, 5, 2), [0, 2, 4, 6, 8, 10]);
-  assert.deepStrictEqual(ticks(0, 1024, 10, 2), [0, 128, 256, 384, 512, 640, 768, 896, 1024]);
+  assert.deepStrictEqual(ticks(    0,   10,  5, 2), [0, 2, 4, 6, 8, 10]);
+  assert.deepStrictEqual(ticks(    0, 1024, 10, 2), [0, 128, 256, 384, 512, 640, 768, 896, 1024]);
   assert.deepStrictEqual(ticks(-1024, 1024, 20, 2), [-1024, -896, -768, -640, -512, -384, -256, -128, 0, 128, 256, 384, 512, 640, 768, 896, 1024]);
-  assert.deepStrictEqual(ticks(0,  2000, 5, 2), [0, 512, 1024, 1536]);
+  assert.deepStrictEqual(ticks(    0, 2000,  5, 2), [0, 512, 1024, 1536]);
+});
+
+it.only("ticks(start, stop, count, base) returns ticks in base e", () => {
+  assert.deepStrictEqual(ticks(           0, 10, 5, Math.E), [0, 2, 4, 6, 8, 10]);
+  assert.deepStrictEqual(ticks(           0, 10, 10, Math.E), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  assert.deepStrictEqual(ticks(           0, Math.E * 10, 10, Math.E), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((v) => v *= Math.E));
+  assert.deepStrictEqual(ticks(-Math.E * 10, Math.E * 10, 10, Math.E), [-10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10].map((v) => v *= Math.E));
+  assert.deepStrictEqual(ticks(-Math.E * 10,           0, 10, Math.E), [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0].map((v) => v *= Math.E));
+});
+
+it("ticks(start, stop, count, base) returns ticks in base 60", () => {
+  assert.deepStrictEqual(ticks(       0,      10, 10, 60), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  assert.deepStrictEqual(ticks(       0,     120, 10, 60), [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]);
+  assert.deepStrictEqual(ticks(       0, 60 * 10, 10, 60), [0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 600]);
+  assert.deepStrictEqual(ticks(-60 * 10,       0, 10, 60), [-600, -540, -480, -420, -360, -300, -240, -180, -120, -60, 0]);
+  assert.deepStrictEqual(ticks(-60 * 10, 60 * 10, 20, 60), [-600, -540, -480, -420, -360, -300, -240, -180, -120, -60, 0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 600]);
+  assert.deepStrictEqual(ticks(       0,    2000,  5, 60), [0, 300, 600, 900, 1200, 1500, 1800]);
 });
