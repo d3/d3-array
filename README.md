@@ -634,7 +634,7 @@ shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]); // returns [7, 4, 5, 3, 9, 0, 6, 1, 2, 
 
 <a name="ticks" href="#ticks">#</a> d3.<b>ticks</b>(<i>start</i>, <i>stop</i>, <i>count</i>, <i>base</i>) · [Source](https://github.com/d3/d3-array/blob/main/src/ticks.js), [Examples](https://observablehq.com/@d3/d3-ticks)
 
-Returns an array of approximately *count* + 1 uniformly-spaced, nicely-rounded values between *start* and *stop* (inclusive). Each value is a power of the *base* (default is `10`) multiplied by 1, 2 or 5. See also [d3.tickIncrement](#tickIncrement), [d3.tickStep](#tickStep) and [*linear*.ticks](https://github.com/d3/d3-scale/blob/main/README.md#linear_ticks).
+Returns an array of approximately *count* + 1 uniformly-spaced, nicely-rounded values between *start* and *stop* (inclusive). Each value is a power of the *base* (default is 10) multiplied by 1, 2 or 5. See also [d3.tickIncrement](#tickIncrement), [d3.tickStep](#tickStep) and [*linear*.ticks](https://github.com/d3/d3-scale/blob/main/README.md#linear_ticks).
 
 Ticks are inclusive in the sense that they may include the specified *start* and *stop* values if (and only if) they are exact, nicely-rounded values consistent with the inferred [step](#tickStep). More formally, each returned tick *t* satisfies *start* ≤ *t* and *t* ≤ *stop*.
 
@@ -644,11 +644,11 @@ Like [d3.tickStep](#tickStep), except requires that *start* is always less than 
 
 <a name="tickStep" href="#tickStep">#</a> d3.<b>tickStep</b>(<i>start</i>, <i>stop</i>, <i>count</i>, <i>base</i>) · [Source](https://github.com/d3/d3-array/blob/main/src/ticks.js), [Examples](https://observablehq.com/@d3/d3-ticks)
 
-Returns the difference between adjacent tick values if the same arguments were passed to [d3.ticks](#ticks): a nicely-rounded value that is a power of the *base* (default is `10`) multiplied by 1, 2 or 5. Note that due to the limited precision of IEEE 754 floating point, the returned value may not be exact decimals; use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
+Returns the difference between adjacent tick values if the same arguments were passed to [d3.ticks](#ticks): a nicely-rounded value that is a power of the *base* (default is 10) multiplied by 1, 2 or 5. Note that due to the limited precision of IEEE 754 floating point, the returned value may not be exact decimals; use [d3-format](https://github.com/d3/d3-format) to format numbers for human consumption.
 
 <a name="nice" href="#nice">#</a> d3.<b>nice</b>(<i>start</i>, <i>stop</i>, <i>count</i>, <i>base</i>) · [Source](https://github.com/d3/d3-array/blob/main/src/nice.js)
 
-Returns a new interval [*niceStart*, *niceStop*] covering the given interval [*start*, *stop*] and where *niceStart* and *niceStop* are guaranteed to align with the corresponding [tick step](#tickStep) given the provided *base* (default is `10`). Like [d3.tickIncrement](#tickIncrement), this requires that *start* is less than or equal to *stop*.
+Returns a new interval [*niceStart*, *niceStop*] covering the given interval [*start*, *stop*] and where *niceStart* and *niceStop* are guaranteed to align with the corresponding [tick step](#tickStep) given the provided *base* (default is 10). Like [d3.tickIncrement](#tickIncrement), this requires that *start* is less than or equal to *stop*.
 
 <a name="range" href="#range">#</a> d3.<b>range</b>([<i>start</i>, ]<i>stop</i>[, <i>step</i>]) · [Source](https://github.com/d3/d3-array/blob/main/src/range.js), [Examples](https://observablehq.com/@d3/d3-range)
 
