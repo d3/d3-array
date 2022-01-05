@@ -311,7 +311,7 @@ Returns the index of the closest value to *x* in the given sorted *array*. This 
 
 <a name="quickselect" href="#quickselect">#</a> d3.<b>quickselect</b>(<i>array</i>, <i>k</i>, <i>left</i> = 0, <i>right</i> = <i>array</i>.length - 1, <i>compare</i> = ascending) · [Source](https://github.com/d3/d3-array/blob/main/src/quickselect.js), [Examples](https://observablehq.com/@d3/d3-quickselect)
 
-See [mourner/quickselect](https://github.com/mourner/quickselect/blob/main/README.md).
+See [mourner/quickselect](https://github.com/mourner/quickselect/blob/master/README.md).
 
 <a name="ascending" href="#ascending">#</a> d3.<b>ascending</b>(<i>a</i>, <i>b</i>) · [Source](https://github.com/d3/d3-array/blob/main/src/ascending.js), [Examples](https://observablehq.com/@d3/d3-ascending)
 
