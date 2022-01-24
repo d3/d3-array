@@ -520,11 +520,11 @@ Map(3) {
 
 To convert a Map to an Array, use [Array.from](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from). See [d3.group](#group) for examples.
 
-<a name="rollups" href="#rollups">#</a> d3.<b>rollups</b>(<i>iterable</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/main/src/group.js), [Examples](https://observablehq.com/@d3/d3-group-d3-rollup)
+<a name="rollups" href="#rollups">#</a> d3.<b>rollups</b>(<i>iterable</i>, <i>reduce</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/main/src/group.js), [Examples](https://observablehq.com/@d3/d3-group-d3-rollup)
 
 Equivalent to [rollup](#rollup), but returns nested arrays instead of nested maps.
 
-<a name="flatRollup" href="#flatRollup">#</a> d3.<b>flatRollup</b>(<i>iterable</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/main/src/group.js), [Examples](https://observablehq.com/@d3/d3-flatgroup)
+<a name="flatRollup" href="#flatRollup">#</a> d3.<b>flatRollup</b>(<i>iterable</i>, <i>reduce</i>, <i>...keys</i>) · [Source](https://github.com/d3/d3-array/blob/main/src/group.js), [Examples](https://observablehq.com/@d3/d3-flatgroup)
 
 Equivalent to [rollup](#rollup), but returns a flat array of [*key0*, *key1*, …, *value*] instead of nested maps.
 
