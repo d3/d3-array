@@ -37,6 +37,11 @@ export default function bin() {
       if (domain === extent) [x0, x1] = nice(x0, x1, tn);
       tz = ticks(x0, x1, tn);
 
+      // If the domain is aligned with the first tick (which it will by
+      // default), then we can use quantization rather than bisection to bin
+      // values, which is substantially faster.
+      if (tz[0] <= x0) step = tickIncrement(x0, x1, tn);
+
       // If the last threshold is coincident with the domain’s upper bound, the
       // last bin will be zero-width. If the default domain is used, and this
       // last threshold is coincident with the maximum input value, we can
@@ -46,7 +51,7 @@ export default function bin() {
       // compare order (>=) rather than strict equality (===)!
       if (tz[tz.length - 1] >= x1) {
         if (max >= x1 && domain === extent) {
-          step = tickIncrement(x0, x1, tn);
+          const step = tickIncrement(x0, x1, tn);
           if (isFinite(step)) {
             if (step > 0) {
               x1 = (Math.floor(x1 / step) + 1) * step;

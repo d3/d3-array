@@ -164,6 +164,48 @@ it("bin()() returns bins whose rightmost bin is not too wide", () => {
   ]);
 });
 
+it("bin(data) handles fractional step correctly", () => {
+  const h = bin().thresholds(10);
+  assert.deepStrictEqual(h([9.8, 10, 11, 12, 13, 13.2]), [
+    box([9.8], 9.5, 10),
+    box([10], 10, 10.5),
+    box([], 10.5, 11),
+    box([11], 11, 11.5),
+    box([], 11.5, 12),
+    box([12], 12, 12.5),
+    box([], 12.5, 13),
+    box([13, 13.2], 13, 13.5)
+  ]);
+});
+
+it("bin(data) handles fractional step correctly with a custom, non-aligned domain", () => {
+  const h = bin().thresholds(10).domain([9.7, 13.3]);
+  assert.deepStrictEqual(h([9.8, 10, 11, 12, 13, 13.2]), [
+    box([9.8], 9.7, 10),
+    box([10], 10, 10.5),
+    box([], 10.5, 11),
+    box([11], 11, 11.5),
+    box([], 11.5, 12),
+    box([12], 12, 12.5),
+    box([], 12.5, 13),
+    box([13, 13.2], 13, 13.3)
+  ]);
+});
+
+it("bin(data) handles fractional step correctly with a custom, aligned domain", () => {
+  const h = bin().thresholds(10).domain([9.5, 13.5]);
+  assert.deepStrictEqual(h([9.8, 10, 11, 12, 13, 13.2]), [
+    box([9.8], 9.5, 10),
+    box([10], 10, 10.5),
+    box([], 10.5, 11),
+    box([11], 11, 11.5),
+    box([], 11.5, 12),
+    box([12], 12, 12.5),
+    box([], 12.5, 13),
+    box([13, 13.2], 13, 13.5)
+  ]);
+});
+
 it("bin(data) coerces values to numbers as expected", () => {
   const h = bin().thresholds(10);
   assert.deepStrictEqual(h(["1", "2", "3", "4", "5"]), [
