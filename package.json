@@ -43,8 +43,8 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "13",
     "d3-random": "2 - 3",
-    "eslint": "7",
-    "jsdom": "17",
+    "eslint": "8",
+    "jsdom": "19",
     "mocha": "9",
     "rollup": "2",
     "rollup-plugin-terser": "7"
