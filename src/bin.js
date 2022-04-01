@@ -76,18 +76,23 @@ export default function bin() {
     }
 
     // Assign data to bins by value, ignoring any outside the domain.
-    if (step && isFinite(step)) {
-      step = step < 0 ? -step : 1 / step;
-      for (i = 0; i < n; ++i) {
-        x = values[i];
-        if (x != null && x0 <= x && x <= x1) {
-          bins[Math.floor((x - x0) * step)].push(data[i]);
+    if (isFinite(step)) {
+      if (step > 0) {
+        for (i = 0; i < n; ++i) {
+          if ((x = values[i]) != null && x0 <= x && x <= x1) {
+            bins[Math.floor((x - x0) / step)].push(data[i]);
+          }
+        }
+      } else if (step < 0) {
+        for (i = 0; i < n; ++i) {
+          if ((x = values[i]) != null && x0 <= x && x <= x1) {
+            bins[Math.floor((x0 - x) * step)].push(data[i]);
+          }
         }
       }
     } else {
       for (i = 0; i < n; ++i) {
-        x = values[i];
-        if (x != null && x0 <= x && x <= x1) {
+        if ((x = values[i]) != null && x0 <= x && x <= x1) {
           bins[bisect(tz, x, 0, m)].push(data[i]);
         }
       }
