@@ -91,7 +91,7 @@ export default function bin() {
       } else if (step < 0) {
         for (i = 0; i < n; ++i) {
           if ((x = values[i]) != null && x0 <= x && x <= x1) {
-            bins[Math.floor((x0 - x) * step)].push(data[i]);
+            bins[Math.floor(x0 * step - x * step)].push(data[i]);
           }
         }
       }

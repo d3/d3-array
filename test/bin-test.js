@@ -1,4 +1,6 @@
 import assert from "assert";
+import {csvParse} from "d3-dsv";
+import {readFile} from "fs/promises";
 import {bin, extent, histogram, thresholdSturges} from "../src/index.js";
 
 it("histogram is a deprecated alias for bin", () => {
@@ -219,6 +221,12 @@ it("bin(data) coerces values to numbers as expected", () => {
     box([], 4.5, 5),
     box(["5"], 5, 5.5)
   ]);
+});
+
+it("bin(athletes) produces the expected result", async () => {
+  const height = csvParse(await readFile("./test/data/athletes.csv", "utf8")).filter(d => d.height).map(d => +d.height);
+  const bins = bin().thresholds(57)(height);
+  assert.deepStrictEqual(bins.map(b => b.length), [1, 0, 0, 0, 0, 0, 2, 1, 2, 1, 1, 4, 11, 7, 13, 39, 78, 93, 119, 193, 354, 393, 573, 483, 651, 834, 808, 763, 627, 648, 833, 672, 578, 498, 395, 425, 278, 235, 182, 128, 91, 69, 43, 29, 21, 23, 3, 3, 1, 1, 1]);
 });
 
 function box(bin, x0, x1)  {
