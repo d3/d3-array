@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "13",
+    "d3-dsv": "3",
     "d3-random": "2 - 3",
     "eslint": "8",
     "jsdom": "19",
