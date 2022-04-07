@@ -92,7 +92,7 @@ export default function bin() {
         for (i = 0; i < n; ++i) {
           if ((x = values[i]) != null && x0 <= x && x <= x1) {
             const j = Math.floor((x0 - x) * step);
-            bins[j + (tz[j] <= x)].push(data[i]); // handle off-by-one due to rounding
+            bins[Math.min(bins.length - 1, j + (tz[j] <= x))].push(data[i]); // handle off-by-one due to rounding
           }
         }
       }
