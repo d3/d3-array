@@ -84,8 +84,10 @@ export default function bin() {
     if (isFinite(step)) {
       if (step > 0) {
         for (i = 0; i < n; ++i) {
-          if ((x = values[i]) != null && x0 <= x && x <= x1) {
+          if ((x = values[i]) != null && x0 <= x && x < x1) {
             bins[Math.floor((x - x0) / step)].push(data[i]);
+          } else if (x === x1) {
+            bins[bins.length - 1].push(data[i]);
           }
         }
       } else if (step < 0) {

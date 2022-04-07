@@ -235,6 +235,10 @@ it("bin(data) assigns floating point values to the correct bins", () => {
   }
 });
 
+it("bin(data) assigns integer values to the correct bins", () => {
+  assert.deepStrictEqual(bin().domain([4, 5])([5]), [box([5], 4, 5)]);
+});
+
 function box(bin, x0, x1)  {
   bin.x0 = x0;
   bin.x1 = x1;
