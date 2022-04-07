@@ -85,14 +85,14 @@ export default function bin() {
       if (step > 0) {
         for (i = 0; i < n; ++i) {
           if ((x = values[i]) != null && x0 <= x && x <= x1) {
-            bins[Math.floor((x - x0) / step)].push(data[i]);
+            bins[Math.min(m, Math.floor((x - x0) / step))].push(data[i]);
           }
         }
       } else if (step < 0) {
         for (i = 0; i < n; ++i) {
           if ((x = values[i]) != null && x0 <= x && x <= x1) {
             const j = Math.floor((x0 - x) * step);
-            bins[j + (tz[j] <= x)].push(data[i]); // handle off-by-one due to rounding
+            bins[Math.min(m, j + (tz[j] <= x))].push(data[i]); // handle off-by-one due to rounding
           }
         }
       }

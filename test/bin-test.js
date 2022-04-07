@@ -235,6 +235,12 @@ it("bin(data) assigns floating point values to the correct bins", () => {
   }
 });
 
+it("bin(data) assigns integer values to the correct bins", () => {
+  assert.deepStrictEqual(bin().domain([4, 5])([5]), [box([5], 4, 5)]);
+  const eights = [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8];
+  assert.deepStrictEqual(bin().domain([3, 8])(eights), [box([], 3, 4), box([], 4, 5), box([], 5, 6), box([], 6, 7), box(eights, 7, 8)]);
+});
+
 function box(bin, x0, x1)  {
   bin.x0 = x0;
   bin.x1 = x1;
