@@ -2,35 +2,36 @@ import ascending from "./ascending.js";
 
 export default function bisector(f) {
   let delta = f;
-  let compare1 = f;
-  let compare2 = f;
+  let compare = f;
 
+  // If an accessor is specified, promote it to a comparator.
   if (f.length !== 2) {
     delta = (d, x) => f(d) - x;
-    compare1 = ascending;
-    compare2 = (d, x) => ascending(f(d), x);
+    compare = (d, x) => ascending(f(d), x);
   }
 
   function left(a, x, lo = 0, hi = a.length) {
     if (lo < hi) {
-      if (compare1(x, x) !== 0) return hi;
+      let ohi = hi, c;
       do {
         const mid = (lo + hi) >>> 1;
-        if (compare2(a[mid], x) < 0) lo = mid + 1;
+        if ((c = compare(a[mid], x)) < 0) lo = mid + 1;
         else hi = mid;
       } while (lo < hi);
+      if (!(c <= c)) return ohi; // x is not orderable
     }
     return lo;
   }
 
   function right(a, x, lo = 0, hi = a.length) {
     if (lo < hi) {
-      if (compare1(x, x) !== 0) return hi;
+      let ohi = hi, c;
       do {
         const mid = (lo + hi) >>> 1;
-        if (compare2(a[mid], x) <= 0) lo = mid + 1;
+        if ((c = compare(a[mid], x)) <= 0) lo = mid + 1;
         else hi = mid;
       } while (lo < hi);
+      if (!(c <= c)) return ohi; // x is not orderable
     }
     return lo;
   }

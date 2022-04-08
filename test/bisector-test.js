@@ -151,6 +151,34 @@ it("bisector(comparator).right(array, value) handles large sparse d3", () => {
   assert.strictEqual(bisectRight(boxes, box(6), i - 5, i), i - 0);
 });
 
+it("bisector(comparator).left(array, value) supports an asymmetric (object, value) comparator", () => {
+  const boxes = [1, 2, 3].map(box);
+  const bisectLeft = bisector(ascendingBoxValue).left;
+  assert.strictEqual(bisectLeft(boxes, 1), 0);
+  assert.strictEqual(bisectLeft(boxes, 2), 1);
+  assert.strictEqual(bisectLeft(boxes, 3), 2);
+});
+
+it("bisector(comparator).left(array, value) keeps non-comparable values to the right", () => {
+  const boxes = [1, 2, null, undefined, NaN].map(box);
+  const bisectLeft = bisector(ascendingBox).left;
+  assert.strictEqual(bisectLeft(boxes, box(1)), 0);
+  assert.strictEqual(bisectLeft(boxes, box(2)), 1);
+  assert.strictEqual(bisectLeft(boxes, box(null)), 5);
+  assert.strictEqual(bisectLeft(boxes, box(undefined)), 5);
+  assert.strictEqual(bisectLeft(boxes, box(NaN)), 5);
+});
+
+it("bisector(accessor).left(array, value) keeps non-comparable values to the right", () => {
+  const boxes = [1, 2, null, undefined, NaN].map(box);
+  const bisectLeft = bisector(unbox).left;
+  assert.strictEqual(bisectLeft(boxes, 1), 0);
+  assert.strictEqual(bisectLeft(boxes, 2), 1);
+  assert.strictEqual(bisectLeft(boxes, null), 5);
+  assert.strictEqual(bisectLeft(boxes, undefined), 5);
+  assert.strictEqual(bisectLeft(boxes, NaN), 5);
+});
+
 it("bisector(accessor).left(array, value) returns the index of an exact match", () => {
   const boxes = [1, 2, 3].map(box);
   const bisectLeft = bisector(unbox).left;
@@ -345,4 +373,8 @@ function unbox(box) {
 
 function ascendingBox(a, b) {
   return ascending(a.value, b.value);
+}
+
+function ascendingBoxValue(a, value) {
+  return ascending(a.value, value);
 }
