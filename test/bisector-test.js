@@ -159,7 +159,10 @@ it("bisector(comparator).left(array, value) supports an asymmetric (object, valu
   assert.strictEqual(bisectLeft(boxes, 3), 2);
 });
 
-it("bisector(comparator).left(array, value) keeps non-comparable values to the right", () => {
+// This is not possible because the bisector has no way of knowing whether the
+// given comparator is symmetric or asymmetric, and if the comparator is
+// asymmetric it cannot be used to test the search value for orderability.
+it.skip("bisector(comparator).left(array, value) keeps non-comparable values to the right", () => {
   const boxes = [1, 2, null, undefined, NaN].map(box);
   const bisectLeft = bisector(ascendingBox).left;
   assert.strictEqual(bisectLeft(boxes, box(1)), 0);
