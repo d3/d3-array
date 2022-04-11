@@ -151,6 +151,12 @@ it("bisectLeft(array, value, lo, hi) keeps non-comparable values to the right", 
   assert.strictEqual(bisectLeft(values, NaN), 5);
 });
 
+it("bisectLeft(array, value, lo, hi) keeps comparable values to the left", () => {
+  const values = [null, undefined, NaN];
+  assert.strictEqual(bisectLeft(values, 1), 0);
+  assert.strictEqual(bisectLeft(values, 2), 0);
+});
+
 it("bisectRight(array, value, lo, hi) keeps non-comparable values to the right", () => {
   const values = [1, 2, null, undefined];
   assert.strictEqual(bisectRight(values, 1), 1);
