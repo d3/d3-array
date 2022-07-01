@@ -38,8 +38,10 @@ it("blur1(values, r) approximately preserves total value", () => {
   assert.strictEqual(blur1([0, 0, 0, 0, 0, 0, 27, 0, 0, 0, 0, 0, 0, 0], 3.0).reduce((p, v) => p + v), 26.370262390670547);
 });
 
-it("blur2(values, width, r) observes the expected integer radius r", () => {
-  const values = [
+const unit = {
+  width: 11,
+  height: 11,
+  data: [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -51,21 +53,17 @@ it("blur2(values, width, r) observes the expected integer radius r", () => {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ];
-  assert.deepStrictEqual(blur2(values.slice(), 11, 0.0), [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ]);
-  assert.deepStrictEqual(blur2(values.slice(), 11, 1.0).map(round), [
+  ]
+};
+
+it("blur2(data, r) modifies in-place", () => {
+  const copy = copy2(unit);
+  assert.strictEqual(blur2(copy, 1), copy);
+});
+
+it("blur2(data, r) observes the expected integer radius r", () => {
+  assert.deepStrictEqual(blur2(copy2(unit), 0), unit);
+  assert.deepStrictEqual(blur2(copy2(unit), 1).data.map(round), [
     0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
     0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
     0.000, 0.000, 0.001, 0.004, 0.008, 0.010, 0.008, 0.004, 0.001, 0.000, 0.000,
@@ -78,7 +76,7 @@ it("blur2(values, width, r) observes the expected integer radius r", () => {
     0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
     0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
   ]);
-  assert.deepStrictEqual(blur2(values.slice(), 11, 2.0).map(round), [
+  assert.deepStrictEqual(blur2(copy2(unit), 2).data.map(round), [
     0.001, 0.001, 0.002, 0.003, 0.003, 0.004, 0.003, 0.003, 0.002, 0.001, 0.001,
     0.001, 0.002, 0.004, 0.006, 0.007, 0.007, 0.007, 0.006, 0.004, 0.002, 0.001,
     0.002, 0.004, 0.006, 0.010, 0.012, 0.012, 0.012, 0.010, 0.006, 0.004, 0.002,
@@ -93,21 +91,8 @@ it("blur2(values, width, r) observes the expected integer radius r", () => {
   ]);
 });
 
-it("blur2(values, width, rx, 0) does horizontal blurring", () => {
-  const values = [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ];
-  assert.deepStrictEqual(blur2(values.slice(), 11, 0, 0), [
+it("blur2(data, rx, 0) does horizontal blurring", () => {
+  assert.deepStrictEqual(blur2(copy2(unit), 0, 0).data, [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -120,7 +105,7 @@ it("blur2(values, width, rx, 0) does horizontal blurring", () => {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
   ]);
-  assert.deepStrictEqual(blur2(values.slice(), 11, 1, 0).map(round), [
+  assert.deepStrictEqual(blur2(copy2(unit), 1, 0).data.map(round), [
     0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
     0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
     0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
@@ -133,7 +118,7 @@ it("blur2(values, width, rx, 0) does horizontal blurring", () => {
     0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
     0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
   ]);
-  assert.deepStrictEqual(blur2(values.slice(), 11, 2, 0).map(round), [
+  assert.deepStrictEqual(blur2(copy2(unit), 2, 0).data.map(round), [
     0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
     0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
     0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
@@ -148,21 +133,8 @@ it("blur2(values, width, rx, 0) does horizontal blurring", () => {
   ]);
 });
 
-it("blur2(values, width, 0, ry) does vertical blurring", () => {
-  const values = [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ];
-  assert.deepStrictEqual(blur2(values.slice(), 11, 0, 0), [
+it("blur2(data, 0, ry) does vertical blurring", () => {
+  assert.deepStrictEqual(blur2(copy2(unit), 0, 0).data, [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -175,7 +147,7 @@ it("blur2(values, width, 0, ry) does vertical blurring", () => {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
   ]);
-  assert.deepStrictEqual(blur2(values.slice(), 11, 0, 1).map(round), [
+  assert.deepStrictEqual(blur2(copy2(unit), 0, 1).data.map(round), [
     0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
     0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
     0.000, 0.000, 0.000, 0.000, 0.000, 0.037, 0.000, 0.000, 0.000, 0.000, 0.000,
@@ -188,7 +160,7 @@ it("blur2(values, width, 0, ry) does vertical blurring", () => {
     0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
     0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
   ]);
-  assert.deepStrictEqual(blur2(values.slice(), 11, 0, 2).map(round), [
+  assert.deepStrictEqual(blur2(copy2(unit), 0, 2).data.map(round), [
     0.000, 0.000, 0.000, 0.000, 0.000, 0.024, 0.000, 0.000, 0.000, 0.000, 0.000,
     0.000, 0.000, 0.000, 0.000, 0.000, 0.048, 0.000, 0.000, 0.000, 0.000, 0.000,
     0.000, 0.000, 0.000, 0.000, 0.000, 0.080, 0.000, 0.000, 0.000, 0.000, 0.000,
@@ -202,6 +174,10 @@ it("blur2(values, width, 0, ry) does vertical blurring", () => {
     0.000, 0.000, 0.000, 0.000, 0.000, 0.024, 0.000, 0.000, 0.000, 0.000, 0.000
   ]);
 });
+
+function copy2({data, width, height}) {
+  return {data: data.slice(), width, height};
+}
 
 function round(x) {
   return Math.round(x * 1000) / 1000 || 0;
