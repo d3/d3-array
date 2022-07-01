@@ -1,13 +1,12 @@
 export function blur1(values, r) {
   if (!((r = +r) >= 0)) throw new RangeError("invalid r");
-  if (r === 0) return values;
-  const T = values;
-  const S = values.slice();
+  if (!r) return values;
+  const temp = values.slice();
   const width = Math.floor(values.length);
   const height = 1;
-  blurh(T, S, r, width, height);
-  blurh(S, T, r, width, height);
-  blurh(T, S, r, width, height);
+  blurh(values, temp, r, width, height);
+  blurh(temp, values, r, width, height);
+  blurh(values, temp, r, width, height);
   return values;
 }
 
@@ -15,32 +14,37 @@ export function blur2(values, width, rx, ry = rx) {
   if (!((rx = +rx) >= 0)) throw new RangeError("invalid rx");
   if (!((ry = +ry) >= 0)) throw new RangeError("invalid ry");
   if (!((width = Math.floor(width)) >= 0)) throw new RangeError("invalid width");
-  if (width === 0 || (rx === 0 && ry === 0)) return values;
-  const T = values;
-  const S = values.slice();
+  if (!width || (!rx && !ry)) return values;
+  const temp = values.slice();
   const height = Math.floor(values.length / width);
-  if (rx !== 0) {
-    blurh(T, S, rx, width, height);
-    blurh(S, T, rx, width, height);
-    blurh(T, S, rx, width, height);
-  }
-  if (ry !== 0) {
-    blurv(T, S, ry, width, height);
-    blurv(S, T, ry, width, height);
-    blurv(T, S, ry, width, height);
+  if (rx && ry) {
+    blurh(temp, values, rx, width, height);
+    blurh(values, temp, rx, width, height);
+    blurh(temp, values, rx, width, height);
+    blurv(values, temp, ry, width, height);
+    blurv(temp, values, ry, width, height);
+    blurv(values, temp, ry, width, height);
+  } else if (rx) {
+    blurh(values, temp, rx, width, height);
+    blurh(temp, values, rx, width, height);
+    blurh(values, temp, rx, width, height);
+  } else if (ry) {
+    blurv(values, temp, ry, width, height);
+    blurv(temp, values, ry, width, height);
+    blurv(values, temp, ry, width, height);
   }
   return values;
 }
 
 function blurh(T, S, r, w, h) {
-  for (let y = 0; y < h; ++y) {
-    blurf(T, S, r, y * w, y * w + w, 1);
+  for (let y = 0, n = w * h; y < n;) {
+    blurf(T, S, r, y, y += w, 1);
   }
 }
 
 function blurv(T, S, r, w, h) {
-  for (let x = 0; x < w; ++x) {
-    blurf(T, S, r, x, w * h, w);
+  for (let x = 0, n = w * h; x < w; ++x) {
+    blurf(T, S, r, x, x + n, w);
   }
 }
 
