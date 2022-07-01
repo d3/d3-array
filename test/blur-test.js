@@ -206,3 +206,40 @@ it("blur2(values, width, 0, ry) does vertical blurring", () => {
 function round(x) {
   return Math.round(x * 1000) / 1000 || 0;
 }
+
+// a stride on blur1 is the same as using a vertical blur2 with width=stride 
+it("blur1 & stride", () => {
+  const values = [-27,270,-2700,27000, 0,0,0,0];
+  assert.deepStrictEqual(blur2(values, 4, 0, 1), [-14,140,-1400,14000, -13,130,-1300,13000]);
+});
+
+it("blur2 & stride", () => {
+  assert.deepStrictEqual(blur2([
+    729,0,0,0, 0,0,0,0,
+    0,0,0,0, 0,0,0,0
+  ], 2, 1, 1, 4), [
+    196,0,0,0, 182,0,0,0,
+    182,0,0,0, 169,0,0,0
+  ]);
+  assert.deepStrictEqual(blur2([
+    0,729,0,0, 0,0,0,0,
+    0,0,0,0, 0,0,0,0
+  ], 2, 1, 1, 4), [
+    0,196,0,0, 0,182,0,0,
+    0,182,0,0, 0,169,0,0
+  ]);
+  assert.deepStrictEqual(blur2([
+    0,0,729,0, 0,0,0,0,
+    0,0,0,0, 0,0,0,0
+  ], 2, 1, 1, 4), [
+    0,0,196,0, 0,0,182,0,
+    0,0,182,0, 0,0,169,0
+  ]);
+  assert.deepStrictEqual(blur2([
+    0,0,0,729, 0,0,0,0,
+    0,0,0,0, 0,0,0,0
+  ], 2, 1, 1, 4), [
+    0,0,0,196, 0,0,0,182,
+    0,0,0,182, 0,0,0,169
+  ]);
+});

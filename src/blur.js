@@ -11,37 +11,40 @@ export function blur1(values, r) {
   return values;
 }
 
-export function blur2(values, width, rx, ry = rx) {
+export function blur2(values, width, rx, ry = rx, stride = 1) {
   if (!((rx = +rx) >= 0)) throw new RangeError("invalid rx");
   if (!((ry = +ry) >= 0)) throw new RangeError("invalid ry");
   if (!((width = Math.floor(width)) >= 0)) throw new RangeError("invalid width");
+  if (!((stride = Math.floor(stride)) > 0)) throw new RangeError("invalid stride");
   if (!width || (!rx && !ry)) return values;
   const temp = values.slice();
-  const height = Math.floor(values.length / width);
+  const height = Math.floor(values.length / width / stride);
   const blurx = blurf(rx);
   const blury = blurf(ry);
   if (rx && ry) {
-    blurh(blurx, temp, values, width, height);
-    blurh(blurx, values, temp, width, height);
-    blurh(blurx, temp, values, width, height);
-    blurv(blury, values, temp, width, height);
-    blurv(blury, temp, values, width, height);
-    blurv(blury, values, temp, width, height);
+    blurh(blurx, temp, values, width, height, stride);
+    blurh(blurx, values, temp, width, height, stride);
+    blurh(blurx, temp, values, width, height, stride);
+    blurv(blury, values, temp, width * stride, height);
+    blurv(blury, temp, values, width * stride, height);
+    blurv(blury, values, temp, width * stride, height);
   } else if (rx) {
-    blurh(blurx, values, temp, width, height);
-    blurh(blurx, temp, values, width, height);
-    blurh(blurx, values, temp, width, height);
+    blurh(blurx, values, temp, width, height, stride);
+    blurh(blurx, temp, values, width, height, stride);
+    blurh(blurx, values, temp, width, height, stride);
   } else if (ry) {
-    blurv(blury, values, temp, width, height);
-    blurv(blury, temp, values, width, height);
-    blurv(blury, values, temp, width, height);
+    blurv(blury, values, temp, width * stride, height);
+    blurv(blury, temp, values, width * stride, height);
+    blurv(blury, values, temp, width * stride, height);
   }
   return values;
 }
 
-function blurh(blur, T, S, w, h) {
-  for (let y = 0, n = w * h; y < n;) {
-    blur(T, S, y, y += w, 1);
+function blurh(blur, T, S, w, h, stride = 1) {
+  for (let a = 0; a < stride; ++a) {
+    for (let y = a, n = w * h * stride; y < n;) {
+      blur(T, S, y, y += w * stride, stride);
+    }
   }
 }
 
