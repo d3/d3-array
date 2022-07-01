@@ -4,9 +4,10 @@ export function blur1(values, r) {
   const temp = values.slice();
   const width = Math.floor(values.length);
   const height = 1;
-  blurh(values, temp, r, width, height);
-  blurh(temp, values, r, width, height);
-  blurh(values, temp, r, width, height);
+  const blur = blurf(r);
+  blurh(blur, values, temp, width, height);
+  blurh(blur, temp, values, width, height);
+  blurh(blur, values, temp, width, height);
   return values;
 }
 
@@ -17,34 +18,36 @@ export function blur2(values, width, rx, ry = rx) {
   if (!width || (!rx && !ry)) return values;
   const temp = values.slice();
   const height = Math.floor(values.length / width);
+  const blurx = blurf(rx);
+  const blury = blurf(ry);
   if (rx && ry) {
-    blurh(temp, values, rx, width, height);
-    blurh(values, temp, rx, width, height);
-    blurh(temp, values, rx, width, height);
-    blurv(values, temp, ry, width, height);
-    blurv(temp, values, ry, width, height);
-    blurv(values, temp, ry, width, height);
+    blurh(blurx, temp, values, width, height);
+    blurh(blurx, values, temp, width, height);
+    blurh(blurx, temp, values, width, height);
+    blurv(blury, values, temp, width, height);
+    blurv(blury, temp, values, width, height);
+    blurv(blury, values, temp, width, height);
   } else if (rx) {
-    blurh(values, temp, rx, width, height);
-    blurh(temp, values, rx, width, height);
-    blurh(values, temp, rx, width, height);
+    blurh(blurx, values, temp, width, height);
+    blurh(blurx, temp, values, width, height);
+    blurh(blurx, values, temp, width, height);
   } else if (ry) {
-    blurv(values, temp, ry, width, height);
-    blurv(temp, values, ry, width, height);
-    blurv(values, temp, ry, width, height);
+    blurv(blury, values, temp, width, height);
+    blurv(blury, temp, values, width, height);
+    blurv(blury, values, temp, width, height);
   }
   return values;
 }
 
-function blurh(T, S, r, w, h) {
+function blurh(blur, T, S, w, h) {
   for (let y = 0, n = w * h; y < n;) {
-    blurf(T, S, r, y, y += w, 1);
+    blur(T, S, y, y += w, 1);
   }
 }
 
-function blurv(T, S, r, w, h) {
+function blurv(blur, T, S, w, h) {
   for (let x = 0, n = w * h; x < w; ++x) {
-    blurf(T, S, r, x, x + n, w);
+    blur(T, S, x, x + n, w);
   }
 }
 
@@ -54,34 +57,40 @@ function blurv(T, S, r, w, h) {
 // S[start] (inclusive) and S[stop] (exclusive). If the given radius is not an
 // integer, S[i - r - 1] and S[i + r + 1] are added to the sum, each weighted
 // according to r - ⌊radius⌋.
-function blurf(T, S, radius, start, stop, step) {
-  if (radius === Math.floor(radius)) return bluri(T, S, radius, start, stop, step);
-  stop = start + (Math.floor((stop - start) / step) - 1) * step; // inclusive stop
-  if (!(stop >= start)) return;
+function blurf(radius) {
   const radius0 = Math.floor(radius);
+  if (radius0 === radius) return bluri(radius);
   const t = radius - radius0;
-  let sum = radius0 * S[start];
-  for (let i = start, j = start + step * radius0; i < j; i += step) {
-    sum += S[Math.max(start, Math.min(stop, i))];
-  }
-  for (let i = start, j = stop, s = step * radius0, w = 2 * radius + 1; i <= j; i += step) {
-    sum += S[Math.min(stop, i + s)];
-    T[i] = (sum + t * (S[Math.max(start, i - s - step)] + S[Math.min(stop, i + s + step)])) / w;
-    sum -= S[Math.max(start, i - s)];
-  }
+  const w = 2 * radius + 1;
+  return (T, S, start, stop, step) => {
+    stop = start + (Math.floor((stop - start) / step) - 1) * step; // inclusive stop
+    if (!(stop >= start)) return;
+    let sum = radius0 * S[start];
+    for (let i = start, j = start + step * radius0; i < j; i += step) {
+      sum += S[Math.max(start, Math.min(stop, i))];
+    }
+    for (let i = start, j = stop, s = step * radius0; i <= j; i += step) {
+      sum += S[Math.min(stop, i + s)];
+      T[i] = (sum + t * (S[Math.max(start, i - s - step)] + S[Math.min(stop, i + s + step)])) / w;
+      sum -= S[Math.max(start, i - s)];
+    }
+  };
 }
 
 // Like blurf, but optimized for integer radius.
-function bluri(T, S, radius, start, stop, step) {
-  stop = start + (Math.floor((stop - start) / step) - 1) * step; // inclusive stop
-  if (!(stop >= start)) return;
-  let sum = radius * S[start];
-  for (let i = start, j = start + step * radius; i < j; i += step) {
-    sum += S[Math.max(start, Math.min(stop, i))];
-  }
-  for (let i = start, j = stop, s = step * radius, w = 2 * radius + 1; i <= j; i += step) {
-    sum += S[Math.min(stop, i + s)];
-    T[i] = sum / w;
-    sum -= S[Math.max(start, i - s)];
-  }
+function bluri(radius) {
+  const w = 2 * radius + 1;
+  return (T, S, start, stop, step) => {
+    stop = start + (Math.floor((stop - start) / step) - 1) * step; // inclusive stop
+    if (!(stop >= start)) return;
+    let sum = radius * S[start];
+    for (let i = start, j = start + step * radius; i < j; i += step) {
+      sum += S[Math.max(start, Math.min(stop, i))];
+    }
+    for (let i = start, j = stop, s = step * radius; i <= j; i += step) {
+      sum += S[Math.min(stop, i + s)];
+      T[i] = sum / w;
+      sum -= S[Math.max(start, i - s)];
+    }
+  };
 }
