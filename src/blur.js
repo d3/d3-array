@@ -2,12 +2,11 @@ export function blur1(values, r) {
   if (!((r = +r) >= 0)) throw new RangeError("invalid r");
   if (!r) return values;
   const temp = values.slice();
-  const width = Math.floor(values.length);
-  const height = 1;
+  const length = Math.floor(values.length);
   const blur = blurf(r);
-  blurh(blur, values, temp, width, height);
-  blurh(blur, temp, values, width, height);
-  blurh(blur, values, temp, width, height);
+  blurh(blur, values, temp, length, 1);
+  blurh(blur, temp, values, length, 1);
+  blurh(blur, values, temp, length, 1);
   return values;
 }
 
@@ -66,13 +65,15 @@ function blurf(radius) {
     stop = start + (Math.floor((stop - start) / step) - 1) * step; // inclusive stop
     if (!(stop >= start)) return;
     let sum = radius0 * S[start];
-    for (let i = start, j = start + step * radius0; i < j; i += step) {
+    const s0 = step * radius0;
+    const s1 = s0 + step;
+    for (let i = start, j = start + s0; i < j; i += step) {
       sum += S[Math.max(start, Math.min(stop, i))];
     }
-    for (let i = start, j = stop, s = step * radius0; i <= j; i += step) {
-      sum += S[Math.min(stop, i + s)];
-      T[i] = (sum + t * (S[Math.max(start, i - s - step)] + S[Math.min(stop, i + s + step)])) / w;
-      sum -= S[Math.max(start, i - s)];
+    for (let i = start, j = stop; i <= j; i += step) {
+      sum += S[Math.min(stop, i + s0)];
+      T[i] = (sum + t * (S[Math.max(start, i - s1)] + S[Math.min(stop, i + s1)])) / w;
+      sum -= S[Math.max(start, i - s0)];
     }
   };
 }
@@ -84,10 +85,11 @@ function bluri(radius) {
     stop = start + (Math.floor((stop - start) / step) - 1) * step; // inclusive stop
     if (!(stop >= start)) return;
     let sum = radius * S[start];
-    for (let i = start, j = start + step * radius; i < j; i += step) {
+    const s = step * radius;
+    for (let i = start, j = start + s; i < j; i += step) {
       sum += S[Math.max(start, Math.min(stop, i))];
     }
-    for (let i = start, j = stop, s = step * radius; i <= j; i += step) {
+    for (let i = start, j = stop; i <= j; i += step) {
       sum += S[Math.min(stop, i + s)];
       T[i] = sum / w;
       sum -= S[Math.max(start, i - s)];
