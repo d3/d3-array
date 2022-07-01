@@ -5,9 +5,9 @@ export function blur1(values, r) {
   if (!length || !r) return values;
   const temp = values.slice();
   const blur = blurf(r);
-  blurh(blur, values, temp, length, 1);
-  blurh(blur, temp, values, length, 1);
-  blurh(blur, values, temp, length, 1);
+  blur(values, temp, 0, length, 1);
+  blur(temp, values, 0, length, 1);
+  blur(values, temp, 0, length, 1);
   return values;
 }
 
