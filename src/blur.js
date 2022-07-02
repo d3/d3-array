@@ -1,6 +1,7 @@
 export function blur1(values, r) {
   if (!((r = +r) >= 0)) throw new RangeError("invalid r");
-  const length = values.length;
+  let length = values.length;
+  if (!((length = Math.floor(length)) >= 0)) throw new RangeError("invalid length");
   if (!length || !r) return values;
   const blur = blurf(r);
   const temp = values.slice();
@@ -10,43 +11,39 @@ export function blur1(values, r) {
   return values;
 }
 
-export function blur2(data, rx, ry = rx) {
-  if (!((rx = +rx) >= 0)) throw new RangeError("invalid rx");
-  if (!((ry = +ry) >= 0)) throw new RangeError("invalid ry");
-  let {data: values, width, height} = data;
-  if (!((width = Math.floor(width)) >= 0)) throw new RangeError("invalid width");
-  if (!((height = Math.floor(height)) >= 0)) throw new RangeError("invalid height");
-  blur2d(values, width, height, rx && blurf(rx), ry && blurf(ry));
-  return data;
-}
+export const blur2 = Blur2(blurf);
 
-export function blurImage(data, rx, ry = rx) {
-  if (!((rx = +rx) >= 0)) throw new RangeError("invalid rx");
-  if (!((ry = +ry) >= 0)) throw new RangeError("invalid ry");
-  const {data: values, width, height} = data;
-  blur2d(values, width, height, rx && blurfImage(rx), ry && blurfImage(ry));
-  return data;
-}
+export const blurImage = Blur2(blurfImage);
 
-function blur2d(values, width, height, blurx, blury) {
-  if (!width || !height || (!blurx && !blury)) return;
-  const temp = values.slice();
-  if (blurx && blury) {
-    blurh(blurx, temp, values, width, height);
-    blurh(blurx, values, temp, width, height);
-    blurh(blurx, temp, values, width, height);
-    blurv(blury, values, temp, width, height);
-    blurv(blury, temp, values, width, height);
-    blurv(blury, values, temp, width, height);
-  } else if (blurx) {
-    blurh(blurx, values, temp, width, height);
-    blurh(blurx, temp, values, width, height);
-    blurh(blurx, values, temp, width, height);
-  } else if (blury) {
-    blurv(blury, values, temp, width, height);
-    blurv(blury, temp, values, width, height);
-    blurv(blury, values, temp, width, height);
-  }
+function Blur2(blur) {
+  return function(data, rx, ry = rx) {
+    if (!((rx = +rx) >= 0)) throw new RangeError("invalid rx");
+    if (!((ry = +ry) >= 0)) throw new RangeError("invalid ry");
+    let {data: values, width, height} = data;
+    if (!((width = Math.floor(width)) >= 0)) throw new RangeError("invalid width");
+    if (!((height = Math.floor(height)) >= 0)) throw new RangeError("invalid height");
+    if (!width || !height || (!rx && !ry)) return data;
+    const blurx = rx && blur(rx);
+    const blury = ry && blur(ry);
+    const temp = values.slice();
+    if (blurx && blury) {
+      blurh(blurx, temp, values, width, height);
+      blurh(blurx, values, temp, width, height);
+      blurh(blurx, temp, values, width, height);
+      blurv(blury, values, temp, width, height);
+      blurv(blury, temp, values, width, height);
+      blurv(blury, values, temp, width, height);
+    } else if (blurx) {
+      blurh(blurx, values, temp, width, height);
+      blurh(blurx, temp, values, width, height);
+      blurh(blurx, values, temp, width, height);
+    } else if (blury) {
+      blurv(blury, values, temp, width, height);
+      blurv(blury, temp, values, width, height);
+      blurv(blury, values, temp, width, height);
+    }
+    return data;
+  };
 }
 
 function blurh(blur, T, S, w, h) {
