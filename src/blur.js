@@ -1,10 +1,9 @@
 export function blur1(values, r) {
   if (!((r = +r) >= 0)) throw new RangeError("invalid r");
-  const length = Math.floor(values.length);
-  if (!(length >= 0)) throw new RangeError("invalid length");
+  const length = values.length;
   if (!length || !r) return values;
-  const temp = values.slice();
   const blur = blurf(r);
+  const temp = values.slice();
   blur(values, temp, 0, length, 1);
   blur(temp, values, 0, length, 1);
   blur(values, temp, 0, length, 1);
@@ -17,27 +16,37 @@ export function blur2(data, rx, ry = rx) {
   let {data: values, width, height} = data;
   if (!((width = Math.floor(width)) >= 0)) throw new RangeError("invalid width");
   if (!((height = Math.floor(height)) >= 0)) throw new RangeError("invalid height");
-  if (!width || !height || (!rx && !ry)) return data;
+  blur2d(values, width, height, rx && blurf(rx), ry && blurf(ry));
+  return data;
+}
+
+export function blurImage(data, rx, ry = rx) {
+  if (!((rx = +rx) >= 0)) throw new RangeError("invalid rx");
+  if (!((ry = +ry) >= 0)) throw new RangeError("invalid ry");
+  const {data: values, width, height} = data;
+  blur2d(values, width, height, rx && blurfImage(rx), ry && blurfImage(ry));
+  return data;
+}
+
+function blur2d(values, width, height, blurx, blury) {
+  if (!width || !height || (!blurx && !blury)) return;
   const temp = values.slice();
-  const blurx = blurf(rx);
-  const blury = blurf(ry);
-  if (rx && ry) {
+  if (blurx && blury) {
     blurh(blurx, temp, values, width, height);
     blurh(blurx, values, temp, width, height);
     blurh(blurx, temp, values, width, height);
     blurv(blury, values, temp, width, height);
     blurv(blury, temp, values, width, height);
     blurv(blury, values, temp, width, height);
-  } else if (rx) {
+  } else if (blurx) {
     blurh(blurx, values, temp, width, height);
     blurh(blurx, temp, values, width, height);
     blurh(blurx, values, temp, width, height);
-  } else if (ry) {
+  } else if (blury) {
     blurv(blury, values, temp, width, height);
     blurv(blury, temp, values, width, height);
     blurv(blury, values, temp, width, height);
   }
-  return data;
 }
 
 function blurh(blur, T, S, w, h) {
@@ -50,6 +59,17 @@ function blurv(blur, T, S, w, h) {
   for (let x = 0, n = w * h; x < w; ++x) {
     blur(T, S, x, x + n, w);
   }
+}
+
+function blurfImage(radius) {
+  const blur = blurf(radius);
+  return (T, S, start, stop, step) => {
+    start <<= 2, stop <<= 2, step <<= 2;
+    blur(T, S, start + 0, stop + 0, step);
+    blur(T, S, start + 1, stop + 1, step);
+    blur(T, S, start + 2, stop + 2, step);
+    blur(T, S, start + 3, stop + 3, step);
+  };
 }
 
 // Given a target array T, a source array S, sets each value T[i] to the average
