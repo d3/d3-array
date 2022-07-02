@@ -1,7 +1,7 @@
 export {default as bisect, bisectRight, bisectLeft, bisectCenter} from "./bisect.js";
 export {default as ascending} from "./ascending.js";
 export {default as bisector} from "./bisector.js";
-export {blur1, blur2, blurImage} from "./blur.js";
+export {blur, blur2, blurImage} from "./blur.js";
 export {default as count} from "./count.js";
 export {default as cross} from "./cross.js";
 export {default as cumsum} from "./cumsum.js";

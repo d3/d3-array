@@ -1,4 +1,4 @@
-export function blur1(values, r) {
+export function blur(values, r) {
   if (!((r = +r) >= 0)) throw new RangeError("invalid r");
   let length = values.length;
   if (!((length = Math.floor(length)) >= 0)) throw new RangeError("invalid length");
