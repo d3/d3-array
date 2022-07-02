@@ -1,94 +1,115 @@
-import {floor, max, min} from "./math.js";
-import {arrayify} from "./utils.js";
+export function blur(values, r) {
+  if (!((r = +r) >= 0)) throw new RangeError("invalid r");
+  let length = values.length;
+  if (!((length = Math.floor(length)) >= 0)) throw new RangeError("invalid length");
+  if (!length || !r) return values;
+  const blur = blurf(r);
+  const temp = values.slice();
+  blur(values, temp, 0, length, 1);
+  blur(temp, values, 0, length, 1);
+  blur(values, temp, 0, length, 1);
+  return values;
+}
 
-function blurTransfer(V, r, n, vertical) {
-  if (!r) return; // radius 0 is a noop
+export const blur2 = Blur2(blurf);
 
-  const iterations = 3, r0 = Math.floor(r);
-  // for a non-integer radius, interpolate between floor(r) and ceil(r)
-  if (r === r0) {
-    for (let i = 0; i < iterations; i++) {
-      blurTransferInt(V, r, n, vertical);
+export const blurImage = Blur2(blurfImage);
+
+function Blur2(blur) {
+  return function(data, rx, ry = rx) {
+    if (!((rx = +rx) >= 0)) throw new RangeError("invalid rx");
+    if (!((ry = +ry) >= 0)) throw new RangeError("invalid ry");
+    let {data: values, width, height} = data;
+    if (!((width = Math.floor(width)) >= 0)) throw new RangeError("invalid width");
+    if (!((height = Math.floor(height !== undefined ? height : values.length / width)) >= 0)) throw new RangeError("invalid height");
+    if (!width || !height || (!rx && !ry)) return data;
+    const blurx = rx && blur(rx);
+    const blury = ry && blur(ry);
+    const temp = values.slice();
+    if (blurx && blury) {
+      blurh(blurx, temp, values, width, height);
+      blurh(blurx, values, temp, width, height);
+      blurh(blurx, temp, values, width, height);
+      blurv(blury, values, temp, width, height);
+      blurv(blury, temp, values, width, height);
+      blurv(blury, values, temp, width, height);
+    } else if (blurx) {
+      blurh(blurx, values, temp, width, height);
+      blurh(blurx, temp, values, width, height);
+      blurh(blurx, values, temp, width, height);
+    } else if (blury) {
+      blurv(blury, values, temp, width, height);
+      blurv(blury, temp, values, width, height);
+      blurv(blury, values, temp, width, height);
     }
-  } else {
-    const frac = r - r0, frac_1 = 1 - frac;
-    const data = V[0].slice();
-    for (let i = 0; i < iterations; i++) {
-      blurTransferInt(V, r0 + 1, n, vertical);
-    }
-    const data_ceil = V[0];
-    V[0] = data;
-    if (r0 > 0) {
-      for (let i = 0; i < iterations; i++) {
-        blurTransferInt(V, r0, n, vertical);
-      }
-    }
-    for (let i = 0; i < data.length; i++) {
-      V[0][i] = V[0][i] * frac_1 + data_ceil[i] * frac;
-    }
+    return data;
+  };
+}
+
+function blurh(blur, T, S, w, h) {
+  for (let y = 0, n = w * h; y < n;) {
+    blur(T, S, y, y += w, 1);
   }
 }
 
-function blurTransferInt(V, r, n, vertical) {
-  const [source, target] = V,
-    m = floor(source.length / n),
-    w = 2 * r + 1,
-    w1 = 1 / w,
-    ki = vertical ? m : 1,
-    kj = vertical ? 1 : n,
-    W = w * ki,
-    R = r * ki;
-
-  for (let j = 0; j < m; ++j) {
-    const k0 = kj * j,
-      kn = k0 + ki * (n - 1);
-    for (let i = 0, sr = w * source[k0]; i < n + r; ++i) {
-      const k = ki * i + kj * j;
-      sr += source[min(k, kn)] - source[max(k - W, k0)];
-      target[max(k - R, k0)] = sr * w1;
-    }
+function blurv(blur, T, S, w, h) {
+  for (let x = 0, n = w * h; x < w; ++x) {
+    blur(T, S, x, x + n, w);
   }
-  V.reverse(); // target becomes V[0] and will be used as source in the next iteration
 }
 
-export default function blur() {
-  let rx = 5,
-    ry = rx,
-    value,
-    width;
-  const V = [];
+function blurfImage(radius) {
+  const blur = blurf(radius);
+  return (T, S, start, stop, step) => {
+    start <<= 2, stop <<= 2, step <<= 2;
+    blur(T, S, start + 0, stop + 0, step);
+    blur(T, S, start + 1, stop + 1, step);
+    blur(T, S, start + 2, stop + 2, step);
+    blur(T, S, start + 3, stop + 3, step);
+  };
+}
 
-  function blur(data) {
-    // reuse the V arrays if possible
-    if (value || !V[0] || V[0].length !== data.length) {
-      V[0] = value ? Float32Array.from(data, value) : Float32Array.from(data);
-      V[1] = new Float32Array(V[0].length);
-    } else {
-      V[0].set(arrayify(data));
+// Given a target array T, a source array S, sets each value T[i] to the average
+// of {S[i - r], …, S[i], …, S[i + r]}, where r = ⌊radius⌋, start <= i < stop,
+// for each i, i + step, i + 2 * step, etc., and where S[j] is clamped between
+// S[start] (inclusive) and S[stop] (exclusive). If the given radius is not an
+// integer, S[i - r - 1] and S[i + r + 1] are added to the sum, each weighted
+// according to r - ⌊radius⌋.
+function blurf(radius) {
+  const radius0 = Math.floor(radius);
+  if (radius0 === radius) return bluri(radius);
+  const t = radius - radius0;
+  const w = 2 * radius + 1;
+  return (T, S, start, stop, step) => { // stop must be aligned!
+    if (!((stop -= step) >= start)) return; // inclusive stop
+    let sum = radius0 * S[start];
+    const s0 = step * radius0;
+    const s1 = s0 + step;
+    for (let i = start, j = start + s0; i < j; i += step) {
+      sum += S[Math.min(stop, i)];
     }
+    for (let i = start, j = stop; i <= j; i += step) {
+      sum += S[Math.min(stop, i + s0)];
+      T[i] = (sum + t * (S[Math.max(start, i - s1)] + S[Math.min(stop, i + s1)])) / w;
+      sum -= S[Math.max(start, i - s0)];
+    }
+  };
+}
 
-    const n = width || V[0].length;
-    const m = Math.round(V[0].length / n);
-
-    blurTransfer(V, rx, n, false);
-    blurTransfer(V, ry, m, true);
-
-    V[0].width = n;
-    V[0].height = m;
-    return V[0];
-  }
-
-  blur.radius = _ =>  _ === undefined
-    ? (rx + ry) / 2
-    : (rx = ry = +_, blur);
-  blur.radiusX = _ =>  _ === undefined
-    ? rx : (rx = +_, blur);
-  blur.radiusY = _ =>  _ === undefined
-    ? ry : (ry = +_, blur);
-  blur.width = _ =>
-    _ === undefined ? width : (width = Math.round(+_), blur);
-  blur.value = _ =>
-    typeof _ === "function" ? (value = _, blur) : value;
-
-  return blur;
+// Like blurf, but optimized for integer radius.
+function bluri(radius) {
+  const w = 2 * radius + 1;
+  return (T, S, start, stop, step) => { // stop must be aligned!
+    if (!((stop -= step) >= start)) return; // inclusive stop
+    let sum = radius * S[start];
+    const s = step * radius;
+    for (let i = start, j = start + s; i < j; i += step) {
+      sum += S[Math.min(stop, i)];
+    }
+    for (let i = start, j = stop; i <= j; i += step) {
+      sum += S[Math.min(stop, i + s)];
+      T[i] = sum / w;
+      sum -= S[Math.max(start, i - s)];
+    }
+  };
 }
