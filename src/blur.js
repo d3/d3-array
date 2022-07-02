@@ -21,7 +21,7 @@ function Blur2(blur) {
     if (!((ry = +ry) >= 0)) throw new RangeError("invalid ry");
     let {data: values, width, height} = data;
     if (!((width = Math.floor(width)) >= 0)) throw new RangeError("invalid width");
-    if (!((height = Math.floor(height)) >= 0)) throw new RangeError("invalid height");
+    if (!((height = Math.floor(height !== undefined ? height : values.length / width)) >= 0)) throw new RangeError("invalid height");
     if (!width || !height || (!rx && !ry)) return data;
     const blurx = rx && blur(rx);
     const blury = ry && blur(ry);
