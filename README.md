@@ -685,35 +685,41 @@ d3.zip([1, 2], [3, 4]); // returns [[1, 3], [2, 4]]
 
 #### Blur
 
-<a name="blur" href="#blur">#</a> <b>blur</b>() · [Source](https://github.com/d3/d3-array/blob/main/src/blur.js), [Examples](https://observablehq.com/@d3/d3-blur)
+<a name="blur" href="#blur">#</a> d3.<b>blur</b>(*data*, *radius*) · [Source](https://github.com/d3/d3-array/blob/main/src/blur.js), [Examples](https://observablehq.com/@d3/d3-blur)
 
-Creates a blur transformer, which can blur (or smooth) an *iterable* by three iterations of a moving average transform.
+Blurs an array of *data* in-place by applying three iterations of a moving average transform, for a fast approximation of a gaussian kernel of the given *radius*, a non-negative number, and returns the array.
 
-<a name="blur_radius" href="#blur_radius">#</a> *blur*.<b>radius</b>([*radius*])
-
-If *radius* is specified, sets the radius of the transformation: on each iteration, the value of a point is transformed into the mean value of itself and the *radius* points of data surrounding it on the left and on the right (taking into account the edges). If *radius* is not specified, returns the current radius (if horizontal and vertical radii have been set separately, returns their average value). If *radius* is not an integer value, the blurring is applied partially. Defaults to 5.
-
-<a name="blur_value" href="#blur_value">#</a> *blur*.<b>value</b>([*value*])
-
-If *value* is specified, sets the *value* accessor, which will read the values of the *iterator*. If not specified, returns the current accessor. Defaults to the special *null* accessor, which copies the values directly (faster than an identity function).
-
-Example:
 ```js
-const blurred = blur().value(d => d.temperature)(data);
+const randomWalk = d3.cumsum({length: 1000}, () => Math.random() - 0.5);
+blur(randomWalk, 5);
 ```
 
-<a name="blur_width" href="#blur_width">#</a> *blur*.<b>width</b>([*width*])
+Copy the data if you don’t want to smooth it in-place:
+```js
+const smoothed = blur(randomWalk.slice(), 5);
+```
 
-If *width* is specified, sets the width of the transformation, otherwise returns the current width. When 0 < width < length, *blur* considers that the *array* describes values in two dimensions—as a rectangle of a certain width (height inferred as length divided by width). In that case each iteration involves an horizontal (x) blurring, followed by a vertical (y) blurring. Defaults to undefined (horizontal dimension).
+<a name="blur2" href="#blur2">#</a> d3.<b>blur2</b>({*data*, *width*[, *height*]}, *rx*[, *ry*]) · [Source](https://github.com/d3/d3-array/blob/main/src/blur.js), [Examples](https://observablehq.com/@d3/d3-blur)
 
-<a name="blur_radiusX" href="#blur_radiusX">#</a> *blur*.<b>radiusX</b>([*radius*])
+Blurs a matrix of the given *width* and *height* in-place, by applying an horizontal blur of radius *rx* and a vertical blur or radius *ry* (which defaults to *rx*). The matrix *data* is stored in a flat array, used to determine the *height* if it is not specified. Returns the blurred {data, width, height}.
 
-If *radius* is specified, sets the horizontal radius of the transformation, otherwise returns it. (Use 0 for vertical blurring.)
+```js
+data = [
+  1, 0, 0,
+  0, 0, 0,
+  0, 0, 1
+];
+blur2({data, width: 3}, 1);
+```
 
-<a name="blur_radiusY" href="#blur_radiusY">#</a> *blur*.<b>radiusY</b>([*radius*])
+<a name="blurImage" href="#blurImage">#</a> d3.<b>blurImage</b>(*imageData*, *rx*[, *ry*]) · [Source](https://github.com/d3/d3-array/blob/main/src/blur.js), [Examples](https://observablehq.com/@d3/d3-blurimage)
 
-If *radius* is specified, sets the vertical radius of the transformation, otherwise returns it. (Use 0 for horizontal blurring.)
+Blurs an [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) structure in-place, blurring each of the RGBA layers independently by applying an horizontal blur of radius *rx* and a vertical blur or radius *ry* (which defaults to *rx*). Returns the blurred ImageData.
 
+```js
+const imData = context.getImageData(0, 0, width, height);
+blurImage(imData, 5);
+```
 
 ### Iterables
 
