@@ -83,9 +83,8 @@ function blurf(radius) {
   if (radius0 === radius) return bluri(radius);
   const t = radius - radius0;
   const w = 2 * radius + 1;
-  return (T, S, start, stop, step) => {
-    stop = start + (Math.floor((stop - start) / step) - 1) * step; // inclusive stop
-    if (!(stop >= start)) return;
+  return (T, S, start, stop, step) => { // stop must be aligned!
+    if (!((stop -= step) >= start)) return; // inclusive stop
     let sum = radius0 * S[start];
     const s0 = step * radius0;
     const s1 = s0 + step;
@@ -103,9 +102,8 @@ function blurf(radius) {
 // Like blurf, but optimized for integer radius.
 function bluri(radius) {
   const w = 2 * radius + 1;
-  return (T, S, start, stop, step) => {
-    stop = start + (Math.floor((stop - start) / step) - 1) * step; // inclusive stop
-    if (!(stop >= start)) return;
+  return (T, S, start, stop, step) => { // stop must be aligned!
+    if (!((stop -= step) >= start)) return; // inclusive stop
     let sum = radius * S[start];
     const s = step * radius;
     for (let i = start, j = start + s; i < j; i += step) {
