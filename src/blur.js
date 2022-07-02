@@ -90,7 +90,7 @@ function blurf(radius) {
     const s0 = step * radius0;
     const s1 = s0 + step;
     for (let i = start, j = start + s0; i < j; i += step) {
-      sum += S[Math.max(start, Math.min(stop, i))];
+      sum += S[Math.min(stop, i)];
     }
     for (let i = start, j = stop; i <= j; i += step) {
       sum += S[Math.min(stop, i + s0)];
@@ -109,7 +109,7 @@ function bluri(radius) {
     let sum = radius * S[start];
     const s = step * radius;
     for (let i = start, j = start + s; i < j; i += step) {
-      sum += S[Math.max(start, Math.min(stop, i))];
+      sum += S[Math.min(stop, i)];
     }
     for (let i = start, j = stop; i <= j; i += step) {
       sum += S[Math.min(stop, i + s)];
