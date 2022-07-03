@@ -57,17 +57,13 @@ const m = d3.min(array);
 
 ## API Reference
 
-- [d3-array](#d3-array)
-  - [Installing](#installing)
-  - [API Reference](#api-reference)
-    - [Statistics](#statistics)
-    - [Search](#search)
-    - [Transformations](#transformations)
-    - [Iterables](#iterables)
-    - [Sets](#sets)
-    - [Bins](#bins)
-      - [Bin Thresholds](#bin-thresholds)
-    - [Interning](#interning)
+* [Statistics](#statistics)
+* [Search](#search)
+* [Transformations](#transformations)
+* [Iterables](#iterables)
+* [Sets](#sets)
+* [Bins](#bins)
+* [Interning](#interning)
 
 ### Statistics
 
