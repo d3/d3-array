@@ -36,6 +36,7 @@ export default function quickselect(array, k, left = 0, right = array.length - 1
     if (j <= k) left = j + 1;
     if (k <= j) right = j - 1;
   }
+
   return array;
 }
 

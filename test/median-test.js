@@ -1,5 +1,5 @@
 import assert from "assert";
-import {median} from "../src/index.js";
+import {median, medianIndex} from "../src/index.js";
 import {OneTimeNumber} from "./OneTimeNumber.js";
 
 it("median(array) returns the median value for numbers", () => {
@@ -97,6 +97,16 @@ it("median(array, f) uses the undefined context", () => {
   median([1, 2], function() { results.push(this); });
   assert.deepStrictEqual(results, [undefined, undefined]);
 });
+
+it("medianIndex(array) returns the index", () => {
+  assert.deepStrictEqual(medianIndex([1, 2]), 0);
+  assert.deepStrictEqual(medianIndex([1, 2, 3]), 1);
+  assert.deepStrictEqual(medianIndex([1, 3, 2]), 2);
+  assert.deepStrictEqual(medianIndex([2, 3, 1]), 0);
+  assert.deepStrictEqual(medianIndex([1]), 0);
+  assert.deepStrictEqual(medianIndex([]), undefined);
+});
+
 
 function box(value) {
   return {value: value};

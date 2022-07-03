@@ -117,6 +117,10 @@ Returns the mean of the given *iterable* of numbers. If the iterable contains no
 
 Returns the median of the given *iterable* of numbers using the [R-7 method](https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample). If the iterable contains no numbers, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the median. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
+<a name="medianIndex" href="#medianIndex">#</a> d3.<b>medianIndex</b>(<i>array</i>, <i>p</i>[, <i>accessor</i>]) [Source](https://github.com/d3/d3-array/blob/main/src/median.js "Source")
+
+Similar to *median*, but returns the index of the element to the left of the median.
+
 <a name="cumsum" href="#cumsum">#</a> d3.<b>cumsum</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/main/src/cumsum.js), [Examples](https://observablehq.com/@d3/d3-cumsum)
 
 Returns the cumulative sum of the given *iterable* of numbers, as a Float64Array of the same length. If the iterable contains no numbers, returns zeros. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the cumulative sum. This method ignores undefined and NaN values; this is useful for ignoring missing data.
@@ -136,6 +140,10 @@ d3.quantile(a, 0.1); // 2
 ```
 
 An optional *accessor* function may be specified, which is equivalent to calling *array*.map(*accessor*) before computing the quantile.
+
+<a name="quantileIndex" href="#quantileIndex">#</a> d3.<b>quantileIndex</b>(<i>array</i>, <i>p</i>[, <i>accessor</i>]) [Source](https://github.com/d3/d3-array/blob/main/src/quantile.js "Source")
+
+Similar to *quantile*, but returns the index to the left of *p*.
 
 <a name="quantileSorted" href="#quantileSorted">#</a> d3.<b>quantileSorted</b>(<i>array</i>, <i>p</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/main/src/quantile.js), [Examples](https://observablehq.com/@d3/d3-mean-d3-median-and-friends)
 
