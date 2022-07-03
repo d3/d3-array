@@ -99,12 +99,12 @@ it("median(array, f) uses the undefined context", () => {
 });
 
 it("medianIndex(array) returns the index", () => {
-  assert.deepEqual(medianIndex([1, 2]), 0);
-  assert.deepEqual(medianIndex([1, 2, 3]), 1);
-  assert.deepEqual(medianIndex([1, 3, 2]), 2);
-  assert.deepEqual(medianIndex([2, 3, 1]), 0);
-  assert.deepEqual(medianIndex([1]), 0);
-  assert.deepEqual(medianIndex([]), undefined);
+  assert.deepStrictEqual(medianIndex([1, 2]), 0);
+  assert.deepStrictEqual(medianIndex([1, 2, 3]), 1);
+  assert.deepStrictEqual(medianIndex([1, 3, 2]), 2);
+  assert.deepStrictEqual(medianIndex([2, 3, 1]), 0);
+  assert.deepStrictEqual(medianIndex([1]), 0);
+  assert.deepStrictEqual(medianIndex([]), undefined);
 });
 
 

@@ -1,7 +1,11 @@
 import max from "./max.js";
+import maxIndex from "./maxIndex.js";
 import min from "./min.js";
+import minIndex from "./minIndex.js";
 import quickselect from "./quickselect.js";
 import number, {numbers} from "./number.js";
+import {ascendingDefined} from "./sort.js";
+import greatest from "./greatest.js";
 
 export default function quantile(values, p, valueof) {
   values = Float64Array.from(numbers(values, valueof));
@@ -29,15 +33,13 @@ export function quantileSorted(values, p, valueof = number) {
 }
 
 export function quantileIndex(values, p, valueof) {
-  if (valueof) values = Float64Array.from(numbers(values, valueof));
-  const q = quantile(values, p);
-
-  let index, v = -Infinity;
-  for (let i = 0; i < values.length; i++) {
-    const x = values[i];
-    if (x <= q) {
-      if (x > v) index = i, v = x;
-    }
-  }
-  return index;
+  values = Float64Array.from(numbers(values, valueof));
+  if (!(n = values.length)) return;
+  if ((p = +p) <= 0 || n < 2) return minIndex(values);
+  if (p >= 1) return maxIndex(values);
+  var n,
+      i = Math.floor((n - 1) * p),
+      order = (i, j) => ascendingDefined(values[i], values[j]),
+      index = quickselect(Uint32Array.from(values, (_, i) => i), i, 0, n - 1, order);
+  return greatest(index.subarray(0, i + 1), i => values[i]);
 }
