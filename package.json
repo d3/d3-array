@@ -33,6 +33,7 @@
   "jsdelivr": "dist/d3-array.min.js",
   "unpkg": "dist/d3-array.min.js",
   "exports": {
+    "require": "./dist/d3-array.min.js",
     "umd": "./dist/d3-array.min.js",
     "default": "./src/index.js"
   },
