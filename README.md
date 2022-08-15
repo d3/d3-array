@@ -113,6 +113,10 @@ Returns the sum of the given *iterable* of numbers. If the iterable contains no 
 
 Returns the mean of the given *iterable* of numbers. If the iterable contains no numbers, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the mean. This method ignores undefined and NaN values; this is useful for ignoring missing data.
 
+<a name="gmean" href="#gmean">#</a> d3.<b>gmean</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/main/src/gmean.js)
+
+Returns the geometric mean of the given *iterable* of numbers. If the iterable contains no numbers, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the mean. This method ignores undefined and NaN values; this is useful for ignoring missing data. 
+
 <a name="median" href="#median">#</a> d3.<b>median</b>(<i>iterable</i>[, <i>accessor</i>]) · [Source](https://github.com/d3/d3-array/blob/main/src/median.js), [Examples](https://observablehq.com/@d3/d3-mean-d3-median-and-friends)
 
 Returns the median of the given *iterable* of numbers using the [R-7 method](https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample). If the iterable contains no numbers, returns undefined. An optional *accessor* function may be specified, which is equivalent to calling Array.from before computing the median. This method ignores undefined and NaN values; this is useful for ignoring missing data.

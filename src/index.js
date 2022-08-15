@@ -9,6 +9,7 @@ export {default as descending} from "./descending.js";
 export {default as deviation} from "./deviation.js";
 export {default as extent} from "./extent.js";
 export {Adder, fsum, fcumsum} from "./fsum.js";
+export {default as gmean} from "./gmean.js";
 export {default as group, flatGroup, flatRollup, groups, index, indexes, rollup, rollups} from "./group.js";
 export {default as groupSort} from "./groupSort.js";
 export {default as bin, default as histogram} from "./bin.js"; // Deprecated; use bin.
