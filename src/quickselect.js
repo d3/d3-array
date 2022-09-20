@@ -3,6 +3,7 @@ import {ascendingDefined, compareDefined} from "./sort.js";
 // Based on https://github.com/mourner/quickselect
 // ISC license, Copyright 2018 Vladimir Agafonkin.
 export default function quickselect(array, k, left = 0, right = array.length - 1, compare) {
+  if (!Number.isInteger(k)) throw new TypeError("k is not an integer");
   compare = compare === undefined ? ascendingDefined : compareDefined(compare);
 
   while (right > left) {
