@@ -70,7 +70,7 @@ export default function bin() {
     var m = tz.length, a = 0, b = m;
     while (tz[a] <= x0) ++a;
     while (tz[b - 1] > x1) --b;
-    if (a || (b < m)) tz = tz.slice(a, b), m = b - a;
+    if (a || b < m) tz = tz.slice(a, b), m = b - a;
 
     var bins = new Array(m + 1),
         bin;
