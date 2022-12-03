@@ -9,8 +9,8 @@ import greatest from "./greatest.js";
 
 export default function quantile(values, p, valueof) {
   values = Float64Array.from(numbers(values, valueof));
-  if (!(n = values.length)) return;
-  if ((p = +p) <= 0 || n < 2) return min(values);
+  if (!(n = values.length) || isNaN(p = +p)) return;
+  if (p <= 0 || n < 2) return min(values);
   if (p >= 1) return max(values);
   var n,
       i = (n - 1) * p,
@@ -21,8 +21,8 @@ export default function quantile(values, p, valueof) {
 }
 
 export function quantileSorted(values, p, valueof = number) {
-  if (!(n = values.length)) return;
-  if ((p = +p) <= 0 || n < 2) return +valueof(values[0], 0, values);
+  if (!(n = values.length) || isNaN(p = +p)) return;
+  if (p <= 0 || n < 2) return +valueof(values[0], 0, values);
   if (p >= 1) return +valueof(values[n - 1], n - 1, values);
   var n,
       i = (n - 1) * p,
@@ -34,8 +34,8 @@ export function quantileSorted(values, p, valueof = number) {
 
 export function quantileIndex(values, p, valueof) {
   values = Float64Array.from(numbers(values, valueof));
-  if (!(n = values.length)) return;
-  if ((p = +p) <= 0 || n < 2) return minIndex(values);
+  if (!(n = values.length) || isNaN(p = +p)) return;
+  if (p <= 0 || n < 2) return minIndex(values);
   if (p >= 1) return maxIndex(values);
   var n,
       i = Math.floor((n - 1) * p),

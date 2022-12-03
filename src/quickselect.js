@@ -2,7 +2,13 @@ import {ascendingDefined, compareDefined} from "./sort.js";
 
 // Based on https://github.com/mourner/quickselect
 // ISC license, Copyright 2018 Vladimir Agafonkin.
-export default function quickselect(array, k, left = 0, right = array.length - 1, compare) {
+export default function quickselect(array, k, left = 0, right = Infinity, compare) {
+  k = Math.floor(k);
+  left = Math.floor(Math.max(0, left));
+  right = Math.floor(Math.min(array.length - 1, right));
+
+  if (!(left <= k && k <= right)) return array;
+
   compare = compare === undefined ? ascendingDefined : compareDefined(compare);
 
   while (right > left) {

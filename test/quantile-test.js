@@ -71,6 +71,13 @@ it("quantile(array, p) returns the last value for p = 1", () => {
   assert.strictEqual(quantile(data, 1), 4);
 });
 
+it("quantile(array, p) returns undefined if p is not a number", () => {
+  assert.strictEqual(quantile([1, 2, 3]), undefined);
+  assert.strictEqual(quantile([1, 2, 3], "no"), undefined);
+  assert.strictEqual(quantile([1, 2, 3], NaN), undefined);
+  assert.strictEqual(quantile([1, 2, 3], null), 1); // +null is 0
+});
+
 it("quantile(array, p, f) observes the specified accessor", () => {
   assert.strictEqual(quantile([1, 2, 3, 4].map(box), 0.5, unbox), 2.5);
   assert.strictEqual(quantile([1, 2, 3, 4].map(box), 0, unbox), 1);
