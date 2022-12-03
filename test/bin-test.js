@@ -241,6 +241,22 @@ it("bin(data) assigns integer values to the correct bins", () => {
   assert.deepStrictEqual(bin().domain([3, 8])(eights), [box([], 3, 4), box([], 4, 5), box([], 5, 6), box([], 6, 7), box(eights, 7, 8)]);
 });
 
+it("bin(data) does not mutate user-supplied thresholds as an array", () => {
+  const thresholds = [3, 4, 5, 6];
+  const b = bin().domain([4, 5]).thresholds(thresholds);
+  assert.deepStrictEqual(b([5]), [box([], 4, 5), box([5], 5, 5)]);
+  assert.deepStrictEqual(thresholds, [3, 4, 5, 6]);
+  assert.deepStrictEqual(b.thresholds()(), [3, 4, 5, 6]);
+});
+
+it("bin(data) does not mutate user-supplied thresholds as a function", () => {
+  const thresholds = [3, 4, 5, 6];
+  const b = bin().domain([4, 5]).thresholds(() => thresholds);
+  assert.deepStrictEqual(b([5]), [box([], 4, 5), box([5], 5, 5)]);
+  assert.deepStrictEqual(thresholds, [3, 4, 5, 6]);
+  assert.deepStrictEqual(b.thresholds()(), [3, 4, 5, 6]);
+});
+
 function box(bin, x0, x1)  {
   bin.x0 = x0;
   bin.x1 = x1;

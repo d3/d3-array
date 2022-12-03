@@ -66,9 +66,11 @@ export default function bin() {
     }
 
     // Remove any thresholds outside the domain.
-    var m = tz.length;
-    while (tz[0] <= x0) tz.shift(), --m;
-    while (tz[m - 1] > x1) tz.pop(), --m;
+    // Be careful not to mutate an array owned by the user!
+    var m = tz.length, a = 0, b = m;
+    while (tz[a] <= x0) ++a;
+    while (tz[b - 1] > x1) --b;
+    if (a || (b < m)) tz = tz.slice(a, b), m = b - a;
 
     var bins = new Array(m + 1),
         bin;
@@ -116,7 +118,7 @@ export default function bin() {
   };
 
   histogram.thresholds = function(_) {
-    return arguments.length ? (threshold = typeof _ === "function" ? _ : Array.isArray(_) ? constant(slice.call(_)) : constant(_), histogram) : threshold;
+    return arguments.length ? (threshold = typeof _ === "function" ? _ : constant(Array.isArray(_) ? slice.call(_) : _), histogram) : threshold;
   };
 
   return histogram;
