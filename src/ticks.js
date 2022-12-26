@@ -6,7 +6,7 @@ export default function ticks(start, stop, count) {
   var reverse,
       i = -1,
       n,
-      ticks,
+      t,
       step;
 
   stop = +stop, start = +start, count = +count;
@@ -18,20 +18,22 @@ export default function ticks(start, stop, count) {
     let r0 = Math.round(start / step), r1 = Math.round(stop / step);
     if (r0 * step < start) ++r0;
     if (r1 * step > stop) --r1;
-    ticks = new Array(n = r1 - r0 + 1);
-    while (++i < n) ticks[i] = (r0 + i) * step;
+    if (r1 < r0 && 0.5 <= count && count < 2) return ticks(start, stop, count * 2);
+    t = new Array(n = r1 - r0 + 1);
+    while (++i < n) t[i] = (r0 + i) * step;
   } else {
     step = -step;
     let r0 = Math.round(start * step), r1 = Math.round(stop * step);
     if (r0 / step < start) ++r0;
     if (r1 / step > stop) --r1;
-    ticks = new Array(n = r1 - r0 + 1);
-    while (++i < n) ticks[i] = (r0 + i) / step;
+    if (r1 < r0 && 0.5 <= count && count < 2) return ticks(start, stop, count * 2);
+    t = new Array(n = r1 - r0 + 1);
+    while (++i < n) t[i] = (r0 + i) / step;
   }
 
-  if (reverse) ticks.reverse();
+  if (reverse) t.reverse();
 
-  return ticks;
+  return t;
 }
 
 export function tickIncrement(start, stop, count) {
