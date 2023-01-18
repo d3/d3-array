@@ -12,14 +12,14 @@ function tickSpec(start, stop, count) {
     if (r0 * step < start) ++r0;
     if (r1 * step > stop) --r1;
     if (r1 < r0 && 0.5 <= count && count < 2) return tickSpec(start, stop, count * 2);
-    return [r0, r1, step];
+    return r0 > r1 ? [r0, r1, 0] : [r0, r1, step];
   } else {
     const step = Math.pow(10, -power) / (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1);
     let r0 = Math.round(start * step), r1 = Math.round(stop * step);
     if (r0 / step < start) ++r0;
     if (r1 / step > stop) --r1;
     if (r1 < r0 && 0.5 <= count && count < 2) return tickSpec(start, stop, count * 2);
-    return [r0, r1, -step];
+    return r0 > r1 ? [r0, r1, 0] : [r0, r1, -step];
   }
 }
 
@@ -27,13 +27,13 @@ export default function ticks(start, stop, count) {
   let reverse,
       i = -1,
       n,
-      ticks;
+      ticks,
+      step;
 
   stop = +stop, start = +start, count = +count;
   if (start === stop && count > 0) return [start];
   if (reverse = stop < start) n = start, start = stop, stop = n;
-  let [r0, r1, step] = tickSpec(start, stop, count);
-  if (step === 0 || !isFinite(step) || r1 < r0) return [];
+  if ((step = tickIncrement(start, stop, count)) === 0 || !isFinite(step)) return [];
 
   if (step > 0) {
     let r0 = Math.round(start / step), r1 = Math.round(stop / step);
