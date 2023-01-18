@@ -1,12 +1,12 @@
 const e10 = Math.sqrt(50),
-  e5 = Math.sqrt(10),
-  e2 = Math.sqrt(2);
+    e5 = Math.sqrt(10),
+    e2 = Math.sqrt(2);
 
 function tickSpec(start, stop, count) {
   const step = (stop - start) / Math.max(0, count),
-    power = Math.floor(Math.log10(step)),
-    error = step / Math.pow(10, power),
-    factor = error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1;
+      power = Math.floor(Math.log10(step)),
+      error = step / Math.pow(10, power),
+      factor = error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1;
   let i1, i2, inc;
   if (power < 0) {
     inc = Math.pow(10, -power) / factor;
