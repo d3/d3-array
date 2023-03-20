@@ -2,5 +2,6 @@ import count from "../count.js";
 import quantile from "../quantile.js";
 
 export default function thresholdFreedmanDiaconis(values, min, max) {
-  return Math.ceil((max - min) / (2 * (quantile(values, 0.75) - quantile(values, 0.25)) * Math.pow(count(values), -1 / 3)));
+  const c = count(values), d = quantile(values, 0.75) - quantile(values, 0.25);
+  return c && d ? Math.ceil((max - min) / (2 * d * Math.pow(c, -1 / 3))) : 1;
 }
