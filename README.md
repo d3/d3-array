@@ -32,19 +32,19 @@ And finally **iteration methods** that apply functions to elements in the array:
 
 ## Installing
 
-If you use npm, `npm install d3-array`. You can also download the [latest release on GitHub](https://github.com/d3/d3-array/releases/latest). For vanilla HTML in modern browsers, import d3-array from Skypack:
+If you use npm, `npm install d3-array`. You can also download the [latest release on GitHub](https://github.com/d3/d3-array/releases/latest). For vanilla HTML in modern browsers, import d3-array from jsDelivr:
 
 ```html
 <script type="module">
 
-import {min} from "https://cdn.skypack.dev/d3-array@3";
+import {min} from "https://cdn.jsdelivr.net/npm/d3-array@3/+esm";
 
 const m = min(array);
 
 </script>
 ```
 
-For legacy environments, you can load d3-array’s UMD bundle from an npm-based CDN such as jsDelivr; a `d3` global is exported:
+For legacy environments, you can load d3-array’s UMD bundle; a `d3` global is exported:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/d3-array@3"></script>
