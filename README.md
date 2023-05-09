@@ -212,13 +212,14 @@ Methods for searching arrays for a specific element.
 Returns the least element of the specified *iterable* according to the specified *comparator* or *accessor*. If the given *iterable* contains no comparable elements (*i.e.*, the comparator returns NaN when comparing each element to itself), returns undefined. If *comparator* is not specified, it defaults to [ascending](#ascending). For example:
 
 ```js
-const array = [{foo: 42}, {foo: 91}];
+const array = [{foo: 91}, {foo: 42}];
 d3.least(array, (a, b) => a.foo - b.foo); // {foo: 42}
 d3.least(array, (a, b) => b.foo - a.foo); // {foo: 91}
 d3.least(array, a => a.foo); // {foo: 42}
+d3.least(array); // {foo: 91}
 ```
 
-This function is similar to [min](#min), except it allows the use of a comparator rather than an accessor.
+This function is similar to [min](#min), except it allows both the use of a *comparator* and an *accessor*.
 
 <a name="leastIndex" href="#leastIndex">#</a> d3.<b>leastIndex</b>(<i>iterable</i>[, <i>comparator</i>]) · [Source](https://github.com/d3/d3-array/blob/main/src/leastIndex.js), [Examples](https://observablehq.com/@d3/d3-least)
 <br><a name="leastIndex" href="#leastIndex">#</a> d3.<b>leastIndex</b>(<i>iterable</i>[, <i>accessor</i>])
