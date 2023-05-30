@@ -104,7 +104,7 @@ it("medianIndex(array) returns the index", () => {
   assert.deepStrictEqual(medianIndex([1, 3, 2]), 2);
   assert.deepStrictEqual(medianIndex([2, 3, 1]), 0);
   assert.deepStrictEqual(medianIndex([1]), 0);
-  assert.deepStrictEqual(medianIndex([]), undefined);
+  assert.deepStrictEqual(medianIndex([]), -1);
 });
 
 
