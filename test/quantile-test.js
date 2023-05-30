@@ -119,6 +119,7 @@ it("quantileIndex(array, 1) returns the maximum index", () => {
 
 it("quantileIndex(array, 0.5) handles undefined values", () => {
   assert.deepStrictEqual(quantileIndex([1, 1, 1, null, 2, 3, 3, 3], 0.5), 4);
+  assert.deepStrictEqual(quantileIndex([1, 1, 1, null, 2, 3, 3, 3], 0.5, (d) => d), 4);
 });
 
 it("quantileIndex(array, 0.5) returns the first of equivalent values", () => {

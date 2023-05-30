@@ -34,14 +34,14 @@ export function quantileSorted(values, p, valueof = number) {
 
 export function quantileIndex(values, p, valueof = number) {
   if (isNaN(p = +p)) return;
-  if (p <= 0) return minIndex(values, valueof);
-  if (p >= 1) return maxIndex(values, valueof);
-  var index = Uint32Array.from(values, (_, i) => i),
-      j = index.length - 1,
-      i = Math.floor(j * p),
-      value = (i) => number(valueof(values[i], i, values)),
-      order = (i, j) => ascendingDefined(value(i), value(j));
-  quickselect(index, i, 0, j, order);
-  i = greatest(index.subarray(0, i + 1), value);
+  numbers = Float64Array.from(values, (_, i) => number(valueof(values[i], i, values)));
+  if (p <= 0) return minIndex(numbers);
+  if (p >= 1) return maxIndex(numbers);
+  var numbers,
+      index = Uint32Array.from(values, (_, i) => i),
+      j = numbers.length - 1,
+      i = Math.floor(j * p);
+  quickselect(index, i, 0, j, (i, j) => ascendingDefined(numbers[i], numbers[j]));
+  i = greatest(index.subarray(0, i + 1), (i) => numbers[i]);
   return i >= 0 ? i : -1;
 }
