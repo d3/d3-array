@@ -96,7 +96,7 @@ it("quantileIndex(array, p) returns the index", () => {
   assert.deepStrictEqual(quantileIndex([1, 3, 2], 0.2), 0);
   assert.deepStrictEqual(quantileIndex([2, 3, 1], 0.2), 2);
   assert.deepStrictEqual(quantileIndex([1], 0.2), 0);
-  assert.deepStrictEqual(quantileIndex([], 0.2), undefined);
+  assert.deepStrictEqual(quantileIndex([], 0.2), -1);
 });
 
 it("quantileIndex(array, 0) returns the minimum index", () => {
@@ -105,16 +105,24 @@ it("quantileIndex(array, 0) returns the minimum index", () => {
   assert.deepStrictEqual(quantileIndex([1, 3, 2], 0), 0);
   assert.deepStrictEqual(quantileIndex([2, 3, 1], 0), 2);
   assert.deepStrictEqual(quantileIndex([1], 0), 0);
-  assert.deepStrictEqual(quantileIndex([], 0), undefined);
+  assert.deepStrictEqual(quantileIndex([], 0), -1);
 });
 
-it("quantileIndex(array, 1) returns the maxium index", () => {
+it("quantileIndex(array, 1) returns the maximum index", () => {
   assert.deepStrictEqual(quantileIndex([1, 2], 1), 1);
   assert.deepStrictEqual(quantileIndex([1, 2, 3], 1), 2);
   assert.deepStrictEqual(quantileIndex([1, 3, 2], 1), 1);
   assert.deepStrictEqual(quantileIndex([2, 3, 1], 1), 1);
   assert.deepStrictEqual(quantileIndex([1], 1), 0);
-  assert.deepStrictEqual(quantileIndex([], 1), undefined);
+  assert.deepStrictEqual(quantileIndex([], 1), -1);
+});
+
+it("quantileIndex(array, 0.5) handles undefined values", () => {
+  assert.deepStrictEqual(quantileIndex([1, 1, 1, null, 2, 3, 3, 3], 0.5), 4);
+});
+
+it("quantileIndex(array, 0.5) returns the first of equivalent values", () => {
+  assert.deepStrictEqual(quantileIndex([1, 1, 1, 2, 2, 3, 3, 3], 0.5), 4);
 });
 
 function box(value) {
