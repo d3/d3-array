@@ -2,6 +2,7 @@ import assert from "assert";
 import {deviation} from "../src/index.js";
 
 it("deviation(array) returns the standard deviation of the specified numbers", () => {
+  assert.strictEqual(deviation([1, 1, 1, 1, 1]), 0);
   assert.strictEqual(deviation([5, 1, 2, 3, 4]), Math.sqrt(2.5));
   assert.strictEqual(deviation([20, 3]), Math.sqrt(144.5));
   assert.strictEqual(deviation([3, 20]), Math.sqrt(144.5));

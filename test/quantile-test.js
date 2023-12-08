@@ -1,5 +1,5 @@
 import assert from "assert";
-import {quantile, quantileSorted} from "../src/index.js";
+import {quantile, quantileIndex, quantileSorted} from "../src/index.js";
 
 it("quantileSorted(array, p) requires sorted numeric input, quantile doesn't", () => {
   assert.strictEqual(quantileSorted([1, 2, 3, 4], 0), 1);
@@ -71,6 +71,13 @@ it("quantile(array, p) returns the last value for p = 1", () => {
   assert.strictEqual(quantile(data, 1), 4);
 });
 
+it("quantile(array, p) returns undefined if p is not a number", () => {
+  assert.strictEqual(quantile([1, 2, 3]), undefined);
+  assert.strictEqual(quantile([1, 2, 3], "no"), undefined);
+  assert.strictEqual(quantile([1, 2, 3], NaN), undefined);
+  assert.strictEqual(quantile([1, 2, 3], null), 1); // +null is 0
+});
+
 it("quantile(array, p, f) observes the specified accessor", () => {
   assert.strictEqual(quantile([1, 2, 3, 4].map(box), 0.5, unbox), 2.5);
   assert.strictEqual(quantile([1, 2, 3, 4].map(box), 0, unbox), 1);
@@ -81,6 +88,42 @@ it("quantile(array, p, f) observes the specified accessor", () => {
   assert.strictEqual(quantile([], 0, unbox), undefined);
   assert.strictEqual(quantile([], 0.5, unbox), undefined);
   assert.strictEqual(quantile([], 1, unbox), undefined);
+});
+
+it("quantileIndex(array, p) returns the index", () => {
+  assert.deepStrictEqual(quantileIndex([1, 2], 0.2), 0);
+  assert.deepStrictEqual(quantileIndex([1, 2, 3], 0.2), 0);
+  assert.deepStrictEqual(quantileIndex([1, 3, 2], 0.2), 0);
+  assert.deepStrictEqual(quantileIndex([2, 3, 1], 0.2), 2);
+  assert.deepStrictEqual(quantileIndex([1], 0.2), 0);
+  assert.deepStrictEqual(quantileIndex([], 0.2), -1);
+});
+
+it("quantileIndex(array, 0) returns the minimum index", () => {
+  assert.deepStrictEqual(quantileIndex([1, 2], 0), 0);
+  assert.deepStrictEqual(quantileIndex([1, 2, 3], 0), 0);
+  assert.deepStrictEqual(quantileIndex([1, 3, 2], 0), 0);
+  assert.deepStrictEqual(quantileIndex([2, 3, 1], 0), 2);
+  assert.deepStrictEqual(quantileIndex([1], 0), 0);
+  assert.deepStrictEqual(quantileIndex([], 0), -1);
+});
+
+it("quantileIndex(array, 1) returns the maximum index", () => {
+  assert.deepStrictEqual(quantileIndex([1, 2], 1), 1);
+  assert.deepStrictEqual(quantileIndex([1, 2, 3], 1), 2);
+  assert.deepStrictEqual(quantileIndex([1, 3, 2], 1), 1);
+  assert.deepStrictEqual(quantileIndex([2, 3, 1], 1), 1);
+  assert.deepStrictEqual(quantileIndex([1], 1), 0);
+  assert.deepStrictEqual(quantileIndex([], 1), -1);
+});
+
+it("quantileIndex(array, 0.5) handles undefined values", () => {
+  assert.deepStrictEqual(quantileIndex([1, 1, 1, null, 2, 3, 3, 3], 0.5), 4);
+  assert.deepStrictEqual(quantileIndex([1, 1, 1, null, 2, 3, 3, 3], 0.5, (d) => d), 4);
+});
+
+it("quantileIndex(array, 0.5) returns the first of equivalent values", () => {
+  assert.deepStrictEqual(quantileIndex([1, 1, 1, 2, 2, 3, 3, 3], 0.5), 4);
 });
 
 function box(value) {

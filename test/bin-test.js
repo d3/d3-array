@@ -1,5 +1,7 @@
 import assert from "assert";
-import {bin, extent, histogram, thresholdSturges} from "../src/index.js";
+import {csvParse} from "d3-dsv";
+import {readFile} from "fs/promises";
+import {bin, extent, histogram, thresholdSturges, ticks} from "../src/index.js";
 
 it("histogram is a deprecated alias for bin", () => {
   assert.strictEqual(histogram, bin);
@@ -164,6 +166,48 @@ it("bin()() returns bins whose rightmost bin is not too wide", () => {
   ]);
 });
 
+it("bin(data) handles fractional step correctly", () => {
+  const h = bin().thresholds(10);
+  assert.deepStrictEqual(h([9.8, 10, 11, 12, 13, 13.2]), [
+    box([9.8], 9.5, 10),
+    box([10], 10, 10.5),
+    box([], 10.5, 11),
+    box([11], 11, 11.5),
+    box([], 11.5, 12),
+    box([12], 12, 12.5),
+    box([], 12.5, 13),
+    box([13, 13.2], 13, 13.5)
+  ]);
+});
+
+it("bin(data) handles fractional step correctly with a custom, non-aligned domain", () => {
+  const h = bin().thresholds(10).domain([9.7, 13.3]);
+  assert.deepStrictEqual(h([9.8, 10, 11, 12, 13, 13.2]), [
+    box([9.8], 9.7, 10),
+    box([10], 10, 10.5),
+    box([], 10.5, 11),
+    box([11], 11, 11.5),
+    box([], 11.5, 12),
+    box([12], 12, 12.5),
+    box([], 12.5, 13),
+    box([13, 13.2], 13, 13.3)
+  ]);
+});
+
+it("bin(data) handles fractional step correctly with a custom, aligned domain", () => {
+  const h = bin().thresholds(10).domain([9.5, 13.5]);
+  assert.deepStrictEqual(h([9.8, 10, 11, 12, 13, 13.2]), [
+    box([9.8], 9.5, 10),
+    box([10], 10, 10.5),
+    box([], 10.5, 11),
+    box([11], 11, 11.5),
+    box([], 11.5, 12),
+    box([12], 12, 12.5),
+    box([], 12.5, 13),
+    box([13, 13.2], 13, 13.5)
+  ]);
+});
+
 it("bin(data) coerces values to numbers as expected", () => {
   const h = bin().thresholds(10);
   assert.deepStrictEqual(h(["1", "2", "3", "4", "5"]), [
@@ -177,6 +221,40 @@ it("bin(data) coerces values to numbers as expected", () => {
     box([], 4.5, 5),
     box(["5"], 5, 5.5)
   ]);
+});
+
+it("bin(athletes) produces the expected result", async () => {
+  const height = csvParse(await readFile("./test/data/athletes.csv", "utf8")).filter(d => d.height).map(d => +d.height);
+  const bins = bin().thresholds(57)(height);
+  assert.deepStrictEqual(bins.map(b => b.length), [1, 0, 0, 0, 0, 0, 2, 1, 2, 1, 1, 4, 11, 7, 13, 39, 78, 93, 119, 193, 354, 393, 573, 483, 651, 834, 808, 763, 627, 648, 833, 672, 578, 498, 395, 425, 278, 235, 182, 128, 91, 69, 43, 29, 21, 23, 3, 3, 1, 1, 1]);
+});
+
+it("bin(data) assigns floating point values to the correct bins", () => {
+  for (const n of [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000]) {
+    assert.ok(bin().thresholds(n)(ticks(1, 2, n)).every(d => d.length === 1));
+  }
+});
+
+it("bin(data) assigns integer values to the correct bins", () => {
+  assert.deepStrictEqual(bin().domain([4, 5])([5]), [box([5], 4, 5)]);
+  const eights = [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8];
+  assert.deepStrictEqual(bin().domain([3, 8])(eights), [box([], 3, 4), box([], 4, 5), box([], 5, 6), box([], 6, 7), box(eights, 7, 8)]);
+});
+
+it("bin(data) does not mutate user-supplied thresholds as an array", () => {
+  const thresholds = [3, 4, 5, 6];
+  const b = bin().domain([4, 5]).thresholds(thresholds);
+  assert.deepStrictEqual(b([5]), [box([], 4, 5), box([5], 5, 5)]);
+  assert.deepStrictEqual(thresholds, [3, 4, 5, 6]);
+  assert.deepStrictEqual(b.thresholds()(), [3, 4, 5, 6]);
+});
+
+it("bin(data) does not mutate user-supplied thresholds as a function", () => {
+  const thresholds = [3, 4, 5, 6];
+  const b = bin().domain([4, 5]).thresholds(() => thresholds);
+  assert.deepStrictEqual(b([5]), [box([], 4, 5), box([5], 5, 5)]);
+  assert.deepStrictEqual(thresholds, [3, 4, 5, 6]);
+  assert.deepStrictEqual(b.thresholds()(), [3, 4, 5, 6]);
 });
 
 function box(bin, x0, x1)  {

@@ -8,10 +8,10 @@ export default function rank(values, valueof = ascending) {
   if (valueof.length !== 2) V = V.map(valueof), valueof = ascending;
   const compareIndex = (i, j) => valueof(V[i], V[j]);
   let k, r;
-  Uint32Array
-    .from(V, (_, i) => i)
-    .sort(valueof === ascending ? (i, j) => ascendingDefined(V[i], V[j]) : compareDefined(compareIndex))
-    .forEach((j, i) => {
+  values = Uint32Array.from(V, (_, i) => i);
+  // Risky chaining due to Safari 14 https://github.com/d3/d3-array/issues/123
+  values.sort(valueof === ascending ? (i, j) => ascendingDefined(V[i], V[j]) : compareDefined(compareIndex));
+  values.forEach((j, i) => {
       const c = compareIndex(j, k === undefined ? j : k);
       if (c >= 0) {
         if (k === undefined || c > 0) k = j, r = i;
