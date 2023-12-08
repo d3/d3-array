@@ -1,9 +1,9 @@
 import {tickIncrement} from "./ticks.js";
 
-export default function nice(start, stop, count, base) {
+export default function nice(start, stop, count, log) {
   let prestep;
   while (true) {
-    const step = tickIncrement(start, stop, count, base);
+    const step = tickIncrement(start, stop, count, log);
     if (step === prestep || step === 0 || !isFinite(step)) {
       return [start, stop];
     } else if (step > 0) {
