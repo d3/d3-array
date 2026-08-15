@@ -23,7 +23,7 @@ export default function bisector(f) {
     if (lo < hi) {
       if (compare1(x, x) !== 0) return hi;
       do {
-        const mid = (lo + hi) >>> 1;
+        const mid = Math.trunc((lo + hi) / 2);
         if (compare2(a[mid], x) < 0) lo = mid + 1;
         else hi = mid;
       } while (lo < hi);
@@ -35,7 +35,7 @@ export default function bisector(f) {
     if (lo < hi) {
       if (compare1(x, x) !== 0) return hi;
       do {
-        const mid = (lo + hi) >>> 1;
+        const mid = Math.trunc((lo + hi) / 2);
         if (compare2(a[mid], x) <= 0) lo = mid + 1;
         else hi = mid;
       } while (lo < hi);

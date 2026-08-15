@@ -165,3 +165,21 @@ it("bisectRight(array, value, lo, hi) keeps non-comparable values to the right",
   assert.strictEqual(bisectRight(values, undefined), 4);
   assert.strictEqual(bisectRight(values, NaN), 4);
 });
+
+it("bisectRight(array, value) terminates for arrays larger than 2³¹ elements (#261)", () => {
+  // A virtual sorted array of length > 2³¹, without allocating it. Reading past
+  // ~log2(length) elements means the midpoint overflowed and the search stalls.
+  const length = 2 ** 32 - 1;
+  const threshold = 3e9; // a[i] = i < threshold ? 0 : 1; boundary is above 2³¹
+  let reads = 0;
+  const a = new Proxy({}, {get(_, k) {
+    if (k === "length") return length;
+    const i = Number(k);
+    if (Number.isInteger(i)) {
+      if (++reads > 64) throw new Error("bisect did not converge");
+      return i < threshold ? 0 : 1;
+    }
+  }});
+  assert.strictEqual(bisectRight(a, 0), threshold);
+  assert.strictEqual(bisectLeft(a, 1), threshold);
+});
