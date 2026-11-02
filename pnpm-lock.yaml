@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       internmap:
-        specifier: ^2.0.3
+        specifier: 1 - 2
         version: 2.0.3
     devDependencies:
       '@rollup/plugin-node-resolve':
