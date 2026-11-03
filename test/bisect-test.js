@@ -1,30 +1,30 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {bisect, bisectLeft, bisectRight} from "../src/index.js";
 
-test("bisect is an alias for bisectRight", () => {
+it("bisect is an alias for bisectRight", () => {
   assert.strictEqual(bisect, bisectRight);
 });
 
-test("bisectLeft(array, value) returns the index of an exact match", () => {
+it("bisectLeft(array, value) returns the index of an exact match", () => {
   const numbers = [1, 2, 3];
   assert.strictEqual(bisectLeft(numbers, 1), 0);
   assert.strictEqual(bisectLeft(numbers, 2), 1);
   assert.strictEqual(bisectLeft(numbers, 3), 2);
 });
 
-test("bisectLeft(array, value) returns the index of the first match", () => {
+it("bisectLeft(array, value) returns the index of the first match", () => {
   const numbers = [1, 2, 2, 3];
   assert.strictEqual(bisectLeft(numbers, 1), 0);
   assert.strictEqual(bisectLeft(numbers, 2), 1);
   assert.strictEqual(bisectLeft(numbers, 3), 3);
 });
 
-test("bisectLeft(empty, value) returns zero", () => {
+it("bisectLeft(empty, value) returns zero", () => {
   assert.strictEqual(bisectLeft([], 1), 0);
 });
 
-test("bisectLeft(array, value) returns the insertion point of a non-exact match", () => {
+it("bisectLeft(array, value) returns the insertion point of a non-exact match", () => {
   const numbers = [1, 2, 3];
   assert.strictEqual(bisectLeft(numbers, 0.5), 0);
   assert.strictEqual(bisectLeft(numbers, 1.5), 1);
@@ -32,14 +32,14 @@ test("bisectLeft(array, value) returns the insertion point of a non-exact match"
   assert.strictEqual(bisectLeft(numbers, 3.5), 3);
 });
 
-test("bisectLeft(array, value) has undefined behavior if the search value is unorderable", () => {
+it("bisectLeft(array, value) has undefined behavior if the search value is unorderable", () => {
   const numbers = [1, 2, 3];
   bisectLeft(numbers, new Date(NaN)); // who knows what this will return!
   bisectLeft(numbers, undefined);
   bisectLeft(numbers, NaN);
 });
 
-test("bisectLeft(array, value, lo) observes the specified lower bound", () => {
+it("bisectLeft(array, value, lo) observes the specified lower bound", () => {
   const numbers = [1, 2, 3, 4, 5];
   assert.strictEqual(bisectLeft(numbers, 0, 2), 2);
   assert.strictEqual(bisectLeft(numbers, 1, 2), 2);
@@ -50,7 +50,7 @@ test("bisectLeft(array, value, lo) observes the specified lower bound", () => {
   assert.strictEqual(bisectLeft(numbers, 6, 2), 5);
 });
 
-test("bisectLeft(array, value, lo, hi) observes the specified bounds", () => {
+it("bisectLeft(array, value, lo, hi) observes the specified bounds", () => {
   const numbers = [1, 2, 3, 4, 5];
   assert.strictEqual(bisectLeft(numbers, 0, 2, 3), 2);
   assert.strictEqual(bisectLeft(numbers, 1, 2, 3), 2);
@@ -61,7 +61,7 @@ test("bisectLeft(array, value, lo, hi) observes the specified bounds", () => {
   assert.strictEqual(bisectLeft(numbers, 6, 2, 3), 3);
 });
 
-test("bisectLeft(array, value) handles large sparse d3", () => {
+it("bisectLeft(array, value) handles large sparse d3", () => {
   const numbers = [];
   let i = 1 << 30;
   numbers[i++] = 1;
@@ -78,25 +78,25 @@ test("bisectLeft(array, value) handles large sparse d3", () => {
   assert.strictEqual(bisectLeft(numbers, 6, i - 5, i), i - 0);
 });
 
-test("bisectRight(array, value) returns the index after an exact match", () => {
+it("bisectRight(array, value) returns the index after an exact match", () => {
   const numbers = [1, 2, 3];
   assert.strictEqual(bisectRight(numbers, 1), 1);
   assert.strictEqual(bisectRight(numbers, 2), 2);
   assert.strictEqual(bisectRight(numbers, 3), 3);
 });
 
-test("bisectRight(array, value) returns the index after the last match", () => {
+it("bisectRight(array, value) returns the index after the last match", () => {
   const numbers = [1, 2, 2, 3];
   assert.strictEqual(bisectRight(numbers, 1), 1);
   assert.strictEqual(bisectRight(numbers, 2), 3);
   assert.strictEqual(bisectRight(numbers, 3), 4);
 });
 
-test("bisectRight(empty, value) returns zero", () => {
+it("bisectRight(empty, value) returns zero", () => {
   assert.strictEqual(bisectRight([], 1), 0);
 });
 
-test("bisectRight(array, value) returns the insertion point of a non-exact match", () => {
+it("bisectRight(array, value) returns the insertion point of a non-exact match", () => {
   const numbers = [1, 2, 3];
   assert.strictEqual(bisectRight(numbers, 0.5), 0);
   assert.strictEqual(bisectRight(numbers, 1.5), 1);
@@ -104,7 +104,7 @@ test("bisectRight(array, value) returns the insertion point of a non-exact match
   assert.strictEqual(bisectRight(numbers, 3.5), 3);
 });
 
-test("bisectRight(array, value, lo) observes the specified lower bound", () => {
+it("bisectRight(array, value, lo) observes the specified lower bound", () => {
   const numbers = [1, 2, 3, 4, 5];
   assert.strictEqual(bisectRight(numbers, 0, 2), 2);
   assert.strictEqual(bisectRight(numbers, 1, 2), 2);
@@ -115,7 +115,7 @@ test("bisectRight(array, value, lo) observes the specified lower bound", () => {
   assert.strictEqual(bisectRight(numbers, 6, 2), 5);
 });
 
-test("bisectRight(array, value, lo, hi) observes the specified bounds", () => {
+it("bisectRight(array, value, lo, hi) observes the specified bounds", () => {
   const numbers = [1, 2, 3, 4, 5];
   assert.strictEqual(bisectRight(numbers, 0, 2, 3), 2);
   assert.strictEqual(bisectRight(numbers, 1, 2, 3), 2);
@@ -126,7 +126,7 @@ test("bisectRight(array, value, lo, hi) observes the specified bounds", () => {
   assert.strictEqual(bisectRight(numbers, 6, 2, 3), 3);
 });
 
-test("bisectRight(array, value) handles large sparse d3", () => {
+it("bisectRight(array, value) handles large sparse d3", () => {
   const numbers = [];
   let i = 1 << 30;
   numbers[i++] = 1;
@@ -143,7 +143,7 @@ test("bisectRight(array, value) handles large sparse d3", () => {
   assert.strictEqual(bisectRight(numbers, 6, i - 5, i), i - 0);
 });
 
-test("bisectLeft(array, value, lo, hi) keeps non-comparable values to the right", () => {
+it("bisectLeft(array, value, lo, hi) keeps non-comparable values to the right", () => {
   const values = [1, 2, null, undefined, NaN];
   assert.strictEqual(bisectLeft(values, 1), 0);
   assert.strictEqual(bisectLeft(values, 2), 1);
@@ -152,13 +152,13 @@ test("bisectLeft(array, value, lo, hi) keeps non-comparable values to the right"
   assert.strictEqual(bisectLeft(values, NaN), 5);
 });
 
-test("bisectLeft(array, value, lo, hi) keeps comparable values to the left", () => {
+it("bisectLeft(array, value, lo, hi) keeps comparable values to the left", () => {
   const values = [null, undefined, NaN];
   assert.strictEqual(bisectLeft(values, 1), 0);
   assert.strictEqual(bisectLeft(values, 2), 0);
 });
 
-test("bisectRight(array, value, lo, hi) keeps non-comparable values to the right", () => {
+it("bisectRight(array, value, lo, hi) keeps non-comparable values to the right", () => {
   const values = [1, 2, null, undefined];
   assert.strictEqual(bisectRight(values, 1), 1);
   assert.strictEqual(bisectRight(values, 2), 2);

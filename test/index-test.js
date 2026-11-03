@@ -1,4 +1,4 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {index, indexes} from "../src/index.js";
 
@@ -9,7 +9,7 @@ const data = [
   {name: "stacy", amount: 34.05,  date: "01/04/2016"}
 ];
 
-test("indexes(data, ...keys) returns the expected nested arrays", () => {
+it("indexes(data, ...keys) returns the expected nested arrays", () => {
   assert.deepStrictEqual(
     indexes(data, d => d.amount),
     [
@@ -45,7 +45,7 @@ test("indexes(data, ...keys) returns the expected nested arrays", () => {
   );
 });
 
-test("index(data, ...keys) returns the expected map", () => {
+it("index(data, ...keys) returns the expected map", () => {
   assert.deepStrictEqual(
     entries(index(data, d => d.amount), 1),
     indexes(data, d => d.amount)
@@ -56,7 +56,7 @@ test("index(data, ...keys) returns the expected map", () => {
   );
 });
 
-test("index(data, ...keys) throws on a non-unique key", () => {
+it("index(data, ...keys) throws on a non-unique key", () => {
   assert.throws(() => index(data, d => d.name));
   assert.throws(() => index(data, d => d.date));
 });

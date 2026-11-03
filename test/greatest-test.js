@@ -1,8 +1,8 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {descending, greatest} from "../src/index.js";
 
-test("greatest(array) compares using natural order", () => {
+it("greatest(array) compares using natural order", () => {
   assert.strictEqual(greatest([0, 1]), 1);
   assert.strictEqual(greatest([1, 0]), 1);
   assert.strictEqual(greatest([0, "1"]), "1");
@@ -17,7 +17,7 @@ test("greatest(array) compares using natural order", () => {
   assert.strictEqual(greatest([NaN, 10, 2]), 10);
 });
 
-test("greatest(array, compare) compares using the specified compare function", () => {
+it("greatest(array, compare) compares using the specified compare function", () => {
   const a = {name: "a"}, b = {name: "b"};
   assert.deepStrictEqual(greatest([a, b], (a, b) => a.name.localeCompare(b.name)), {name: "b"});
   assert.strictEqual(greatest([1, 0], descending), 0);
@@ -27,31 +27,31 @@ test("greatest(array, compare) compares using the specified compare function", (
   assert.strictEqual(greatest([2, NaN, 10], descending), 2);
 });
 
-test("greatest(array, accessor) uses the specified accessor function", () => {
+it("greatest(array, accessor) uses the specified accessor function", () => {
   const a = {name: "a", v: 42}, b = {name: "b", v: 0.42};
   assert.deepStrictEqual(greatest([a, b], d => d.name), b);
   assert.deepStrictEqual(greatest([a, b], d => d.v), a);
 });
 
-test("greatest(array) returns undefined if the array is empty", () => {
+it("greatest(array) returns undefined if the array is empty", () => {
   assert.strictEqual(greatest([]), undefined);
 });
 
-test("greatest(array) returns undefined if the array contains only incomparable values", () => {
+it("greatest(array) returns undefined if the array contains only incomparable values", () => {
   assert.strictEqual(greatest([NaN, undefined]), undefined);
   assert.strictEqual(greatest([NaN, "foo"], (a, b) => a - b), undefined);
 });
 
-test("greatest(array) returns the first of equal values", () => {
+it("greatest(array) returns the first of equal values", () => {
   assert.deepStrictEqual(greatest([2, 2, 1, 1, 0, 0, 0, 3, 0].map(box), descendingValue), {value: 0, index: 4});
   assert.deepStrictEqual(greatest([3, 2, 2, 1, 1, 0, 0, 0, 3, 0].map(box), ascendingValue), {value: 3, index: 0});
 });
 
-test("greatest(array) ignores null and undefined", () => {
+it("greatest(array) ignores null and undefined", () => {
   assert.deepStrictEqual(greatest([null, -2, undefined]), -2);
 });
 
-test("greatest(array, accessor) ignores null and undefined", () => {
+it("greatest(array, accessor) ignores null and undefined", () => {
   assert.deepStrictEqual(greatest([null, -2, undefined], d => d), -2);
 });
 

@@ -1,21 +1,21 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {csvParse} from "d3-dsv";
 import {readFile} from "fs/promises";
 import {bin, extent, histogram, thresholdSturges, ticks} from "../src/index.js";
 
-test("histogram is a deprecated alias for bin", () => {
+it("histogram is a deprecated alias for bin", () => {
   assert.strictEqual(histogram, bin);
 });
 
-test("bin() returns a default bin generator", () => {
+it("bin() returns a default bin generator", () => {
   const h = bin();
   assert.strictEqual(h.value()(42), 42);
   assert.strictEqual(h.domain(), extent);
   assert.deepStrictEqual(h.thresholds(), thresholdSturges);
 });
 
-test("bin(data) computes bins of the specified array of data", () => {
+it("bin(data) computes bins of the specified array of data", () => {
   const h = bin();
   assert.deepStrictEqual(h([0, 0, 0, 10, 20, 20]), [
     box([0, 0, 0], 0, 5),
@@ -26,7 +26,7 @@ test("bin(data) computes bins of the specified array of data", () => {
   ]);
 });
 
-test("bin(iterable) is equivalent to bin(array)", () => {
+it("bin(iterable) is equivalent to bin(array)", () => {
   const h = bin();
   assert.deepStrictEqual(h(iterable([0, 0, 0, 10, 20, 20])), [
     box([0, 0, 0], 0, 5),
@@ -37,14 +37,14 @@ test("bin(iterable) is equivalent to bin(array)", () => {
   ]);
 });
 
-test("bin.value(number) sets the constant value", () => {
+it("bin.value(number) sets the constant value", () => {
   const h = bin().value(12); // Pointless, but for consistency.
   assert.deepStrictEqual(h([0, 0, 0, 1, 2, 2]), [
     box([0, 0, 0, 1, 2, 2], 12, 12),
   ]);
 });
 
-test("bin(data) does not bin null, undefined, or NaN", () => {
+it("bin(data) does not bin null, undefined, or NaN", () => {
   const h = bin();
   assert.deepStrictEqual(h([0, null, undefined, NaN, 10, 20, 20]), [
     box([0], 0, 5),
@@ -55,7 +55,7 @@ test("bin(data) does not bin null, undefined, or NaN", () => {
   ]);
 });
 
-test("bin.value(function) sets the value accessor", () => {
+it("bin.value(function) sets the value accessor", () => {
   const h = bin().value((d) => d.value);
   const a = {value: 0};
   const b = {value: 10};
@@ -69,7 +69,7 @@ test("bin.value(function) sets the value accessor", () => {
   ]);
 });
 
-test("bin.domain(array) sets the domain", () => {
+it("bin.domain(array) sets the domain", () => {
   const h = bin().domain([0, 20]);
   assert.deepStrictEqual(h.domain()(), [0, 20]);
   assert.deepStrictEqual(h([1, 2, 2, 10, 18, 18]), [
@@ -80,7 +80,7 @@ test("bin.domain(array) sets the domain", () => {
   ]);
 });
 
-test("bin.domain(function) sets the domain accessor", () => {
+it("bin.domain(function) sets the domain accessor", () => {
   let actual;
   const values = [1, 2, 2, 10, 18, 18];
   const domain = (values) => { actual = values; return [0, 20]; };
@@ -95,7 +95,7 @@ test("bin.domain(function) sets the domain accessor", () => {
   assert.deepStrictEqual(actual, values);
 });
 
-test("bin.thresholds(number) sets the approximate number of bin thresholds", () => {
+it("bin.thresholds(number) sets the approximate number of bin thresholds", () => {
   const h = bin().thresholds(3);
   assert.deepStrictEqual(h([0, 0, 0, 10, 30, 30]), [
     box([0, 0, 0], 0, 10),
@@ -105,7 +105,7 @@ test("bin.thresholds(number) sets the approximate number of bin thresholds", () 
   ]);
 });
 
-test("bin.thresholds(array) sets the bin thresholds", () => {
+it("bin.thresholds(array) sets the bin thresholds", () => {
   const h = bin().thresholds([10, 20]);
   assert.deepStrictEqual(h([0, 0, 0, 10, 30, 30]), [
     box([0, 0, 0], 0, 10),
@@ -114,7 +114,7 @@ test("bin.thresholds(array) sets the bin thresholds", () => {
   ]);
 });
 
-test("bin.thresholds(array) ignores thresholds outside the domain", () => {
+it("bin.thresholds(array) ignores thresholds outside the domain", () => {
   const h = bin().thresholds([0, 1, 2, 3, 4]);
   assert.deepStrictEqual(h([0, 1, 2, 3]), [
     box([0], 0, 1),
@@ -124,7 +124,7 @@ test("bin.thresholds(array) ignores thresholds outside the domain", () => {
   ]);
 });
 
-test("bin.thresholds(function) sets the bin thresholds accessor", () => {
+it("bin.thresholds(function) sets the bin thresholds accessor", () => {
   let actual;
   const values = [0, 0, 0, 10, 30, 30];
   const h = bin().thresholds((values, x0, x1) => { actual = [values, x0, x1]; return [10, 20]; });
@@ -145,7 +145,7 @@ test("bin.thresholds(function) sets the bin thresholds accessor", () => {
   ]);
 });
 
-test("bin(data) uses nice thresholds", () => {
+it("bin(data) uses nice thresholds", () => {
   const h = bin().domain([0, 1]).thresholds(5);
   assert.deepStrictEqual(h([]).map(b => [b.x0, b.x1]), [
     [0.0, 0.2],
@@ -156,7 +156,7 @@ test("bin(data) uses nice thresholds", () => {
   ]);
 });
 
-test("bin()() returns bins whose rightmost bin is not too wide", () => {
+it("bin()() returns bins whose rightmost bin is not too wide", () => {
   const h = bin();
   assert.deepStrictEqual(h([9.8, 10, 11, 12, 13, 13.2]), [
     box([9.8], 9, 10),
@@ -167,7 +167,7 @@ test("bin()() returns bins whose rightmost bin is not too wide", () => {
   ]);
 });
 
-test("bin(data) handles fractional step correctly", () => {
+it("bin(data) handles fractional step correctly", () => {
   const h = bin().thresholds(10);
   assert.deepStrictEqual(h([9.8, 10, 11, 12, 13, 13.2]), [
     box([9.8], 9.5, 10),
@@ -181,7 +181,7 @@ test("bin(data) handles fractional step correctly", () => {
   ]);
 });
 
-test("bin(data) handles fractional step correctly with a custom, non-aligned domain", () => {
+it("bin(data) handles fractional step correctly with a custom, non-aligned domain", () => {
   const h = bin().thresholds(10).domain([9.7, 13.3]);
   assert.deepStrictEqual(h([9.8, 10, 11, 12, 13, 13.2]), [
     box([9.8], 9.7, 10),
@@ -195,7 +195,7 @@ test("bin(data) handles fractional step correctly with a custom, non-aligned dom
   ]);
 });
 
-test("bin(data) handles fractional step correctly with a custom, aligned domain", () => {
+it("bin(data) handles fractional step correctly with a custom, aligned domain", () => {
   const h = bin().thresholds(10).domain([9.5, 13.5]);
   assert.deepStrictEqual(h([9.8, 10, 11, 12, 13, 13.2]), [
     box([9.8], 9.5, 10),
@@ -209,7 +209,7 @@ test("bin(data) handles fractional step correctly with a custom, aligned domain"
   ]);
 });
 
-test("bin(data) coerces values to numbers as expected", () => {
+it("bin(data) coerces values to numbers as expected", () => {
   const h = bin().thresholds(10);
   assert.deepStrictEqual(h(["1", "2", "3", "4", "5"]), [
     box(["1"], 1, 1.5),
@@ -224,25 +224,25 @@ test("bin(data) coerces values to numbers as expected", () => {
   ]);
 });
 
-test("bin(athletes) produces the expected result", async () => {
+it("bin(athletes) produces the expected result", async () => {
   const height = csvParse(await readFile("./test/data/athletes.csv", "utf8")).filter(d => d.height).map(d => +d.height);
   const bins = bin().thresholds(57)(height);
   assert.deepStrictEqual(bins.map(b => b.length), [1, 0, 0, 0, 0, 0, 2, 1, 2, 1, 1, 4, 11, 7, 13, 39, 78, 93, 119, 193, 354, 393, 573, 483, 651, 834, 808, 763, 627, 648, 833, 672, 578, 498, 395, 425, 278, 235, 182, 128, 91, 69, 43, 29, 21, 23, 3, 3, 1, 1, 1]);
 });
 
-test("bin(data) assigns floating point values to the correct bins", () => {
+it("bin(data) assigns floating point values to the correct bins", () => {
   for (const n of [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000]) {
     assert.ok(bin().thresholds(n)(ticks(1, 2, n)).every(d => d.length === 1));
   }
 });
 
-test("bin(data) assigns integer values to the correct bins", () => {
+it("bin(data) assigns integer values to the correct bins", () => {
   assert.deepStrictEqual(bin().domain([4, 5])([5]), [box([5], 4, 5)]);
   const eights = [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8];
   assert.deepStrictEqual(bin().domain([3, 8])(eights), [box([], 3, 4), box([], 4, 5), box([], 5, 6), box([], 6, 7), box(eights, 7, 8)]);
 });
 
-test("bin(data) does not mutate user-supplied thresholds as an array", () => {
+it("bin(data) does not mutate user-supplied thresholds as an array", () => {
   const thresholds = [3, 4, 5, 6];
   const b = bin().domain([4, 5]).thresholds(thresholds);
   assert.deepStrictEqual(b([5]), [box([], 4, 5), box([5], 5, 5)]);
@@ -250,7 +250,7 @@ test("bin(data) does not mutate user-supplied thresholds as an array", () => {
   assert.deepStrictEqual(b.thresholds()(), [3, 4, 5, 6]);
 });
 
-test("bin(data) does not mutate user-supplied thresholds as a function", () => {
+it("bin(data) does not mutate user-supplied thresholds as a function", () => {
   const thresholds = [3, 4, 5, 6];
   const b = bin().domain([4, 5]).thresholds(() => thresholds);
   assert.deepStrictEqual(b([5]), [box([], 4, 5), box([5], 5, 5)]);

@@ -1,4 +1,4 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {rollup, sum} from "../src/index.js";
 
@@ -9,7 +9,7 @@ const data = [
   {name: "stacy", amount: "3405",  date: "01/04/2016"}
 ];
 
-test("rollup(data, reduce, accessor) returns the expected map", () => {
+it("rollup(data, reduce, accessor) returns the expected map", () => {
   assert.deepStrictEqual(
     entries(rollup(data, v => v.length, d => d.name), 1),
     [
@@ -28,7 +28,7 @@ test("rollup(data, reduce, accessor) returns the expected map", () => {
   );
 });
 
-test("rollup(data, reduce, accessor, accessor) returns the expected map", () => {
+it("rollup(data, reduce, accessor, accessor) returns the expected map", () => {
   assert.deepStrictEqual(
     entries(rollup(data, v => v.length, d => d.name, d => d.amount), 2),
     [

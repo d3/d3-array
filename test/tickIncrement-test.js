@@ -1,8 +1,8 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {tickIncrement} from "../src/index.js";
 
-test("tickIncrement(start, stop, count) returns NaN if any argument is NaN", () => {
+it("tickIncrement(start, stop, count) returns NaN if any argument is NaN", () => {
   assert(isNaN(tickIncrement(NaN, 1, 1)));
   assert(isNaN(tickIncrement(0, NaN, 1)));
   assert(isNaN(tickIncrement(0, 1, NaN)));
@@ -12,7 +12,7 @@ test("tickIncrement(start, stop, count) returns NaN if any argument is NaN", () 
   assert(isNaN(tickIncrement(NaN, NaN, NaN)));
 });
 
-test("tickIncrement(start, stop, count) returns NaN or -Infinity if start === stop", () => {
+it("tickIncrement(start, stop, count) returns NaN or -Infinity if start === stop", () => {
   assert(isNaN(tickIncrement(1, 1, -1)));
   assert(isNaN(tickIncrement(1, 1, 0)));
   assert(isNaN(tickIncrement(1, 1, NaN)));
@@ -20,16 +20,16 @@ test("tickIncrement(start, stop, count) returns NaN or -Infinity if start === st
   assert.strictEqual(tickIncrement(1, 1, 10), -Infinity);
 });
 
-test("tickIncrement(start, stop, count) returns 0 or Infinity if count is not positive", () => {
+it("tickIncrement(start, stop, count) returns 0 or Infinity if count is not positive", () => {
   assert.strictEqual(tickIncrement(0, 1, -1), Infinity);
   assert.strictEqual(tickIncrement(0, 1, 0), Infinity);
 });
 
-test("tickIncrement(start, stop, count) returns -Infinity if count is infinity", () => {
+it("tickIncrement(start, stop, count) returns -Infinity if count is infinity", () => {
   assert.strictEqual(tickIncrement(0, 1, Infinity), -Infinity);
 });
 
-test("tickIncrement(start, stop, count) returns approximately count + 1 tickIncrement when start < stop", () => {
+it("tickIncrement(start, stop, count) returns approximately count + 1 tickIncrement when start < stop", () => {
   assert.strictEqual(tickIncrement(  0,  1, 10), -10);
   assert.strictEqual(tickIncrement(  0,  1,  9), -10);
   assert.strictEqual(tickIncrement(  0,  1,  8), -10);

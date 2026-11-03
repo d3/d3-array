@@ -1,11 +1,11 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {readFileSync} from "fs";
 import {ascending, descending, groupSort, median} from "../src/index.js";
 
 const barley = JSON.parse(readFileSync("./test/data/barley.json"));
 
-test("groupSort(data, reduce, key) returns sorted keys when reduce is an accessor", () => {
+it("groupSort(data, reduce, key) returns sorted keys when reduce is an accessor", () => {
   assert.deepStrictEqual(
     groupSort(barley, g => median(g, d => d.yield), d => d.variety),
     ["Svansota", "No. 462", "Manchuria", "No. 475", "Velvet", "Peatland", "Glabron", "No. 457", "Wisconsin No. 38", "Trebi"]
@@ -32,7 +32,7 @@ test("groupSort(data, reduce, key) returns sorted keys when reduce is an accesso
   );
 });
 
-test("groupSort(data, reduce, key) returns sorted keys when reduce is a comparator", () => {
+it("groupSort(data, reduce, key) returns sorted keys when reduce is a comparator", () => {
   assert.deepStrictEqual(
     groupSort(barley, (a, b) => ascending(median(a, d => d.yield), median(b, d => d.yield)), d => d.variety),
     ["Svansota", "No. 462", "Manchuria", "No. 475", "Velvet", "Peatland", "Glabron", "No. 457", "Wisconsin No. 38", "Trebi"]

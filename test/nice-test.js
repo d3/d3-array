@@ -1,8 +1,8 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {nice} from "../src/index.js";
 
-test("nice(start, stop, count) returns [start, stop] if any argument is NaN", () => {
+it("nice(start, stop, count) returns [start, stop] if any argument is NaN", () => {
   assert.deepStrictEqual(nice(NaN, 1, 1), [NaN, 1]);
   assert.deepStrictEqual(nice(0, NaN, 1), [0, NaN]);
   assert.deepStrictEqual(nice(0, 1, NaN), [0, 1]);
@@ -12,7 +12,7 @@ test("nice(start, stop, count) returns [start, stop] if any argument is NaN", ()
   assert.deepStrictEqual(nice(NaN, NaN, NaN), [NaN, NaN]);
 });
 
-test("nice(start, stop, count) returns [start, stop] if start === stop", () => {
+it("nice(start, stop, count) returns [start, stop] if start === stop", () => {
   assert.deepStrictEqual(nice(1, 1, -1), [1, 1]);
   assert.deepStrictEqual(nice(1, 1, 0), [1, 1]);
   assert.deepStrictEqual(nice(1, 1, NaN), [1, 1]);
@@ -20,16 +20,16 @@ test("nice(start, stop, count) returns [start, stop] if start === stop", () => {
   assert.deepStrictEqual(nice(1, 1, 10), [1, 1]);
 });
 
-test("nice(start, stop, count) returns [start, stop] if count is not positive", () => {
+it("nice(start, stop, count) returns [start, stop] if count is not positive", () => {
   assert.deepStrictEqual(nice(0, 1, -1), [0, 1]);
   assert.deepStrictEqual(nice(0, 1, 0), [0, 1]);
 });
 
-test("nice(start, stop, count) returns [start, stop] if count is infinity", () => {
+it("nice(start, stop, count) returns [start, stop] if count is infinity", () => {
   assert.deepStrictEqual(nice(0, 1, Infinity), [0, 1]);
 });
 
-test("nice(start, stop, count) returns the expected values", () => {
+it("nice(start, stop, count) returns the expected values", () => {
   assert.deepStrictEqual(nice(0.132, 0.876, 1000), [0.132, 0.876]);
   assert.deepStrictEqual(nice(0.132, 0.876, 100), [0.13, 0.88]);
   assert.deepStrictEqual(nice(0.132, 0.876, 30), [0.12, 0.88]);

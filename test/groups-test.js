@@ -1,4 +1,4 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {groups} from "../src/index.js";
 
@@ -9,7 +9,7 @@ const data = [
   {name: "stacy", amount: "34.05",  date: "01/04/2016"}
 ];
 
-test("groups(data, accessor) returns the expected array", () => {
+it("groups(data, accessor) returns the expected array", () => {
   assert.deepStrictEqual(
     groups(data, d => d.name),
     [
@@ -52,7 +52,7 @@ test("groups(data, accessor) returns the expected array", () => {
   );
 });
 
-test("groups(data, accessor, accessor) returns the expected array", () => {
+it("groups(data, accessor, accessor) returns the expected array", () => {
   assert.deepStrictEqual(
     groups(data, d => d.name, d => d.amount),
     [

@@ -1,8 +1,8 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {descending, scan} from "../src/index.js";
 
-test("scan(array) compares using natural order", () => {
+it("scan(array) compares using natural order", () => {
   assert.strictEqual(scan([0, 1]), 0);
   assert.strictEqual(scan([1, 0]), 1);
   assert.strictEqual(scan([0, "1"]), 0);
@@ -17,7 +17,7 @@ test("scan(array) compares using natural order", () => {
   assert.strictEqual(scan([NaN, 10, 2]), 2);
 });
 
-test("scan(array, compare) compares using the specified compare function", () => {
+it("scan(array, compare) compares using the specified compare function", () => {
   var a = {name: "a"}, b = {name: "b"};
   assert.strictEqual(scan([a, b], (a, b) => a.name.localeCompare(b.name)), 0);
   assert.strictEqual(scan([1, 0], descending), 0);
@@ -27,16 +27,16 @@ test("scan(array, compare) compares using the specified compare function", () =>
   assert.strictEqual(scan([2, NaN, 10], descending), 2);
 });
 
-test("scan(array) returns undefined if the array is empty", () => {
+it("scan(array) returns undefined if the array is empty", () => {
   assert.strictEqual(scan([]), undefined);
 });
 
-test("scan(array) returns undefined if the array contains only incomparable values", () => {
+it("scan(array) returns undefined if the array contains only incomparable values", () => {
   assert.strictEqual(scan([NaN, undefined]), undefined);
   assert.strictEqual(scan([NaN, "foo"], (a, b) => a - b), undefined);
 });
 
-test("scan(array) returns the first of equal values", () => {
+it("scan(array) returns the first of equal values", () => {
   assert.strictEqual(scan([2, 2, 1, 1, 0, 0, 0, 3, 0]), 4);
   assert.strictEqual(scan([3, 2, 2, 1, 1, 0, 0, 0, 3, 0], descending), 0);
 });

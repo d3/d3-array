@@ -1,29 +1,29 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {map} from "../src/index.js";
 
-test("map(values, mapper) returns the mapped values", () => {
+it("map(values, mapper) returns the mapped values", () => {
   assert.deepStrictEqual(map([1, 2, 3, 2, 1], x => x * 2), [2, 4, 6, 4, 2]);
 });
 
-test("map(values, mapper) accepts an iterable", () => {
+it("map(values, mapper) accepts an iterable", () => {
   assert.deepStrictEqual(map(new Set([1, 2, 3, 2, 1]), x => x * 2), [2, 4, 6]);
   assert.deepStrictEqual(map((function*() { yield* [1, 2, 3, 2, 1]; })(), x => x * 2), [2, 4, 6, 4, 2]);
 });
 
-test("map(values, mapper) accepts a typed array", () => {
+it("map(values, mapper) accepts a typed array", () => {
   assert.deepStrictEqual(map(Uint8Array.of(1, 2, 3, 2, 1), x => x * 2), [2, 4, 6, 4, 2]);
 });
 
-test("map(values, mapper) enforces that test is a function", () => {
+it("map(values, mapper) enforces that test is a function", () => {
   assert.throws(() => map([]), TypeError);
 });
 
-test("map(values, mapper) enforces that values is iterable", () => {
+it("map(values, mapper) enforces that values is iterable", () => {
   assert.throws(() => map({}, () => true), TypeError);
 });
 
-test("map(values, mapper) passes test (value, index, values)", () => {
+it("map(values, mapper) passes test (value, index, values)", () => {
   const calls = [];
   const values = new Set([5, 4, 3, 2, 1]);
   map(values, function() { calls.push([this, ...arguments]); });
@@ -36,6 +36,6 @@ test("map(values, mapper) passes test (value, index, values)", () => {
   ]);
 });
 
-test("map(values, mapper) does not skip sparse elements", () => {
+it("map(values, mapper) does not skip sparse elements", () => {
   assert.deepStrictEqual(map([, 1, 2,, ], x => x * 2), [NaN, 2, 4, NaN]);
 });

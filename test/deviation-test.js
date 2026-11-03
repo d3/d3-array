@@ -1,26 +1,26 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {deviation} from "../src/index.js";
 
-test("deviation(array) returns the standard deviation of the specified numbers", () => {
+it("deviation(array) returns the standard deviation of the specified numbers", () => {
   assert.strictEqual(deviation([1, 1, 1, 1, 1]), 0);
   assert.strictEqual(deviation([5, 1, 2, 3, 4]), Math.sqrt(2.5));
   assert.strictEqual(deviation([20, 3]), Math.sqrt(144.5));
   assert.strictEqual(deviation([3, 20]), Math.sqrt(144.5));
 });
 
-test("deviation(array) ignores null, undefined and NaN", () => {
+it("deviation(array) ignores null, undefined and NaN", () => {
   assert.strictEqual(deviation([NaN, 1, 2, 3, 4, 5]), Math.sqrt(2.5));
   assert.strictEqual(deviation([1, 2, 3, 4, 5, NaN]), Math.sqrt(2.5));
   assert.strictEqual(deviation([10, null, 3, undefined, 5, NaN]), Math.sqrt(13));
 });
 
-test("deviation(array) can handle large numbers without overflowing", () => {
+it("deviation(array) can handle large numbers without overflowing", () => {
   assert.strictEqual(deviation([Number.MAX_VALUE, Number.MAX_VALUE]), 0);
   assert.strictEqual(deviation([-Number.MAX_VALUE, -Number.MAX_VALUE]), 0);
 });
 
-test("deviation(array) returns undefined if the array has fewer than two numbers", () => {
+it("deviation(array) returns undefined if the array has fewer than two numbers", () => {
   assert.strictEqual(deviation([1]), undefined);
   assert.strictEqual(deviation([]), undefined);
   assert.strictEqual(deviation([null]), undefined);
@@ -29,24 +29,24 @@ test("deviation(array) returns undefined if the array has fewer than two numbers
   assert.strictEqual(deviation([NaN, NaN]), undefined);
 });
 
-test("deviation(array, f) returns the deviation of the specified numbers", () => {
+it("deviation(array, f) returns the deviation of the specified numbers", () => {
   assert.strictEqual(deviation([5, 1, 2, 3, 4].map(box), unbox), Math.sqrt(2.5));
   assert.strictEqual(deviation([20, 3].map(box), unbox), Math.sqrt(144.5));
   assert.strictEqual(deviation([3, 20].map(box), unbox), Math.sqrt(144.5));
 });
 
-test("deviation(array, f) ignores null, undefined and NaN", () => {
+it("deviation(array, f) ignores null, undefined and NaN", () => {
   assert.strictEqual(deviation([NaN, 1, 2, 3, 4, 5].map(box), unbox), Math.sqrt(2.5));
   assert.strictEqual(deviation([1, 2, 3, 4, 5, NaN].map(box), unbox), Math.sqrt(2.5));
   assert.strictEqual(deviation([10, null, 3, undefined, 5, NaN].map(box), unbox), Math.sqrt(13));
 });
 
-test("deviation(array, f) can handle large numbers without overflowing", () => {
+it("deviation(array, f) can handle large numbers without overflowing", () => {
   assert.strictEqual(deviation([Number.MAX_VALUE, Number.MAX_VALUE].map(box), unbox), 0);
   assert.strictEqual(deviation([-Number.MAX_VALUE, -Number.MAX_VALUE].map(box), unbox), 0);
 });
 
-test("deviation(array, f) returns undefined if the array has fewer than two numbers", () => {
+it("deviation(array, f) returns undefined if the array has fewer than two numbers", () => {
   assert.strictEqual(deviation([1].map(box), unbox), undefined);
   assert.strictEqual(deviation([].map(box), unbox), undefined);
   assert.strictEqual(deviation([null].map(box), unbox), undefined);

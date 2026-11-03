@@ -1,28 +1,28 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {mode} from "../src/index.js";
 
-test("mode(array) returns the most frequent value for numbers", () => {
+it("mode(array) returns the most frequent value for numbers", () => {
   assert.strictEqual(mode([1]), 1);
   assert.strictEqual(mode([5, 1, 1, 3, 4]), 1);
 });
 
-test("mode(array) returns the most frequent value for strings", () => {
+it("mode(array) returns the most frequent value for strings", () => {
   assert.strictEqual(mode(["1"]), "1");
   assert.strictEqual(mode(["5", "1", "1", "3", "4"]), "1");
 });
 
-test("mode(array) returns the most frequent value for heterogenous types", () => {
+it("mode(array) returns the most frequent value for heterogenous types", () => {
   assert.strictEqual(mode(["1"]), "1");
   assert.strictEqual(mode(["5", "1", "1", 2, 2, "2", 1, 1, 1, "3", "4"]), 1);
   assert.strictEqual(mode(["5", 2, 2, "2", "2", 1, 1, 1, "3", "4"]), 1);
 });
 
-test("mode(array) returns the first of the most frequent values", () => {
+it("mode(array) returns the first of the most frequent values", () => {
   assert.strictEqual(mode(["5", "1", "1", "2", "2", "3", "4"]), "1");
 });
 
-test("mode(array) ignores null, undefined and NaN", () => {
+it("mode(array) ignores null, undefined and NaN", () => {
   const o = {valueOf: () => NaN};
   assert.strictEqual(mode([NaN, 1, 1, 3, 4, 5]), 1);
   assert.strictEqual(mode([o, 1, null, null, 1, null]), 1);
@@ -31,7 +31,7 @@ test("mode(array) ignores null, undefined and NaN", () => {
   assert.strictEqual(mode([1, undefined, undefined, 1, 5, undefined]), 1);
 });
 
-test("mode(array) returns undefined if the array contains no comparable values", () => {
+it("mode(array) returns undefined if the array contains no comparable values", () => {
   assert.strictEqual(mode([]), undefined);
   assert.strictEqual(mode([null]), undefined);
   assert.strictEqual(mode([undefined]), undefined);
@@ -39,26 +39,26 @@ test("mode(array) returns undefined if the array contains no comparable values",
   assert.strictEqual(mode([NaN, NaN]), undefined);
 });
 
-test("mode(array, f) returns the most frequent value for numbers", () => {
+it("mode(array, f) returns the most frequent value for numbers", () => {
   assert.strictEqual(mode([1].map(box), unbox), 1);
   assert.strictEqual(mode([5, 1, 1, 3, 4].map(box), unbox), 1);
 });
 
-test("mode(array, f) returns the most frequent value for strings", () => {
+it("mode(array, f) returns the most frequent value for strings", () => {
   assert.strictEqual(mode(["1"].map(box), unbox), "1");
   assert.strictEqual(mode(["5", "1", "1", "3", "4"].map(box), unbox), "1");
 });
 
-test("mode(array, f) returns the most frequent value for heterogenous types", () => {
+it("mode(array, f) returns the most frequent value for heterogenous types", () => {
   assert.strictEqual(mode(["1"].map(box), unbox), "1");
   assert.strictEqual(mode(["5", "1", "1", 2, 2, "2", 1, 1, 1, "3", "4"].map(box), unbox), 1);
 });
 
-test("mode(array, f) returns the first of the most frequent values", () => {
+it("mode(array, f) returns the first of the most frequent values", () => {
   assert.strictEqual(mode(["5", "1", "1", "2", "2", "3", "4"].map(box), unbox), "1");
 });
 
-test("mode(array, f) ignores null, undefined and NaN", () => {
+it("mode(array, f) ignores null, undefined and NaN", () => {
   const o = {valueOf: () => NaN};
   assert.strictEqual(mode([NaN, 1, 1, 3, 4, 5].map(box), unbox), 1);
   assert.strictEqual(mode([o, 1, null, null, 1, null].map(box), unbox), 1);
@@ -67,7 +67,7 @@ test("mode(array, f) ignores null, undefined and NaN", () => {
   assert.strictEqual(mode([1, undefined, undefined, 1, 5, undefined].map(box), unbox), 1);
 });
 
-test("mode(array, f) returns undefined if the array contains no comparable values", () => {
+it("mode(array, f) returns undefined if the array contains no comparable values", () => {
   assert.strictEqual(mode([].map(box), unbox), undefined);
   assert.strictEqual(mode([null].map(box), unbox), undefined);
   assert.strictEqual(mode([undefined].map(box), unbox), undefined);
@@ -75,14 +75,14 @@ test("mode(array, f) returns undefined if the array contains no comparable value
   assert.strictEqual(mode([NaN, NaN].map(box), unbox), undefined);
 });
 
-test("mode(array, f) passes the accessor d, i, and array", () => {
+it("mode(array, f) passes the accessor d, i, and array", () => {
   const results = [];
   const array = ["a", "b", "c"];
   mode(array, (d, i, array) => results.push([d, i, array]));
   assert.deepStrictEqual(results, [["a", 0, array], ["b", 1, array], ["c", 2, array]]);
 });
 
-test("mode(array, f) uses the undefined context", () => {
+it("mode(array, f) uses the undefined context", () => {
   const results = [];
   mode([1, 2], function() { results.push(this); });
   assert.deepStrictEqual(results, [undefined, undefined]);

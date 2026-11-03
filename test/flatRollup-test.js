@@ -1,4 +1,4 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {flatRollup} from "../src/index.js";
 
@@ -9,7 +9,7 @@ const data = [
   {name: "stacy", amount: "34.05",  date: "01/04/2016"}
 ];
 
-test("flatRollup(data, reduce, accessor) returns the expected array", () => {
+it("flatRollup(data, reduce, accessor) returns the expected array", () => {
   assert.deepStrictEqual(
     flatRollup(data, v => v.length, d => d.name),
     [
@@ -20,7 +20,7 @@ test("flatRollup(data, reduce, accessor) returns the expected array", () => {
   );
 });
 
-test("flatRollup(data, reduce, accessor, accessor) returns the expected array", () => {
+it("flatRollup(data, reduce, accessor, accessor) returns the expected array", () => {
   assert.deepStrictEqual(
     flatRollup(data, v => v.length, d => d.name, d => d.amount),
     [

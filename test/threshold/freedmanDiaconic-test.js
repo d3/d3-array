@@ -1,19 +1,19 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {thresholdFreedmanDiaconis} from "../../src/index.js";
 
-test("thresholdFreedmanDiaconis(values, min, max) returns the expected result", () => {
+it("thresholdFreedmanDiaconis(values, min, max) returns the expected result", () => {
   assert.strictEqual(thresholdFreedmanDiaconis([4, 3, 2, 1, NaN], 1, 4), 2);
 });
 
-test("thresholdFreedmanDiaconis(values, min, max) handles values with zero deviation", () => {
+it("thresholdFreedmanDiaconis(values, min, max) handles values with zero deviation", () => {
   assert.strictEqual(thresholdFreedmanDiaconis([1, 1, 1, 1], 1, 4), 1);
 });
 
-test("thresholdFreedmanDiaconis(values, min, max) handles single-value arrays", () => {
+it("thresholdFreedmanDiaconis(values, min, max) handles single-value arrays", () => {
   assert.strictEqual(thresholdFreedmanDiaconis([1], 1, 4), 1);
 });
 
-test("thresholdFreedmanDiaconis(values, min, max) handles empty arrays", () => {
+it("thresholdFreedmanDiaconis(values, min, max) handles empty arrays", () => {
   assert.strictEqual(thresholdFreedmanDiaconis([], 1, 4), 1);
 });

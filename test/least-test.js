@@ -1,8 +1,8 @@
-import {test} from "vitest";
+import {it} from "vitest";
 import assert from "assert";
 import {descending, least} from "../src/index.js";
 
-test("least(array) compares using natural order", () => {
+it("least(array) compares using natural order", () => {
   assert.strictEqual(least([0, 1]), 0);
   assert.strictEqual(least([1, 0]), 0);
   assert.strictEqual(least([0, "1"]), 0);
@@ -17,7 +17,7 @@ test("least(array) compares using natural order", () => {
   assert.strictEqual(least([NaN, 10, 2]), 2);
 });
 
-test("least(array, compare) compares using the specified compare function", () => {
+it("least(array, compare) compares using the specified compare function", () => {
   const a = {name: "a"}, b = {name: "b"};
   assert.deepStrictEqual(least([a, b], (a, b) => a.name.localeCompare(b.name)), {name: "a"});
   assert.strictEqual(least([1, 0], descending), 1);
@@ -27,31 +27,31 @@ test("least(array, compare) compares using the specified compare function", () =
   assert.strictEqual(least([2, NaN, 10], descending), 10);
 });
 
-test("least(array, accessor) uses the specified accessor function", () => {
+it("least(array, accessor) uses the specified accessor function", () => {
   const a = {name: "a", v: 42}, b = {name: "b", v: 0.42};
   assert.deepStrictEqual(least([a, b], d => d.name), a);
   assert.deepStrictEqual(least([a, b], d => d.v), b);
 });
 
-test("least(array) returns undefined if the array is empty", () => {
+it("least(array) returns undefined if the array is empty", () => {
   assert.strictEqual(least([]), undefined);
 });
 
-test("least(array) returns undefined if the array contains only incomparable values", () => {
+it("least(array) returns undefined if the array contains only incomparable values", () => {
   assert.strictEqual(least([NaN, undefined]), undefined);
   assert.strictEqual(least([NaN, "foo"], (a, b) => a - b), undefined);
 });
 
-test("least(array) returns the first of equal values", () => {
+it("least(array) returns the first of equal values", () => {
   assert.deepStrictEqual(least([2, 2, 1, 1, 0, 0, 0, 3, 0].map(box), ascendingValue), {value: 0, index: 4});
   assert.deepStrictEqual(least([3, 2, 2, 1, 1, 0, 0, 0, 3, 0].map(box), descendingValue), {value: 3, index: 0});
 });
 
-test("least(array) ignores null and undefined", () => {
+it("least(array) ignores null and undefined", () => {
   assert.deepStrictEqual(least([null, 2, undefined]), 2);
 });
 
-test("least(array, accessor) ignores null and undefined", () => {
+it("least(array, accessor) ignores null and undefined", () => {
   assert.deepStrictEqual(least([null, 2, undefined], d => d), 2);
 });
 
