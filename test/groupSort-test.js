@@ -1,6 +1,6 @@
 import assert from "node:assert";
+import {readFileSync} from "node:fs";
 import {it} from "vitest";
-import {readFileSync} from "fs";
 import {ascending, descending, groupSort, median} from "../src/index.js";
 
 const barley = JSON.parse(readFileSync("./test/data/barley.json"));
