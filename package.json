@@ -45,7 +45,7 @@
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.2",
     "d3-dsv": "^3.0.1",
-    "d3-random": "^3.0.1",
+    "d3-random": "^3.0.2",
     "eslint": "^10.14.0",
     "globals": "^17.14.0",
     "jsdom": "^21.1.2",
