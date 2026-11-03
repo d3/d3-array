@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {descending, greatest} from "../src/index.js";
+import {descending, greatest} from "d3-array";
 
 it("greatest(array) compares using natural order", () => {
   assert.strictEqual(greatest([0, 1]), 1);

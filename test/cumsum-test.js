@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {cumsum} from "../src/index.js";
+import {cumsum} from "d3-array";
 
 it("cumsum(array) returns the cumulative sum of the specified numbers", () => {
   assert.deepStrictEqual(Array.from(cumsum([1])), [1]);

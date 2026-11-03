@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {blur, blur2} from "../src/index.js";
+import {blur, blur2} from "d3-array";
 
 it("blur(values, r) returns values", () => {
   const V = [0, 0, 0, 0, 0, 0, 27, 0, 0, 0, 0, 0, 0, 0];

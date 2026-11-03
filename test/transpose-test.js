@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {transpose} from "../src/index.js";
+import {transpose} from "d3-array";
 
 it("transpose([]) and transpose([[]]) return an empty array", () => {
   assert.deepStrictEqual(transpose([]), []);

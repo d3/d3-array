@@ -1,5 +1,5 @@
 import {it} from "vitest";
-import {union} from "../src/index.js";
+import {union} from "d3-array";
 import {assertSetEqual} from "./asserts.js";
 
 it("union(values) returns a set of values", () => {

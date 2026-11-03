@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {count} from "../src/index.js";
+import {count} from "d3-array";
 
 it("count() accepts an iterable", () => {
   assert.deepStrictEqual(count([1, 2]), 2);

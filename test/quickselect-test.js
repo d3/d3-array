@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {quickselect} from "../src/index.js";
+import {quickselect} from "d3-array";
 
 it("quickselect(array, k) does nothing if k is not a number", () => {
   const array = [3, 1, 2];

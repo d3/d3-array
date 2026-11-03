@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {reduce} from "../src/index.js";
+import {reduce} from "d3-array";
 
 it("reduce(values, reducer) returns the reduced value", () => {
   assert.strictEqual(reduce([1, 2, 3, 2, 1], (p, v) => p + v), 9);

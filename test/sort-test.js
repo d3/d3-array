@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {ascending, descending, sort} from "../src/index.js";
+import {ascending, descending, sort} from "d3-array";
 
 it("sort(values) returns a sorted copy", () => {
   const input = [1, 3, 2, 5, 4];

@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {bisect, bisectLeft, bisectRight} from "../src/index.js";
+import {bisect, bisectLeft, bisectRight} from "d3-array";
 
 it("bisect is an alias for bisectRight", () => {
   assert.strictEqual(bisect, bisectRight);

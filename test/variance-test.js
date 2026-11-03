@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {variance} from "../src/index.js";
+import {variance} from "d3-array";
 
 it("variance(array) returns the variance of the specified numbers", () => {
   assert.strictEqual(variance([5, 1, 2, 3, 4]), 2.5);

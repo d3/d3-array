@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {superset} from "../src/index.js";
+import {superset} from "d3-array";
 
 it("superset(values, other) returns true if values is a superset of others", () => {
   assert.strictEqual(superset([1, 2], [2]), true);

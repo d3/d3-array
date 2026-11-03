@@ -2,7 +2,7 @@ import assert from "node:assert";
 import {readFile} from "node:fs/promises";
 import {it} from "vitest";
 import {csvParse} from "d3-dsv";
-import {bin, extent, histogram, thresholdSturges, ticks} from "../src/index.js";
+import {bin, extent, histogram, thresholdSturges, ticks} from "d3-array";
 
 it("histogram is a deprecated alias for bin", () => {
   assert.strictEqual(histogram, bin);

@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {disjoint} from "../src/index.js";
+import {disjoint} from "d3-array";
 
 it("disjoint(values, other) returns true if sets are disjoint", () => {
   assert.strictEqual(disjoint([1], [2]), true);

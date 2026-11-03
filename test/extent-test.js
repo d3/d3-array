@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {extent} from "../src/index.js";
+import {extent} from "d3-array";
 
 it("extent(array) returns the least and greatest numeric values for numbers", () => {
   assert.deepStrictEqual(extent([1]), [1, 1]);

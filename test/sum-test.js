@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {sum} from "../src/index.js";
+import {sum} from "d3-array";
 
 it("sum(array) returns the sum of the specified numbers", () => {
   assert.strictEqual(sum([1]), 1);

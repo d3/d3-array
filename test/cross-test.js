@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {cross} from "../src/index.js";
+import {cross} from "d3-array";
 
 it("cross() returns an empty array", () => {
   assert.deepStrictEqual(cross(), []);

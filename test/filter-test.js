@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import * as d3 from "../src/index.js";
+import * as d3 from "d3-array";
 
 it("filter(values, test) returns the values that pass the test", () => {
   assert.deepStrictEqual(d3.filter([1, 2, 3, 2, 1], x => x & 1), [1, 3, 1]);

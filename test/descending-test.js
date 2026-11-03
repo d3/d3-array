@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {descending} from "../src/index.js";
+import {descending} from "d3-array";
 
 it("descending(a, b) returns a positive number if a < b", () => {
   assert(descending(0, 1) > 0);

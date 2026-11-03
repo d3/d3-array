@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {deviation} from "../src/index.js";
+import {deviation} from "d3-array";
 
 it("deviation(array) returns the standard deviation of the specified numbers", () => {
   assert.strictEqual(deviation([1, 1, 1, 1, 1]), 0);

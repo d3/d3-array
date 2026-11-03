@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {descending, leastIndex} from "../src/index.js";
+import {descending, leastIndex} from "d3-array";
 
 it("leastIndex(array) compares using natural order", () => {
   assert.strictEqual(leastIndex([0, 1]), 0);

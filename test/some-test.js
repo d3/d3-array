@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {some} from "../src/index.js";
+import {some} from "d3-array";
 
 it("some(values, test) returns true if any test passes", () => {
   assert.strictEqual(some([1, 2, 3, 2, 1], x => x & 1), true);

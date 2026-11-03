@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {subset} from "../src/index.js";
+import {subset} from "d3-array";
 
 it("subset(values, other) returns true if values is a subset of others", () => {
   assert.strictEqual(subset([2], [1, 2]), true);

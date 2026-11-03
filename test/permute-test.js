@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {permute} from "../src/index.js";
+import {permute} from "d3-array";
 
 it("permute(…) permutes according to the specified index", () => {
   assert.deepStrictEqual(permute([3, 4, 5], [2, 1, 0]), [5, 4, 3]);

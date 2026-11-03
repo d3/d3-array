@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import {it} from "vitest";
-import {mode} from "../src/index.js";
+import {mode} from "d3-array";
 
 it("mode(array) returns the most frequent value for numbers", () => {
   assert.strictEqual(mode([1]), 1);

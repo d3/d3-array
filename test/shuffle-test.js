@@ -1,7 +1,7 @@
 import assert from "node:assert";
 import {it} from "vitest";
 import {randomLcg} from "d3-random";
-import {pairs, shuffler} from "../src/index.js";
+import {pairs, shuffler} from "d3-array";
 
 it("shuffle(array) shuffles the array in-place", () => {
   const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
