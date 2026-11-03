@@ -45,3 +45,19 @@ it("nice(start, stop, count) returns the expected values", () => {
   assert.deepStrictEqual(nice(132, 876, 5), [0, 1000]);
   assert.deepStrictEqual(nice(132, 876, 1), [0, 1000]);
 });
+
+it("nice(start, stop, count) handles small steps precisely", () => {
+  assert.deepStrictEqual(nice(0.9299999999999999, 1.07, 5000), [0.92998, 1.07]);
+  assert.deepStrictEqual(nice(-1.07, -0.9299999999999999, 5000), [-1.07, -0.92998]);
+  assert.deepStrictEqual(nice(0.929999999999999, 1.07, 5000), [0.92998, 1.07]);
+  assert.deepStrictEqual(nice(-1.07, -0.929999999999999, 5000), [-1.07, -0.92998]);
+  assert.deepStrictEqual(nice(0.92999999999999, 1.07, 5000), [0.92998, 1.07]);
+  assert.deepStrictEqual(nice(-1.07, -0.92999999999999, 5000), [-1.07, -0.92998]);
+  assert.deepStrictEqual(nice(0.930000000000001, 1.07, 5000), [0.93, 1.07]);
+  assert.deepStrictEqual(nice(-1.07, -0.930000000000001, 5000), [-1.07, -0.93]);
+});
+
+it("nice(start, stop, count) handles large steps precisely", () => {
+  assert.deepStrictEqual(nice(0.929999999999999e10, 1.07e10, 5000), [0.92998e10, 1.07e10]);
+  assert.deepStrictEqual(nice(-1.07e10, -0.929999999999999e10, 5000), [-1.07e10, -0.92998e10]);
+});
