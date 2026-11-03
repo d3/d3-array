@@ -1,5 +1,6 @@
-import assert from "assert";
-import {ascending, bisector} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {ascending, bisector} from "d3-array";
 
 it("bisector(comparator).left(array, value) returns the index of an exact match", () => {
   const boxes = [1, 2, 3].map(box);

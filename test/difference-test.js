@@ -1,4 +1,5 @@
-import {difference} from "../src/index.js";
+import {it} from "vitest";
+import {difference} from "d3-array";
 import {assertSetEqual} from "./asserts.js";
 
 it("difference(values, other) returns a set of values", () => {

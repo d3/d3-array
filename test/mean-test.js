@@ -1,5 +1,6 @@
-import assert from "assert";
-import {mean} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {mean} from "d3-array";
 import {OneTimeNumber} from "./OneTimeNumber.js";
 
 it("mean(array) returns the mean value for numbers", () => {

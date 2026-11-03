@@ -1,5 +1,6 @@
-import assert from "assert";
-import {range} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {range} from "d3-array";
 
 it("range(stop) returns [0, 1, 2, … stop - 1]", () => {
   assert.deepStrictEqual(range(5), [0, 1, 2, 3, 4]);

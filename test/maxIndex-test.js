@@ -1,5 +1,6 @@
-import assert from "assert";
-import {maxIndex} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {maxIndex} from "d3-array";
 
 it("maxIndex(array) returns the index of the greatest numeric value for numbers", () => {
   assert.deepStrictEqual(maxIndex([1]), 0);

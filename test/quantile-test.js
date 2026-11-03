@@ -1,5 +1,6 @@
-import assert from "assert";
-import {quantile, quantileIndex, quantileSorted} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {quantile, quantileIndex, quantileSorted} from "d3-array";
 
 it("quantileSorted(array, p) requires sorted numeric input, quantile doesn't", () => {
   assert.strictEqual(quantileSorted([1, 2, 3, 4], 0), 1);

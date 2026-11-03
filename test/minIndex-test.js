@@ -1,5 +1,6 @@
-import assert from "assert";
-import {minIndex} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {minIndex} from "d3-array";
 
 it("minIndex(array) returns the index of the least numeric value for numbers", () => {
   assert.deepStrictEqual(minIndex([1]), 0);

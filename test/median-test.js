@@ -1,5 +1,6 @@
-import assert from "assert";
-import {median, medianIndex} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {median, medianIndex} from "d3-array";
 import {OneTimeNumber} from "./OneTimeNumber.js";
 
 it("median(array) returns the median value for numbers", () => {

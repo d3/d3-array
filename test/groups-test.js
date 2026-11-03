@@ -1,5 +1,6 @@
-import assert from "assert";
-import {groups} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {groups} from "d3-array";
 
 const data = [
   {name: "jim",   amount: "34.0",   date: "11/12/2015"},

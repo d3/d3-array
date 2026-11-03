@@ -1,5 +1,6 @@
-import assert from "assert";
-import {Adder, fsum} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {Adder, fsum} from "d3-array";
 
 it("new Adder() returns an Adder", () => {
   assert.strictEqual(typeof new Adder().add, "function");

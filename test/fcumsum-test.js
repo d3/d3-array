@@ -1,5 +1,6 @@
-import assert from "assert";
-import {cumsum, fcumsum} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {cumsum, fcumsum} from "d3-array";
 
 it("fcumsum(array) returns a Float64Array of the expected length", () => {
   const A = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1];

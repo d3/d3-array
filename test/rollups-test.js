@@ -1,5 +1,6 @@
-import assert from "assert";
-import {rollups, sum} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {rollups, sum} from "d3-array";
 
 const data = [
   {name: "jim",   amount: "3400",   date: "11/12/2015"},

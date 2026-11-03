@@ -1,7 +1,7 @@
-import {nodeResolve} from "@rollup/plugin-node-resolve";
-import {readFileSync} from "fs";
-import {terser} from "rollup-plugin-terser";
-import meta from "./package.json" assert {type: "json"};
+import {readFileSync} from "node:fs";
+import RollupNode from "@rollup/plugin-node-resolve";
+import RollupTerser from "@rollup/plugin-terser";
+import meta from "./package.json" with {type: "json"};
 
 // Extract copyrights from the LICENSE.
 const copyright = readFileSync("./LICENSE", "utf-8")
@@ -10,44 +10,69 @@ const copyright = readFileSync("./LICENSE", "utf-8")
   .map(line => line.replace(/^copyright\s+/i, ""))
   .join(", ");
 
-const config = {
-  input: "src/index.js",
-  external: Object.keys(meta.dependencies || {}).filter(key => /^d3-/.test(key)),
-  output: {
-    file: `dist/${meta.name}.js`,
-    name: "d3",
-    format: "umd",
-    indent: false,
-    extend: true,
-    banner: `// ${meta.homepage} v${meta.version} Copyright ${copyright}`,
-    globals: Object.assign({}, ...Object.keys(meta.dependencies || {}).filter(key => /^d3-/.test(key)).map(key => ({[key]: "d3"})))
-  },
-  plugins: [
-    nodeResolve()
-  ]
-};
+const banner = `// ${meta.homepage} v${meta.version} Copyright ${copyright}`;
 
-export default [
-  config,
-  {
-    ...config,
-    output: {
-      ...config.output,
-      file: `dist/${meta.name}.min.js`
-    },
-    plugins: [
-      ...config.plugins,
-      terser({
-        output: {
-          preamble: config.output.banner
-        },
-        mangle: {
-          reserved: [
-            "InternMap",
-            "InternSet"
-          ]
-        }
-      })
+const terser = RollupTerser({
+  output: {
+    preamble: banner
+  },
+  mangle: {
+    reserved: [
+      "InternMap",
+      "InternSet"
     ]
   }
+});
+
+function config(options) {
+  return {
+    ...options,
+    input: "src/index.js",
+    external: Object.keys(meta.dependencies || {}).filter(key => /^d3-/.test(key)),
+    output: {
+      ...options.output,
+      name: "d3",
+      indent: false,
+      extend: true,
+      banner,
+      globals: Object.assign({}, ...Object.keys(meta.dependencies || {}).filter(key => /^d3-/.test(key)).map(key => ({[key]: "d3"})))
+    },
+    plugins: [
+      RollupNode(),
+      ...(options.plugins ?? [])
+    ]
+  };
+}
+
+export default [
+  config({
+    output: {
+      file: `dist/${meta.name}.mjs`,
+      format: "es"
+    }
+  }),
+  config({
+    output: {
+      file: `dist/${meta.name}.min.mjs`,
+      format: "es"
+    },
+    plugins: [
+      terser
+    ]
+  }),
+  config({
+    output: {
+      file: `dist/${meta.name}.js`,
+      format: "umd"
+    }
+  }),
+  config({
+    output: {
+      file: `dist/${meta.name}.min.js`,
+      format: "umd"
+    },
+    plugins: [
+      terser
+    ]
+  })
 ];

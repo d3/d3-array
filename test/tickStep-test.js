@@ -1,5 +1,6 @@
-import assert from "assert";
-import {tickStep} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {tickStep} from "d3-array";
 
 it("tickStep(start, stop, count) returns NaN if any argument is NaN", () => {
   assert(isNaN(tickStep(NaN, 1, 1)));

@@ -1,5 +1,6 @@
-import assert from "assert";
-import {map} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {map} from "d3-array";
 
 it("map(values, mapper) returns the mapped values", () => {
   assert.deepStrictEqual(map([1, 2, 3, 2, 1], x => x * 2), [2, 4, 6, 4, 2]);

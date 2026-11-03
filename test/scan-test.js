@@ -1,5 +1,6 @@
-import assert from "assert";
-import {descending, scan} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {descending, scan} from "d3-array";
 
 it("scan(array) compares using natural order", () => {
   assert.strictEqual(scan([0, 1]), 0);

@@ -1,4 +1,5 @@
-import {intersection} from "../src/index.js";
+import {it} from "vitest";
+import {intersection} from "d3-array";
 import {assertSetEqual} from "./asserts.js";
 
 it("intersection(values) returns a set of values", () => {

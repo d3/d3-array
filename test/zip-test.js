@@ -1,5 +1,6 @@
-import assert from "assert";
-import {zip} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {zip} from "d3-array";
 
 it("zip() and zip([]) return an empty array", () => {
   assert.deepStrictEqual(zip(), []);

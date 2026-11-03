@@ -1,5 +1,6 @@
-import assert from "assert";
-import {every} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {every} from "d3-array";
 
 it("every(values, test) returns true if all tests pass", () => {
   assert.strictEqual(every([1, 2, 3, 2, 1], x => x & 1), false);

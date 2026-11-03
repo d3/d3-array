@@ -1,5 +1,6 @@
-import assert from "assert";
-import {reverse} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {reverse} from "d3-array";
 
 it("reverse(values) returns a reversed copy", () => {
   const input = [1, 3, 2, 5, 4];

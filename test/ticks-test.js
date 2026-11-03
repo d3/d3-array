@@ -1,5 +1,6 @@
-import assert from "assert";
-import {ticks} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {ticks} from "d3-array";
 
 it("ticks(start, stop, count) returns the empty array if any argument is NaN", () => {
   assert.deepStrictEqual(ticks(NaN, 1, 1), []);

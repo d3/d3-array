@@ -1,5 +1,6 @@
-import assert from "assert";
-import {nice} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {nice} from "d3-array";
 
 it("nice(start, stop, count) returns [start, stop] if any argument is NaN", () => {
   assert.deepStrictEqual(nice(NaN, 1, 1), [NaN, 1]);

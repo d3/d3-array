@@ -1,5 +1,6 @@
-import assert from "assert";
-import {merge} from "../src/index.js";
+import assert from "node:assert";
+import {it} from "vitest";
+import {merge} from "d3-array";
 
 it("merge(arrays) merges an array of arrays", () => {
   const a = {}, b = {}, c = {}, d = {}, e = {}, f = {};
