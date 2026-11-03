@@ -32,6 +32,11 @@ it("groupSort(data, reduce, key) returns sorted keys when reduce is an accessor"
   );
 });
 
+it("groupSort(data, reduce, key) puts non-orderable reduced values last", () => {
+  const data = [{key: "z", value: 2}, {key: "a", value: null}, {key: "m", value: 1}];
+  assert.deepStrictEqual(groupSort(data, g => g[0].value, d => d.key), ["m", "z", "a"]);
+});
+
 it("groupSort(data, reduce, key) returns sorted keys when reduce is a comparator", () => {
   assert.deepStrictEqual(
     groupSort(barley, (a, b) => ascending(median(a, d => d.yield), median(b, d => d.yield)), d => d.variety),
