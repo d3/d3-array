@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {descending, scan} from "../src/index.js";
 
 it("scan(array) compares using natural order", () => {

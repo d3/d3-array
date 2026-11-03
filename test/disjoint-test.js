@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {disjoint} from "../src/index.js";
 
 it("disjoint(values, other) returns true if sets are disjoint", () => {

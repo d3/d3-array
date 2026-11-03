@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {some} from "../src/index.js";
 
 it("some(values, test) returns true if any test passes", () => {

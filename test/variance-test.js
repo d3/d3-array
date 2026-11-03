@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {variance} from "../src/index.js";
 
 it("variance(array) returns the variance of the specified numbers", () => {

@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {ascending, descending, greatestIndex} from "../src/index.js";
 
 it("greatestIndex(array) compares using natural order", () => {

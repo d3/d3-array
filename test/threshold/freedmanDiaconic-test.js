@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {thresholdFreedmanDiaconis} from "../../src/index.js";
 
 it("thresholdFreedmanDiaconis(values, min, max) returns the expected result", () => {

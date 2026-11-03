@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {thresholdSturges} from "../../src/index.js";
 
 it("thresholdSturges(values, min, max) returns the expected result", () => {

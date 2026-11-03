@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import ascending from "../src/ascending.js";
 import descending from "../src/descending.js";
 import rank from "../src/rank.js";

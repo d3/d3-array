@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {map} from "../src/index.js";
 
 it("map(values, mapper) returns the mapped values", () => {

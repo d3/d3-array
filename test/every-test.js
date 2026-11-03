@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {every} from "../src/index.js";
 
 it("every(values, test) returns true if all tests pass", () => {

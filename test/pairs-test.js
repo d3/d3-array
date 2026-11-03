@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {pairs} from "../src/index.js";
 
 it("pairs(array) returns the empty array if input array has fewer than two elements", () => {

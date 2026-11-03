@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {ascending, bisector} from "../src/index.js";
 
 it("bisector(comparator).left(array, value) returns the index of an exact match", () => {

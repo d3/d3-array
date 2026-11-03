@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {median, medianIndex} from "../src/index.js";
 import {OneTimeNumber} from "./OneTimeNumber.js";
 

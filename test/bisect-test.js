@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {bisect, bisectLeft, bisectRight} from "../src/index.js";
 
 it("bisect is an alias for bisectRight", () => {

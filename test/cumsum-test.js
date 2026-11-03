@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {cumsum} from "../src/index.js";
 
 it("cumsum(array) returns the cumulative sum of the specified numbers", () => {

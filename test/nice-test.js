@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {nice} from "../src/index.js";
 
 it("nice(start, stop, count) returns [start, stop] if any argument is NaN", () => {

@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {csvParse} from "d3-dsv";
 import {readFile} from "fs/promises";
 import {bin, extent, histogram, thresholdSturges, ticks} from "../src/index.js";

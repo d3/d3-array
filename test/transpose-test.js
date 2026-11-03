@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {transpose} from "../src/index.js";
 
 it("transpose([]) and transpose([[]]) return an empty array", () => {

@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {reduce} from "../src/index.js";
 
 it("reduce(values, reducer) returns the reduced value", () => {

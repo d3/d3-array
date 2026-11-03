@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {superset} from "../src/index.js";
 
 it("superset(values, other) returns true if values is a superset of others", () => {

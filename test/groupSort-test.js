@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {readFileSync} from "fs";
 import {ascending, descending, groupSort, median} from "../src/index.js";
 

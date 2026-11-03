@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {range} from "../src/index.js";
 
 it("range(stop) returns [0, 1, 2, … stop - 1]", () => {

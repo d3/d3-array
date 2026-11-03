@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {blur, blur2} from "../src/index.js";
 
 it("blur(values, r) returns values", () => {

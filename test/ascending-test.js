@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {ascending} from "../src/index.js";
 
 it("ascending(a, b) returns a negative number if a < b", () => {

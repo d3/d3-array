@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {tickIncrement} from "../src/index.js";
 
 it("tickIncrement(start, stop, count) returns NaN if any argument is NaN", () => {

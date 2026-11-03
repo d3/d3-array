@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {quickselect} from "../src/index.js";
 
 it("quickselect(array, k) does nothing if k is not a number", () => {

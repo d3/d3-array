@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {quantile, quantileIndex, quantileSorted} from "../src/index.js";
 
 it("quantileSorted(array, p) requires sorted numeric input, quantile doesn't", () => {

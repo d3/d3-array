@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {rollup, sum} from "../src/index.js";
 
 const data = [

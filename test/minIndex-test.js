@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {minIndex} from "../src/index.js";
 
 it("minIndex(array) returns the index of the least numeric value for numbers", () => {

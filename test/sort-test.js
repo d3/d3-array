@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {ascending, descending, sort} from "../src/index.js";
 
 it("sort(values) returns a sorted copy", () => {

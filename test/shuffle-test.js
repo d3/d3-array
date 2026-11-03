@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {randomLcg} from "d3-random";
 import {pairs, shuffler} from "../src/index.js";
 

@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {mode} from "../src/index.js";
 
 it("mode(array) returns the most frequent value for numbers", () => {

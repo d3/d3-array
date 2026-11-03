@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {permute} from "../src/index.js";
 
 it("permute(…) permutes according to the specified index", () => {

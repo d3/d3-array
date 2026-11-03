@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {sum} from "../src/index.js";
 
 it("sum(array) returns the sum of the specified numbers", () => {

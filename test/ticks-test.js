@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {ticks} from "../src/index.js";
 
 it("ticks(start, stop, count) returns the empty array if any argument is NaN", () => {

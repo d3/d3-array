@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {deviation} from "../src/index.js";
 
 it("deviation(array) returns the standard deviation of the specified numbers", () => {

@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {zip} from "../src/index.js";
 
 it("zip() and zip([]) return an empty array", () => {

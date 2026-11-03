@@ -1,5 +1,5 @@
+import assert from "node:assert";
 import {it} from "vitest";
-import assert from "assert";
 import {extent} from "../src/index.js";
 
 it("extent(array) returns the least and greatest numeric values for numbers", () => {
