@@ -1,35 +1,36 @@
+import {test} from "vitest";
 import assert from "assert";
 import {reduce} from "../src/index.js";
 
-it("reduce(values, reducer) returns the reduced value", () => {
+test("reduce(values, reducer) returns the reduced value", () => {
   assert.strictEqual(reduce([1, 2, 3, 2, 1], (p, v) => p + v), 9);
   assert.strictEqual(reduce([1, 2], (p, v) => p + v), 3);
   assert.strictEqual(reduce([1], (p, v) => p + v), 1);
   assert.strictEqual(reduce([], (p, v) => p + v), undefined);
 });
 
-it("reduce(values, reducer, initial) returns the reduced value", () => {
+test("reduce(values, reducer, initial) returns the reduced value", () => {
   assert.strictEqual(reduce([1, 2, 3, 2, 1], (p, v) => p + v, 0), 9);
   assert.strictEqual(reduce([1], (p, v) => p + v, 0), 1);
   assert.strictEqual(reduce([], (p, v) => p + v, 0), 0);
   assert.deepStrictEqual(reduce([1, 2, 3, 2, 1], (p, v) => p.concat(v), []), [1, 2, 3, 2, 1]);
 });
 
-it("reduce(values, reducer) accepts an iterable", () => {
+test("reduce(values, reducer) accepts an iterable", () => {
   assert.strictEqual(reduce(new Set([1, 2, 3, 2, 1]), (p, v) => p + v), 6);
   assert.strictEqual(reduce((function*() { yield* [1, 2, 3, 2, 1]; })(), (p, v) => p + v), 9);
   assert.strictEqual(reduce(Uint8Array.of(1, 2, 3, 2, 1), (p, v) => p + v), 9);
 });
 
-it("reduce(values, reducer) enforces that test is a function", () => {
+test("reduce(values, reducer) enforces that test is a function", () => {
   assert.throws(() => reduce([]), TypeError);
 });
 
-it("reduce(values, reducer) enforces that values is iterable", () => {
+test("reduce(values, reducer) enforces that values is iterable", () => {
   assert.throws(() => reduce({}, () => true), TypeError);
 });
 
-it("reduce(values, reducer) passes reducer (reduced, value, index, values)", () => {
+test("reduce(values, reducer) passes reducer (reduced, value, index, values)", () => {
   const calls = [];
   const values = new Set([5, 4, 3, 2, 1]);
   reduce(values, function(p, v) { calls.push([this, ...arguments]); return p + v; });
@@ -41,7 +42,7 @@ it("reduce(values, reducer) passes reducer (reduced, value, index, values)", () 
   ]);
 });
 
-it("reduce(values, reducer, initial) passes reducer (reduced, value, index, values)", () => {
+test("reduce(values, reducer, initial) passes reducer (reduced, value, index, values)", () => {
   const calls = [];
   const values = new Set([5, 4, 3, 2, 1]);
   reduce(values, function(p, v) { calls.push([this, ...arguments]); return p + v; }, 0);
@@ -54,6 +55,6 @@ it("reduce(values, reducer, initial) passes reducer (reduced, value, index, valu
   ]);
 });
 
-it("reduce(values, reducer, initial) does not skip sparse elements", () => {
+test("reduce(values, reducer, initial) does not skip sparse elements", () => {
   assert.strictEqual(reduce([, 1, 2,, ], (p, v) => p + (v === undefined ? -1 : v), 0), 1);
 });

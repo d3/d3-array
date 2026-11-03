@@ -1,7 +1,8 @@
+import {test} from "vitest";
 import assert from "assert";
 import {tickStep} from "../src/index.js";
 
-it("tickStep(start, stop, count) returns NaN if any argument is NaN", () => {
+test("tickStep(start, stop, count) returns NaN if any argument is NaN", () => {
   assert(isNaN(tickStep(NaN, 1, 1)));
   assert(isNaN(tickStep(0, NaN, 1)));
   assert(isNaN(tickStep(0, 1, NaN)));
@@ -11,7 +12,7 @@ it("tickStep(start, stop, count) returns NaN if any argument is NaN", () => {
   assert(isNaN(tickStep(NaN, NaN, NaN)));
 });
 
-it("tickStep(start, stop, count) returns NaN or 0 if start === stop", () => {
+test("tickStep(start, stop, count) returns NaN or 0 if start === stop", () => {
   assert(isNaN(tickStep(1, 1, -1)));
   assert(isNaN(tickStep(1, 1, 0)));
   assert(isNaN(tickStep(1, 1, NaN)));
@@ -19,16 +20,16 @@ it("tickStep(start, stop, count) returns NaN or 0 if start === stop", () => {
   assert.strictEqual(tickStep(1, 1, 10), 0);
 });
 
-it("tickStep(start, stop, count) returns 0 or Infinity if count is not positive", () => {
+test("tickStep(start, stop, count) returns 0 or Infinity if count is not positive", () => {
   assert.strictEqual(tickStep(0, 1, -1), Infinity);
   assert.strictEqual(tickStep(0, 1, 0), Infinity);
 });
 
-it("tickStep(start, stop, count) returns 0 if count is infinity", () => {
+test("tickStep(start, stop, count) returns 0 if count is infinity", () => {
   assert.strictEqual(tickStep(0, 1, Infinity), 0);
 });
 
-it("tickStep(start, stop, count) returns approximately count + 1 tickStep when start < stop", () => {
+test("tickStep(start, stop, count) returns approximately count + 1 tickStep when start < stop", () => {
   assert.strictEqual(tickStep(  0,  1, 10), 0.1);
   assert.strictEqual(tickStep(  0,  1,  9), 0.1);
   assert.strictEqual(tickStep(  0,  1,  8), 0.1);
@@ -61,7 +62,7 @@ it("tickStep(start, stop, count) returns approximately count + 1 tickStep when s
   assert.strictEqual(tickStep(-10, 10,  1), 20);
 });
 
-it("tickStep(start, stop, count) returns -tickStep(stop, start, count)", () => {
+test("tickStep(start, stop, count) returns -tickStep(stop, start, count)", () => {
   assert.strictEqual(tickStep(  0,  1, 10), -tickStep( 1,   0, 10));
   assert.strictEqual(tickStep(  0,  1,  9), -tickStep( 1,   0,  9));
   assert.strictEqual(tickStep(  0,  1,  8), -tickStep( 1,   0,  8));

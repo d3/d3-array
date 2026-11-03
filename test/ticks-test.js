@@ -1,7 +1,8 @@
+import {test} from "vitest";
 import assert from "assert";
 import {ticks} from "../src/index.js";
 
-it("ticks(start, stop, count) returns the empty array if any argument is NaN", () => {
+test("ticks(start, stop, count) returns the empty array if any argument is NaN", () => {
   assert.deepStrictEqual(ticks(NaN, 1, 1), []);
   assert.deepStrictEqual(ticks(0, NaN, 1), []);
   assert.deepStrictEqual(ticks(0, 1, NaN), []);
@@ -11,36 +12,36 @@ it("ticks(start, stop, count) returns the empty array if any argument is NaN", (
   assert.deepStrictEqual(ticks(NaN, NaN, NaN), []);
 });
 
-it("ticks(start, stop, count) returns the empty array if start === stop and count is non-positive", () => {
+test("ticks(start, stop, count) returns the empty array if start === stop and count is non-positive", () => {
   assert.deepStrictEqual(ticks(1, 1, -1), []);
   assert.deepStrictEqual(ticks(1, 1, 0), []);
   assert.deepStrictEqual(ticks(1, 1, NaN), []);
 });
 
-it("ticks(start, stop, count) returns the empty array if start === stop and count is positive", () => {
+test("ticks(start, stop, count) returns the empty array if start === stop and count is positive", () => {
   assert.deepStrictEqual(ticks(1, 1, 1), [1]);
   assert.deepStrictEqual(ticks(1, 1, 10), [1]);
 });
 
-it("ticks(start, stop, count) returns the empty array if count is not positive", () => {
+test("ticks(start, stop, count) returns the empty array if count is not positive", () => {
   assert.deepStrictEqual(ticks(0, 1, 0), []);
   assert.deepStrictEqual(ticks(0, 1, -1), []);
   assert.deepStrictEqual(ticks(0, 1, NaN), []);
 });
 
-it("ticks(start, stop, count) returns the empty array if count is infinity", () => {
+test("ticks(start, stop, count) returns the empty array if count is infinity", () => {
   assert.deepStrictEqual(ticks(0, 1, Infinity), []);
 });
 
-it("ticks(start, stop, count) does not include negative zero", () => {
+test("ticks(start, stop, count) does not include negative zero", () => {
   assert.strictEqual(1 / ticks(-1, 0, 5).pop(), Infinity);
 });
 
-it("ticks(start, stop, count) remains within the domain", () => {
+test("ticks(start, stop, count) remains within the domain", () => {
   assert.deepStrictEqual(ticks(0, 2.2, 3), [0, 1, 2]);
 });
 
-it("ticks(start, stop, count) returns approximately count + 1 ticks when start < stop", () => {
+test("ticks(start, stop, count) returns approximately count + 1 ticks when start < stop", () => {
   assert.deepStrictEqual(ticks(  0,  1, 10), [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]);
   assert.deepStrictEqual(ticks(  0,  1,  9), [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]);
   assert.deepStrictEqual(ticks(  0,  1,  8), [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]);
@@ -73,7 +74,7 @@ it("ticks(start, stop, count) returns approximately count + 1 ticks when start <
   assert.deepStrictEqual(ticks(-10, 10,  1), [                     0,               ]);
 });
 
-it("ticks(start, stop, count) returns the reverse of ticks(stop, start, count)", () => {
+test("ticks(start, stop, count) returns the reverse of ticks(stop, start, count)", () => {
   assert.deepStrictEqual(ticks( 1,   0, 10), ticks(  0,  1, 10).reverse());
   assert.deepStrictEqual(ticks( 1,   0,  9), ticks(  0,  1,  9).reverse());
   assert.deepStrictEqual(ticks( 1,   0,  8), ticks(  0,  1,  8).reverse());
@@ -106,11 +107,11 @@ it("ticks(start, stop, count) returns the reverse of ticks(stop, start, count)",
   assert.deepStrictEqual(ticks(10, -10,  1), ticks(-10, 10,  1).reverse());
 });
 
-it("ticks(start, stop, count) handles precision problems", () => {
+test("ticks(start, stop, count) handles precision problems", () => {
   assert.deepStrictEqual(ticks(0.98, 1.14, 10), [0.98, 1, 1.02, 1.04, 1.06, 1.08, 1.1, 1.12, 1.14]);
 });
 
-it("ticks(start, stop, count) tries to return at least one tick if count >= 0.5", () => {
+test("ticks(start, stop, count) tries to return at least one tick if count >= 0.5", () => {
   assert.deepStrictEqual(ticks(1, 364, 0.1), []);
   assert.deepStrictEqual(ticks(1, 364, 0.499), []);
   assert.deepStrictEqual(ticks(1, 364, 0.5), [200]);

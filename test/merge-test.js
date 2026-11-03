@@ -1,12 +1,13 @@
+import {test} from "vitest";
 import assert from "assert";
 import {merge} from "../src/index.js";
 
-it("merge(arrays) merges an array of arrays", () => {
+test("merge(arrays) merges an array of arrays", () => {
   const a = {}, b = {}, c = {}, d = {}, e = {}, f = {};
   assert.deepStrictEqual(merge([[a], [b, c], [d, e, f]]), [a, b, c, d, e, f]);
 });
 
-it("merge(arrays) returns a new array when zero arrays are passed", () => {
+test("merge(arrays) returns a new array when zero arrays are passed", () => {
   const input = [];
   const output = merge(input);
   assert.deepStrictEqual(output, []);
@@ -15,7 +16,7 @@ it("merge(arrays) returns a new array when zero arrays are passed", () => {
   assert.deepStrictEqual(output, []);
 });
 
-it("merge(arrays) returns a new array when one array is passed", () => {
+test("merge(arrays) returns a new array when one array is passed", () => {
   const input = [[1, 2, 3]];
   const output = merge(input);
   assert.deepStrictEqual(output, [1, 2, 3]);
@@ -25,7 +26,7 @@ it("merge(arrays) returns a new array when one array is passed", () => {
   assert.deepStrictEqual(output, [1, 2, 3]);
 });
 
-it("merge(arrays) returns a new array when two or more arrays are passed", () => {
+test("merge(arrays) returns a new array when two or more arrays are passed", () => {
   const input = [[1, 2, 3], [4, 5], [6]];
   const output = merge(input);
   assert.deepStrictEqual(output, [1, 2, 3, 4, 5, 6]);
@@ -37,7 +38,7 @@ it("merge(arrays) returns a new array when two or more arrays are passed", () =>
   assert.deepStrictEqual(output, [1, 2, 3, 4, 5, 6]);
 });
 
-it("merge(arrays) does not modify the input arrays", () => {
+test("merge(arrays) does not modify the input arrays", () => {
   const input = [[1, 2, 3], [4, 5], [6]];
   merge(input);
   assert.deepStrictEqual(input, [[1, 2, 3], [4, 5], [6]]);

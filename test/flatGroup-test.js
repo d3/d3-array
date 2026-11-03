@@ -1,3 +1,4 @@
+import {test} from "vitest";
 import assert from "assert";
 import {flatGroup} from "../src/index.js";
 
@@ -8,7 +9,7 @@ const data = [
   {name: "stacy", amount: "34.05",  date: "01/04/2016"}
 ];
 
-it("flatGroup(data, accessor, accessor) returns the expected array", () => {
+test("flatGroup(data, accessor, accessor) returns the expected array", () => {
   assert.deepStrictEqual(
     flatGroup(data, d => d.name, d => d.amount),
     [

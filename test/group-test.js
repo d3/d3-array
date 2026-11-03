@@ -1,3 +1,4 @@
+import {test} from "vitest";
 import assert from "assert";
 import {group} from "../src/index.js";
 
@@ -8,7 +9,7 @@ const data = [
   {name: "stacy", amount: "34.05",  date: "01/04/2016"}
 ];
 
-it("group(data, accessor) returns the expected map", () => {
+test("group(data, accessor) returns the expected map", () => {
   assert.deepStrictEqual(
     entries(group(data, d => d.name), 1),
     [
@@ -51,7 +52,7 @@ it("group(data, accessor) returns the expected map", () => {
   );
 });
 
-it("group(data, accessor, accessor) returns the expected map", () => {
+test("group(data, accessor, accessor) returns the expected map", () => {
   assert.deepStrictEqual(
     entries(group(data, d => d.name, d => d.amount), 2),
     [
@@ -114,7 +115,7 @@ it("group(data, accessor, accessor) returns the expected map", () => {
   );
 });
 
-it("group(data, accessor) interns keys", () => {
+test("group(data, accessor) interns keys", () => {
   const a1 = new Date(Date.UTC(2001, 0, 1));
   const a2 = new Date(Date.UTC(2001, 0, 1));
   const b = new Date(Date.UTC(2002, 0, 1));
