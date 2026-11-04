@@ -38,8 +38,8 @@ export function quantileIndex(values, p, valueof = number) {
   if (p <= 0) return minIndex(numbers);
   if (p >= 1) return maxIndex(numbers);
   var numbers,
-      index = Uint32Array.from(values, (_, i) => i),
-      j = numbers.length - 1,
+      index = Uint32Array.from(values, (_, i) => i).filter(i => !isNaN(numbers[i])),
+      j = index.length - 1,
       i = Math.floor(j * p);
   quickselect(index, i, 0, j, (i, j) => ascendingDefined(numbers[i], numbers[j]));
   i = greatest(index.subarray(0, i + 1), (i) => numbers[i]);

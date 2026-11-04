@@ -99,6 +99,11 @@ it("median(array, f) uses the undefined context", () => {
   assert.deepStrictEqual(results, [undefined, undefined]);
 });
 
+it("medianIndex(array) excludes missing values from the median rank", () => {
+  assert.strictEqual(medianIndex([0, null, 100]), 0);
+  assert.strictEqual(medianIndex([undefined, 0, 100]), 1);
+});
+
 it("medianIndex(array) returns the index", () => {
   assert.deepStrictEqual(medianIndex([1, 2]), 0);
   assert.deepStrictEqual(medianIndex([1, 2, 3]), 1);

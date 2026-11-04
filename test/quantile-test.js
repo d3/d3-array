@@ -123,6 +123,16 @@ it("quantileIndex(array, 0.5) handles undefined values", () => {
   assert.deepStrictEqual(quantileIndex([1, 1, 1, null, 2, 3, 3, 3], 0.5, (d) => d), 4);
 });
 
+it("quantileIndex(array, p) excludes missing values from the quantile rank", () => {
+  for (const missing of [null, undefined, NaN]) {
+    assert.strictEqual(quantileIndex([0, missing, 100], 0.5), 0);
+    assert.strictEqual(quantileIndex([missing, 0, 100], 0.5), 1);
+    assert.strictEqual(quantileIndex([0, 100, missing], 0.5), 0);
+  }
+  assert.strictEqual(quantileIndex([{v: 0}, {}, {v: 100}], 0.5, d => d.v), 0);
+  assert.strictEqual(quantileIndex([null, undefined, NaN], 0.5), -1);
+});
+
 it("quantileIndex(array, 0.5) returns the first of equivalent values", () => {
   assert.deepStrictEqual(quantileIndex([1, 1, 1, 2, 2, 3, 3, 3], 0.5), 4);
 });
