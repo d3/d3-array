@@ -7,8 +7,8 @@ export default function disjoint(values, other) {
     let value, done;
     while (({value, done} = iterator.next())) {
       if (done) break;
-      if (Object.is(v, value)) return false;
       set.add(value);
+      if (set.has(v)) return false;
     }
   }
   return true;
