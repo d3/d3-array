@@ -33,3 +33,19 @@ function* repeat(...values) {
     yield* values;
   }
 }
+
+it("disjoint(values, other) interns values encountered while advancing the iterator", () => {
+  assert.strictEqual(disjoint([new Date(0)], [new Date(0)]), false);
+  for (const values of [[new Date(0)], [Object(1)], [Object("a")]]) {
+    const other = values.map(value => Object(value.valueOf()));
+    assert.strictEqual(disjoint(values, other), false);
+    assert.strictEqual(disjoint(values, [null, ...other]), false);
+    assert.strictEqual(disjoint(other, values), false);
+  }
+});
+
+it("disjoint(values, other) uses set equality for signed zeros and NaN", () => {
+  assert.strictEqual(disjoint([-0], [0]), false);
+  assert.strictEqual(disjoint([0], [-0]), false);
+  assert.strictEqual(disjoint([NaN], [NaN]), false);
+});
