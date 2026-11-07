@@ -236,6 +236,35 @@ it("bin(data) assigns floating point values to the correct bins", () => {
   }
 });
 
+it("bin(data) keeps values below integer thresholds in the preceding bin", () => {
+  const value = 1.9999999999999998;
+  const bins = bin().domain([-10, 10]).thresholds(10)([value, 2]);
+  assert.deepStrictEqual(bins[5], box([value], 0, 2));
+  assert.deepStrictEqual(bins[6], box([2], 2, 4));
+});
+
+it("bin(data) keeps values below fractional thresholds in the preceding bin", () => {
+  const value = 0.8999999999999999;
+  const bins = bin().domain([0, 1]).thresholds(10)([value, 0.9]);
+  assert.deepStrictEqual(bins[8], box([value], 0.8, 0.9));
+  assert.deepStrictEqual(bins[9], box([0.9], 0.9, 1));
+});
+
+it("bin(data) agrees with explicit thresholds near bin boundaries", () => {
+  for (const domain of [[-10, 10], [-1, 1], [0, 1], [1, 2]]) {
+    for (const count of [2, 5, 10, 20, 50]) {
+      const histogram = bin().domain(domain).thresholds(count);
+      const thresholds = histogram([]).slice(1).map(b => b.x0);
+      const values = thresholds.flatMap(t => {
+        const epsilon = Math.abs(t) * Number.EPSILON / 2 || Number.MIN_VALUE;
+        return [t - epsilon, t, t + epsilon];
+      });
+      const reference = bin().domain(domain).thresholds(thresholds);
+      assert.deepStrictEqual(histogram(values), reference(values));
+    }
+  }
+});
+
 it("bin(data) assigns integer values to the correct bins", () => {
   assert.deepStrictEqual(bin().domain([4, 5])([5]), [box([5], 4, 5)]);
   const eights = [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8];
