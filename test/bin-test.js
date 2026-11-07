@@ -267,3 +267,13 @@ function box(bin, x0, x1)  {
 function* iterable(array) {
   yield* array;
 }
+
+
+it("bin() keeps finite bounds when one threshold spans zero", () => {
+  const bins = bin().thresholds(1)([-1.4, 5.6]);
+  assert.strictEqual(bins.flat().length, 2);
+  for (const {x0, x1} of bins) {
+    assert(Number.isFinite(x0));
+    assert(Number.isFinite(x1));
+  }
+});
