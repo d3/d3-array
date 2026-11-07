@@ -5,14 +5,19 @@ export class Adder {
     this._n = 0;
   }
   add(x) {
-    const p = this._partials;
+    let p = this._partials;
     let i = 0;
-    for (let j = 0; j < this._n && j < 32; j++) {
+    for (let j = 0; j < this._n; j++) {
       const y = p[j],
         hi = x + y,
         lo = Math.abs(x) < Math.abs(y) ? x - (hi - y) : y - (hi - x);
       if (lo) p[i++] = lo;
       x = hi;
+    }
+    if (i === p.length) {
+      this._partials = new Float64Array(p.length * 2);
+      this._partials.set(p);
+      p = this._partials;
     }
     p[i] = x;
     this._n = i + 1;
