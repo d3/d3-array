@@ -9,6 +9,12 @@ it("fcumsum(array) returns a Float64Array of the expected length", () => {
   assert.strictEqual(R.length, A.length);
 });
 
+it("fcumsum(array) preserves widely separated terms through cancellation", () => {
+  const values = Array.from({length: 33}, (_, i) => 2 ** (-1074 + i * 54));
+  const negatives = values.slice(1).reverse().map(x => -x);
+  assert.deepStrictEqual(Array.from(fcumsum([...values, ...negatives])), [...values, ...values.slice(0, -1).reverse()]);
+});
+
 it("fcumsum(array) is an exact cumsum", () => {
   assert.strictEqual(lastc([0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]), 1);
   assert.strictEqual(lastc([0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, -0.3, -0.3, -0.3, -0.3, -0.3, -0.3, -0.3, -0.3, -0.3, -0.3]), 0);

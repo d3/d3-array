@@ -14,6 +14,36 @@ it("+adder can be applied several times", () => {
   assert.strictEqual(+adder, 1);
 });
 
+it("Adder preserves widely separated terms through cancellation", () => {
+  const values = Array.from({length: 33}, (_, i) => 2 ** (-1074 + i * 54));
+  const adder = new Adder();
+  for (const value of values) adder.add(value);
+  // All smaller terms together are less than half an ulp of the largest.
+  assert.strictEqual(+adder, values[32]);
+  for (let i = 32; i > 0; --i) {
+    adder.add(-values[i]);
+    assert.strictEqual(+adder, values[i - 1]);
+  }
+});
+
+it("Adder preserves partials through repeated storage growth", () => {
+  const adder = new Adder();
+  for (let e = 0; e <= 128; e += 2) {
+    const x = 2 ** (e + 53);
+    // Cancellation leaves 2 ** e in a separate partial.
+    adder.add(x).add(-x + 2 ** e);
+  }
+  assert(Number.isFinite(+adder));
+  for (let e = 128; e > 0; e -= 2) adder.add(-(2 ** e));
+  assert.strictEqual(+adder, 1);
+});
+
+it("fsum(array) sums widely separated finite terms", () => {
+  const values = Array.from({length: 33}, (_, i) => 2 ** (-1074 + i * 54));
+  assert.strictEqual(fsum(values), values[32]);
+  assert.strictEqual(fsum([...values, ...values.slice(1).reverse().map(x => -x)]), values[0]);
+});
+
 it("fsum(array) is an exact sum", () => {
   assert.strictEqual(fsum([.1, .1, .1, .1, .1, .1, .1, .1, .1, .1]), 1);
   assert.strictEqual(fsum([.3, .3, .3, .3, .3, .3, .3, .3, .3, .3, -.3, -.3, -.3, -.3, -.3, -.3, -.3, -.3, -.3, -.3]), 0);
