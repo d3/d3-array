@@ -26,6 +26,18 @@ it("Adder preserves widely separated terms through cancellation", () => {
   }
 });
 
+it("Adder preserves partials through repeated storage growth", () => {
+  const adder = new Adder();
+  for (let e = 0; e <= 128; e += 2) {
+    const x = 2 ** (e + 53);
+    // Cancellation leaves 2 ** e in a separate partial.
+    adder.add(x).add(-x + 2 ** e);
+  }
+  assert(Number.isFinite(+adder));
+  for (let e = 128; e > 0; e -= 2) adder.add(-(2 ** e));
+  assert.strictEqual(+adder, 1);
+});
+
 it("fsum(array) sums widely separated finite terms", () => {
   const values = Array.from({length: 33}, (_, i) => 2 ** (-1074 + i * 54));
   assert.strictEqual(fsum(values), values[32]);
