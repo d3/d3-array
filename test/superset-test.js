@@ -22,6 +22,15 @@ it("superset(values, other) performs interning", () => {
   assert.strictEqual(superset([new Date("2021-01-01")], []), true);
 });
 
+it("superset(values, other) uses set equality for signed zeros and NaN", () => {
+  assert.strictEqual(superset([-0], [0]), true);
+  assert.strictEqual(superset([0], [-0]), true);
+  assert.strictEqual(superset([Object(-0)], [0]), true);
+  assert.strictEqual(superset([0], [Object(-0)]), true);
+  assert.strictEqual(superset([1, -0], [0, 1]), true);
+  assert.strictEqual(superset([NaN], [NaN]), true);
+});
+
 function* odds() {
   for (let i = 1; true; i += 2) {
     yield i;

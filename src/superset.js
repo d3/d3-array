@@ -8,7 +8,7 @@ export default function superset(values, other) {
       if (done) return false;
       const ivalue = intern(value);
       set.add(ivalue);
-      if (Object.is(io, ivalue)) break;
+      if (set.has(io)) break;
     }
   }
   return true;
