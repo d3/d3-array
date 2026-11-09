@@ -236,6 +236,18 @@ it("bin(data) assigns floating point values to the correct bins", () => {
   }
 });
 
+it("bin(data) assigns values just below an integer threshold to the preceding bin", () => {
+  const b = bin().domain([-10, 10]).thresholds(10);
+  assert.deepStrictEqual(b([1.9999999999999998, 2]).slice(5, 7), [box([1.9999999999999998], 0, 2), box([2], 2, 4)]);
+  assert.deepStrictEqual(b([-Number.MIN_VALUE, 0]).slice(4, 6), [box([-Number.MIN_VALUE], -2, 0), box([0], 0, 2)]);
+});
+
+it("bin(data) assigns values just below a fractional threshold to the preceding bin", () => {
+  const b = bin().domain([0, 1]).thresholds(10);
+  assert.deepStrictEqual(b([0.8999999999999999, 0.9]).slice(8), [box([0.8999999999999999], 0.8, 0.9), box([0.9], 0.9, 1)]);
+  assert.deepStrictEqual(bin().domain([-1, 0]).thresholds(10)([-0.30000000000000004, -0.3]).slice(6, 8), [box([-0.30000000000000004], -0.4, -0.3), box([-0.3], -0.3, -0.2)]);
+});
+
 it("bin(data) assigns integer values to the correct bins", () => {
   assert.deepStrictEqual(bin().domain([4, 5])([5]), [box([5], 4, 5)]);
   const eights = [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8];
