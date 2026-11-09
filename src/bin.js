@@ -54,9 +54,9 @@ export default function bin() {
           const step = tickIncrement(x0, x1, tn);
           if (isFinite(step)) {
             if (step > 0) {
-              x1 = (Math.floor(x1 / step) + 1) * step;
+              x1 = (Math.round(x1 / step) + 1) * step;
             } else if (step < 0) {
-              x1 = (Math.ceil(x1 * -step) + 1) / -step;
+              x1 = (Math.round(x1 * -step) + 1) / -step;
             }
           }
         } else {
