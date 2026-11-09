@@ -1,6 +1,7 @@
 import {tickIncrement} from "./ticks.js";
 
 export default function nice(start, stop, count) {
+  if (count > 0) count = Math.max(count, start < 0 && stop > 0 ? 2 : 1);
   let prestep;
   while (true) {
     const step = tickIncrement(start, stop, count);
