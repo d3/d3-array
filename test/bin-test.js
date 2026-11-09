@@ -258,6 +258,12 @@ it("bin(data) does not mutate user-supplied thresholds as a function", () => {
   assert.deepStrictEqual(b.thresholds()(), [3, 4, 5, 6]);
 });
 
+it("bin(data) extends the niced domain by exactly one step when the maximum is a threshold", () => {
+  assert.deepStrictEqual(bin().thresholds(7)([0, 0.07]).at(-1), box([0.07], 0.07, 0.08));
+  assert.deepStrictEqual(bin().thresholds(10)([0, 0.07]).at(-1), box([0.07], 0.07, 0.075));
+  assert.deepStrictEqual(bin().thresholds(50)([0, 1.1]).at(-1), box([1.1], 1.1, 1.12));
+});
+
 function box(bin, x0, x1)  {
   bin.x0 = x0;
   bin.x1 = x1;
