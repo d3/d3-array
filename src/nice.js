@@ -1,8 +1,7 @@
 import {tickIncrement} from "./ticks.js";
 
 export default function nice(start, stop, count) {
-  // An interval crossing zero needs at least two ticks to converge.
-  if (start < 0 && stop > 0 && count > 0 && count < 2) count = 2;
+  if (count > 0) count = Math.max(count, start < 0 && stop > 0 ? 2 : 1);
   let prestep;
   while (true) {
     const step = tickIncrement(start, stop, count);

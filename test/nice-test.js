@@ -62,8 +62,7 @@ it("nice(start, stop, count) handles large steps precisely", () => {
   assert.deepStrictEqual(nice(-1.07e10, -0.929999999999999e10, 5000), [-1.07e10, -0.92998e10]);
 });
 
-
-it("nice(start, stop, count) keeps intervals crossing zero finite for small counts", () => {
+it("nice(start, stop, count) keeps intervals finite for small counts", () => {
   for (const count of [0.5, 1, 1.5]) {
     for (const [start, stop] of [[-1, 5], [-0.1, 0.2], [-5, 1], [-1, 1]]) {
       const [a, b] = nice(start, stop, count);
@@ -71,4 +70,6 @@ it("nice(start, stop, count) keeps intervals crossing zero finite for small coun
       assert(b - a < 100 * (stop - start));
     }
   }
+  assert.deepStrictEqual(nice(-1, 5, 1), [-10, 10]);
+  assert.deepStrictEqual(nice(0, 1, 0.5), [0, 1]);
 });

@@ -105,6 +105,16 @@ it("bin.thresholds(number) sets the approximate number of bin thresholds", () =>
   ]);
 });
 
+it("bin() keeps finite bounds when one threshold spans zero", () => {
+  const bins = bin().thresholds(1)([-1.4, 5.6]);
+  assert.strictEqual(bins.flat().length, 2);
+  for (const {x0, x1} of bins) {
+    assert(Number.isFinite(x0));
+    assert(Number.isFinite(x1));
+  }
+  assert.deepStrictEqual(bins, [box([-1.4], -10, 0), box([5.6], 0, 10)]);
+});
+
 it("bin.thresholds(array) sets the bin thresholds", () => {
   const h = bin().thresholds([10, 20]);
   assert.deepStrictEqual(h([0, 0, 0, 10, 30, 30]), [
@@ -267,13 +277,3 @@ function box(bin, x0, x1)  {
 function* iterable(array) {
   yield* array;
 }
-
-
-it("bin() keeps finite bounds when one threshold spans zero", () => {
-  const bins = bin().thresholds(1)([-1.4, 5.6]);
-  assert.strictEqual(bins.flat().length, 2);
-  for (const {x0, x1} of bins) {
-    assert(Number.isFinite(x0));
-    assert(Number.isFinite(x1));
-  }
-});
