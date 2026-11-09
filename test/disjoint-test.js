@@ -20,6 +20,7 @@ it("disjoint(values, other) performs interning", () => {
   assert.strictEqual(disjoint([new Date("2021-01-01")], [new Date("2021-01-02")]), true);
   assert.strictEqual(disjoint([new Date("2021-01-02"), new Date("2021-01-03")], [new Date("2021-01-03"), new Date("2021-01-04")]), false);
   assert.strictEqual(disjoint([new Date("2021-01-01")], []), true);
+  assert.strictEqual(disjoint([new Date("2021-01-01")], [new Date("2021-01-01")]), false);
 });
 
 function* odds() {

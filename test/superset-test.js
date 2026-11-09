@@ -22,6 +22,11 @@ it("superset(values, other) performs interning", () => {
   assert.strictEqual(superset([new Date("2021-01-01")], []), true);
 });
 
+it("superset(values, other) treats -0 and 0 as equal", () => {
+  assert.strictEqual(superset([-0], [0]), true);
+  assert.strictEqual(superset([0], [-0]), true);
+});
+
 function* odds() {
   for (let i = 1; true; i += 2) {
     yield i;
