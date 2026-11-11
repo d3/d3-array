@@ -17,6 +17,10 @@ export default function quantile(values, p, valueof) {
       i0 = Math.floor(i),
       value0 = max(quickselect(values, i0).subarray(0, i0 + 1)),
       value1 = min(values.subarray(i0 + 1));
+  if (Number.isFinite(value0) && Number.isFinite(value1) && !Number.isFinite(value1 - value0)) {
+    const t = i - i0;
+    return value0 * (1 - t) + value1 * t;
+  }
   return value0 + (value1 - value0) * (i - i0);
 }
 
@@ -29,6 +33,10 @@ export function quantileSorted(values, p, valueof = number) {
       i0 = Math.floor(i),
       value0 = +valueof(values[i0], i0, values),
       value1 = +valueof(values[i0 + 1], i0 + 1, values);
+  if (Number.isFinite(value0) && Number.isFinite(value1) && !Number.isFinite(value1 - value0)) {
+    const t = i - i0;
+    return value0 * (1 - t) + value1 * t;
+  }
   return value0 + (value1 - value0) * (i - i0);
 }
 
