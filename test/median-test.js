@@ -22,6 +22,18 @@ it("median(array) can handle large numbers without overflowing", () => {
   assert.strictEqual(median([-Number.MAX_VALUE, -Number.MAX_VALUE]), -Number.MAX_VALUE);
 });
 
+it("median(array) handles large opposite-sign values without overflowing", () => {
+  const h = 2 ** 1023;
+  assert.strictEqual(median([-1e308, 1e308]), 0);
+  assert.strictEqual(median([-1.5 * h, h]), -0.25 * h);
+  assert.strictEqual(median([-h, 1.5 * h]), 0.25 * h);
+});
+
+it("median(array) returns the selected finite value at an integer position", () => {
+  const h = 2 ** 1023;
+  assert.strictEqual(median([-h, -h, h]), -h);
+});
+
 it("median(array) returns undefined if the array contains no observed values", () => {
   assert.strictEqual(median([]), undefined);
   assert.strictEqual(median([null]), undefined);
