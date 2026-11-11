@@ -32,6 +32,31 @@ it("quantile(array, p) uses the R-7 method", () => {
   assert.strictEqual(quantile(odd, 1), 20);
 });
 
+it("quantile and quantileSorted interpolate large opposite-sign values without overflowing", () => {
+  for (const q of [quantile, quantileSorted]) {
+    assert.strictEqual(q([-1e308, 1e308], 0.5), 0);
+  }
+});
+
+it("quantile and quantileSorted interpolate large asymmetric opposite-sign values", () => {
+  const h = 2 ** 1023;
+  for (const q of [quantile, quantileSorted]) {
+    assert.strictEqual(q([-1.5 * h, h], 0.25), -0.875 * h);
+    assert.strictEqual(q([-1.5 * h, h], 0.5), -0.25 * h);
+    assert.strictEqual(q([-1.5 * h, h], 0.75), 0.375 * h);
+    assert.strictEqual(q([-h, 1.5 * h], 0.25), -0.375 * h);
+    assert.strictEqual(q([-h, 1.5 * h], 0.5), 0.25 * h);
+    assert.strictEqual(q([-h, 1.5 * h], 0.75), 0.875 * h);
+  }
+});
+
+it("quantile and quantileSorted return the selected finite value at an integer position", () => {
+  const h = 2 ** 1023;
+  for (const q of [quantile, quantileSorted]) {
+    assert.strictEqual(q([-h, -h, h], 0.5), -h);
+  }
+});
+
 it("quantile(array, p) coerces values to numbers", () => {
   const strings = ["1", "2", "3", "4"];
   assert.strictEqual(quantile(strings, 1 / 3), 2);
