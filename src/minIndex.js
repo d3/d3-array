@@ -1,3 +1,5 @@
+import primitive from "./primitive.js";
+
 export default function minIndex(values, valueof) {
   let min;
   let minIndex = -1;
@@ -5,16 +7,18 @@ export default function minIndex(values, valueof) {
   if (valueof === undefined) {
     for (const value of values) {
       ++index;
-      if (value != null
-          && (min > value || (min === undefined && value >= value))) {
-        min = value, minIndex = index;
+      const x = primitive(value);
+      if (x != null
+          && (min > x || (min === undefined && x >= x))) {
+        min = x, minIndex = index;
       }
     }
   } else {
     for (let value of values) {
-      if ((value = valueof(value, ++index, values)) != null
-          && (min > value || (min === undefined && value >= value))) {
-        min = value, minIndex = index;
+      const x = primitive(valueof(value, ++index, values));
+      if (x != null
+          && (min > x || (min === undefined && x >= x))) {
+        min = x, minIndex = index;
       }
     }
   }

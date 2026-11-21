@@ -4,6 +4,7 @@ import constant from "./constant.js";
 import extent from "./extent.js";
 import identity from "./identity.js";
 import nice from "./nice.js";
+import primitive from "./primitive.js";
 import ticks, {tickIncrement} from "./ticks.js";
 import sturges from "./threshold/sturges.js";
 
@@ -83,24 +84,26 @@ export default function bin() {
     }
 
     // Assign data to bins by value, ignoring any outside the domain.
+    var lo = primitive(x0), hi = primitive(x1);
     if (isFinite(step)) {
       if (step > 0) {
         for (i = 0; i < n; ++i) {
-          if ((x = values[i]) != null && x0 <= x && x <= x1) {
-            bins[Math.min(m, Math.floor((x - x0) / step))].push(data[i]);
+          if ((x = primitive(values[i])) != null && lo <= x && x <= hi) {
+            bins[Math.min(m, Math.floor((x - lo) / step))].push(data[i]);
           }
         }
       } else if (step < 0) {
         for (i = 0; i < n; ++i) {
-          if ((x = values[i]) != null && x0 <= x && x <= x1) {
-            const j = Math.floor((x0 - x) * step);
+          if ((x = primitive(values[i])) != null && lo <= x && x <= hi) {
+            const j = Math.floor((lo - x) * step);
             bins[Math.min(m, j + (tz[j] <= x))].push(data[i]); // handle off-by-one due to rounding
           }
         }
       }
     } else {
+      tz = tz.map(primitive);
       for (i = 0; i < n; ++i) {
-        if ((x = values[i]) != null && x0 <= x && x <= x1) {
+        if ((x = primitive(values[i])) != null && lo <= x && x <= hi) {
           bins[bisect(tz, x, 0, m)].push(data[i]);
         }
       }

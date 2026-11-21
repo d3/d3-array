@@ -1,26 +1,32 @@
+import primitive from "./primitive.js";
+
 export default function extent(values, valueof) {
   let min;
   let max;
+  let lo;
+  let hi;
   if (valueof === undefined) {
     for (const value of values) {
-      if (value != null) {
+      const x = primitive(value);
+      if (x != null) {
         if (min === undefined) {
-          if (value >= value) min = max = value;
+          if (x >= x) min = max = value, lo = hi = x;
         } else {
-          if (min > value) min = value;
-          if (max < value) max = value;
+          if (lo > x) min = value, lo = x;
+          if (hi < x) max = value, hi = x;
         }
       }
     }
   } else {
     let index = -1;
     for (let value of values) {
-      if ((value = valueof(value, ++index, values)) != null) {
+      const x = primitive(value = valueof(value, ++index, values));
+      if (x != null) {
         if (min === undefined) {
-          if (value >= value) min = max = value;
+          if (x >= x) min = max = value, lo = hi = x;
         } else {
-          if (min > value) min = value;
-          if (max < value) max = value;
+          if (lo > x) min = value, lo = x;
+          if (hi < x) max = value, hi = x;
         }
       }
     }

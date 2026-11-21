@@ -1,4 +1,7 @@
+import primitive from "./primitive.js";
+
 export default function descending(a, b) {
+  a = primitive(a), b = primitive(b);
   return a == null || b == null ? NaN
     : b < a ? -1
     : b > a ? 1
