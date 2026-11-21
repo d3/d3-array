@@ -1,3 +1,5 @@
+import primitive from "./primitive.js";
+
 export default function maxIndex(values, valueof) {
   let max;
   let maxIndex = -1;
@@ -5,16 +7,18 @@ export default function maxIndex(values, valueof) {
   if (valueof === undefined) {
     for (const value of values) {
       ++index;
-      if (value != null
-          && (max < value || (max === undefined && value >= value))) {
-        max = value, maxIndex = index;
+      const x = primitive(value);
+      if (x != null
+          && (max < x || (max === undefined && x >= x))) {
+        max = x, maxIndex = index;
       }
     }
   } else {
     for (let value of values) {
-      if ((value = valueof(value, ++index, values)) != null
-          && (max < value || (max === undefined && value >= value))) {
-        max = value, maxIndex = index;
+      const x = primitive(valueof(value, ++index, values));
+      if (x != null
+          && (max < x || (max === undefined && x >= x))) {
+        max = x, maxIndex = index;
       }
     }
   }

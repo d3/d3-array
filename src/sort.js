@@ -1,5 +1,6 @@
 import ascending from "./ascending.js";
 import permute from "./permute.js";
+import primitive from "./primitive.js";
 
 export default function sort(values, ...F) {
   if (typeof values[Symbol.iterator] !== "function") throw new TypeError("values is not iterable");
@@ -35,5 +36,6 @@ export function compareDefined(compare = ascending) {
 }
 
 export function ascendingDefined(a, b) {
+  a = primitive(a), b = primitive(b);
   return (a == null || !(a >= a)) - (b == null || !(b >= b)) || (a < b ? -1 : a > b ? 1 : 0);
 }
