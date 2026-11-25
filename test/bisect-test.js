@@ -166,3 +166,32 @@ it("bisectRight(array, value, lo, hi) keeps non-comparable values to the right",
   assert.strictEqual(bisectRight(values, undefined), 4);
   assert.strictEqual(bisectRight(values, NaN), 4);
 });
+
+it("bisectLeft handles indices above 2^31 without uint32 truncation", () => {
+  const lo = 2 ** 31;
+  const hi = lo + 4;
+  const values = {length: hi};
+  values[lo] = 1;
+  values[lo + 1] = 3;
+  values[lo + 2] = 5;
+  values[lo + 3] = 7;
+  assert.strictEqual(bisectLeft(values, 0, lo, hi), lo);
+  assert.strictEqual(bisectLeft(values, 2, lo, hi), lo + 1);
+  assert.strictEqual(bisectLeft(values, 4, lo, hi), lo + 2);
+  assert.strictEqual(bisectLeft(values, 6, lo, hi), lo + 3);
+  assert.strictEqual(bisectLeft(values, 8, lo, hi), hi);
+});
+
+it("bisectRight handles indices above 2^31 without uint32 truncation", () => {
+  const lo = 2 ** 31;
+  const hi = lo + 4;
+  const values = {length: hi};
+  values[lo] = 1;
+  values[lo + 1] = 3;
+  values[lo + 2] = 5;
+  values[lo + 3] = 7;
+  assert.strictEqual(bisectRight(values, 1, lo, hi), lo + 1);
+  assert.strictEqual(bisectRight(values, 3, lo, hi), lo + 2);
+  assert.strictEqual(bisectRight(values, 5, lo, hi), lo + 3);
+  assert.strictEqual(bisectRight(values, 7, lo, hi), hi);
+});
